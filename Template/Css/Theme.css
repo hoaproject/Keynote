@@ -1,0 +1,159 @@
+@font-face {
+    font-family: Header;
+    src: url("../Media/Font/GoudyStM_italic.eot");
+    src: url("../Media/Font/GoudyStM_italic.eot?#iefix") format("embedded-opentype"),
+         url("../Media/Font/GoudyStM_italic.woff")       format("woff"),
+         url("../Media/Font/GoudyStM_italic.ttf")        format("truetype"),
+         url("../Media/Font/GoudyStM_italic.svg#font")   format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Text;
+    src: url("../Media/Font/Colaborate.eot");
+    src: url("../Media/Font/Colaborate.eot?#iefix") format("embedded-opentype"),
+         url("../Media/Font/Colaborate.woff")       format("woff"),
+         url("../Media/Font/Colaborate.ttf")        format("truetype"),
+         url("../Media/Font/Colaborate.svg#font")   format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Pre;
+    src: url("../Media/Font/DroidSansMono.eot");
+    src: url("../Media/Font/DroidSansMono.eot?#iefix") format("embedded-opentype"),
+         url("../Media/Font/DroidSansMono.woff")       format("woff"),
+         url("../Media/Font/DroidSansMono.ttf")        format("truetype"),
+         url("../Media/Font/DroidSansMono.svg#font")   format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    background: #000;
+}
+
+body {
+    color: #fff;
+    text-shadow: 2px 2px 1px rgba(46, 83, 146, 1);
+    background: url("../Media/Image/Background.jpg");
+    background-size: cover;
+}
+
+section {
+    font: 40px/55px Text;
+    margin: 0;
+    padding: .5em;
+}
+
+h1 {
+    font: 70px/90px Header;
+    font-weight: normal;
+    text-align: center;
+    margin: 0;
+    padding: 0 .5em .5em .5em;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+    hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+ul li {
+    list-style: none;
+    position: relative;
+    margin: 0 0 0 2em;
+}
+
+ul li:before {
+    font-size: 70%;
+    content: "✪";
+    position: absolute;
+    left: -1.5em;
+}
+
+footer {
+    position: absolute;
+    font-size: 50%;
+    bottom: 40px;
+    right: 80px;
+}
+
+code {
+    font: 26px Pre;
+}
+
+pre {
+    color: #bfe0ff;
+    margin: 0 .5em 0 -.5em;
+    padding: .5em;
+    line-height: 40px;
+    overflow-y: auto;
+
+    -moz-box-shadow: inset 0 0 5px #2c7cc6;
+    background: rgba(35, 53, 69, .4);
+}
+
+    pre code {
+        color: #9282a9;
+        text-shadow: 1px 1px 1px #233545;
+    }
+
+    .token-keyword {
+        color: #9282a9;
+    }
+
+    .token-id {
+        color: #7dc4f0;
+    }
+
+    .token-string {
+        color: #88bf7e;
+    }
+
+    .token-variable {
+        color: #b4895a;
+    }
+
+
+
+
+
+section {
+    -moz-transition: left .4s ease;
+}
+
+section {
+    left: -150%;
+}
+section[aria-selected] {
+    left: 0;
+}
+section[aria-selected] ~ section {
+    left: +150%;
+}
+
+.increment > * {
+    opacity: .1;
+    -moz-transition: opacity .5s ease;
+}
+
+.incremental > * {
+    opacity: 1;
+    -moz-transition: opacity .5s ease;
+}
+
+.incremental > *[aria-selected] {
+    text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1),
+                 0   0   10px rgba(255, 254, 236, .95);
+    opacity: 1;
+}
+
+.incremental > *[aria-selected] ~ * {
+    opacity: 0.3;
+}
