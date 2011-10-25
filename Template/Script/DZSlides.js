@@ -23,8 +23,6 @@ if (!Function.prototype.bind) {
   };
 }
 
-
-
 var $ = (HTMLElement.prototype.$ = function(aQuery) {
   return this.querySelector(aQuery);
 }).bind(document);
@@ -48,6 +46,8 @@ var Dz = {
     autoplay: "1"
   }
 };
+
+
 
 Dz.init = function() {
   document.body.className = "loaded";
