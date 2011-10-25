@@ -1,0 +1,106 @@
+@font-face {
+    font-family: Text;
+    src: url("../Media/Font/Colaborate.eot");
+    src: url("../Media/Font/Colaborate.eot?#iefix") format("embedded-opentype"),
+         url("../Media/Font/Colaborate.woff")       format("woff"),
+         url("../Media/Font/Colaborate.ttf")        format("truetype"),
+         url("../Media/Font/Colaborate.svg#font")   format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    overflow: hidden;
+    font: 1.7em/.5em Text;
+    height: 100%;
+    background: #000 url("../Media/Image/Background.png");
+}
+
+iframe {
+    border: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#present {
+    width: 52.5%;
+    height: 70%;
+    margin: 1em 2% 0 2%;
+    float: left;
+}
+
+#future {
+    width: 37.5%;
+    height: 50%;
+    margin: 1em 2% 0 2%;
+    float: right;
+}
+
+#time {
+    display: block;
+    position: absolute;
+    bottom: 9%;
+    right: 10%;
+
+    font-size: 125%;
+    color: #cdf2fe;
+    text-shadow: 0 0 5px #c8e9f8;
+    padding: .5em;
+    border: 1px #314d6f solid;
+    border-radius: 6px;
+    -moz-box-shadow: 0 0 3px #26466e;
+    background: -moz-linear-gradient(top, rgba(31, 46, 65, .8), rgba(0, 0, 0, .8));
+}
+
+#slideidx,
+#nextslideidx,
+#slidecount,
+#popup-button {
+    position: absolute;
+    font-size: 70%;
+    color: #cdf2fe;
+    text-shadow: 0 0 5px #c8e9f8;
+    padding: .5em;
+    border: 0;
+    border-radius: 2px;
+    background: none;
+
+    -moz-transition: text-shadow .2s ease,
+                     -moz-box-shadow .2s ease;
+}
+
+#slideidx {
+    bottom: 10%;
+    right: 69%;
+}
+
+#nextslideidx {
+    bottom: 30%;
+    right: 19%;
+}
+
+#slidecount {
+    bottom: 30%;
+    right: 1%;
+}
+
+    #slidecount::before {
+        content: "∙ ";
+    }
+
+#popup-button {
+    bottom: 12%;
+    right: 2%;
+    padding: 0 4px;
+    border: 1px #cdf2fe solid;
+    -moz-box-shadow: 0 0 2px #c8e9f8,
+                     inset 0 0 2px #c8e9f8;
+}
+
+    #slideidx:hover,
+    #popup-button:hover {
+        text-shadow: 0 0 10px #c8e9f8;
+        -moz-box-shadow: 0 0 8px #c8e9f8,
+                         inset 0 0 5px #c8e9f8;
+    }
+
