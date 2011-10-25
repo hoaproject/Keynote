@@ -95,7 +95,9 @@ pre {
     line-height: 40px;
     overflow-y: auto;
 
-    -moz-box-shadow: inset 0 0 5px #2c7cc6;
+    box-shadow:         inset 0 0 5px #2c7cc6;
+    -moz-box-shadow:    inset 0 0 5px #2c7cc6;
+    -webkit-box-shadow: inset 0 0 5px #2c7cc6;
     background: rgba(35, 53, 69, .4);
 }
 
@@ -125,7 +127,9 @@ pre {
 
 
 section {
+    transition: left .4s ease;
     -moz-transition: left .4s ease;
+    -webkit-transition: left .4s ease;
 }
 
 section {
@@ -140,12 +144,16 @@ section[aria-selected] ~ section {
 
 .increment > * {
     opacity: .1;
+    transition: opacity .5s ease;
     -moz-transition: opacity .5s ease;
+    -webkit-transition: opacity .5s ease;
 }
 
 .incremental > * {
     opacity: 1;
+    transition: opacity .5s ease;
     -moz-transition: opacity .5s ease;
+    -webkit-transition: opacity .5s ease;
 }
 
 .incremental > *[aria-selected] {

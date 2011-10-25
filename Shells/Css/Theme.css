@@ -48,8 +48,14 @@ iframe {
     padding: .5em;
     border: 1px #314d6f solid;
     border-radius: 6px;
-    -moz-box-shadow: 0 0 3px #26466e;
-    background: -moz-linear-gradient(top, rgba(31, 46, 65, .8), rgba(0, 0, 0, .8));
+
+    box-shadow:         0 0 3px #26466e;
+    -moz-box-shadow:    0 0 3px #26466e;
+    -webkit-box-shadow: 0 0 5px #26466e;
+
+    background:         linear-gradient(top, rgba(31, 46, 65, .8), rgba(0, 0, 0, .8));
+    background:    -moz-linear-gradient(top, rgba(31, 46, 65, .8), rgba(0, 0, 0, .8));
+    background: -webkit-linear-gradient(top, rgba(31, 46, 65, .8), rgba(0, 0, 0, .8));
 }
 
 #slideidx,
@@ -65,8 +71,9 @@ iframe {
     border-radius: 2px;
     background: none;
 
-    -moz-transition: text-shadow .2s ease,
-                     -moz-box-shadow .2s ease;
+    transition:         text-shadow .2s ease, box-shadow .2s ease;
+    -moz-transition:    text-shadow .2s ease, -moz-box-shadow .2s ease;
+    -webkit-transition: text-shadow .2s ease, -webkit-box-shadow .2s ease;
 }
 
 #slideidx {
@@ -93,14 +100,16 @@ iframe {
     right: 2%;
     padding: 0 4px;
     border: 1px #cdf2fe solid;
-    -moz-box-shadow: 0 0 2px #c8e9f8,
-                     inset 0 0 2px #c8e9f8;
+    box-shadow:         0 0 2px #c8e9f8, inset 0 0 2px #c8e9f8;
+    -moz-box-shadow:    0 0 2px #c8e9f8, inset 0 0 2px #c8e9f8;
+    -webkit-box-shadow: 0 0 2px #c8e9f8, inset 0 0 2px #c8e9f8;
 }
 
     #slideidx:hover,
     #popup-button:hover {
         text-shadow: 0 0 10px #c8e9f8;
-        -moz-box-shadow: 0 0 8px #c8e9f8,
-                         inset 0 0 5px #c8e9f8;
+        box-shadow:         0 0 8px #c8e9f8, inset 0 0 5px #c8e9f8;
+        -moz-box-shadow:    0 0 8px #c8e9f8, inset 0 0 5px #c8e9f8;
+        -webkit-box-shadow: 0 0 8px #c8e9f8, inset 0 0 5px #c8e9f8;
     }
 
