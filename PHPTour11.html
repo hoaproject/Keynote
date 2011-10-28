@@ -27,15 +27,98 @@ Ce que ça nous a apporté ?
 -->
 
 <section>
-  <h1>Bibliothèques</h1>
+  <h1>Qui suis-je ?</h1>
+</section>
+
+<section>
+  <h1>Contexte</h1>
+
+  <p>Avant :<ul class="incremental">
+    <li>petits sites Web</li>
+    <li>équipes de quelques personnes</li>
+    <li>dévelopement <del>anarchique</del> peu organisé</li>
+  </ul></p>
+
+  <p>Maintenant :<ul class="incremental">
+    <li>moyennes et grandes applications</li>
+    <li>équipes de plus en plus nombreuses</li>
+    <li>dévelopement <del>semi-anarchique</del> en nette progression</li>
+  </ul></p>
+
+  <details>
+    <p>Des tous petits sites Web codés par 3 bonhommes avec des centaines de
+    fonctions et de fichiers éparpillés, copiés-collés, non-testés, bidouillés,
+    pas de versionning …</p>
+    <p>Maintenant, plus sites Web mais applications, plus de données sur
+    l'utilisateur qui est plus impliqué, plus d'échanges, plus d'interactions,
+    plus d'utilisateurs, plus d'équipes et donc une
+    amélioration/professionalisation du développement</p>
+  </details>
+</section>
+
+<section>
+  <h1>Motivations</h1>
+
+  <p>Pour nous :<ul class="incremental">
+    <li>mutualiser les efforts</li>
+    <li>automatiser plus de tâches</li>
+    <li>travailler plus vite :développement, maintenance …</li>
+  </ul></p>
+
+  <p>Pour PHP :<ul class="incremental">
+    <li>plus de professionnalisme : organisation, qualité, tests …</li>
+    <li>plus de standards</li>
+    <li>plus de fun : PHP offre ce qu'il faut !</li>
+    <li>plus <em>à compléter</em></li>
+  </ul></li>
+
+  <details>
+    <p>Mutualiser = factoriser, partager, réutiliser, faciliter</p>
+    <p>Professionnalisme = objets, design-patterns, qualité, tests,
+    réorganisation des métiers …</p>
+  </details>
+</section>
+
+<section>
+  <h1>Bibliothèque</h1>
+
+  <div class="incremental">
+
+  <q cite="moi">Une bibliothèque est un ensemble de fonctionnalités dédiées à la
+  résolution d'un problème grâce à son abstraction la plus élevée</q>
+  <q cite="toujours moi">L'abstraction permet de s'adapter à plus de formes de
+  problèmes</q>
+
+  <p class="thus">la Force est dans l'abstraction</p>
+
+  </div>
 </section>
 
 <section>
   <h1>Philosophie</h1>
+
+  <p><ul class="incremental">
+    <li>Être le plus simple possible</li>
+    <li>Être le plus abstrait possible</li>
+    <li>Être le plus efficace possible</li>
+    <li>Être </li>
+
+    <!--
+    X =(simple, abstrait, efficace)
+    pour tout x, x \in X => lim … -> inf
+    -->
+  </ul></p>
 </section>
 
 <section>
   <h1>Contributions</h1>
+
+  <div class="incremental">
+
+  <p class="thus">Hoa : un ensemble de bibliothèques PHP</p>
+  <p class="thus">Hoa : un pont entre la recherche et l'entreprise</p>
+
+  </div>
 </section>
 
 <section>
@@ -50,6 +133,25 @@ Ce que ça nous a apporté ?
     <li>Conclusion et perspectives</li>
     <!-- parler aussi de la doc (« adopter Hoa ») -->
   </ul>
+</section>
+
+<section>
+  <h1>Installation</h1>
+
+  <p><ul>
+    <li>Emplacement par défaut (sous Unix) :
+       <code>/usr/local/lib/hoa</code></li>
+    <li>Formats : <code>.7z</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>,
+    <code>.zip</code>, <code>.phar</code> (!)</li>
+  </ul></p>
+  <pre><code>$ wget http://download.hoa-project.net/Central/Hoa.next.phar
+$ php Hoa.next.phar --extract</code></pre>
+  <p><ul>
+    <li>Versionning : Mercurial</li>
+  </ul></p>
+  <pre><code>$ hg clone http://hg.hoa-project.net/Central .</code></pre>
+
+  <p class="thus">Un seul exemplaire de Hoa pour plusieurs applications !</p>
 </section>
 
 <section>
