@@ -36,13 +36,13 @@ Ce que ça nous a apporté ?
   <p>Avant :<ul class="incremental">
     <li>petits sites Web</li>
     <li>équipes de quelques personnes</li>
-    <li>dévelopement <del>anarchique</del> peu organisé</li>
+    <li>développement <del>anarchique</del> peu organisé</li>
   </ul></p>
 
   <p>Maintenant :<ul class="incremental">
     <li>moyennes et grandes applications</li>
     <li>équipes de plus en plus nombreuses</li>
-    <li>dévelopement <del>semi-anarchique</del> en nette progression</li>
+    <li>développement <del>semi-anarchique</del> en nette progression</li>
   </ul></p>
 
   <details>
@@ -62,7 +62,7 @@ Ce que ça nous a apporté ?
   <p>Pour nous :<ul class="incremental">
     <li>mutualiser les efforts</li>
     <li>automatiser plus de tâches</li>
-    <li>travailler plus vite :développement, maintenance …</li>
+    <li>travailler plus vite : développement, maintenance …</li>
   </ul></p>
 
   <p>Pour PHP :<ul class="incremental">
@@ -85,7 +85,8 @@ Ce que ça nous a apporté ?
   <div class="incremental">
 
   <q cite="moi">Une bibliothèque est un ensemble de fonctionnalités dédiées à la
-  résolution d'un problème grâce à son abstraction la plus élevée</q>
+  résolution d'un problème précis et isolé, grâce à son abstraction la plus
+  élevée</q>
   <q cite="toujours moi">L'abstraction permet de s'adapter à plus de formes de
   problèmes</q>
 
@@ -155,13 +156,68 @@ $ php Hoa.next.phar --extract</code></pre>
 </section>
 
 <section>
-  <h1>Code block</h1>
+  <h1>Architecture</h1>
 
-  <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
-<span class="token-id">from</span>(<span class="token-string">'Hoa'</span>)
--> <span class="token-id">import</span>(<span class="token-string">'Foo.Bar'</span>);
+  <p><ul>
+    <li><code>Bin</code>, les outils</li>
+    <li><code>Core</code>, le noyau</li>
+    <li><code>Library</code>, les bibliothèques standards (famille
+        <code>Hoa</code>)</li>
+    <li><code>Module</code>, les bibliothèques utilisateurs (famille
+        <code>Hoathis</code>)</li>
+    <li><code>Stub</code>, exportation de Hoa</li>
+  </ul></p>
 
-<span class="token-variable">$foo</span> = <span class="token-id">true</span>;</code></pre>
+    <!-- on met Stub/, vraiment ?? -->
+
+    <p>Seul le noyau est nécessaire :</p>
+    <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
+<span class="token-id">var_dump</span>(<span class="token-id">HOA</span>);</code></pre>
+</section>
+
+<section>
+  <h1>Noyau</h1>
+
+  <p>Les couches du noyau :<ul class="incremental">
+    <li><em lang="en">Core</em>, base fondamentale du noyau</li>
+    <li><em lang="en">Consistency</em>, consistence pour Hoa et PHP</li>
+    <li><em lang="en">Data</em>, représentation de données polymorphiques
+        (expérimentale)</li>
+    <li><em lang="en">Event</em>, événements et écouteurs</li>
+    <li><em lang="en">Exception</em>, exceptions enrichies</li>
+    <li><em lang="en">Parameter</em>, paramétrage des bibliothèques et des
+        classes</li>
+    <li><em lang="en">Protocol</em>, gestion de <code>hoa://</code></li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Outils</h1>
+</section>
+
+<section>
+  <h1>Framework ?</h1>
+</section>
+
+<section>
+  <h1>Autres projets autour de Hoa</h1>
+
+  <p><ul class="incremental">
+    <li>Hoathis.net, une forge open-source pour partager les Hoathis et
+        expérimenter Hoa sur un très gros projet</li>
+    <li>Virthoasity, une machine virtuelle pour du développement Web,
+        non-intrusive et simple</li>
+    <li>Launchee, un interpréteur XYL pour des applications bureaux</li>
+    <li>Bhoa, un serveur HTTP léger et très facile d'usage</li>
+    <li>Praspel, un langage de spécification pour automatiser la génération de
+        données de tests et de tests unitaires</li>
+    <li>Sandbox, un ensemble de programmes clé-en-main pour découvrir Hoa par le
+        code</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Conclusion et perspectives</h1>
 </section>
 
 <script src="Template/Script/DZSlides.js"></script>
