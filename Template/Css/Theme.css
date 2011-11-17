@@ -42,8 +42,11 @@ body {
     background-size: cover;
 }
 
-section {
+section, math {
     font: 30px/45px Text;
+}
+
+section {
     margin: 0;
     padding: .5em;
 }
@@ -70,8 +73,10 @@ p {
     }
 
     p.thus {
-        margin-top: 2em;
+        margin: 1em 0;
         text-align: center;
+        text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1),
+                     0   0   10px rgba(255, 254, 236, .95);
     }
 
     p.thus::before {
@@ -80,18 +85,26 @@ p {
         margin-right: 1em;
     }
 
+span.lastname {
+    font-variant: small-caps;
+}
+
 ul li {
     list-style: none;
     position: relative;
     margin: 0 0 0 2em;
 }
 
-ul li:before {
-    font-size: 70%;
-    content: "✪";
-    position: absolute;
-    left: -1.5em;
-}
+    ul li:before {
+        font-size: 70%;
+        content: "✪";
+        position: absolute;
+        left: -1.5em;
+    }
+
+    ul li[data-item]:before {
+        content: attr(data-item);
+    }
 
 footer {
     position: absolute;
@@ -162,6 +175,28 @@ q {
         opacity: .2;
     }
 
+math {
+    display: inline-block;
+}
+
+mtd {
+    text-align: left;
+    padding-left: .5em;
+}
+
+mo {
+    margin: 0 1em;
+    padding: 0 1em;
+}
+
+/* Poor hack :'-( */
+mtext:after {
+    content: "   ";
+}
+
+    mtr > mtext:after {
+        content: "";
+    }
 
 
 
