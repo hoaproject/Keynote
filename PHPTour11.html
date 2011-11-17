@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<section>
-  <h1>Hoa</h1>
-  <footer>by Ivan Enderlin</footer>
+<section class="front">
+  <h1>Hoa, un ensemble de bibliothèques</h1>
+  <footer>par Ivan Enderlin</footer>
 </section>
 
 <!--
@@ -28,18 +28,47 @@ Ce que ça nous a apporté ?
 
 <section>
   <h1>Qui suis-je ?</h1>
+
+  <p><ul>
+    <li>Ivan <span class="lastname">Enderlin</span></li>
+    <li>doctorant en Informatique (LIFC/INRIA)</li>
+    <li>développeur de Hoa</li>
+    <li>contributeur PHP, Mozilla, Debian … open-source</li>
+    <li>expert invité au W3C (HTML, CSS, WebApp)</li>
+    <li>@hoaproject</li>
+  </ul></p>
+
+  <p class="thus">
+  <math display="block">
+    <mrow>
+      <mtext>ivan.enderlin@</mtext>
+      <mo fence="true">{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>hoa-project.net</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>lifc.univ-fcomte.fr</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>inria.fr</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+  </p>
 </section>
 
 <section>
   <h1>Contexte</h1>
 
-  <p>Avant :<ul class="incremental">
+  <p>Avant :<ul>
     <li>petits sites Web</li>
     <li>équipes de quelques personnes</li>
     <li>développement <del>anarchique</del> peu organisé</li>
   </ul></p>
 
-  <p>Maintenant :<ul class="incremental">
+  <p>Maintenant :<ul>
     <li>moyennes et grandes applications</li>
     <li>équipes de plus en plus nombreuses</li>
     <li>développement <del>semi-anarchique</del> en nette progression</li>
@@ -59,13 +88,13 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Motivations</h1>
 
-  <p>Pour nous :<ul class="incremental">
+  <p>Pour nous :<ul>
     <li>mutualiser les efforts</li>
     <li>automatiser plus de tâches</li>
     <li>travailler plus vite : développement, maintenance …</li>
   </ul></p>
 
-  <p>Pour PHP :<ul class="incremental">
+  <p>Pour PHP :<ul>
     <li>plus de professionnalisme : organisation, qualité, tests …</li>
     <li>plus de standards</li>
     <li>plus de fun : PHP offre ce qu'il faut !</li>
@@ -82,7 +111,7 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Bibliothèque</h1>
 
-  <div class="incremental">
+  <div>
 
   <q cite="moi">Une bibliothèque est un ensemble de fonctionnalités dédiées à la
   résolution d'un problème précis et isolé, grâce à son abstraction la plus
@@ -98,7 +127,7 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Philosophie</h1>
 
-  <p><ul class="incremental">
+  <p><ul>
     <li>Être le plus simple possible</li>
     <li>Être le plus abstrait possible</li>
     <li>Être le plus efficace possible</li>
@@ -114,7 +143,7 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Contributions</h1>
 
-  <div class="incremental">
+  <div>
 
   <p class="thus">Hoa : un ensemble de bibliothèques PHP</p>
   <p class="thus">Hoa : un pont entre la recherche et l'entreprise</p>
@@ -125,14 +154,14 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Plan</h1>
 
-  <ul class="incremental">
-    <li>Installation et architecture</li>
-    <!-- de Hoa et du framework, parler de Bin/ -->
+  <ul>
+    <li>Installation, architecture et outils</li>
+    <li>Couche framework</li>
     <li>Quelques bibliothèques notables</li>
+    <li>Vers plus de fun</li>
+    <li>Hoathis</li>
     <li>Autres projets autour de Hoa</li>
-    <!-- Launchee, Virthoasity, la place dans Hoa dans la recherche -->
     <li>Conclusion et perspectives</li>
-    <!-- parler aussi de la doc (« adopter Hoa ») -->
   </ul>
 </section>
 
@@ -168,21 +197,18 @@ $ php Hoa.next.phar --extract</code></pre>
     <li><code>Stub</code>, exportation de Hoa</li>
   </ul></p>
 
-    <!-- on met Stub/, vraiment ?? -->
-
-    <p>Seul le noyau est nécessaire :</p>
-    <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
+  <p>Seul le noyau est nécessaire :</p>
+  <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
 <span class="token-id">var_dump</span>(<span class="token-id">HOA</span>);</code></pre>
 </section>
 
 <section>
   <h1>Noyau</h1>
 
-  <p>Les couches du noyau :<ul class="incremental">
+  <p>Les couches du noyau :<ul>
     <li><em lang="en">Core</em>, base fondamentale du noyau</li>
     <li><em lang="en">Consistency</em>, consistence pour Hoa et PHP</li>
-    <li><em lang="en">Data</em>, représentation de données polymorphiques
-        (expérimentale)</li>
+    <li><em lang="en">Data</em>, représentation de données polymorphiques</li>
     <li><em lang="en">Event</em>, événements et écouteurs</li>
     <li><em lang="en">Exception</em>, exceptions enrichies</li>
     <li><em lang="en">Parameter</em>, paramétrage des bibliothèques et des
@@ -193,26 +219,226 @@ $ php Hoa.next.phar --extract</code></pre>
 
 <section>
   <h1>Outils</h1>
+
+  <p class="thus">Un script important : <code>hoa</code></p>
+  <p>Propose des outils liés aux bibliothèques :<ul>
+    <li><code>debugger</code>, un client pour le debugger de Hoa</li>
+    <li><code>bhoa</code>, un petit server HTTP léger et rapide</li>
+    <li><code>test:*</code>, pour les tests</li>
+    <li><code>worker:*</code>, pour les workers</li>
+    <li>etc.</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>hoa://</h1>
+
+  <p>Abstraction des accès aux ressources :<ul>
+    <li><code>hoa://Application</code>, pour l'application</li>
+    <li><code>hoa://Data</code>, pour les données de l'application</li>
+    <li><code>hoa://Library</code>, pour les bibliothèques</li>
+    <li data-item="≈">suite de liens symboliques (paramétrable)</li>
+  </ul></p>
+  <p class="thus">Partage, intégration et maintenance facilitée</p>
 </section>
 
 <section>
   <h1>Framework ?</h1>
+
+  <p><ul>
+    <li><em>Proof-of-Concept</em></li>
+    <li>Formats : <code>.7z</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>,
+    <code>.zip</code>, <code>.phar</code> (!)</li>
+  </ul></p>
+  <pre><code>$ wget <em>…</em>/Framework/Hoa_Framework.next.phar
+$ php Hoa_Framework.next.phar --extract</code></pre>
+  <p><ul>
+    <li>Versionning : Mercurial</li>
+  </ul></p>
+  <pre><code>$ hg clone http://hg.hoa-project.net/Framework .</code></pre>
+  <p><ul>
+    <li>Où est Hoa ?</li>
+    <li>Script dédié à l'application : <code>myapp</code> (étend
+    <code>hoa</code>)</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Routeur et dispatcheur</h1>
+
+  <p class="thus">Assembler des bibliothèques pour plus d'automatisation</p>
+  <p><ul>
+    <li data-item=""><code>Hoa\Router</code> extrait des données</li>
+    <li data-item="+"><code>Hoa\Dispatcher</code> dispatche des données sur un
+    <em>callable</em></li>
+    <li data-item="=">Oh, un MVC !</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Modèle</h1>
+
+  <p><ul>
+    <li>Modéliser des données pour mieux les manipuler</li>
+    <li>Textuel (code) ou graphique (compilé vers du code)</li>
+  </ul></p>
+  <p class="thus"><code>Hoa\Model</code> pour décrire et manipuler des
+  modèles</p>
+  <p><ul>
+    <li>Où se trouvent les données (e.g. <code>Hoa\Database</code>,
+    <code>Hoa\Xml</code> …)</li>
+    <li>Créer un lien entre le modèle et les données</li>
+    <li>Valider ses données (manuellement ou automatiquement)</li>
+  </ul></p>
+  <p class="thus">Abstraire et assembler pour plus d'automatisation</p>
+</section>
+
+<section>
+  <h1>XYL</h1>
+
+  <p><ul>
+    <li><em>XML Yielding Language</em>, langage d'interface graphique …</li>
+    <li>… multi-plateformes : OS, bureaux, portables, tablettes etc.</li>
+    <li>… multi-sorties : Web, console, PDF etc.</li>
+    <li><code>&lt;yield /&gt;</code> pour créer des composants</li>
+    <li><code>@bind</code> pour s'accrocher à l'arbre des données</li>
+    <li><code>&lt;overlay /&gt;</code>, <code>&lt;fragment /&gt;</code>,
+    <code>&lt;definition /&gt;</code>  …</li>
+    <li data-item="≈">théorie des composants + HTML + …</li>
+  </ul></p>
+  <p class="thus">Coder une fois, utiliser partout !</p>
+</section>
+
+<section>
+  <h1>Test et Praspel</h1>
+
+  <p><ul>
+    <li>Travaux au LIFC/DISC et à l'INRIA</li>
+    <li>Rapport de recherche, article ICTSS'11, thèse (en cours)</li>
+    <li>Praspel : un langage de spécification pour du <em>Contract-based
+    Testing</em></li>
+    <li>Exploite les domaines réalistes (structures algébriques)</li>
+    <li><em>Runtime Assertion Checking</em></li>
+    <li>Génération de tests unitaires et de données de tests automatiques</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Flux</h1>
+
+  <p><ul>
+    <li><code>Hoa\Stream</code> parent de tous les flux</li>
+    <li>flux bas-niveau : <code>Hoa\File</code>, <code>Hoa\Socket</code> …</li>
+    <li>flux composites, qui travaillent sur des flux :
+    <code>Hoa\Xml</code> …</li>
+    <li>beaucoup d'interfaces de flux : <code>Bufferable</code>,
+    <code>In</code>, <code>Lockable</code>, <code>Out</code>,
+    <code>Pathable</code>, <code>Pointable</code>, <code>Statable</code>,
+    <code>Structurable</code>, <code>Touchable</code> …</li>
+    <li>API uniforme et élégamment simplifiée</li>
+  </ul></p>
+  <p class="thus">Les flux de PHP sont très puissants, ne pas les négliger</p>
+</section>
+
+<section>
+  <h1>Un peu plus de fun</h1>
+
+  <p><code>Hoa\FastCgi</code> permet d'utiliser FastCGI et donc PHP FastCGI</p>
+  <pre><code>$client  = new Hoa\Socket\Client('tcp://127.0.0.1:9000');
+$fastcgi = new Hoa\FastCgi\Responder($client);
+echo $fastcgi->send($headers, $content);</code></pre>
+</section>
+
+<section>
+  <h1>Toujours plus du fun</h1>
+
+  <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones</p>
+  <pre><code>$wrker = new Hoa\Worker\Backend\Shared('workerId', 'pwd');
+$wrkr->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+    // Compute $bucket->getData().
+});
+$wrkr->run();</code></pre>
+  <pre><code>$worker = new Hoa\Worker\Shared('workerId');
+$worker->postMessage('foobar');</code></pre>
+</section>
+
+<section>
+  <h1>Encore plus du fun</h1>
+
+  <p><code>Hoa\Dns</code> permet de coder un serveur DNS</p>
+  <pre><code>$server = new Hoa\Socket\Server('udp://127.0.0.1:57005');
+$dns    = new Hoa\Dns($server);
+$dns->on('query', function ( Hoa\Core\Event\Bucket $bucket ) {
+    return '127.0.0.1';
+});
+$dns->run();</code></pre>
+</section>
+
+<section>
+  <h1>Overfun</h1>
+
+  <p><code>Hoa\Websocket</code> permet d'utiliser un serveur Websocket</p>
+  <pre><code>$server    = new Hoa\Socket\Server('tcp://127.0.0.1:8889');
+$websocket = new Hoa\Websocket\Server($server);
+$websocket->on('message', …);
+$websocket->on('close', …);
+$websocket->on('error', …);
+$websocket->run();</code></pre>
+</section>
+
+<section>
+  <h1>Hoathis</h1>
+
+  <p><ul>
+    <li>Bibliothèques utilisateurs (avec différentes visibilités)</li>
+    <li>Mécanisme simple et rapide</li>
+    <li>Enrichir et <em>hacker</em> Hoa</li>
+    <li>Point de choix :
+    </li>
+  </ul></p>
+  <pre><code>$server = dnew('(Hoathis or Hoa)\Socket\Server', …);</code></pre>
+
+  <p class="thus">Hoa est un environnement pour écrire et maintenir des
+  bibliothèques</p>
+</section>
+
+<section>
+  <h1>Mais aussi …</h1>
+
+  <p>Acl, Bench, Cache, Compiler, Console, Database, Dispatcher, Dns,
+  EventSource, FastCgi, File, Filter, Graph, Http, Iterator, Json, Locale, Log,
+  Mail, Memory, Mime, Model, Notification, Observer, Php, Prototype, Realdom,
+  Reflection, Regex, Registry, Router, Serialize, Session, Socket, Stream,
+  StringBuffer, Test, Translate, Tree, Uri, View, Visitor, Websocket, Worker,
+  Xml, XmlRpc, Xyl, Yaml, Zombie, xcallable, from, import, curry, memoize,
+  Praspel …</p>
 </section>
 
 <section>
   <h1>Autres projets autour de Hoa</h1>
 
-  <p><ul class="incremental">
+  <p><ul>
     <li>Hoathis.net, une forge open-source pour partager les Hoathis et
-        expérimenter Hoa sur un très gros projet</li>
+    expérimenter Hoa sur un très gros projet</li>
     <li>Virthoasity, une machine virtuelle pour du développement Web,
-        non-intrusive et simple</li>
+    non-intrusive et simple</li>
     <li>Launchee, un interpréteur XYL pour des applications bureaux</li>
-    <li>Bhoa, un serveur HTTP léger et très facile d'usage</li>
-    <li>Praspel, un langage de spécification pour automatiser la génération de
-        données de tests et de tests unitaires</li>
     <li>Sandbox, un ensemble de programmes clé-en-main pour découvrir Hoa par le
-        code</li>
+    code</li>
+    <li>Mais aussi : Khoala, Hoapi …</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Documentation</h1>
+
+  <p><ul>
+    <li>En cours d'écriture /o\ …</li>
+    <li>… mais avancent vite \o/</li>
+    <li>Plusieurs manuels : apprentissage, référence, API,
+    <em>snippets</em> …</li>
+    <li>En français (pour l'instant)</li>
+    <li>Pour les impatients : voir Sandbox</li>
   </ul></p>
 </section>
 
