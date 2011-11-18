@@ -197,6 +197,7 @@ q {
     width: 70%;
     margin: 0 auto;
     text-align: center;
+    position: relative;
 }
 
     q + q {
@@ -214,6 +215,13 @@ q {
         font-family: Title;
         font-size: 1000%;
         opacity: .2;
+    }
+
+    q[cite]::after {
+        position: absolute;
+        right: 0;
+        font: 50%/3.5em Header;
+        content: "⁘ " attr(cite);
     }
 
 div.stack {
