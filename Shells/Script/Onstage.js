@@ -44,12 +44,15 @@ var Dz = {
   views: {},
   notes: null,
   url: null,
-  idx: 1
+  idx: 1,
+  socket: null,
+  host: 'ws://127.0.0.1:8889'
 };
 
 Dz.init = function() {
   this.startClock();
   this.loadIframes();
+  this.startSocket(this.host);
 }
 
 Dz.onkeydown = function(aEvent) {
@@ -180,6 +183,9 @@ Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
   for (var i = 2; i < arguments.length; i++)
     aMsg.push(encodeURIComponent(arguments[i]));
   aWin.postMessage(aMsg.join(" "), "*");
+
+  if(null != this.socket)
+    this.socket.send(aMsg);
 }
 
 Dz.startClock = function() {
@@ -192,6 +198,25 @@ Dz.startClock = function() {
     $("#minutes").innerHTML = addZero(now.getMinutes());
     $("#seconds").innerHTML = addZero(now.getSeconds());
   }, 1000);
+}
+
+Dz.startSocket = function ( host ) {
+
+  try {
+    window.socket         = window.MozWebSocket || window.WebSocket;
+    this.socket           = new window.socket(host);
+    this.socket.onopen    = function ( message ) {
+      console.log('connected (' + host + ')');
+    }
+    this.socket.onclose   = function ( message ) {
+      this.socket = null;
+      console.log('close');
+    }
+  }
+  catch ( e ) {
+    this.socket = null;
+    console.log('*** ' + e);
+  }
 }
 
 window.onload = Dz.init.bind(Dz);
