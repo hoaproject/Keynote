@@ -155,7 +155,7 @@ Ce que ça nous a apporté ?
   <h1>Plan</h1>
 
   <ul>
-    <li>Installation, architecture et outils</li>
+    <li>Installation et découverte</li>
     <li>Couche framework</li>
     <li>Quelques bibliothèques notables</li>
     <li>Vers plus de fun</li>
@@ -205,14 +205,11 @@ $ php Hoa.next.phar --extract</code></pre>
 <section>
   <h1>Noyau</h1>
 
-  <p>Les couches du noyau :<ul>
+  <p>Quelques couches du noyau :<ul>
     <li><em lang="en">Core</em>, base fondamentale du noyau</li>
     <li><em lang="en">Consistency</em>, consistence pour Hoa et PHP</li>
-    <li><em lang="en">Data</em>, représentation de données polymorphiques</li>
     <li><em lang="en">Event</em>, événements et écouteurs</li>
     <li><em lang="en">Exception</em>, exceptions enrichies</li>
-    <li><em lang="en">Parameter</em>, paramétrage des bibliothèques et des
-        classes</li>
     <li><em lang="en">Protocol</em>, gestion de <code>hoa://</code></li>
   </ul></p>
 </section>
@@ -233,7 +230,7 @@ $ php Hoa.next.phar --extract</code></pre>
 <section>
   <h1>hoa://</h1>
 
-  <p>Abstraction des accès aux ressources :<ul>
+  <p>Abstraction des accès aux ressources, 3 racines proposées :<ul>
     <li><code>hoa://Application</code>, pour l'application</li>
     <li><code>hoa://Data</code>, pour les données de l'application</li>
     <li><code>hoa://Library</code>, pour les bibliothèques</li>
@@ -267,14 +264,15 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Routeur et dispatcheur</h1>
 
   <div class="stack incremental">
-  <div>
 
+  <div>
   <p class="thus">Assembler des bibliothèques pour plus d'automatisation</p>
   <p><ul>
     <li data-item=""><code>Hoa\Router</code> extrait des données</li>
     <li data-item="+"><code>Hoa\Dispatcher</code> dispatche des données sur un
     <em>callable</em></li>
-    <li data-item="=">Oh, un MVC !</li>
+    <li data-item="+"><code>Hoa\Dispatcher\Kit</code> une structure</li>
+    <li data-item="=">Oh, un début de MVC !</li>
   </ul></p>
   </div>
 
@@ -330,6 +328,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>Exploite les domaines réalistes (structures algébriques)</li>
     <li><em>Runtime Assertion Checking</em></li>
     <li>Génération de tests unitaires et de données de tests automatiques</li>
+    <li data-item="⚡">Thèse inscrite dans le projet Squash</li>
   </ul></p>
 </section>
 
@@ -338,10 +337,10 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 
   <p><ul>
     <li><code>Hoa\Stream</code> parent de tous les flux</li>
-    <li>flux bas-niveau : <code>Hoa\File</code>, <code>Hoa\Socket</code> …</li>
+    <li>flux bas-niveaux : <code>Hoa\File</code>, <code>Hoa\Socket</code> …</li>
     <li>flux composites, qui travaillent sur des flux :
     <code>Hoa\Xml</code> …</li>
-    <li>beaucoup d'interfaces de flux : <code>Bufferable</code>,
+    <li>beaucoup d'interfaces : <code>Bufferable</code>,
     <code>In</code>, <code>Lockable</code>, <code>Out</code>,
     <code>Pathable</code>, <code>Pointable</code>, <code>Statable</code>,
     <code>Structurable</code>, <code>Touchable</code> …</li>
@@ -363,7 +362,7 @@ echo $fastcgi->send($headers, $content);</code></pre>
   <h1>Toujours plus du fun</h1>
 
   <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones</p>
-  <pre><code>$wrker = new Hoa\Worker\Backend\Shared('workerId', 'pwd');
+  <pre><code>$wrkr = new Hoa\Worker\Backend\Shared('workerId', 'pwd');
 $wrkr->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
     // Compute $bucket->getData().
 });
@@ -403,7 +402,7 @@ $websocket->run();</code></pre>
     <li>Bibliothèques utilisateurs (avec différentes visibilités)</li>
     <li>Mécanisme simple et rapide</li>
     <li>Enrichir et <em>hacker</em> Hoa</li>
-    <li>Point de choix :
+    <li>Points de choix :
     </li>
   </ul></p>
   <pre><code>$server = dnew('(Hoathis or Hoa)\Socket\Server', …);</code></pre>
@@ -420,8 +419,8 @@ $websocket->run();</code></pre>
   Mail, Memory, Mime, Model, Notification, Observer, Php, Prototype, Realdom,
   Reflection, Regex, Registry, Router, Serialize, Session, Socket, Stream,
   StringBuffer, Test, Translate, Tree, Uri, View, Visitor, Websocket, Worker,
-  Xml, XmlRpc, Xyl, Yaml, Zombie, xcallable, from, import, curry, memoize,
-  Praspel …</p>
+  Xml, XmlRpc, Xyl, Yaml, Zombie, xcallable, from, import, dnew, curry, event,
+  resolve, memoize, ƒ, zFormat, Praspel …</p>
 </section>
 
 <section>
@@ -453,7 +452,36 @@ $websocket->run();</code></pre>
 </section>
 
 <section>
-  <h1>Conclusion et perspectives</h1>
+  <h1>Conclusion</h1>
+
+  <p>Hoa est :<ul>
+    <li>un ensemble de bibliothèques</li>
+    <li>un environnement pour développer des bibliothèques</li>
+  </ul></p>
+  <p>Hoa framework est :<ul>
+    <li>un <em>proof-of-concept</em> de la puissance des bibliothèques</li>
+    <li>un porte d'entrée facile dans Hoa</li>
+  </ul></p>
+</section>
+
+<section>
+  <h1>Perspectives</h1>
+
+  <p><ul>
+    <li>Version courante : 1.0.0ß6 … ☞ une release ?</li>
+    <li>Continuer la documentation, toujours être pédagogique</li>
+    <li>Hoathis.net pour éprouver Hoa sur un très gros projet</li>
+    <li>Faire une bonne thèse \o/</li>
+    <li>Écrire des Hoathis pour inclure d'autres projets</li>
+  </ul></p>
+</section>
+
+<section class="thanks">
+  <h1>Merci &amp; questions</h1>
+
+  <p>Un grand merci pour votre attention</p>
+  <p>Des questions ?</p>
+  <p class="thus">hoa-project.net</p>
 </section>
 
 <script src="Template/Script/DZSlides.js"></script>
