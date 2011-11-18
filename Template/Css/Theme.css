@@ -92,6 +92,19 @@ section, mtext {
     padding: .5em;
 }
 
+    section.thanks {
+        font-size: 40px;
+    }
+
+    section.thanks > h1 {
+        margin-bottom: 2em;
+    }
+
+    section.thanks > p {
+        margin: 1em;
+        text-align: center;
+    }
+
 h1 {
     font: 60px/80px Header;
     font-weight: normal;
