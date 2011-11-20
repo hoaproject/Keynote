@@ -139,6 +139,20 @@ p {
         margin-right: 1em;
     }
 
+a, a:link, a:visited, a:hover, a:active, a:focus {
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    padding: .1em .2em;
+    background: rgba(255, 255, 255, .15);
+}
+
+    a:hover, a:active, a:focus {
+        border: 1px rgba(46, 83, 146, .8) solid;
+        border-width: 0 0 1px 0;
+        background: rgba(255, 255, 255, .3);
+    }
+
 span.lastname {
     font-variant: small-caps;
 }
