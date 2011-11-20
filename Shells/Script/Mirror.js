@@ -38,6 +38,7 @@ var Dz = {
 Dz.init = function() {
   this.loadIframe();
   this.startSocket(this.host);
+  this.loadNote();
 }
 
 /* Get url from hash or prompt and store it */
@@ -109,10 +110,12 @@ Dz.startSocket = function ( host ) {
     socket           = new window.socket(host);
     socket.onopen    = function ( message ) {
       console.log('connected (' + host + ')');
+      $('#onstage').checked = true;
       this.send('OPEN');
     }
     socket.onmessage = function ( message ) {
-      switch(message.data) {
+      var messages = message.data.split(',');
+      switch(messages[0]) {
         case 'BACK':
           this.back();
           break;
@@ -125,15 +128,35 @@ Dz.startSocket = function ( host ) {
         case 'END':
           this.goEnd();
           break;
+        case 'SET_CURSOR':
+          this.setCursor(messages[1]);
+          break;
       }
     }.bind(this);
     socket.onclose   = function ( message ) {
       console.log('close');
+      $('#onstage').checked = false;
     }
   }
   catch ( e ) {
     console.log('*** ' + e);
   }
 }
+
+Dz.loadNote = function ( ) {
+
+  var note = $('#note');
+  var ls   = window.localStorage;
+  var item = this.url;
+
+  if(ls.getItem(item))
+      note.value = ls.getItem(item);
+
+  window.setInterval(function ( ) {
+
+      ls.setItem(item, note.value);
+  }, 1000);
+}
+
 
 window.onload = Dz.init.bind(Dz);

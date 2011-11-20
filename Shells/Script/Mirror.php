@@ -16,12 +16,13 @@ $websocket->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
     $server  = $self->getServer();
     $nodes   = $server->getNodes();
 
-    switch($message) {
+    switch(substr($message, 0, strpos($message, ',') ?: strlen($message))) {
 
-        case 'BACK':
         case 'FORWARD':
+        case 'BACK':
         case 'START':
         case 'END':
+        case 'SET_CURSOR':
           break;
 
         case 'OPEN':
@@ -37,7 +38,7 @@ $websocket->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
 
     foreach($nodes as $node)
         if($id != $node->getId())
-            $self->send($bucket->getData(), $node);
+            $self->send($message, $node);
 });
 
 $websocket->on('close', function ( Hoa\Core\Event\Bucket $bucket ) {
@@ -46,7 +47,7 @@ $websocket->on('close', function ( Hoa\Core\Event\Bucket $bucket ) {
 
     echo "\r",
          '- A viewer has left.', "\n",
-         ($c = count($nodes) - 2), ' viewer', (1 < $c ? 's' : ''), '.';
+         ($c = count($nodes) - 1), ' viewer', (1 < $c ? 's' : ''), '.';
 
 });
 
