@@ -107,7 +107,7 @@ Dz.startSocket = function ( host ) {
 
   try {
     window.socket    = window.MozWebSocket || window.WebSocket;
-    socket           = new window.socket(host);
+    var socket       = new window.socket(host);
     socket.onopen    = function ( message ) {
       console.log('connected (' + host + ')');
       $('#onstage').checked = true;
