@@ -184,7 +184,7 @@ Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
     aMsg.push(encodeURIComponent(arguments[i]));
   aWin.postMessage(aMsg.join(" "), "*");
 
-  if(null != this.socket)
+  if(aWin == this.views.present && null != this.socket)
     this.socket.send(aMsg);
 }
 
