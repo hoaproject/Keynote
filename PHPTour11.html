@@ -106,12 +106,8 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Contributions</h1>
 
-  <div>
-
   <p class="thus">Hoa : un ensemble de bibliothèques PHP</p>
   <p class="thus">Hoa : un pont entre la recherche et l'entreprise</p>
-
-  </div>
 </section>
 
 <section>
@@ -238,7 +234,12 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   </div>
 
   <div class="stack-em">
-  <p>foobar</p>
+  <p>Exemple clé-en-main sur :<ul>
+    <li>http://hg.hoa-project.net/Sandbox</li>
+    <li>(ou archives)</li>
+    <li>voir le <em>Gordon's blog</em></li>
+    <li>dossier <code>Application/</code></li>
+  </ul></p>
   </div>
 
   </div>
@@ -282,14 +283,16 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Test et Praspel</h1>
 
   <p><ul>
-    <li>Travaux au LIFC/DISC et à l'INRIA</li>
+    <li><a href="http://lifc.univ-fcomte.fr/~publis/papers/Author/ENDERLIN-I.html">Travaux</a>
+    au LIFC/DISC et à l'INRIA</li>
     <li>Rapport de recherche, article ICTSS'11, thèse (en cours)</li>
     <li>Praspel : un langage de spécification pour du <em>Contract-based
     Testing</em></li>
     <li>Exploite les domaines réalistes (structures algébriques)</li>
     <li><em>Runtime Assertion Checking</em></li>
     <li>Génération de tests unitaires et de données de tests automatiques</li>
-    <li data-item="⚡">Thèse inscrite dans le projet Squash</li>
+    <li data-item="⚡">Thèse inscrite dans le projet <a
+    href="http://squashtest.org">Squash</a></li>
   </ul></p>
 </section>
 
@@ -314,46 +317,46 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Un peu plus de fun</h1>
 
   <p><code>Hoa\FastCgi</code> permet d'utiliser FastCGI et donc PHP FastCGI</p>
-  <pre><code>$client  = new Hoa\Socket\Client('tcp://127.0.0.1:9000');
-$fastcgi = new Hoa\FastCgi\Responder($client);
-echo $fastcgi->send($headers, $content);</code></pre>
+  <pre><code><span class="token-variable">$client</span>  = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Client</span>(<span class="token-string">'tcp://127.0.0.1:9000'</span>);
+<span class="token-variable">$fastcgi</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\FastCgi\Responder</span>(<span class="token-variable">$client</span>);
+<span class="token-keyword">echo</span> <span class="token-variable">$fastcgi</span>-><span class="token-id">send</span>(<span class="token-variable">$headers</span>, <span class="token-variable">$content</span>);</code></pre>
 </section>
 
 <section>
   <h1>Toujours plus du fun</h1>
 
   <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones</p>
-  <pre><code>$wrkr = new Hoa\Worker\Backend\Shared('workerId', 'pwd');
-$wrkr->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+  <pre><code><span class="token-variable">$wrkr</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Backend\Shared</span>(<span class="token-string">'workerId'</span>, <span class="token-string">'pwd'</span>);
+<span class="token-variable">$wrkr</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
     // Compute $bucket->getData().
 });
-$wrkr->run();</code></pre>
-  <pre><code>$worker = new Hoa\Worker\Shared('workerId');
-$worker->postMessage('foobar');</code></pre>
+<span class="token-variable">$wrkr</span>-><span class="token-id">run</span>();</code></pre>
+  <pre><code><span class="token-variable">$worker</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Shared</span>(<span class="token-string">'workerId'</span>);
+<span class="token-variable">$worker</span>-><span class="token-id">postMessage</span>(<span class="token-string">'foobar'</span>);</code></pre>
 </section>
 
 <section>
   <h1>Encore plus du fun</h1>
 
   <p><code>Hoa\Dns</code> permet de coder un serveur DNS</p>
-  <pre><code>$server = new Hoa\Socket\Server('udp://127.0.0.1:57005');
-$dns    = new Hoa\Dns($server);
-$dns->on('query', function ( Hoa\Core\Event\Bucket $bucket ) {
-    return '127.0.0.1';
+  <pre><code><span class="token-variable">$server</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'udp://127.0.0.1:57005'</span>);
+<span class="token-variable">$dns</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Dns</span>(<span class="token-variable">$server</span>);
+<span class="token-variable">$dns</span>-><span class="token-id">on</span>(<span class="token-string">'query'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
+    return <span class="token-string">'127.0.0.1'</span>;
 });
-$dns->run();</code></pre>
+<span class="token-variable">$dns</span>-><span class="token-id">run</span>();</code></pre>
 </section>
 
 <section>
   <h1>Overfun</h1>
 
   <p><code>Hoa\Websocket</code> permet d'utiliser un serveur Websocket</p>
-  <pre><code>$server    = new Hoa\Socket\Server('tcp://127.0.0.1:8889');
-$websocket = new Hoa\Websocket\Server($server);
-$websocket->on('message', …);
-$websocket->on('close', …);
-$websocket->on('error', …);
-$websocket->run();</code></pre>
+  <pre><code><span class="token-variable">$server</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'tcp://127.0.0.1:8889'</span>);
+<span class="token-variable">$websocket</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Websocket\Server</span>(<span class="token-variable">$server</span>);
+<span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, …);
+<span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'close'</span>, …);
+<span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'error'</span>, …);
+<span class="token-variable">$websocket</span>-><span class="token-id">run</span>();</code></pre>
 </section>
 
 <section>
@@ -366,7 +369,7 @@ $websocket->run();</code></pre>
     <li>Points de choix :
     </li>
   </ul></p>
-  <pre><code>$server = dnew('(Hoathis or Hoa)\Socket\Server', …);</code></pre>
+  <pre><code><span class="token-variable">$server</span> = <span class="token-id">dnew</span>(<span class="token-string">'(Hoathis or Hoa)\Socket\Server'</span>, …);</code></pre>
 
   <p class="thus">Hoa est un environnement pour écrire et maintenir des
   bibliothèques</p>
@@ -443,7 +446,7 @@ $websocket->run();</code></pre>
 
   <p>Un grand merci pour votre attention</p>
   <p>Des questions ?</p>
-  <p class="thus">hoa-project.net</p>
+  <p class="thus"><a href="http://hoa-project.net/">hoa-project.net</a></p>
 </section>
 
 <script src="Template/Script/DZSlides.js"></script>
