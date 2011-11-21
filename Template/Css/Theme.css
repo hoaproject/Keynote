@@ -257,29 +257,53 @@ div.stack {
     width: 765px;
 }
 
-div.stack > div {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-}
+    div.stack > div {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+    }
 
-div.stack > div + div {
-    height: 260px;
-    width: 520px;
-    top: 50%;
-    left: 50%;
-    margin-top: -180px;
-    margin-left: -300px;
-    padding: 20px 40px;
+    div.stack > div ~ div {
+        height: 260px;
+        width: 520px;
+        top: 50%;
+        left: 50%;
+        margin-top: -180px;
+        margin-left: -300px;
+        padding: 20px 40px;
+    }
 
-    -moz-transform: rotate(-5deg);
+    div.stack-em {
+        background: #000;
+        -moz-transform: rotate(-5deg);
+    }
 
-    background: rgba(0, 0, 0, .9);
-    border: 2px yellow solid;
-}
+    div.stack-em:before,
+    div.stack-em:after {
+        content: "";
+        position: absolute;
+        bottom: -.2em;
+        height: 1em;
+        -moz-box-shadow: 0 0 8px #000;
+        background: rgba(0, 0, 0, .4);
+    }
+
+    div.stack-em:before {
+        right: 45%;
+        left: .3em;
+
+        -moz-transform: rotate(-4.3deg);
+    }
+
+    div.stack-em:after {
+        left: 45%;
+        right: .3em;
+
+        -moz-transform: rotate(4.3deg);
+    }
 
 math {
     font: 30px/45px MathRegular;
