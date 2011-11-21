@@ -88,9 +88,12 @@ body {
 
 section, mtext {
     font: 30px/45px Text;
-    margin: 0;
-    padding: .5em;
 }
+
+    section {
+        margin: 0;
+        padding: 0;
+    }
 
     section.thanks {
         font-size: 40px;
@@ -109,12 +112,12 @@ h1 {
     font: 60px/80px Header;
     font-weight: normal;
     text-align: center;
-    margin: 0 0 .1em 0;
-    padding: 0 .5em .5em .5em;
+    margin: .2em 0 .5em 0;
+    padding: 0;
 }
 
 p {
-    margin: 0;
+    margin: 0 0 0 1em;
     padding: 0;
     width: 96%;
     text-align: justify;
@@ -127,13 +130,12 @@ p {
     }
 
     p.thus {
-        margin: 1em 0;
         text-align: center;
         text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1),
                      0   0   10px rgba(255, 254, 236, .95);
     }
 
-    p.thus::before {
+    p.thus:before {
         content: "☞";
         font-size: 80%;
         margin-right: 1em;
@@ -157,28 +159,35 @@ span.lastname {
     font-variant: small-caps;
 }
 
-ul li {
+ul li,
+ol li {
     list-style: none;
     position: relative;
-    margin: 0 0 0 2em;
+    margin: 0 0 0 3em;
 }
+
+    ol li {
+        list-style-type: lower-roman;
+    }
 
     ul li:before {
         font-size: 70%;
         content: "✪";
         position: absolute;
         left: -1.5em;
+        width: 1em;
+        text-align: center;
     }
 
-    ul li[data-item]:before {
+    li[data-item]:before {
         content: attr(data-item);
     }
 
 footer {
     position: absolute;
     font-size: 50%;
-    bottom: 40px;
-    right: 80px;
+    bottom: 10px;
+    right: 40px;
 }
 
 code {
@@ -187,8 +196,8 @@ code {
 
 pre {
     color: #bfe0ff;
-    margin: 0 .5em 0 -.5em;
-    padding: .5em;
+    margin: .3em 0;
+    padding: .5em 1em;
     line-height: 40px;
     overflow-y: auto;
 
@@ -221,17 +230,16 @@ pre {
 
 q {
     display: block;
-    width: 70%;
-    margin: 0 auto;
+    width: 600px;
+    margin: 2em auto auto auto;
     text-align: center;
-    position: relative;
 }
 
     q + q {
       margin-top: 1.7em;
     }
 
-    q::before {
+    q:before {
         content: "“";
         position: relative;
         display: inline-block;
@@ -244,9 +252,9 @@ q {
         opacity: .2;
     }
 
-    q[cite]::after {
+    q[cite]:after {
         position: absolute;
-        right: 0;
+        right: 3em;
         font: 50%/3.5em Header;
         content: "⁘ " attr(cite);
     }
@@ -305,8 +313,14 @@ div.stack {
         -moz-transform: rotate(4.3deg);
     }
 
+.vspace {
+    margin-top: 4em !important;
+}
+
 math {
     font: 30px/45px MathRegular;
+    margin: 0;
+    padding: 0;
 }
 
 mtd {

@@ -31,11 +31,13 @@ Ce que ça nous a apporté ?
 
   <p><ul>
     <li>Ivan <span class="lastname">Enderlin</span></li>
-    <li>doctorant en Informatique (LIFC/INRIA)</li>
-    <li>développeur de Hoa</li>
-    <li>contributeur PHP, Mozilla, Debian … open-source</li>
-    <li>expert invité au W3C (HTML, CSS, WebApp)</li>
-    <li>@hoaproject</li>
+    <li>doctorant en Informatique (<a href="http://lifc.univ-fcomte.fr/">LIFC</a>/<a href="http://www.inria.fr/">INRIA</a>)</li>
+    <li>leader et développeur de Hoa</li>
+    <li>contributeur <a href="http://php.net/">PHP</a>,
+    <a href="http://mozilla.org/">Mozilla</a>, Debian … open-source</li>
+    <li>expert invité au <a href="http://w3.org/">W3C</a> (HTML, CSS,
+    WebApp)</li>
+    <li data-item=""><a href="https://twitter.com/#!/hoaproject">@hoaproject</a></li>
   </ul></p>
 
   <p class="thus">
@@ -88,7 +90,6 @@ Ce que ça nous a apporté ?
     <li>plus de professionnalisme : organisation, qualité, tests …</li>
     <li>plus de standards</li>
     <li>plus de fun : PHP offre ce qu'il faut !</li>
-    <li>plus <em>à compléter</em></li>
   </ul></li>
 </section>
 
@@ -106,20 +107,20 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Contributions</h1>
 
-  <p class="thus">Hoa : un ensemble de bibliothèques PHP</p>
+  <p class="thus vspace">Hoa : un ensemble de bibliothèques PHP</p>
   <p class="thus">Hoa : un pont entre la recherche et l'entreprise</p>
 </section>
 
 <section>
   <h1>Plan</h1>
 
-  <ul>
+  <ol>
     <li>Installation et découverte</li>
     <li>Couche framework</li>
     <li>Quelques bibliothèques notables</li>
     <li>Hoathis et autres projets autour de Hoa</li>
     <li>Conclusion et perspectives</li>
-  </ul>
+  </ol>
 </section>
 
 <section>
@@ -129,12 +130,13 @@ Ce que ça nous a apporté ?
     <li>Emplacement par défaut (sous Unix) :
        <code>/usr/local/lib/hoa</code></li>
     <li>Formats : <code>.7z</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>,
-    <code>.zip</code>, <code>.phar</code> (!)</li>
+    <code>.zip</code>, <a href="http://php.net/phar"><code>.phar</code></a>
+    ⚑</li>
   </ul></p>
   <pre><code>$ wget http://download.hoa-project.net/Central/Hoa.next.phar
 $ php Hoa.next.phar --extract</code></pre>
   <p><ul>
-    <li>Versionning : Mercurial</li>
+    <li><em>Versionning</em> : <a href="http://mercurial.selenic.com/">Mercurial</a></li>
   </ul></p>
   <pre><code>$ hg clone http://hg.hoa-project.net/Central .</code></pre>
 
@@ -191,7 +193,7 @@ $ php Hoa.next.phar --extract</code></pre>
     <li><code>hoa://Application</code>, pour l'application</li>
     <li><code>hoa://Data</code>, pour les données de l'application</li>
     <li><code>hoa://Library</code>, pour les bibliothèques</li>
-    <li data-item="≈">liens symboliques (paramétrable)</li>
+    <li data-item="≈">liens symboliques (paramétrables)</li>
   </ul></p>
   <p class="thus">Partage, intégration et maintenance facilitée</p>
 </section>
@@ -202,17 +204,18 @@ $ php Hoa.next.phar --extract</code></pre>
   <p><ul>
     <li><em>Proof-of-Concept</em></li>
     <li>Formats : <code>.7z</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>,
-    <code>.zip</code>, <code>.phar</code> (!)</li>
+    <code>.zip</code>, <a href="http://php.net/phar"><code>.phar</code></a>
+    ⚑</li>
   </ul></p>
   <pre><code>$ wget <em>…</em>/Framework/Hoa_Framework.next.phar
 $ php Hoa_Framework.next.phar --extract</code></pre>
   <p><ul>
-    <li>Versionning : Mercurial</li>
+    <li><em>Versionning</em> : <a href="http://mercurial.selenic.com/">Mercurial</a></li>
   </ul></p>
   <pre><code>$ hg clone http://hg.hoa-project.net/Framework .</code></pre>
   <p><ul>
     <li>Où est Hoa ?</li>
-    <li>Script dédié à l'application : <code>myapp</code> (hérite
+    <li>Script dédié à l'application : <code>myapp</code> (hérite de
     <code>hoa</code>)</li>
   </ul></p>
 </section>
@@ -238,11 +241,12 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>http://hg.hoa-project.net/Sandbox</li>
     <li>(ou archives)</li>
     <li>voir le <em>Gordon's blog</em></li>
-    <li>dossier <code>Application/</code></li>
+    <li>puis le dossier <code>Application/</code></li>
   </ul></p>
   </div>
 
   </div>
+  <footer>Continuons …</footer>
 </section>
 
 <section>
@@ -256,11 +260,12 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   modèles</p>
   <p><ul>
     <li>Où se trouvent les données (e.g. <code>Hoa\Database</code>,
-    <code>Hoa\Xml</code> …)</li>
+    <code>Hoa\Xml</code> …) ?</li>
     <li>Créer un lien entre le modèle et les données</li>
     <li>Valider ses données (manuellement ou automatiquement)</li>
   </ul></p>
   <p class="thus">Abstraire et assembler pour créer de l'automatisation</p>
+  <footer>Mais encore …</footer>
 </section>
 
 <section>
@@ -284,7 +289,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 
   <p><ul>
     <li><a href="http://lifc.univ-fcomte.fr/~publis/papers/Author/ENDERLIN-I.html">Travaux</a>
-    au LIFC/DISC et à l'INRIA</li>
+    au LIFC et à l'INRIA</li>
     <li>Rapport de recherche, article ICTSS'11, thèse (en cours)</li>
     <li>Praspel : un langage de spécification pour du <em>Contract-based
     Testing</em></li>
