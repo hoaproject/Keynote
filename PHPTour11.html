@@ -34,7 +34,7 @@ Ce que ça nous a apporté ?
     <li>doctorant en Informatique (<a href="http://lifc.univ-fcomte.fr/">LIFC</a>/<a href="http://www.inria.fr/">INRIA</a>)</li>
     <li>leader et développeur de Hoa</li>
     <li>contributeur <a href="http://php.net/">PHP</a>,
-    <a href="http://mozilla.org/">Mozilla</a>, Debian … open-source</li>
+    <a href="https://mozilla.org/">Mozilla</a>, Debian … open-source</li>
     <li>expert invité au <a href="http://w3.org/">W3C</a> (HTML, CSS,
     WebApp)</li>
     <li data-item=""><a href="https://twitter.com/#!/hoaproject">@hoaproject</a></li>
@@ -126,6 +126,9 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Installation</h1>
 
+  <div class="stack incremental">
+
+  <div>
   <p><ul>
     <li>Emplacement par défaut (sous Unix) :
        <code>/usr/local/lib/hoa</code></li>
@@ -141,6 +144,18 @@ $ php Hoa.next.phar --extract</code></pre>
   <pre><code>$ hg clone http://hg.hoa-project.net/Central .</code></pre>
 
   <p class="thus">Un seul exemplaire de Hoa pour plusieurs applications !</p>
+  </div>
+
+  <div class="stack-em">
+  <p>Astuces :<ul>
+    <li>index des dépôts :
+    <a href="http://hg.hoa-project.net/">hg.hoa-project.net/</a></li>
+    <li>architecture des archives</li>
+    <li data-item="=">architecture des dépôts</li>
+  </ul></p>
+  </div>
+
+  </div>
 </section>
 
 <section>
@@ -232,16 +247,19 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li data-item="+"><code>Hoa\Dispatcher</code> dispatche des données sur un
     <em>callable</em></li>
     <li data-item="+"><code>Hoa\Dispatcher\Kit</code> une structure</li>
-    <li data-item="=">Oh, un début de MVC !</li>
+    <li data-item="="><a href="http://hoa-project.net/Literature/Learn/Routerdispatcher.html">♥</a></li>
+    <li data-item="≈">un début de MVC</li>
   </ul></p>
   </div>
 
   <div class="stack-em">
   <p>Exemple clé-en-main sur :<ul>
-    <li>http://hg.hoa-project.net/Sandbox</li>
-    <li>(ou archives)</li>
+    <li><a
+    href="http://hg.hoa-project.net/Sandbox">hg.hoa-project.net/Sandbox</a>
+    (&amp;
+    archives)</li>
     <li>voir le <em>Gordon's blog</em></li>
-    <li>puis le dossier <code>Application/</code></li>
+    <li>dossier <code>Application/</code></li>
   </ul></p>
   </div>
 
@@ -253,7 +271,9 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Modèle</h1>
 
   <p><ul>
-    <li>Modéliser des données pour mieux les manipuler</li>
+    <li><a
+    href="http://hoa-project.net/Literature/Learn/Model.html">Modéliser</a> des
+    données pour mieux les manipuler</li>
     <li>Textuel ou graphique</li>
   </ul></p>
   <p class="thus"><code>Hoa\Model</code> pour décrire et manipuler des
@@ -279,7 +299,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li><code>@bind</code> pour s'accrocher à l'arbre des données</li>
     <li><code>&lt;overlay /&gt;</code>, <code>&lt;fragment /&gt;</code>,
     <code>&lt;definition /&gt;</code>  …</li>
-    <li data-item="≈">théorie des composants + HTML + …</li>
+    <li data-item="≈">théorie des composants + <a href="http://w3.org/TR/html5/">HTML</a> + …</li>
   </ul></p>
   <p class="thus">Coder une fois, utiliser partout !</p>
 </section>
@@ -321,7 +341,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Un peu plus de fun</h1>
 
-  <p><code>Hoa\FastCgi</code> permet d'utiliser FastCGI et donc PHP FastCGI</p>
+  <p><code>Hoa\FastCgi</code> permet d'utiliser FastCGI et donc
+  PHP FastCGI :</p>
   <pre><code><span class="token-variable">$client</span>  = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Client</span>(<span class="token-string">'tcp://127.0.0.1:9000'</span>);
 <span class="token-variable">$fastcgi</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\FastCgi\Responder</span>(<span class="token-variable">$client</span>);
 <span class="token-keyword">echo</span> <span class="token-variable">$fastcgi</span>-><span class="token-id">send</span>(<span class="token-variable">$headers</span>, <span class="token-variable">$content</span>);</code></pre>
@@ -330,12 +351,12 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Toujours plus du fun</h1>
 
-  <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones</p>
-  <pre><code><span class="token-variable">$wrkr</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Backend\Shared</span>(<span class="token-string">'workerId'</span>, <span class="token-string">'pwd'</span>);
-<span class="token-variable">$wrkr</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
+  <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones :</p>
+  <pre><code><span class="token-variable">$wk</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Backend\Shared</span>(<span class="token-string">'workerId'</span>, <span class="token-string">'pwd'</span>);
+<span class="token-variable">$wk</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
     // Compute $bucket->getData().
 });
-<span class="token-variable">$wrkr</span>-><span class="token-id">run</span>();</code></pre>
+<span class="token-variable">$wk</span>-><span class="token-id">run</span>();</code></pre>
   <pre><code><span class="token-variable">$worker</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Shared</span>(<span class="token-string">'workerId'</span>);
 <span class="token-variable">$worker</span>-><span class="token-id">postMessage</span>(<span class="token-string">'foobar'</span>);</code></pre>
 </section>
@@ -343,7 +364,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Encore plus du fun</h1>
 
-  <p><code>Hoa\Dns</code> permet de coder un serveur DNS</p>
+  <p><code>Hoa\Dns</code> permet de coder un serveur DNS :</p>
   <pre><code><span class="token-variable">$server</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'udp://127.0.0.1:57005'</span>);
 <span class="token-variable">$dns</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Dns</span>(<span class="token-variable">$server</span>);
 <span class="token-variable">$dns</span>-><span class="token-id">on</span>(<span class="token-string">'query'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
@@ -355,7 +376,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Overfun</h1>
 
-  <p><code>Hoa\Websocket</code> permet d'utiliser un serveur Websocket</p>
+  <p><code>Hoa\Websocket</code> permet d'utiliser un serveur Websocket :</p>
   <pre><code><span class="token-variable">$server</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'tcp://127.0.0.1:8889'</span>);
 <span class="token-variable">$websocket</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Websocket\Server</span>(<span class="token-variable">$server</span>);
 <span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, …);
@@ -413,7 +434,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <p><ul>
     <li>En cours d'écriture /o\ …</li>
     <li>… mais avance vite \o/</li>
-    <li>Plusieurs manuels : apprentissage, référence, API,
+    <li>Plusieurs manuels : <a href="http://hoa-project.net/Literature/Learn/Introduction.html">apprentissage</a>,
+    référence, API,
     <em>snippets</em> …</li>
     <li>En français (pour l'instant)</li>
     <li>Pour les impatients : voir Sandbox</li>
