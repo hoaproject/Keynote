@@ -285,12 +285,26 @@ div.stack {
     }
 
     div.stack-em {
-        background: #000;
-        -moz-transform: rotate(-5deg);
+        color: #285995;
+        text-shadow: 2px 2px 1px #ced9f4 !important;
+        background:
+            -moz-radial-gradient(
+                100% 100% 45deg,
+                ellipse farthest-corner,
+                #f2c14a 0%,
+                rgba(249, 235, 114, 0) 50%
+            ),
+            -moz-radial-gradient(
+                0% 100% 45deg,
+                ellipse farthest-corner,
+                #f2c14a 0%,
+                rgba(249, 235, 114, 1) 50%
+            );
     }
 
     div.stack-em:before,
     div.stack-em:after {
+        z-index: -1;
         content: "";
         position: absolute;
         bottom: -.2em;
@@ -379,18 +393,20 @@ section[aria-selected] ~ section {
         opacity: .3;
     }
 
+    div.stack.incremental > * {
+        transtion: none;
+        -moz-transition: none;
+        -webkit-transition: none;
+        opacity: 1;
+    }
+
     div.stack.incremental > * ~ * {
         opacity: 0;
-        -moz-transform: rotate(-5deg) scale(1.2);
     }
 
     div.stack.incremental > *[aria-selected] {
         text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1);
         opacity: 1;
-    }
-
-    div.stack.incremental > * ~ *[aria-selected] {
-        -moz-transform: rotate(-5deg) scale(1);
     }
 
     div.stack.incremental > *[aria-selected] ~ * {
