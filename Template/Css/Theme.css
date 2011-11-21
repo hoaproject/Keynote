@@ -117,9 +117,8 @@ h1 {
 }
 
 p {
-    margin: 0 0 0 1em;
+    margin: 0 1em;
     padding: 0;
-    width: 96%;
     text-align: justify;
     hyphens: auto;
     -moz-hyphens: auto;
