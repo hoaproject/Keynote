@@ -129,6 +129,8 @@ p {
     }
 
     p.thus {
+        hyphens: none;
+        -moz-hyphens: none;
         text-align: center;
         text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1),
                      0   0   10px rgba(255, 254, 236, .95);
