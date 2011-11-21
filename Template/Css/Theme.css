@@ -275,12 +275,12 @@ div.stack {
 
     div.stack > div ~ div {
         height: 260px;
-        width: 520px;
+        width: 560px;
         top: 50%;
         left: 50%;
         margin-top: -180px;
-        margin-left: -300px;
-        padding: 20px 40px;
+        margin-left: -270px;
+        padding: 20px 0;
     }
 
     div.stack-em {
@@ -324,6 +324,11 @@ div.stack {
         right: .3em;
 
         -moz-transform: rotate(4.3deg);
+    }
+
+    div.stack-em a {
+        color: #285995;
+        background: #f2dc63;
     }
 
 .vspace {
@@ -401,13 +406,16 @@ section[aria-selected] ~ section {
 
     div.stack.incremental > * ~ * {
         opacity: 0;
+        visibility: hidden;
     }
 
     div.stack.incremental > *[aria-selected] {
         text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1);
         opacity: 1;
+        visibility: visible;
     }
 
     div.stack.incremental > *[aria-selected] ~ * {
         opacity: 0;
+        visibility: hidden;
     }
