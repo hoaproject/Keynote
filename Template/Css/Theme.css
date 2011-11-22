@@ -200,8 +200,7 @@ pre {
     margin: .3em 0;
     padding: .5em 1em;
     line-height: 40px;
-    overflow-y: auto;
-
+    overflow: hidden;
     box-shadow:         inset 0 0 5px #2c7cc6;
     -moz-box-shadow:    inset 0 0 5px #2c7cc6;
     -webkit-box-shadow: inset 0 0 5px #2c7cc6;
@@ -230,6 +229,7 @@ pre {
     }
 
 q {
+    position: relative;
     display: block;
     width: 600px;
     margin: 2em auto auto auto;
@@ -242,11 +242,11 @@ q {
 
     q:before {
         content: "“";
-        position: relative;
+        position: absolute;
         display: inline-block;
         width: 50px;
         margin: -100px -50px 0 0;
-        top: 150px;
+        top: 180px;
         left: -50px;
         font-family: Title;
         font-size: 1000%;
@@ -288,6 +288,7 @@ div.stack {
     div.stack-em {
         color: #285995;
         text-shadow: 2px 2px 1px #ced9f4 !important;
+        background: #f9eb72;
         background:
             -moz-radial-gradient(
                 100% 100% 45deg,
@@ -296,7 +297,20 @@ div.stack {
                 rgba(249, 235, 114, 0) 50%
             ),
             -moz-radial-gradient(
-                0% 100% 45deg,
+                0 100% 45deg,
+                ellipse farthest-corner,
+                #f2c14a 0%,
+                rgba(249, 235, 114, 1) 50%
+            );
+        background:
+            -webkit-radial-gradient(
+                100% 100%,
+                ellipse farthest-corner,
+                #f2c14a 0%,
+                rgba(249, 235, 114, 0) 50%
+            ),
+            -webkit-radial-gradient(
+                0 100%,
                 ellipse farthest-corner,
                 #f2c14a 0%,
                 rgba(249, 235, 114, 1) 50%
@@ -310,7 +324,9 @@ div.stack {
         position: absolute;
         bottom: -.2em;
         height: 1em;
-        -moz-box-shadow: 0 0 8px #000;
+        box-shadow:         0 0 8px #000;
+        -moz-box-shadow:    0 0 8px #000;
+        -webkit-box-shadow: 0 0 8px #000;
         background: rgba(0, 0, 0, .4);
     }
 
@@ -318,14 +334,18 @@ div.stack {
         right: 45%;
         left: .3em;
 
-        -moz-transform: rotate(-4.3deg);
+        transform:         rotate(-4.3deg);
+        -moz-transform:    rotate(-4.3deg);
+        -webkit-transform: rotate(-4.3deg);
     }
 
     div.stack-em:after {
         left: 45%;
         right: .3em;
 
-        -moz-transform: rotate(4.3deg);
+        transform:         rotate(4.3deg);
+        -moz-transform:    rotate(4.3deg);
+        -webkit-transform: rotate(4.3deg);
     }
 
     div.stack-em a {
