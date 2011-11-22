@@ -95,6 +95,14 @@ section, mtext {
         padding: 0;
     }
 
+    section.front p {
+        text-align: center;
+    }
+
+    section.front footer {
+        font-size: 90%;
+    }
+
     section.thanks {
         font-size: 40px;
     }
