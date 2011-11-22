@@ -95,10 +95,6 @@ section, mtext {
         padding: 0;
     }
 
-    section.front p {
-        text-align: center;
-    }
-
     section.front footer {
         font-size: 90%;
     }
@@ -134,6 +130,10 @@ p {
 
     p + p {
         margin-top: .6em;
+    }
+
+    p.center {
+        text-align: center;
     }
 
     p.thus {
