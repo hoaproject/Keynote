@@ -263,7 +263,7 @@ q {
 div.stack {
     position: relative;
     height: 465px;
-    width: 765px;
+    width: 100%;
 }
 
     div.stack > div {
@@ -281,7 +281,7 @@ div.stack {
         top: 50%;
         left: 50%;
         margin-top: -180px;
-        margin-left: -270px;
+        margin-left: -280px;
         padding: 20px 0;
     }
 
