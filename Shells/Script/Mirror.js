@@ -110,7 +110,7 @@ Dz.startSocket = function ( host ) {
     var socket       = new window.socket(host);
     socket.onopen    = function ( message ) {
       console.log('connected (' + host + ')');
-      $('#onstage').checked = true;
+      $('#connect').className = 'on';
       this.send('OPEN');
     }
     socket.onmessage = function ( message ) {
@@ -135,7 +135,7 @@ Dz.startSocket = function ( host ) {
     }.bind(this);
     socket.onclose   = function ( message ) {
       console.log('close');
-      $('#onstage').checked = false;
+      $('#connect').className = 'off';
     }
   }
   catch ( e ) {

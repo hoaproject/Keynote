@@ -76,15 +76,18 @@ iframe {
     background: transparent;
 }
 
-#onstage {
+#connect {
     position: absolute;
     right: 1em;
     bottom: .5em;
-    height: 1.5em;
-    width: 1.5em;
-    background: #fff;
 }
 
-#onstage[checked] {
-    background: green;
-}
+  #connect.off {
+    color: #f00;
+    text-shadow: 0 0 3px #c00;
+  }
+
+  #connect.on {
+    color: #3b0;
+    text-shadow: 0 0 3px #990;
+  }
