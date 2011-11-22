@@ -36,9 +36,10 @@ var Dz = {
 };
 
 Dz.init = function() {
-  this.loadIframe();
-  this.startSocket(this.host);
-  this.loadNote();
+  this.loadIframe(function ( ) {
+    Dz.startSocket(Dz.host);
+    Dz.loadNote();
+  });
 }
 
 /* Get url from hash or prompt and store it */
@@ -59,12 +60,13 @@ Dz.getUrl = function() {
   return u;
 }
 
-Dz.loadIframe = function() {
+Dz.loadIframe = function(after) {
   var iframe = $("iframe");
   iframe.src = this.url = this.getUrl();
   iframe.onload = function() {
     Dz.view = this.contentWindow;
     Dz.postMsg(Dz.view, "REGISTER");
+    after();
   }
 }
 
@@ -112,6 +114,7 @@ Dz.startSocket = function ( host ) {
       console.log('connected (' + host + ')');
       $('#connect').className = 'on';
       this.send('OPEN');
+      this.send('GET_CURSOR');
     }
     socket.onmessage = function ( message ) {
       var messages = message.data.split(',');

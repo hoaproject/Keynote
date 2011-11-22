@@ -208,6 +208,13 @@ Dz.startSocket = function ( host ) {
     this.socket.onopen    = function ( message ) {
       console.log('connected (' + host + ')');
     }
+    this.socket.onmessage = function ( message ) {
+      switch(message.data) {
+        case 'GET_CURSOR':
+          this.send('SET_CURSOR,' + Dz.idx + '.' + Dz.step);
+          break;
+      }
+    }
     this.socket.onclose   = function ( message ) {
       this.socket = null;
       console.log('close');

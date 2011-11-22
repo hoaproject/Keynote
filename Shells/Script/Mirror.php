@@ -23,6 +23,7 @@ $websocket->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
         case 'START':
         case 'END':
         case 'SET_CURSOR':
+        case 'GET_CURSOR':
           break;
 
         case 'OPEN':
