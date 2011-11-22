@@ -45,6 +45,7 @@ var Dz = {
   notes: null,
   url: null,
   idx: 1,
+  step: 0,
   socket: null,
   host: 'ws://127.0.0.1:8889'
 };
