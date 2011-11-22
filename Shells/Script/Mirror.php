@@ -34,6 +34,7 @@ $websocket->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
         default:
             return;
     }
+
     $id = $server->getCurrentNode()->getId();
 
     foreach($nodes as $node)
