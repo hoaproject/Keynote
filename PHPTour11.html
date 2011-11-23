@@ -17,6 +17,8 @@
 
   <p class="center"><img src="Template/Media/Image/Hoa.png" alt="Logo de Hoa" /></p>
   <footer>24 novembre, PHPTour'11, Lille</footer>
+
+  <details>bibliothèques • recherche • automatisation • abstraction</details>
 </section>
 
 <!--
@@ -38,9 +40,10 @@ Ce que ça nous a apporté ?
     <li>contributeur <a href="http://php.net/">PHP</a>,
     <a href="https://mozilla.org/">Mozilla</a>,
     <a href="http://debian.org/">Debian</a> … open-source</li>
-    <li>expert invité au <a href="http://w3.org/">W3C</a> (HTML, CSS,
+    <li>expert invité au <a href="http://w3.org/">W3C</a> (HTML, CSS et
     WebApp)</li>
-    <li><a href="https://twitter.com/#!/hoaproject">@hoaproject</a></li>
+    <li><a href="https://twitter.com/#!/hoaproject">@hoaproject</a>,
+    #hoa_php</li>
   </ul></p>
 
   <p class="thus">
@@ -78,6 +81,8 @@ Ce que ça nous a apporté ?
     <li>équipes de plus en plus nombreuses</li>
     <li>développement <del>semi-anarchique</del> en nette progression</li>
   </ul></p>
+
+  <details>interactions • données • méthodes Agiles • décentralisation</details>
 </section>
 
 <section>
@@ -103,13 +108,20 @@ Ce que ça nous a apporté ?
   d'un problème précis et isolé, grâce à son abstraction la plus élevée</q>
   <q>L'abstraction permet de s'adapter à plus de formes de problèmes</q>
   <p class="thus">la Force est dans l'abstraction</p>
+
+  <details><em>modus operandi</em></details>
 </section>
 
 <section>
   <h1>Contributions</h1>
 
-  <p class="thus vspace">Hoa : un ensemble de bibliothèques PHP</p>
-  <p class="thus">Hoa : un pont entre la recherche et l'entreprise</p>
+  <p>Hoa :<ul>
+    <li>un ensemble de bibliothèques PHP</li>
+    <li>un pont entre la recherche et l'entreprise</li>
+    <li>un environnement pour développer des bibliothèques</li>
+  </ul></p>
+
+  <details>principales</details>
 </section>
 
 <section>
@@ -157,6 +169,8 @@ $ php Hoa.next.phar --extract</code></pre>
   </div>
 
   </div>
+
+  <details>léger • maintenance • cloud</details>
 </section>
 
 <section>
@@ -175,6 +189,8 @@ $ php Hoa.next.phar --extract</code></pre>
   <p>Seul le noyau est requis :</p>
   <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
 <span class="token-id">var_dump</span>(<span class="token-id">HOA</span>);</code></pre>
+
+  <details>exclusivité</details>
 </section>
 
 <section>
@@ -185,9 +201,11 @@ $ php Hoa.next.phar --extract</code></pre>
     <li><em lang="en">Core</em>, base fondamentale du noyau</li>
     <li><em lang="en">Consistency</em>, consistence pour Hoa et PHP</li>
     <li><em lang="en">Event</em>, événements et écouteurs</li>
-    <li><em lang="en">Exception</em>, exceptions enrichies</li>
+    <li><em lang="en">Exception</em>, exceptions uniformisées et enrichies</li>
     <li><em lang="en">Protocol</em>, gestion de <code>hoa://</code></li>
   </ul></p>
+
+  <details>mise à jour • erreurs</details>
 </section>
 
 <section>
@@ -201,6 +219,8 @@ $ php Hoa.next.phar --extract</code></pre>
     <li><code>worker:*</code>, pour les workers</li>
     <li>etc.</li>
   </ul></p>
+
+  <details>groupes</details>
 </section>
 
 <section>
@@ -213,6 +233,8 @@ $ php Hoa.next.phar --extract</code></pre>
     <li data-item="≈">liens symboliques (paramétrables)</li>
   </ul></p>
   <p class="thus">Partage, intégration et maintenance facilités</p>
+
+  <details>à la volée • réécriture</details>
 </section>
 
 <section>
@@ -235,6 +257,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>Script dédié à l'application : <code>myapp</code> (hérite de
     <code>hoa</code>)</li>
   </ul></p>
+
+  <details>différence • philosophie • besoin</details>
 </section>
 
 <section>
@@ -267,6 +291,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 
   </div>
   <footer>Continuons …</footer>
+
+  <details>exemple simple d'assemblage</details>
 </section>
 
 <section>
@@ -288,6 +314,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   </ul></p>
   <p class="thus">Abstraire et assembler pour créer de l'automatisation</p>
   <footer>Mais encore …</footer>
+
+  <details>manuel • rapide • compris</details>
 </section>
 
 <section>
@@ -316,11 +344,11 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>Praspel : langage de spécification pour du <em>Contract-based
     Testing</em></li>
     <li>Exploite les domaines réalistes (structures algébriques)</li>
-    <li>Offre :<em>Runtime Assertion Checking</em>, et génération de tests
-    unitaires et de données de tests automatiques</li>
+    <li><em>Runtime Assertion Checking</em></li>
+    <li>Génération de tests unitaires et de données de tests automatiques</li>
+    <li>Utiliser par PHP pour tester PHP !</li>
     <li data-item="⚡">Thèse accompagnant le projet
     <a href="http://squashtest.org">Squash</a></li>
-    <li data-item="☞">Utiliser par PHP pour tester PHP !</li>
   </ul></p>
 </section>
 
@@ -339,6 +367,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>API uniforme et élégamment simplifiée</li>
   </ul></p>
   <p class="thus">Les flux de PHP sont très puissants, ne pas les négliger</p>
+
+  <details>souplesse • rigidité • interchangeable</details>
 </section>
 
 <section>
@@ -364,6 +394,9 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <span class="token-variable">$wk</span>-><span class="token-id">run</span>();</code></pre>
   <pre><code><span class="token-variable">$worker</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Shared</span>(<span class="token-string">'workerId'</span>);
 <span class="token-variable">$worker</span>-><span class="token-id">postMessage</span>(<span class="token-string">'foobar'</span>);</code></pre>
+
+  <details>tâches bloquantes • pas de retour utilisateur •
+  non-séquentielles</details>
 </section>
 
 <section>
@@ -388,6 +421,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'close'</span>, …);
 <span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'error'</span>, …);
 <span class="token-variable">$websocket</span>-><span class="token-id">run</span>();</code></pre>
+
+  <details>live.hoa</details>
 </section>
 
 <section>
@@ -404,6 +439,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 
   <p class="thus">Hoa est un environnement pour écrire et maintenir des
   bibliothèques</p>
+
+  <details>philosophie • open-source • <em>hackability</em></details>
 </section>
 
 <section>
@@ -448,6 +485,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>En français (pour l'instant)</li>
     <li>Pour les impatients : voir Sandbox</li>
   </ul></p>
+
+  <details>code • interactivité</details>
 </section>
 
 <section>
@@ -474,6 +513,8 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>Faire une bonne thèse \o/</li>
     <li>Écrire des Hoathis pour inclure d'autres projets</li>
   </ul></p>
+
+  <details>ouverture</details>
 </section>
 
 <section class="thanks">
