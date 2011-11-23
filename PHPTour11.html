@@ -91,7 +91,7 @@ Ce que ça nous a apporté ?
 
   <p>Pour PHP :<ul>
     <li>plus de professionnalisme : organisation, qualité, tests …</li>
-    <li>plus de standards</li>
+    <li>plus de standards : par PHP ou par un consortium</li>
     <li>plus de fun : PHP offre ce qu'il faut !</li>
   </ul></li>
 </section>
@@ -99,11 +99,9 @@ Ce que ça nous a apporté ?
 <section>
   <h1>Bibliothèque</h1>
 
-  <q cite="moi">Une bibliothèque est un ensemble de fonctionnalités dédiées à la
-  résolution d'un problème précis et isolé, grâce à son abstraction la plus
-  élevée</q>
-  <q cite="toujours moi">L'abstraction permet de s'adapter à plus de formes de
-  problèmes</q>
+  <q>Une bibliothèque est un ensemble de fonctionnalités dédiées à la résolution
+  d'un problème précis et isolé, grâce à son abstraction la plus élevée</q>
+  <q>L'abstraction permet de s'adapter à plus de formes de problèmes</q>
   <p class="thus">la Force est dans l'abstraction</p>
 </section>
 
@@ -174,7 +172,7 @@ $ php Hoa.next.phar --extract</code></pre>
     <li><code>Stub</code>, exportation de Hoa</li>
   </ul></p>
 
-  <p>Seul le noyau est nécessaire :</p>
+  <p>Seul le noyau est requis :</p>
   <pre><code><span class="token-keyword">require</span> <span class="token-string">'/usr/local/lib/hoa/Core/Core.php'</span>;
 <span class="token-id">var_dump</span>(<span class="token-id">HOA</span>);</code></pre>
 </section>
@@ -182,7 +180,8 @@ $ php Hoa.next.phar --extract</code></pre>
 <section>
   <h1>Noyau</h1>
 
-  <p>Quelques couches du noyau :<ul>
+  <p>Quelques couches du
+  <a href="http://hoa-project.net/Literature/Learn/Core.html">noyau</a> :<ul>
     <li><em lang="en">Core</em>, base fondamentale du noyau</li>
     <li><em lang="en">Consistency</em>, consistence pour Hoa et PHP</li>
     <li><em lang="en">Event</em>, événements et écouteurs</li>
@@ -220,7 +219,7 @@ $ php Hoa.next.phar --extract</code></pre>
   <h1>Framework ?</h1>
 
   <p><ul>
-    <li><em>Proof-of-Concept</em></li>
+    <li><em>Proof-of-Concept</em>, juste une architecture</li>
     <li>Formats : <code>.7z</code>, <code>.tar.gz</code>, <code>.tar.bz2</code>,
     <code>.zip</code>, <a href="http://php.net/phar"><code>.phar</code></a>
     ⚑</li>
@@ -311,16 +310,17 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Test et Praspel</h1>
 
   <p><ul>
-    <li><a href="http://lifc.univ-fcomte.fr/~publis/papers/Author/ENDERLIN-I.html">Travaux</a>
+    <li><a href="http://hoa-project.net/Literature.html#Articles_presentations_et_autres_documents">Travaux</a>
     au LIFC et à l'INRIA</li>
-    <li>Rapport de recherche, article ICTSS'11, thèse (en cours)</li>
-    <li>Praspel : un langage de spécification pour du <em>Contract-based
+    <li>Rapport de recherche, mémoire, article, thèse (en cours)</li>
+    <li>Praspel : langage de spécification pour du <em>Contract-based
     Testing</em></li>
     <li>Exploite les domaines réalistes (structures algébriques)</li>
-    <li><em>Runtime Assertion Checking</em></li>
-    <li>Génération de tests unitaires et de données de tests automatiques</li>
-    <li data-item="⚡">Thèse inscrite dans le projet <a
-    href="http://squashtest.org">Squash</a></li>
+    <li>Offre :<em>Runtime Assertion Checking</em>, et génération de tests
+    unitaires et de données de tests automatiques</li>
+    <li data-item="⚡">Thèse accompagnant le projet
+    <a href="http://squashtest.org">Squash</a></li>
+    <li data-item="☞">Utiliser par PHP pour tester PHP !</li>
   </ul></p>
 </section>
 
@@ -328,7 +328,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
   <h1>Flux</h1>
 
   <p><ul>
-    <li><code>Hoa\Stream</code> parent de tous les flux</li>
+    <li><code>Hoa\Stream</code> parente de tous les flux</li>
     <li>flux bas-niveaux : <code>Hoa\File</code>, <code>Hoa\Socket</code> …</li>
     <li>flux composites, qui travaillent sur des flux :
     <code>Hoa\Xml</code> …</li>
@@ -344,15 +344,17 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Un peu plus de fun</h1>
 
-  <p><code>Hoa\FastCgi</code> permet d'utiliser FastCGI et donc
-  PHP FastCGI :</p>
+  <p><code>Hoa\FastCgi</code> permet de parler avec un serveur
+  <a href="http://fastcgi.com/">FastCGI</a> :</p>
   <pre><code><span class="token-variable">$client</span>  = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Client</span>(<span class="token-string">'tcp://127.0.0.1:9000'</span>);
 <span class="token-variable">$fastcgi</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\FastCgi\Responder</span>(<span class="token-variable">$client</span>);
 <span class="token-keyword">echo</span> <span class="token-variable">$fastcgi</span>-><span class="token-id">send</span>(<span class="token-variable">$headers</span>, <span class="token-variable">$content</span>);</code></pre>
+  <p class="thus">Exécuter des fichiers PHP facilement à travers PHP FastCGI ou
+  <a href="http://php.net/fpm">PHP-FPM</a> !</p>
 </section>
 
 <section>
-  <h1>Toujours plus du fun</h1>
+  <h1>Encore plus du fun</h1>
 
   <p><code>Hoa\Worker</code> permet d'avoir des tâches asynchrones :</p>
   <pre><code><span class="token-variable">$wk</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Worker\Backend\Shared</span>(<span class="token-string">'workerId'</span>, <span class="token-string">'pwd'</span>);
@@ -365,9 +367,9 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 </section>
 
 <section>
-  <h1>Encore plus du fun</h1>
+  <h1>Toujours plus du fun</h1>
 
-  <p><code>Hoa\Dns</code> permet de coder un serveur DNS :</p>
+  <p><code>Hoa\Dns</code> permet de coder un serveur … DNS :</p>
   <pre><code><span class="token-variable">$server</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'udp://127.0.0.1:57005'</span>);
 <span class="token-variable">$dns</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Dns</span>(<span class="token-variable">$server</span>);
 <span class="token-variable">$dns</span>-><span class="token-id">on</span>(<span class="token-string">'query'</span>, <span class="token-keyword">function</span> ( <span class="token-id">Hoa\Core\Event\Bucket</span> <span class="token-variable">$bucket</span> ) {
@@ -379,7 +381,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Overfun</h1>
 
-  <p><code>Hoa\Websocket</code> permet d'utiliser un serveur Websocket :</p>
+  <p><code>Hoa\Websocket</code> permet de coder un serveur … … Websocket :</p>
   <pre><code><span class="token-variable">$server</span>    = <span class="token-keyword">new</span> <span class="token-id">Hoa\Socket\Server</span>(<span class="token-string">'tcp://127.0.0.1:8889'</span>);
 <span class="token-variable">$websocket</span> = <span class="token-keyword">new</span> <span class="token-id">Hoa\Websocket\Server</span>(<span class="token-variable">$server</span>);
 <span class="token-variable">$websocket</span>-><span class="token-id">on</span>(<span class="token-string">'message'</span>, …);
@@ -395,7 +397,7 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
     <li>Bibliothèques utilisateurs</li>
     <li>Mécanisme simple et rapide</li>
     <li>Enrichir et <em>hacker</em> Hoa</li>
-    <li>Points de choix, e.g. :
+    <li>Plusieurs points de choix, e.g. :
     </li>
   </ul></p>
   <pre><code><span class="token-variable">$server</span> = <span class="token-id">dnew</span>(<span class="token-string">'(Hoathis or Hoa)\Socket\Server'</span>, …);</code></pre>
@@ -407,13 +409,16 @@ $ php Hoa_Framework.next.phar --extract</code></pre>
 <section>
   <h1>Mais aussi …</h1>
 
-  <p>Acl, Bench, Cache, Compiler, Console, Database, Dispatcher, Dns,
-  EventSource, FastCgi, File, Filter, Graph, Http, Iterator, Json, Locale, Log,
-  Mail, Memory, Mime, Model, Notification, Observer, Php, Prototype, Realdom,
-  Reflection, Regex, Registry, Router, Serialize, Session, Socket, Stream,
-  StringBuffer, Test, Translate, Tree, Uri, View, Visitor, Websocket, Worker,
-  Xml, XmlRpc, Xyl, Yaml, Zombie, xcallable, from, import, dnew, curry, event,
-  resolve, memoize, ƒ, zFormat, Praspel …</p>
+  <p>Acl, Bench, Cache, <strong>Compiler</strong>, Console, Database,
+  Dispatcher, Dns, <strong>EventSource</strong>, FastCgi, File, Filter, Graph,
+  <strong>Http</strong>, Iterator, Json, Locale, <strong>Log</strong>, Mail,
+  Memory, Mime, Model, Notification, Observer, Php, Prototype, Realdom,
+  Reflection, <strong>Regex</strong>, Registry, Router, Serialize, Session,
+  Socket, Stream, StringBuffer, Test, Translate, Tree, Uri, View, Visitor,
+  Websocket, Worker, Xml, XmlRpc, Xyl, Yaml, <strong>Zombie</strong>, xcallable,
+  from, import, dnew, <strong>curry</strong>, <strong>event</strong>, resolve,
+  memoize, « <strong>…</strong> », ƒ, <strong>zFormat</strong>, Praspel …</p>
+
 </section>
 
 <section>
