@@ -164,6 +164,11 @@ a, a:link, a:visited, a:hover, a:active, a:focus {
         background: rgba(255, 255, 255, .3);
     }
 
+strong {
+    text-shadow: 2px 2px 1px  rgba(46, 83, 146, 1),
+                 0   0   10px rgba(255, 254, 236, .95);
+}
+
 span.lastname {
     font-variant: small-caps;
 }
@@ -216,24 +221,24 @@ pre {
 }
 
     pre code {
-        color: #9282a9;
+        color: #b7a0db;
         text-shadow: 1px 1px 1px #233545;
     }
 
     .token-keyword {
-        color: #9282a9;
+        color: #b7a0db;
     }
 
     .token-id {
-        color: #7dc4f0;
+        color: #8ac5f6;
     }
 
     .token-string {
-        color: #88bf7e;
+        color: #8abf80;
     }
 
     .token-variable {
-        color: #b4895a;
+        color: #caad69;
     }
 
 q {
