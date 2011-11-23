@@ -112,9 +112,15 @@ Dz.startSocket = function ( host ) {
     var socket       = new window.socket(host);
     socket.onopen    = function ( message ) {
       console.log('connected (' + host + ')');
-      $('#connect').className = 'on';
       this.send('OPEN');
-      this.send('GET_CURSOR');
+
+      // Fix a bug in Webkit that send one concatenated message instead of two
+      // clearly seperated messages.
+      window.setTimeout(function ( ) {
+
+          socket.send('GET_CURSOR');
+          $('#connect').className = 'on';
+      }, 100);
     }
     socket.onmessage = function ( message ) {
       var messages = message.data.split(',');
