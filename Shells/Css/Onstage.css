@@ -61,7 +61,8 @@ iframe {
 #slideidx,
 #nextslideidx,
 #slidecount,
-#popup-button {
+#popup-button,
+#notes {
     position: absolute;
     font-size: 70%;
     color: #cdf2fe;
@@ -76,24 +77,24 @@ iframe {
     -webkit-transition: text-shadow .2s ease, -webkit-box-shadow .2s ease;
 }
 
-#slideidx {
-    bottom: 10%;
-    right: 69%;
-}
-
-#nextslideidx {
-    bottom: 30%;
-    right: 19%;
-}
-
-#slidecount {
-    bottom: 30%;
-    right: 1%;
-}
-
-    #slidecount::before {
-        content: "∙ ";
+    #slideidx {
+        bottom: 3%;
+        right: 69%;
     }
+
+    #nextslideidx {
+        bottom: 30%;
+        right: 19%;
+    }
+
+    #slidecount {
+        bottom: 30%;
+        right: 1%;
+    }
+
+        #slidecount::before {
+            content: "∙ ";
+        }
 
 #popup-button {
     bottom: 12%;
@@ -113,3 +114,14 @@ iframe {
         -webkit-box-shadow: 0 0 8px #c8e9f8, inset 0 0 5px #c8e9f8;
     }
 
+#notes {
+    font-size: 60%;
+    top: 77%;
+    left: 2.5%;
+    width: 49.5%;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
