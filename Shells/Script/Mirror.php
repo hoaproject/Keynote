@@ -27,6 +27,7 @@ $websocket->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
           break;
 
         case 'OPEN':
+            $self->send('DUMMY', $server->getCurrentNode());
             echo "\r",
                  '+ A viewer has joined', "\n",
                  ($c = count($nodes) - 1), ' viewer', (1 < $c ? 's' : ''), '.';
