@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Embedder</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="Css/Embedder.css" rel="stylesheet" />
+</head>
+<body>
+
+<iframe></iframe>
+<div id="controls">
+  <span id="indexes">
+    <input onchange="Dz.setCursor(this.value)" id="slideidx" value="0" />
+    /
+    <span id="slidecount">...</span>
+  </span>
+
+  <button title="Previous" id="back" onclick="Dz.back()">&#9664;</button>
+  <button title="Next" id="forward" onclick="Dz.forward()">&#9654;</button>
+  <button id="popup-button" onclick="Dz.popup()">➚</button>
+</div>
+<script src="Script/Embedder.js"></script>
+
+</body>
+</html>
