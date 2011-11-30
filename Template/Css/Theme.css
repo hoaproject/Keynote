@@ -137,6 +137,7 @@ section, mtext {
     }
 
     .view section {
+        margin: -145px -195px;
         background: url("../Media/Image/Background.jpg");
         background-size: cover;
         box-shadow: 0 0 20px #000;
