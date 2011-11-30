@@ -140,7 +140,9 @@ section, mtext {
         background: url("../Media/Image/Background.jpg");
         background-size: cover;
         box-shadow: 0 0 20px #000;
+        transition: none;
         -moz-transition: none;
+        -webkit-transition: none;
     }
 
     .view section:after {
@@ -167,7 +169,6 @@ section[aria-selected] {
 
     .view section[aria-selected]:after {
         color: #f9eb72;
-        text-
     }
 
 section[aria-selected] ~ section {
@@ -475,7 +476,7 @@ mtext:after {
     }
 
     div.stack.incremental > * {
-        transtion: none;
+        transition: none;
         -moz-transition: none;
         -webkit-transition: none;
         opacity: 1;
