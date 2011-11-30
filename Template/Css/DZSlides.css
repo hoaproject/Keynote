@@ -7,15 +7,46 @@ details {
     display: none;
 }
 
+html {
+    overflow: hidden;
+}
+
+    html.view {
+        overflow: visible;
+    }
+
 body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 800px;
     height: 600px;
     margin-left: -400px;
     margin-top: -300px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     overflow: hidden;
+}
+
+    .view body {
+        position: static;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+        overflow: visible;
+        overflow-x: hidden;
+
+        /* undo Dz.onresize */
+        transform: none !important;
+        -moz-transform: none !important;
+        -webkit-transform: none !important;
+        -o-transform: none !important;
+        -ms-transform: none !important;
+    }
+
+.view head,
+.view head > title {
+    display: block;
 }
 
 section {
@@ -25,13 +56,24 @@ section {
     height: 100%;
 }
 
-section[aria-selected] {
-    pointer-events: auto;
-}
+    .view section {
+        pointer-events: auto;
+        position: static;
+        width: 800px;
+        height: 600px;
+        margin: -145px -195px;
+        float: left;
 
-html {
-    overflow: hidden;
-}
+        transform: scale(.4);
+        -moz-transform: scale(.4);
+        -webkit-transform: scale(.4);
+        -o-transform: scale(.4);
+        -ms-transform: scale(.4);
+    }
+
+    section[aria-selected] {
+        pointer-events: auto;
+    }
 
 body {
     display: none;

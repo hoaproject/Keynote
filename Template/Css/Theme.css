@@ -79,11 +79,31 @@ html {
     background: #000;
 }
 
+    html.view {
+        padding: 0 0 5em 0;
+        background: url("../Media/Image/Background_view.png");
+    }
+
 body {
     color: #fff;
     text-shadow: 2px 2px 1px rgba(46, 83, 146, 1);
     background: url("../Media/Image/Background.jpg");
     background-size: cover;
+}
+
+    .view body {
+        background: none;
+        counter-reset: slideidx;
+    }
+
+
+.view head > title {
+    color: #292a2d;
+    font-family: Text;
+    font-size: 280%;
+    text-align: center;
+    text-shadow: 0 1px 1px #8d8e90;
+    margin: 1em 0 2.5em 0;
 }
 
 section, mtext {
@@ -93,6 +113,10 @@ section, mtext {
     section {
         margin: 0;
         padding: 0;
+        transition: left .4s ease;
+        -moz-transition: left .4s ease;
+        -webkit-transition: left .4s ease;
+        left: -150%;
     }
 
     section.front footer {
@@ -111,6 +135,44 @@ section, mtext {
         margin: 1em;
         text-align: center;
     }
+
+    .view section {
+        background: url("../Media/Image/Background.jpg");
+        background-size: cover;
+        box-shadow: 0 0 20px #000;
+        -moz-transition: none;
+    }
+
+    .view section:after {
+        counter-increment: slideidx;
+        content: counter(slideidx, decimal-leading-zero);
+        position: absolute;
+        bottom: -80px;
+        right: 100px;
+
+        color: #3a3b3e;
+        text-shadow: 0 1px 1px #8d8e90;
+        font-size: 180%;
+    }
+
+section[aria-selected] {
+    left: 0;
+}
+
+    .view section[aria-selected] {
+        border: 5px #f9eb72 solid;
+        border-radius: 10px;
+        margin: -150px -200px;
+    }
+
+    .view section[aria-selected]:after {
+        color: #f9eb72;
+        text-
+    }
+
+section[aria-selected] ~ section {
+    left: +150%;
+}
 
 h1 {
     font: 60px/80px Header;
@@ -393,23 +455,6 @@ mtext:after {
     }
 
 
-
-
-section {
-    transition: left .4s ease;
-    -moz-transition: left .4s ease;
-    -webkit-transition: left .4s ease;
-}
-
-section {
-    left: -150%;
-}
-section[aria-selected] {
-    left: 0;
-}
-section[aria-selected] ~ section {
-    left: +150%;
-}
 
 .incremental > * {
     visibility: visible;

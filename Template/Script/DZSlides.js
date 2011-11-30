@@ -56,6 +56,7 @@ Dz.init = function() {
   this.onhashchange();
   this.setupTouchEvents();
   this.onresize();
+  this.setupView();
 }
 
 Dz.setupParams = function() {
@@ -100,6 +101,10 @@ Dz.onkeydown = function(aEvent) {
     aEvent.preventDefault();
     this.toggleContent();
   }
+  if (aEvent.keyCode == 27) { // esc
+    aEvent.preventDefault();
+    this.goView();
+  }
 }
 
 /* Touch Events */
@@ -131,6 +136,24 @@ Dz.setupTouchEvents = function() {
       }
     }
   }
+}
+
+Dz.setupView = function() {
+  var html     = $("html");
+  var sections = $$("section");
+  var eclick   = function ( j ) {
+    return function ( ) {
+
+      if("" == html.className)
+        return;
+
+      html.className = "";
+      Dz.setCursor(j + 1);
+    }
+  }
+
+  for(var i = 0; i < sections.length; ++i)
+    sections[i].addEventListener("click", eclick(i), false);
 }
 
 /* Adapt the size of the slides to the window */
@@ -261,6 +284,11 @@ Dz.goEnd = function() {
   var lastIdx = this.slides.length;
   var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
   this.setCursor(lastIdx, lastStep);
+}
+
+Dz.goView = function() {
+  $("html").className = "view";
+  $("section[aria-selected]").scrollIntoView(true);
 }
 
 Dz.setSlide = function(aIdx) {
