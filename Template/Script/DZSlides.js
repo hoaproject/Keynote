@@ -196,6 +196,8 @@ Dz.onmessage = function(aEvent) {
     this.goStart();
   if (argv[0] === "END" && argc === 1)
     this.goEnd();
+  if (argv[0] === "VIEW" && argc === 1)
+    this.goView();
   if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
     this.toggleContent();
   if (argv[0] === "SET_CURSOR" && argc === 2)
