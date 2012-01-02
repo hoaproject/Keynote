@@ -185,7 +185,9 @@ Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
     aMsg.push(encodeURIComponent(arguments[i]));
   aWin.postMessage(aMsg.join(" "), "*");
 
-  if(aWin == this.views.present && null != this.socket)
+  if(   aWin == this.views.present
+     && null != this.socket
+     && this.socket.readyState == 1)
     this.socket.send(aMsg);
 }
 
@@ -194,8 +196,8 @@ Dz.startClock = function() {
     return num < 10 ? '0' + num : num;
   }
   setInterval(function() {
-    var now = new Date();
-    $("#hours").innerHTML = addZero(now.getHours());
+    var now                 = new Date();
+    $("#hours").innerHTML   = addZero(now.getHours());
     $("#minutes").innerHTML = addZero(now.getMinutes());
     $("#seconds").innerHTML = addZero(now.getSeconds());
   }, 1000);
@@ -219,6 +221,7 @@ Dz.startSocket = function ( host ) {
     this.socket.onclose   = function ( message ) {
       this.socket = null;
       console.log('close');
+      console.log(this.socket);
     }
   }
   catch ( e ) {
@@ -227,7 +230,7 @@ Dz.startSocket = function ( host ) {
   }
 }
 
-window.onload = Dz.init.bind(Dz);
-window.onkeydown = Dz.onkeydown.bind(Dz);
+window.onload       = Dz.init.bind(Dz);
+window.onkeydown    = Dz.onkeydown.bind(Dz);
 window.onhashchange = Dz.loadIframes.bind(Dz);
-window.onmessage = Dz.onmessage.bind(Dz);
+window.onmessage    = Dz.onmessage.bind(Dz);
