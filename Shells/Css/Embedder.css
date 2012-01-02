@@ -39,9 +39,11 @@ iframe {
     background-color: #fff;
 }
 
-#controls {
+#controls,
+#controls svg {
     position: relative;
     color: #cdf2fe;
+    fill: #cdf2fe;
     text-shadow: 0 0 5px #c8e9f8;
     text-align: center;
 }
@@ -81,6 +83,12 @@ iframe {
     width: 2em;
     border: 0;
     background: transparent;
+}
+
+#view {
+    position: absolute;
+    top: .4em;
+    right: 3em;
 }
 
 #popup-button {

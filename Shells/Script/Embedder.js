@@ -144,6 +144,10 @@ Dz.goEnd = function() {
   this.postMsg(this.view, "END");
 }
 
+Dz.goView = function() {
+  this.postMsg(this.view, "VIEW");
+}
+
 Dz.setCursor = function(aCursor) {
   this.postMsg(this.view, "SET_CURSOR", aCursor);
 }
