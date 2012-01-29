@@ -144,10 +144,10 @@ Dz.setupView = function() {
   var eclick   = function ( j ) {
     return function ( ) {
 
-      if("" == html.className)
+      if(!html.classList.contains("view"))
         return;
 
-      html.className = "";
+      html.classList.remove("view");
       Dz.setCursor(j + 1);
     }
   }
