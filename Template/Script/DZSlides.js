@@ -41,6 +41,7 @@ var Dz = {
   remoteWindows: [],
   idx: -1,
   step: 0,
+  html: null,
   slides: null,
   params: {
     autoplay: "1"
@@ -51,7 +52,8 @@ var Dz = {
 
 Dz.init = function() {
   document.body.className = "loaded";
-  this.slides = $$("body > section");
+  this.slides = Array.prototype.slice.call($$("body > section"));
+  this.html = document.body.parentNode;
   this.setupParams();
   this.onhashchange();
   this.setupTouchEvents();
@@ -101,9 +103,9 @@ Dz.onkeydown = function(aEvent) {
     aEvent.preventDefault();
     this.toggleContent();
   }
-  if (aEvent.keyCode == 27) { // esc
+  if (aEvent.keyCode == 79) { // o
     aEvent.preventDefault();
-    this.goView();
+    this.toggleView();
   }
 }
 
@@ -139,21 +141,13 @@ Dz.setupTouchEvents = function() {
 }
 
 Dz.setupView = function() {
-  var html     = $("html");
-  var sections = $$("section");
-  var eclick   = function ( j ) {
-    return function ( ) {
+  document.body.addEventListener("click", function ( e ) {
+    if (!Dz.html.classList.contains("view")) return;
+    if (!e.target || e.target.nodeName != "SECTION") return;
 
-      if(!html.classList.contains("view"))
-        return;
-
-      html.classList.remove("view");
-      Dz.setCursor(j + 1);
-    }
-  }
-
-  for(var i = 0; i < sections.length; ++i)
-    sections[i].addEventListener("click", eclick(i), false);
+    Dz.html.classList.remove("view");
+    Dz.setCursor(Dz.slides.indexOf(e.target) + 1);
+  }, false);
 }
 
 /* Adapt the size of the slides to the window */
@@ -288,9 +282,12 @@ Dz.goEnd = function() {
   this.setCursor(lastIdx, lastStep);
 }
 
-Dz.goView = function() {
-  $("html").className = "view";
-  $("section[aria-selected]").scrollIntoView(true);
+Dz.toggleView = function() {
+  this.html.classList.toggle("view");
+
+  if (this.html.classlist.contains("view")) {
+    $("section[aria-selected]").scrollIntoView(true);
+  }
 }
 
 Dz.setSlide = function(aIdx) {
