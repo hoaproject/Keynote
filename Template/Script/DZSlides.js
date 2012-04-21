@@ -285,7 +285,7 @@ Dz.goEnd = function() {
 Dz.toggleView = function() {
   this.html.classList.toggle("view");
 
-  if (this.html.classlist.contains("view")) {
+  if (this.html.classList.contains("view")) {
     $("section[aria-selected]").scrollIntoView(true);
   }
 }
