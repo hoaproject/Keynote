@@ -1,0 +1,109 @@
+@charset   "utf-8";
+@namespace url("http://www.w3.org/1999/xhtml");
+
+@font-face {
+    font-family: Text;
+    src: url('../Font/texgyretermes-regular-webfont.eot');
+    src: url('../Font/texgyretermes-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Font/texgyretermes-regular-webfont.woff') format('woff'),
+         url('../Font/texgyretermes-regular-webfont.ttf') format('truetype'),
+         url('../Font/texgyretermes-regular-webfont.svg#TeXGyreTermesRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: TextItalic;
+    src: url('../Font/texgyretermes-italic-webfont.eot');
+    src: url('../Font/texgyretermes-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Font/texgyretermes-italic-webfont.woff') format('woff'),
+         url('../Font/texgyretermes-italic-webfont.ttf') format('truetype'),
+         url('../Font/texgyretermes-italic-webfont.svg#TeXGyreTermesItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: TextBold;
+    src: url('../Font/texgyretermes-bold-webfont.eot');
+    src: url('../Font/texgyretermes-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Font/texgyretermes-bold-webfont.woff') format('woff'),
+         url('../Font/texgyretermes-bold-webfont.ttf') format('truetype'),
+         url('../Font/texgyretermes-bold-webfont.svg#TeXGyreTermesBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: TextBoldItalic;
+    src: url('../Font/texgyretermes-bolditalic-webfont.eot');
+    src: url('../Font/texgyretermes-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Font/texgyretermes-bolditalic-webfont.woff') format('woff'),
+         url('../Font/texgyretermes-bolditalic-webfont.ttf') format('truetype'),
+         url('../Font/texgyretermes-bolditalic-webfont.svg#TeXGyreTermesBoldItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+head,
+head > title {
+    display: block;
+}
+
+head > title {
+    font-size: 280%;
+    font-family: Text;
+    text-align: center;
+    margin: 1.5em 0 2.5em;
+}
+
+body {
+    font: 1.2em/1.4em Text;
+    text-align: justify;
+    margin: 0 10em;
+    padding: 0;
+    hyphens: auto;
+    -moz-hyphens: auto;
+    background: url("../Image/Background.gif") repeat;
+}
+
+strong {
+    font-family: TextBold;
+    font-weight: normal;
+}
+
+cite, em {
+    font-family: TextItalic;
+    font-style: normal;
+}
+
+h1 {
+    font-family: Text;
+    font-size: 180%;
+    font-weight: normal;
+    margin: 1.8em 0 1em;
+}
+
+h2 {
+    font-family: Text;
+    font-size: 120%;
+    font-weight: normal;
+    text-align: center;
+}
+
+ul li {
+    list-style: none;
+    position: relative;
+    margin: 0 0 0 1em;
+}
+
+ul li:before {
+    content: "✪";
+    position: absolute;
+    left: -2em;
+}
