@@ -58,465 +58,228 @@
 
 <h1>Histoire</h1>
 
-<div class="bo"><p><em class="indication">Saluer et se présenter</em></p></div>
-
-<h2>Introduction</h2>
-
-<div class="fh"><p>De nos jours, le test est de plus en plus présent dans notre
-quotidien, qu'il soit unitaire, fonctionnel, de recette, d'intégration, manuel,
-automatique ou que sais-je encore ! Pourtant, nos expériences respectives en
-tant que concepteur de framework de tests unitaires et de doctorant en
-Informatique spécialisé dans le test nous permettent de dire qu'il s'agit d'un
-domaine encore bien mystérieux pour la plupart des développeurs.</p></div>
-<div class="ie"><p>Nous sommes en effet très régulièrement interrogés sur la
-façon d'appréhender les tests, de les concevoir, de les rédiger, de les
-maintenir, de les mettre en production, et cela aussi bien par des développeurs
-juniors qu'expérimentés.</p></div>
-<div class="fh"><p>C'est la raison pour laquelle nous avons décidé de présenter
-au cours de cette conférence qui, comme son nom l'indique, le test logiciel dans
-sa globalité. Nous allons essayer de vous présenter toute la chaîne du test et
-vous trouverez des liens en complément à la fin de cette présentation.</p></div>
-<div class="ie"><p>Nous avons longuement réfléchis à un format pour finalement
-décider de vous raconter une histoire ! Dans cette histoire, nous avons une
-équipe de développement et un projet dont nous allons suivre le cheminement.
-Cela va nous amener à découvrir plusieurs sortes de tests, voir comment ils
-fonctionnent, quel service ils offrent, comment ils se complètent etc. Vous êtes
-d'accord ? On y va ?</p></div>
-<div class="pu"><p>Oui !</p></div>
-<div class="fh"><p>Bien. En tant que dévelopeur, ma plus grande peur est de
-livrer à mon client un code avec des erreurs ou qui n'a pas le comportement
-désiré. J'ai donc absolument besoin d'avoir <strong>confiance</strong> dans mon
-code. Cette notion de confiance est vraiment très importante. Elle intervient au
-moment où j'écris mon code, mais aussi quand je modifie ou utilise le code d'une
-autre personne, quand je mets le projet en production etc.</p>
-<p>Cependant, entre les tests unitaires, les tests fonctionnels, le TDD, le BDD,
-les tests automatisés, j'en passe et des meilleurs, je suis complètement perdu.
-De plus, je m'interroge sur le retour sur investissement offert par les tests,
-sur le ratio correct entre les tests et le code, sur les métriques à considérer,
-sur la meilleure façon de les écrire etc. Une idée ?</p></div>
-
-<h2>Définition</h2>
-
-<div class="ie"><p>Avant de commencer, on va voir une petite définition et un
-tout petit peu de vocabulaire, ça ne peut pas nous faire de mal :</p>
-<pre><code>schéma avec en entrée des données, qui vont dans le système sous test
-pour sortir d'autres données + verdict</code></pre>
-<p>On considère un SUT pour <strong>système sous test</strong> qui prend en
-entré des données et qui en calcule de nouvelles ou modifie l'état du système.
-Un test permet d'exécuter ce SUT et de valider son état ou sa sortie sous
-certaines conditions. C'est un <strong>oracle</strong> qui nous permet de
-déduire le <strong>verdict</strong> du test, c'est à dire de savoir si le test
-est un succès ou un échec.</p></div>
-
-<h2><em>Test Driven Development</em></h2>
-
-<div class="fh"><p>La toute première problématique que l'on rencontre est :
-comment écrire les tests ? Dans notre équipe de développeurs, certains ont déjà
-touché aux tests et d'autres non. L'objectif est de commencer par obter pour une
-technique de travail qui permet d'écrire des tests …</p></div>
-<div class="ie"><p>Imagineons que notre projet est découpé en tâches. Chaque
-développeur va choisir une tâche, potentiellement selon un ordre pré-établi.
-Quand on commence à développer, d'une manière générale, on écrit des classes,
-par exemple pour représenter un utilisateur. Bien sûr on peut s'aider d'outils
-annexes, comme des frameworks, mais ils ne rentrent pas en compte ici car on est
-censé avoir confiance dans ces outils, ils sont censés être préalablement
-testés. La question qui se pose est : doit-on commencer par écrire le code tout
-de suite ?</p></div>
-<div class="pu"><p>Oui ou non.</p></div>
-<div class="fh"><p>La bonne réponse était non. Il est préférable de commencer
-par écrire les tests. Pourquoi ?</p></div>
-<div class="ie"><p>Et bien c'est simple : c'est une bonne pratique. Que l'on
-soit sur un langage objet ou fonctionnel, l'élément le plus atomique que l'on va
-considéré est la <strong>fonction</strong> ou <strong>méthode</strong>. C'est
-notre SUT. Une fonction prend en entrée des données et en calcule une nouvelle
-ou alors modifie l'état de notre système, par exemple dans le cas des objets, on
-peut modifier un attribut. Si on commence à coder tête baissée, on a de grandes
-chances d'écrire « n'importe quoi ». Ce sera du bon code mais il ne fera pas ce
-qu'on veut. Il faut penser aussi qu'il doit être très simple à utiliser. Peu
-importe s'il devient complexe après, on doit commencer par quelque chose de
-facile. C'est pourquoi il existe une méthode de travail qui s'appelle le TDD
-pour <em>Test Driven Development</em>.</p></div>
-<div class="fh"><p>En effet. L'idée est un développement
-<strong>incrémental</strong> dirigé par les tests. On commence toujours par
-écrire un test avant d'écrire du code. Il y a plusieurs avantages à ça :</p>
+<div class="fh"><p>Aujourd'hui, le test devient à la mode dans le monde
+industriel. Les outils permettant de les mettre en œuvre sont de plus en plus
+nombreux et de plus en plus évolués, les techniques de travail changent tout
+comme les mentalités, bref le test se <strong>démocratise</strong> gentiment.
+Cependant, l'information à leur sujet est souvent fragmentée et parcellaire, si
+bien que la plupart des développeurs et futur-testeurs ont des difficultés à les
+appréhender correctement de manière globale et se posent beaucoup de
+questions.</p>
+<p>L'histoire que nous allons vous raconter a pour but d'apporter quelques
+réponses aux questions qui nous ont été le plus souvent posées.</p></div>
+<div class="ie">Il était une fois une équipe de développeurs qui souhaitait
+concevoir un programme répondant à un besoin avec la meilleure
+<strong>qualité</strong> et <strong>assurance</strong> possible, et afin d'y
+arriver, ils décidèrent d'utiliser les <strong>tests</strong>.</p>
+<p>L'objectif est d'exécuter un SUT pour système sous test sous certaines
+conditions et contraintes, pour à la fin vérifier la sortie ou l'état de ce SUT.
+Dans le test dit <em>manuel</em>, c'est le testeur qui va écrire toutes les
+conditions d'exécution du SUT, ainsi que les <strong>oracles</strong> permettant
+de calculer les <strong>verdicts</strong> des tests, tout simplement si les
+tests ont été un succès ou ont échoué. Les tests suivent tous ce proccessus à
+quelques nuances près.</p></div>
+<div class="fh"><p>Cependant, même si c'est le testeur qui va écrire les tests,
+il serait nettement plus confortable pour lui de les faire exécuter par une
+machine, ce qui lui offrirait beaucoup d'avantages :</p>
 <ol>
-  <li>ça nous oblige à réfléchir un peu, à modéliser notre code : modéliser le
-  code ça revient au début à écrire une API potable, c'est comme un exemple
-  d'utilisation de notre code en production ;</li>
-  <li>comme il est conseillé de travailler en binôme, on évite beaucoup
-  d'erreurs bêtes (fautes de frappes, fautes de conception, oublis …) ;</li>
-  <li>avoir constamment un objectif, à savoir : satisfaire le test que l'on
-  vient d'écrire ;</li>
-  <li>les tests doivent au minimum représenter les exigences de la tâche
-  courante : on a un suivi concret ;</li>
-  <li>et financièrement, le coût du test est confondu avec celui du
-  développement et il devient donc inutile de définir un budget spécifique aux
-  tests (budget souvent très maigre voire inexistant).</li>
+  <li>la machine est capable d'exécuter les tests aussi souvent que
+  nécessaire et cela de manière <strong>automatisé</strong> ;</li>
+  <li>la machine offre un gain de temps et d'efficacité ;</li>
 </ol>
-<p>Ça nécessite que l'équipe accepte de changer un peu ses habitutes mais en
-pratique ça marche vraiment bien et les résultats sont immédiats. Car l'un des
-développeurs écrit le test tandis que le seconde écrit le code permettant de
-l'exécuter avec succès, et les rôles sont inversés régulièrement afin d'éviter
-la lassitude et pour profiter de la vision du code propre à chacun des
-développeurs. On peut penser que c'est du gaspillage que de monopoliser deux
-ressources au lieu d'une seule pour résoudre un problème. Cependant, deux
-cerveaux valent mieux qu'un et ça se confirme par la pratique, d'autant que le
-second développeur est loin d'être passif ! Il doit en effet à la fois
-surveiller le code de son collègue tout en faisant des suggestions, en repérant
-les problèmes éventuelles et en veillant au respect des bonnes pratiques de
-développement et des conventions de codage.</p>
-<p>Le binômage, outre le fait qu'il augmente la qualité des tests, favorise le
-partage des connaissances, et cela d'autant plus si les les binômes sont
-modifiés fréquemments. Chacun a l'occasion de travailler sur des portions de
-code différentes et tout le monde a donc une vision globale et non plus
-parcellaire de l'architecture du code. Et je peux vous assurer que le travail en
-binôme est loin d'être une sinécure : c'est une façon de travailler très
-fatigante car elle ne laisse aucun répit à aucun des participants.</p>
-<p>Mais revenons à l'écriture de nos tests.</p></div>
-
-<h2>Test unitaire</h2>
-
-<div class="ie"><p>On va prendre un exemple. Si on a une classe pour manipuler
-un utilisateur, on sait qu'il aura un identifiant et un nom. On peut commencer
-par tester les méthodes principales et le constructeur par exemple :</p>
-<pre><code>$user = new User('anId', 'Gordon Freeman');
-var_dump('anId' == $user->getId());
-var_dump('Gordon Freeman' == $user->getName());</code></pre>
-<p>Ça, c'est l'API que l'on souhaite avoir. On remarque que l'on teste du PHP
-avec du PHP, c'est plutôt pratique car on n'a pas à apprendre un nouveau
-langage. On peut aussi imaginer l'année de naissance avec la contrainte
-« l'année ne doit pas être supérieure à l'année courante » et « l'année ne doit
-pas être plus vieille de 140 ans » :</p>
-<pre><code>$valid = true;
-try {
-
-    $user->setBirthday(1973);
-}
-catch ( Exception $exception ) {
-
-    $valid = false;
-}
-var_dump(true === $valid);
-
-$invalid = true;
-try {
-
-    $user->setBirthday(date('Y') + 1);
-}
-catch ( Exception $exception ) {
-
-    $invalid = false;
-}
-var_dump(true === $invalid);
-
-// etc.</code></pre>
-<p>On voudrait aussi calculer l'âge de l'utilisateur :</p>
-<pre><code>$user->setBirthday(1973);
-var_dump(date('Y') - 1973 == $user->getAge());</code></pre>
-<p>En général, il est toujours intéressant d'écrire un test positif et un test
-négatif. C'est une notion qui appartient à la <strong>sûreté</strong> : notre
-code fait ce qu'on attend de lui, ni plus, ni moins.</p></div>
-<div class="fh"><p>Ok. Et maintenant on va essayer d'avoir des <code>true</code>
-partout car en fait on vient d'écrire les oracles, ou
-<strong>assertions</strong>, de nos tests. On a nos objectifs, ça correspond à
-la tâche, l'API nous semble correct, alors il ne reste qu'à écrire le code.</p>
-<p>Ce que l'on doit remarquer c'est que les tests vont toujours droit au but et
-qu'il ne teste qu'une méthode à chaque fois !</p></div>
-<div class="ie"><p>Et c'est pour ça que ça s'appelle du test
-<strong>unitaire</strong>.</p></div>
-<div class="fh"><p>Mais écrire les tests de cette façon n'est pas très pratique.
-On remarque que ce n'est pas évident de le mettre à l'échelle, chacun va écrire
-ses tests avec ses propres conventions. Heureusement pour nous, il existe
-plusieurs outils dans le monde PHP, comme par exemple : PHPUnit,
-SimpleTest …</p></div>
-<div class="ie"><p>J'en connais un autre mais il n'est vraiment pas potable, je
-ne sais pas si c'est utile de le citer ? Vous savez duquel je parle ?</p></div>
-<div class="pu"><p>Atouuuum !</p></div>
-<div class="fh"><p>Ah bah oui ! C'est vrai. Blague à part, l'objectif de ce
-genre de framework est de faciliter et simplifier l'écriture et l'exécution des
-tests, en l'occurence unitaire. À chaque fois, la démarche est la même : on
-prépare les données et on <strong>vérifie</strong> la sortie. Les frameworks de
-tests vont nous permettre d'écrire cette démarche rapidement et de produire de
-beaux rapports : quelle méthode a échoué, pourquoi, avec quelles données etc.
-Mais attention, le choix de l'outil doit être fait avec précautions, puisque les
-différents outils existants ne sont pas interopérables ! En conséquence, si pour
-une raison ou pour une autre il devient nécessaire de changer d'outil de tests
-unitaires au cours de la vie du projet, il n'y a pas de solution simple et
-rapide permettant de le faire !</p>
-<p>En revanche, « qu'est-ce qu'un bon test ? » est la seconde question que l'on
-nous pose le plus avec : « quand doit-on s'arrêter d'écrire des
-tests ? »</p></div>
-
-<h2>Couverture</h2>
-
-<div class="ie"><p>Au niveau unitaire, une métrique utile est la couverture du
-code.  Il en existe plusieurs et il est important de connaître certaines notions
-théoriques avant. Si on prend l'implémentation de la méthode
-<code>User::setBirthday()</code> par exemple, elle pourrait ressembler à
-ceci :</p>
-<pre><code>public function setBirthday ( $year ) {
-
-    if($year > date('Y') || $year &lt; date('Y') - 140)
-        throw new Exception('Are you from the future or… the past?');
-
-    $this->_birthday = $year;
-}</code></pre>
-<p>On voit que l'on a deux chemins possibles : si l'année est invalide ou si
-elle est valide. Pour y voir plus clair, on utilise la rerésentation CFG pour
-<em>Control Flow Graph</em>.</p>
-<pre><code>[[mettre l'équivalent en CFG]]</code></pre>
-<p>On voit clairement les deux chemins apparaîtrent à travers la succession
-d'arcs. Une première couverture pourrait être : tous-les-arcs. En fait c'est
-déjà un bon début si on couvre tous les arcs, mais est-ce que c'est suffisant
-pour avoir confiance dans notre code ?</p></div>
-<div class="pu"><p>Oui ou non.</p></div>
-<div class="ie"><p>Et bien non en fait. On peut atteindre l'exception de deux
-manières différentes : soit avec une année trop grande ou trop petite. On a
-besoin de deux tests différents ici pour assurer la couverture
-toutes-les-décisions. C'est plus ou moins facile si on a des conjonctions ou
-disjonctions, si on arrive à transformer ça en DNF pour <em>Disjunctive Normal
-Form</em> etc.</p>
-<p>Des couvertures il y en a pleins. Par exemple, tous-les-arcs ou
-tous-les-nœuds ne sont pas suffisantes quand on a une boucle parce qu'on peut
-avoir des conditions à l'intérieur qui deviennent atteignables après être passé
-<em>i</em>-fois dans la boucle : ça c'est la couverture
-tous-les-<em>i</em>-chemins. La notion d'<strong>atteignabilité</strong> est
-importante ici.</p></div>
-<div class="fh"><p>D'accord mais alors le saint-graal c'est quoi ? Quand est-ce
-qu'on peut dire que la couverture est totale ?</p></div>
-<div class="ie"><p>Les couvertures forment une hiérarchie de la plus faible à la
-plus forte.</p>
-<pre><code>[[mettre le schéma et expliquer un peu]]</code></pre>
-<p>La plus forte est tous-les-chemins, mais elle est difficile à obtenir. Si le
-code est simple, on peut tester les cas limites ou ajouter beaucoup de tests
-jusqu'à atteindre tous-les-chemins. Par contre, il faut que les frameworks de
-tests sachent détecter la couverture.</p></div>
-
-<h2>Test structurel</h2>
-
-<div class="fh"><p>D'accord. Donc pour le test unitaire, la couverture est un bon
-indicateur. Mais ça implique d'avoir le code source à disposition ?</p></div>
-<div class="ie"><p>Excellente remarque ! Quand on a le code source, on appelle ça le
-test <strong>structurel</strong> ou encore le <em>white-box testing</em>. C'est
-de ce domaine que vient la notion de CFG, de chemins, de couverture etc. C'était
-une petite parenthèse plus formelle.</p></div>
-
-<h2>Test d'intégration</h2>
-
-<div class="ie"><p>Bref. On a écrit des tests, on a écrit du code, mais il est
-éparpillé entre plusieurs équipes. Qu'est-ce qu'on fait ?</p></div>
-<div class="fh"><p>Et bien on va faire du test d'<strong>intégration</strong>,
-c'est à dire que l'on va écrire à nouveau des tests pour décrire comment le code
-va se comporter une fois assemblé. En revanche, on est toujours assez
-bas-niveau, on est toujours sur du code, alors quels outils utiliser ?</p></div>
-<div class="ie"><p>En fait, il faut bien faire attention à la distinction entre
-techniques de tests (unitaire, d'intégration, fonctionnel …) et les outils. Les
-outils peuvent trouver leur application sur plusieurs tests.</p></div>
-<div class="fh"><p>Par exemple on peut très bien utilisé Atoum pour du test
-unitaire ou du test d'intégration.</p></div>
-<div class="ie"><p>Un bon exemple oui. Les besoins sont les mêmes. On est sur du
-test structurel dans les deux cas, on teste pratiquement au même niveau, on veut
-les mêmes informations (comme les métriques) etc. En fait, on a une sorte de
-<strong>matrice</strong> entre les techniques de tests et les outils.</p></div>
-<div class="fh"><p>J'en profite pour enfoncer le clou sur l'intérêt des tests et
-la confiance qu'ils offrent. Lors d'une intégration, on sera amener à modifier
-le code ou à effectuer de la maintenance (et pas que pendant l'intégration
-d'ailleurs). À la moindre modification, on peut relancer l'ensemble des tests et
-ainsi observer que cette modification n'a pas eu d'impact négative :
-c'est à dire que l'on n'a pas introduit de
-<strong>régression</strong>. C'est là où les outils auront un rôle important :
-rapidité d'exécution, détection des erreurs, rapports d'erreurs …</p></div>
-<div class="ie"><p>Tout ça rentre dans le domaine de l'<strong>intégration
-continue</strong> : on a une machine qui exécute tous nos tests, vérifie notre
-code en permanence et émet des alertes si jamais. C'est un outil très utile
-quand on travaille en TDD.</p></div>
-
-<h2>Testabilité</h2>
-
-<div class="fh"><p>Toutefois, j'avoue être un peu perdu avec toutes ces
-techniques de tests. J'ai l'impression que beaucoup de notions se recoupent et
-qu'elles ne sont pas bien définies. Est-ce que je me trompe ou pas ? Je ne sais
-pas si c'est plus clair pour vous ?</p></div>
-<div class="pu"><p>Mais si !</p></div>
-<div class="ie"><p>Si, c'est très bien défini mais toutes ces notions
-interviennent à plusieurs niveaux en même temps. Il y a beaucoup
-d'incompréhension, de mélange, d'abus et certains s'amusent même à créer de
-nouvelles techniques de tests qui ne veulent simplement rien dire et qui n'ont
-aucun sens. Il faut toujours se focaliser sur un type de test selon le contexte
-et on s'apercevra qu'ils sont tous <strong>complémentaires</strong>.</p>
-<p>Quand on est perdu, il y a une définition qui pourra toujours nous aider,
-celle de la <strong>testabilité</strong> : qu'est-ce qu'on teste et comment le
-tester ?</p></div>
-<div class="fh"><p>Par exemple « qu'est-ce qu'on teste ? » quand on écrit nos
-classes, ça revient à se dire : on a accès au code source, on n'a pas conscience
-du reste du code, on veut tester uniquement les parties atomiques de notre code,
-donc on fait du test unitaire. Et pour les outils, on utilise celui qui répond
-le mieux à ce besoin. En général, l'outil s'impose de lui-même si on est sûr du
-type de test que l'on veut faire j'ai l'impression.</p>
-<p>Mais alors … j'hésite à en parler … oh et pis : dans le cas du paradigme
-objet par exemple, est-ce qu'on doit tester les méthodes protégées et privées ?
-Ça fait partie de la question « qu'est-ce qu'on teste ? » !</p></div>
-<div class="pu"><p>Oui, non, oui, non, il est pas frais mon poisson !?</p></div>
-<div class="ie"><p>C'est vrai. Pour être franc, si je dis dans mon laboratoire
-que je n'ai pas testé les méthodes protégées ou privées, je peux t'assurer qu'on
-va bien rire de moi ! Si tu veux une bonne <strong>campagne</strong> de tests
-unitaires, c'est à dire que tous tes tests unitaires soient pertinents, on a dit
-qu'il fallait une bonne couverture. Et je ne vois pas comment on pourrait
-choisir ce qu'on veut couvrir ou pas. L'objectif premier d'un test est de
-détecter des erreurs, et je peux t'assurer qu'elles se cachent
-partout !</p></div>
-<div class="fh"><p>Oui mais normalement tes méthodes publics s'appuient sur les
-méthodes de visibilité inférieure, comme protégée ou privée, donc tu es censé
-tout couvrir en utilisant les méthodes publics non ?</p></div>
-<div class="ie"><p>Et bien non, pas forcément. Comme tu l'as très bien dit, ou
-plutôt modélisé, on a des niveaux. Si <code>User::setBirthday</code> est
-protégée et qu'elle est utilisée par une autre méthode public, peut-être qu'on
-ne pourra tout simplement pas déclencher l'exception, ou alors que d'une seule
-manière.  Mais si une autre personne reprend ta classe <code>User</code> et
-utilise <code>User::setBirthday</code> d'une autre manière, comment peux-tu
-t'assurer qu'elle l'utilisera de la même manière que toi ? Il faut vraiment tout
-tester.</p></div>
-<div class="fh"><p>Hmm, je vois. C'est vrai que techniquement ce n'est pas
-vraiment un problème. Autant en PHP, qu'en Java ou d'autres langages, on peut
-toujours s'en sortir sans trop de pirouettes. Et c'est aux frameworks de tests
-de gérer ça.</p></div>
-<div class="ie"><p>Et d'ailleurs, si on veut rester dans le domaine de la
-testabilité, j'ai une autre problème qui me vient à l'esprit. On parle de test
-unitaire mais comment gérer les dépendances avec d'autres « composants » ou
-parties d'un projet ? Par exemple si on doit accéder à un système de fichiers ?
-ou encore une base de données ?</p></div>
-
-<h2>Mock et mole</h2>
-
-<div class="fh"><p>Il ne faut pas utiliser ces dépendances justement car le code
-va devenir très dur à tester. Il faut « boucher » ces parties du code en
-immitant des dépendances fictives. En anglais on parle de <em>mock</em>. L'idée
-est d'immiter une dépendance en lui forçant certains comportements pour nos
-tests.</p>
-<pre><code>[[mettre un exemple avec un import d'utilisateur depuis des fichiers]]</code></pre>
-<p>Ici, on a la méthode <code>User::export(Stream\Out $stream)</code> qui
-utilise un flux pour sauvegarder un utilisateur qui aurait été sérialisé par
-exemple. Ce flux peut être de n'importe quelle sorte : un fichier sur la
-machine, sur le réseau, dans plusieurs formats etc.</p></div>
-<div class="ie"><p>Encore une fois, si on écrit le test avant le code, on va
-naturellement créer un objet pour notre flux et le passer en argument de notre
-objet ou méthode (ça dépend s'il est partagé entre plusieurs méthodes ou pas).
-Alors que si on avait écrit le code en premier, on aurait pu créer notre flux
-directement dans la méthode et ça aurait été une erreur car on n'aurait pas pu
-tester cette méthode facilement. Certains appellent ça l'injection de dépendance
-mais c'est un bien grand mot pour décrire une bonne pratique
-évidente !</p></div>
-<div class="fh"><p>Et en écrivant le test en premier, on n'aurait même pas
-besoin de savoir comment fonctionne notre flux grâce au mock justement. On
-aurait créer une immitation de cet objet, on aurait spécifier le comportement
-des méthodes selon le besoin de notre test et c'est tout. Par exemple : simuler
-un fichier déjà existant, un chemin inconnu, un disque dur saturé, une machine
-déconnectée si on est en réseau etc. Je vous montre un exemple avec Atoum :</p>
-<pre><code>[[mettre un exemple de mock avec Atoum]]</code></pre>
-<p>Les mocks ont également l'avantage d'augmenter la portabilité des tests ainsi
-que d'améliorer la vitesse d'exécution des tests puisqu'on se coupe d'une partie
-de l'environnement. Et ça améliore même la vitesse d'écriture des tests car on
-n'a pas tout un environnement à mettre en place !</p></div>
-<div class="ie"><p>Si on veut que les mocks soient faciles à mettre en place, il
-faut concevoir rapidement des interfaces pour nos objets, bibliothèques etc. Là
-encore, c'est une bonne pratique qui nous permet de gagner en
-productivité.</p></div>
-<div class="fh"><p>Je précise qu'un mock n'est pas là pour supprimer ou ajouter
-des méthodes sur une classe mais uniquement pour immiter des comportements déjà
-existants.</p></div>
-<div class="ie"><p>Exact. En revanche, l'inconvénient des mocks est que dans la
-plupart des cas ils nécessitent de spécifier le comportement de l'ensemble des
-méthodes pour l'objet immité. Heureusement, il existe une alternative plus
-souple qui s'appelle les <em>moles</em>. Le principe est strictement le même
-sauf qu'on peut spécifier le comportement des méthodes souhaitées uniquement,
-c'est au cas par cas. Ça nécessite souvent d'<strong>instrumenter</strong> le
-code, c'est à dire de le réécrire de manière automatique pour lui ajouter des
-fonctionnalités.</p></div>
-<div class="fh"><p>Oui et ce n'est pas toujours évident. C'est pour ça que très
-souvent les mocks sont des classes qui étendent la classe à immiter et que ça
-peut parfois poser des problèmes, par exemple si on a vérification de type un
-peu forte. Mais là c'est un problème d'ingénierie lié à l'outil et pas au test
-en lui-même.</p></div>
-
-<h2>Test fonctionnel</h2>
-
-<div class="fh"><p>Maintenant, on quitte le code : la partie bas-niveau du
-projet, pour prendre un peu de hauteur. Le projet prend forme, on a les tests
-unitaires, on a le code, toutes les parties sont assemblées entre elles et on a
-même des tests d'intégration. Maintenant, il faut tester que le code que l'on a
-écrit est le bon par rapport aux exigences fonctionnelles du projet.</p></div>
-<div class="ie"><p>Exactement. Ce terme veut dire beaucoup de choses. Ça
-comprend aussi bien le test du code métier, que l'interface graphique etc. Comme
-tout à l'heure où l'on parlait de <em>white-box</em> pour le test structurel,
-ici on parle de <em>black-box</em> pour le test fonctionnel. On n'a pas le code,
-donc pas de couverture de code (ce ne serait plus du tout pertinent). Il faut de
-nouvelles techniques.</p></div>
-<div class="fh"><p>Et on va commencer par l'approche industrielle. On reprend la
-testabilité : « qu'est-ce qu'on veut tester ? ». On commence par le code
-métier.</p>
-<pre><code>[[Frédéric, à toi de compléter, avec Behat par exemple]]</code></pre></div>
-<div class="ie"><p>Mais également, on peut vouloir tester les interfaces
-graphiques.  L'idée est d'associer un scénario à chaque exigence du projet pour
-collecter des données ou amener le système dans un état particulier pour ensuite
-le vérifier.  On peut vérifier la présence d'un texte, d'une image, d'un lien …
-bref, tout ce qui est relatif aux interfaces graphiques. Ces scénarios sont
-ensuite enregistrés pour pouvoir être rejoués par la suite. Citons comme outil
-CasperJS (lien sponsorisé), Selenium ou encore Sahi.</p></div>
-
-<h2><em>Model-based Testing</em> et <em>Contract-based Testing</em></h2>
-
-<div class="ie"><p>Dans l'idéal, il faudrait modéliser son système de manière
-abstraite, par exemple à l'aide d'UML. L'idée derrière le <em>Model-based
-Testing</em> est la génération automatique de suites de test. On ne va pas trop
-s'étaler sur le sujet car aujourd'hui c'est difficilement applicable pour des
-petites et moyennes applications. C'est dommage car les bénéfices sont énormes
-et ça offre une sûreté et une sécurité élevés même si ça reste encore réservé à
-des projets très critiques car il faut former les équipes, les coûts sont assez
-importants etc. Mais ça me permet de faire la transition sur le test à partir de
-contrat.</p>
-<p>Un <strong>contrat</strong> est composé d'une pré-condition, d'une
-post-condition et d'invariants. Si la pré-condition n'est pas satisfaite, alors
-le contract est inconclusif. La post-condition nous fournit l'oracle, à savoir
-le verdict du test. Les invariants doivent être vrais avant et après l'exécution
-du système sous test. L'idée du <em>Contract-based Testing</em> est de placer
-les contrats directement dans le code, à l'aide d'annotation, là où se trouve
-les données : sur les attributs de classes, sur les arguments des méthodes
-etc.</p>
-<p>On est entre le <em>black-box</em> et le <em>white-box</em>, on parle alors
-de <em>grey-box</em> …</p></div>
-<div class="fh"><p>Et oh, stop ! Trop théorique. À quoi ça va nous
-servir ?</p></div>
-
-<h2>Test automatique</h2>
-
-<div class="ie"><p>Et bien c'est simple. On a deux utilisations des contrats :
-  <ol>
-    <li>validation : quand on appelle une méthode, on vérifie la pré-condition,
-    ainsi que la post-condition et les invariants, et ceci pour toutes les
-    méthodes ;</li>
-    <li>vérification : on utilise la pré-condition pour générer automatiquement
-    des données de tests et la post-condition nous fournit le verdict ! On
-    obtient un générateur automatique de tests unitaires !</li>
-  </ol>
-Le point clé est la génération des données de tests : il faut qu'elles soient
-pertinentes, réalistes et qu'elles offrent une bonne couverture.</p></div>
-<div class="fh"><p>Ah je vois. Et c'est à ce moment là que l'analyse statique ou
-dynamique permet d'améliorer la génération des données ?</p></div>
-<div class="ie"><p>Exactement ! Mais là c'est un autre monde, vraiment passionnant.
-En fait c'est le sujet de ma thèse.</p></div>
-<div class="fh"><p>Et c'est dans ce cadre que tu as proposé Praspel c'est ça ?</p></div>
-<div class="ie"><p>Oui. Praspel signifie <em>PHP Realistic Annotation and
-Specification Language</em>, c'est un langage qui permet de faire de la
-programmation par contrat etc. Le langage a été conçu pour être facile à
-utiliser par les développeurs. Ce n'est pas le but de la conférence mais ça
-tourne plutôt pas mal et vous trouverez des liens vers ce sujet à la fin.</p></div>
-<div class="fh"><p>Voilà voilà. Il a été sage presque jusqu'à la fin, c'est plutôt
-bien non ?</p></div>
-<div class="ie"><p>Mais attention, c'est tout à fait complémentaire à Atoum ! Le test
-automatique est bien avancé et même s'il trouve souvent plus d'erreurs que le
-test manuel, il y a parfois des limites.</p></div>
-
-<h2>Conclusion</h2>
+<p>À ce stade, on parle de <strong>vérification</strong> de programme.</p></div>
+<div class="ie"><p>Et avant de tester le programme dans sa totalité, il est plus
+évident de tester des petites parties, les unes après les autres. Nous allons
+donc chercher quelles sont les parties « <strong>atomiques</strong> » de notre
+programme. Le plus souvent, ce seront les fonctions ou les méthodes de classes.
+Ces parties sont les fondations de notre programme, il est nécessaire d'avoir
+<strong>confiance</strong> dans ces fondations avant de bâtir par dessus.</p>
+<p>Nous parlons alors de tests <strong>unitaires</strong>, puisqu'ils ont pour
+but de vérifier le fonctionnement de la plus petite unité de code existante, qui
+est alors le SUT évoqué précédemment.</p></div>
+<div class="fh"><p>Notre équipe de développeurs a donc commencé à écrire du
+code, puis ensuite à rédiger les tests correspondants afin de les exécuter
+régulièrement. Cela leur a été d'autant plus facile qu'un test unitaire s'écrit
+souvent dans le même langage que celui utilisé pour écrire le code. Et pour se
+faciliter encore plus la tâche, ils ont utilisé un <strong>framework</strong> de
+tests unitaires, car c'est un outil dont le but est d'organiser, faciliter et
+simplifier l'écriture et l'exécution de un ou plusieurs tests (dans ce cas, on
+parle de <strong>suite</strong> de tests). Un tel framework doit également être
+capable de produire des rapports dans différents formats qui permettront aux
+développeurs de pouvoir localiser avec précision les tests qui ont échoué et la
+raison de cet échec. Ces rapports peuvent également contenir d'autres
+informations, notamment sur des <strong>métriques</strong> permettant de
+qualifier la qualité des tests. Tout ces facteurs nous permettent de savoir
+quelle confiance avoir dans notre code.</p>
+<p>Le choix d'un framework de test unitaires a été relativement simple pour
+notre équipe de développeur car ils ont tout simplement expérimentés ceux qui
+leur semblaient intéressants. Leur choix a été totalement subjectif, mais ce
+n'est un mal car l'important n'est pas tant l'outil choisi que le fait d'être
+efficace avec. Toutefois, le choix n'est pas anodin car ces outils sont en
+général très <strong>peu compatible</strong> entre eux, et par conséquence, il
+n'y a pas de solution simple et rapide permettant d'en changer.</p></div>
+<div class="ie"><p>Notre équipe écrit donc des tests <em>a posteriori</em> de la
+rédaction de leur code avec leur framework de tests unitaires favori. Cependant,
+ils n'ont pas tardé à réaliser que cette façon de faire présentait des
+inconvénients significatifs.</p>
+<p>Tout d'abord, ils se sont aperçus que pour être <strong>testable</strong>,
+leur code devait forcément suivre un certain nombre de bonnes pratiques de
+développement, et le fait d'écrire leurs tests <em>a posteriori</em> rendait
+cette contrainte difficile à satisfaire. Ils étaient alors obligé de modifier le
+code concerné et de faire plusieurs fois le même travail. De plus, ils se sont
+aperçus qu'ils développaient des fonctionnalités dont ils n'avaient pas besoin,
+ce qui leur faisait encore perdre plus de temps. Enfin, lors de la mise en œuvre
+de leur au sein des tests, ils se rendaient parfois compte qu'il n'était pas
+pratique à utiliser, du fait d'une API mal pensée ou peu adaptée au contexte
+d'utilisation.</p>
+<p>Ces trois problèmes étant induits par le fait d'écrire les tests unitaires
+après avoir écrit le code, nos développeurs ont décidé de faire à l'avenir
+l'inverse : écrire les tests unitaires <em>a priori</em>.</p></div>
+<div class="fh"><p>Ce faisant, ils ont donc commencé à appliquer une méthode de
+développement connue sous l'acronyme TDD pour <em>Test Driven Development</em>.
+Cette méthode impose un développement itératif qui a comme avantage de faciliter
+la conception du code. Lorsque l'un de nos développeurs veut écrire du code, il
+commence par écrire le test le plus simple posible permettant de le décrire, et
+en général il consiste à instancier une classe et à appeler une méthode devant
+être testée. Le développeur exécute alors ce test unitaire, qui aboutit
+forcément sur un échec puisque le code correspondant n'existe pas encore. La
+plupart des frameworks de tests matérialise l'échec sous la forme d'un message
+écrit en rouge, d'où l'expression « la barre est rouge ». C'est le signal qui
+autorise le développeur a écrire du code mais juste ce qui est nécessaire pour
+exécuter que le test devienne un succès et que la « barre devienne verte ».
+Comme la méthode de travail est itérative, nous recommençons ce processus en
+écrivant un nouveau test et ainsi de suite.</p>
+<p>Parfois, la modification du code peut invalider un test déjà existant. Nous
+parlons de <strong>régression</strong>. Mais grâce aux tests justement, ces
+régressions sont détectées immédiatement et peuvent être corriger rapidement
+grâce aux rapports générés par notre outil de test.</p></div>
+<div class="ie"><p>Mais parfois, des régressions ont été introduites sans que
+les tests ne puissent les détecter immédiatement. Ils se sont demandés comment
+être sûr qu'un test soit de bonne <strong>qualité</strong> ? Dans un premier
+tant, les tests doivent représenter les <strong>exigences</strong> de notre code
+ou de notre projet. Mais nous voulons que les tests apportent un élément de
+<strong>sûreté</strong> (notamment avec la détection de régression). Pour cela,
+nos développeurs ont écrit des tests <strong>positifs</strong> qui symbolisent
+un succès, mais aussi des tests <strong>négatifs</strong> qui symbolisent un
+échec. Ils voulaient être sûr que le code faisait ce qu'il devait faire et ne
+faisait pas ce qu'il ne devait pas faire.</p>
+<p>Les résultats étaient nettement meilleurs et leur code était devenu de bien
+meilleur qualité. Mais ce n'était pas suffisant car dans certains cas, ils
+découvraient encore des erreurs inatendues et difficiles à détecter. Ils ont
+voulu qualifier la qualité des tests, savoir à quel point ils pouvaient faire
+confiance dans leurs tests. Heureusement, une métrique très utile dans le cas
+des tests unitaires est la <strong>couverture</strong> du code. Durant
+l'exécution d'un test, le framework utilisé va analyser quelle partie du code a
+été <strong>atteinte</strong> ou couverte. Une fois la suite de tests exécutée
+en entier, l'outil aggrège toutes ces données et nous fournit un rapport
+détaillé sur la couverture. Plus elle est importante et plus cela nous indique
+que nos tests sont de qualité.</p>
+<p>Il existe plusieurs niveaux de couverture. En réalité, nous pouvons
+représenter un code par son CFG pour <em>Control Flow Graph</em>. Chaque nœud
+dans ce graphe représente un bloc de code et chaque arc (dirigé) représente un
+saut d'un nœud vers un autre. Une exécution d'un test sera représenté par un
+chemin dans ce graphe. Des couvertures évidentes apparaissent comme par exemple
+<em>tous-les-arcs</em>. D'autres sont plus difficiles comme par exemple
+<em>tous-les-chemins</em>. En effet, si notre code comporte une boucle,
+peut-être qu'une partie sera <strong>atteignable</strong> uniquement après
+<em>i</em> passages dans cette boucle ; c'est la couverture
+<em>tous-les-<em>i</em>-chemins</em>. Nous pouvons aussi prendre en compte la
+dépendance entre les variables, leurs utilisations etc.</p>
+<p>Plus la couverture est forte et plus le test sera de qualité. L'objectif
+ultime étant la couverture <em>tous-les-chemins</em>.</p>
+<p>Malheureusement, selon les langages, rares sont les frameworks capables de
+détecter toutes les couvertures. La couverture la plus utilisée est
+<em>tous-les-nœuds</em>, elle reste faible mais c'est toujours une
+avancée !</p></div>
+<div class="fh"><p>Mais nos développeurs ont trouvé une solution supplémentaire
+pour améliorer la qualité de leur code directement à la source : travailler en
+<strong>binôme</strong>. Ils se partagent ainsi le même écran, le même clavier
+et la même souris.</p>
+<p>En dehors de l'équipe, certain ont pensé que c'était du gaspillage de
+ressources et qu'il fallait en conséquence arrêter immédiatement. Cependant, il
+a suffit de regarder attentivement ce binôme en train de travailler pour que les
+plus septiques reconnaissent que la paire travaille bien simultanément et en
+équipe. En effet, lorsque l'un a le clavier, l'autre porte un regard critique
+sur le code qu'il écrit, ce qui lui permet de réparer les erreurs de syntaxe, le
+non respect des conventions de codage et de faire des suggestions souvent
+bienvenues pour améliorer la lisibilité, la maintenance ou l'efficacité du code
+ou des tests. De plus, deux cerveaux sont bien plus à même de répertorier
+l'ensemble des cas d'utilisation possibles pour du code, et d'ailleurs, pour y
+parvenir au mieux, nos développeurs pratiquent de temps à autre le
+<strong>ping-pong</strong>. L'un des deux rédige alors le test tandis que
+l'autre écrit le code permettant de l'exécuter avec succès. Les rôles étant
+régulièrement permutés afin d'éviter la lassitude et détecter plus
+d'erreurs.</p>
+<p>Les résultats sont très impressionnants mais cette façon de travailler est
+éprouvante car elle ne laisse aucun répit aux deux développeurs, et elle ne doit
+donc être utilisée qu'à bon escient. Un dernier avantage du binômage : chaque
+membre est amené à travailler sur l'ensemble du code, car les binômes sont très
+souvent modifiés et le partage des connaissances se fait donc au fil de l'eau de
+manière transparent. Les membres de l'équipe ont tous une vision globale du code
+du programme.</p></div>
+<div class="ie"><p>Une vision globale mais pas totale. Dans certains cas, nos
+amis devaient travailler sur du code qui nécessitait des parties encore non
+développées ou finalisées. Par exemple, il arrive fréquemment qu'un test ait
+besoin d'accéder à un système de fichiers, à une base de données ou bien encore
+à une connexion réseau, un Web service etc. Or, si ce composant n'existe pas,
+cela est bloquant pour la tâche, et même s'il existe, il n'est pas évident de
+simuler un disfonctionnement pour avoir une suite de test complète.</p></div>
+<div class="fh"><p>C'est pourquoi nos développeurs ont décidé d'utiliser les
+<strong>mocks</strong>. Un mock est capable de simuler une dépendance. Son
+comportement est spécifié par le testeur. Grâce aux mocks, il devient possible
+de simuler des erreurs lors de la sauvegarde d'un fichier ou la parte d'une
+connexion à une base de données ou à un réseau, tout en améliorant la
+portabilité des tests. Un mock fait parti intégrante du test et il sera en
+conséquence toujours disponible indépendamment de son environnement d'exécution.
+Nous remarquons aussi que les mocks améliorent la vitesse d'exécution des tests
+car, étant virtuels, ils ne dépendent d'aucune contrainte technique et
+s'exécutent beaucoup plus rapidement que leurs équivalents du monde réel.
+Lorsqu'un mock simule une connexion à un réseau, la latence du réseau ou des
+serveurs n'a donc plus aucune influence sur la vitesse d'exécution des tests
+(sauf si le mock le spécifie bien entendu).</p></div>
+<div class="ie"><p>La mise en œuvre des tests unitaires et plus particulièrement
+du TDD ont permis à notre équipe non seulement de gagner en qualité, ce qui
+était l'objectif de départ, mais aussi en productivité et en confiance. D'autres
+effets positifs n'avaient même pas été anticités. Par exemple, au début du
+projet, ils avaient alloué du temps pour la rédaction des test <em>a
+posteriori</em>, temps qui s'était révélé bien souvent insuffisant. Or, avec le
+TDD, l'écriture des tests revient à développer le code du programme, ce qui
+revient à dire que le coût d'écriture des tests est confondu avec le coût du
+développement. Il est donc devenu totalement inutile d'allouer du temps
+spécifique à l'écriture des tests, ce qui facilite la planification du projet et
+a permis d'améliorer la maîtrise des délais. Mais également, à chaque instant du
+projet, notre équipe était certaine que l'existant fonctionnait.</p></div>
+<div class="fh"><p>Toutefois, même si les parties unitaires étaient de qualité,
+des erreurs pouvaient apparaître au moment d'assembler ces parties. Pour
+reprendre notre métaphore sur la maison, les briques étaient toutes bien
+réalisées mais personne n'a pensé à regarder si elles sont
+<strong>compatibles</strong> entre elles.</p>
+<p>Pour cela, une autre technique <strong>complémentaire</strong> au test
+unitaire est le test d'<strong>intégration</strong>. Le test d'intégration n'est
+pas très différent d'un test unitaire car le SUT est un agrégat d'unités de
+code.</p></div>
+<div class="ie"><p>En fait, nous manipulons toujours du code. Et quand nous
+testons à partir du code, nous appelons ça le test <strong>structurel</strong>
+(qui comprend la notion de couverture, de CFG etc.). Des outils adaptés au test
+unitaire seront probablement adaptés au test d'intégration.</p></div>
+<div class="fh"><p>Mais attention, les métriques pour qualifer la qualité d'un
+test d'intégration ne sera pas les mêmes. Au lieu d'utiliser la couverture, nous
+utiliserons plutôt les exigences du projet mais aussi d'utiliser toutes les
+dépendances.</p>
+<p>En effet, un test d'intégration se déroule dans un environnement très proche
+de celui du monde réel une fois que toutes les dépendances ont été mises en
+place, <em>a contrario</em> des tests unitaires qui se basent sur des mocks. Des
+surprises peuvent apparaître. La complémentarité entre les techniques de tests
+est importante.</p></div>
+<div class="ie"><p>Armés de leurs tests unitaires et d'intégrations, notre
+équipe est donc maintenant certaine de disposer de briques élémentaires fiables
+et compatibles, nécessaires à la construction de leur programme. Cependant, ces
+tests ne leur permettent pas de vérifier que le programme construit à partir de
+ces briques de base répondra aux besoins de ses utilisateurs. Pour reprendre
+encore une fois notre métaphore, la maison est construite mais est-ce la porte
+en haut du mur est pratique à utiliser ? Or, c'est justement le rôle des tests
+<strong>fonctionnels</strong> de vérifier que le code du programme répond aux
+besoin de l'utilisateur.</p></div>
 
 </body>
 </html>
