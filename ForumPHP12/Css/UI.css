@@ -82,6 +82,10 @@ cite, em {
     font-style: normal;
 }
 
+em em {
+    font-family: Text;
+}
+
 h1 {
     font-family: Text;
     font-size: 180%;
