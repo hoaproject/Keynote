@@ -178,8 +178,8 @@ ou de notre projet. Mais nous voulons que les tests apportent un élément de
 <strong>sûreté</strong> (notamment avec la détection de régression). Pour cela,
 nos développeurs ont écrit des tests <strong>positifs</strong> qui symbolisent
 un succès, mais aussi des tests <strong>négatifs</strong> qui symbolisent un
-échec. Ils voulaient être sûr que le code faisait ce qu'il devait faire et ne
-faisait pas ce qu'il ne devait pas faire.</p>
+échec. Cette approche ajoute de la <strong>sûreté</strong> : le code fait ce
+qu'il doit faire et ne fait pas ce qu'il ne doit pas faire.</p>
 
 <h2>Couverture</h2>
 
@@ -292,8 +292,9 @@ code.</p></div>
 
 <div class="ie"><p>En fait, nous manipulons toujours du code. Et quand nous
 testons à partir du code, nous appelons ça le test <strong>structurel</strong>
-(qui comprend la notion de couverture, de CFG etc.). Des outils adaptés au test
-unitaire seront probablement adaptés au test d'intégration.</p></div>
+ou le test <em>white-box</em> (qui comprend la notion de couverture, de CFG
+etc.). Des outils adaptés au test unitaire seront probablement adaptés au test
+d'intégration.</p></div>
 <div class="fh"><p>Mais attention, les métriques pour qualifer la qualité d'un
 test d'intégration ne sera pas les mêmes. Au lieu d'utiliser la couverture, nous
 utiliserons plutôt les exigences du projet mais aussi d'utiliser toutes les
@@ -383,6 +384,80 @@ problèmes rencontrés et leur solution peuvent être très différents.</p>
 <p>Tout ce qui précède n'est donc pas une recette magique permettant d'écrire
 des tests pertinents et de bonne qualité car il faut de toute façon du temps et
 de l'expérience pour y parvenir.</p></div>
+
+<h2><em>One more thing</em> : test automatique</h2>
+
+<div class="ie"><p>On a surtout parlé de <em>white-box</em> mais vous aurez
+deviné qu'il existe aussi le <em>black-box</em>. En réalité, c'est le test
+fonctionnel ! Quand on ne connaît pas le code ou que l'on n'y a pas accès, on
+est en boîte noire. On a évoqué un moyen de tester son programme avec des
+scripts écrits manuellement, mais il existe d'autres techniques, plus coûteuses
+cependant et qui nécessitent plus de compétences, comme le MbT pour le test
+<strong>à partir de modèle</strong>. L'idée est d'avoir un modèle formel qui
+décrit l'évolution du système à travers une vision abstraite de son
+fonctionnement. Un modèle est souvent caractérisé par une
+<strong>spécification</strong> la plus formelle possible. C'est grâce à son
+aspect abstrait que le MbT permet de générer des suites de tests automatiquement
+mais aussi d'analyser la <strong>conformance</strong> entre le modèle et le
+code, normalement réalisés <strong>dos-à-dos</strong> par des équipes
+différentes. On peut également <strong>animer</strong> un modèle pour détecter
+les erreurs de conceptions.</p>
+<p>Mais comme précisé, ça coûte cher et c'est souvent dédié à des logiciels
+nécessitant une très haute sécurité et sûreté. Heureusement, il existe le le
+<em>grey-box</em> qui prend le meilleur des deux mondes ! On est sûr le code au
+niveau unitaire et on l'<strong>annote</strong> avec des
+<strong>contrats</strong>. Un contrat est constitué d'une pré-condition, d'une
+post-condition et d'invariants. On peut s'en servir de deux manières : utiliser
+les contrats pour <strong>vérifier</strong> notre programme, un peu comme on le
+faisait avec du test unitaire manuel, ou alors <strong>valider</strong> notre
+programme. L'idée est alors d'utiliser la pré-condition pour générer des données
+de tests et utiliser la post-condition et les invariants comme oracle.</p>
+<p>Vous aurez compris que l'élément clé dans le test automatique est la
+spécification (donnée par l'utilisateur) la génération des données (par la
+machine) : comment générer des données réalistes ? Il faut assurer la meilleure
+couverture possible et le plus efficacement possible. Que choisir : génération
+aléatoire, statique, dynamique, <em>concolic</em>, <em>fuzzing</em> … ? Autant
+de domaines à découvrir (sans mauvais jeu de mots) !</p>
+<p>Et c'est bien beau de générer des suites de tests mais comment les
+maintenir : lesquelles conservées, lesquelles mettre à jour, lesquelles
+supprimées ?</p>
+<p>Heureusement que toutes ces questions ont des réponses, ou des bouts de
+réponses.  En recherche, on voit de plus en plus d'outils « intelligents » qui
+mélangent plusieurs techniques et qui sont utilisés dans l'industrie … pour de
+vrai !</p></div>
+
+<h2><em>One more thing<sup>2</sup></em> : quelques outils</h2>
+
+<div class="fh"><p>Du coup, voici quelques outils que vous pourrez utiliser.
+Pour du <em>white-box</em> manuel en PHP :</p>
+<ul>
+  <li><a href="http://atoum.org">atoum</a> ;</li>
+  <li><a href="http://phpunit.de/">PHPUnit</a> ;</li>
+  <li><a href="http://simpletest.org/">SimpleTest</a>.</li>
+</ul>
+<p>Pour du <em>grey-box</em> automatique en PHP :</p>
+<ul>
+  <li><a href="https://secure.wikimedia.org/wikipedia/fr/wiki/Praspel">Praspel</a>.</li>
+</ul>
+<p>Pour du <em>black-box</em> manuel en PHP :</p>
+<ul>
+  <li><a href="http://behat.org/">Behat</a>.</li>
+</ul>
+<p>Pour du <em>black-box</em> manuel pour interface graphique :</p>
+<ul>
+  <li><a href="http://casperjs.org/">CasperJS</a> ;</li>
+  <li><a href="http://sahi.co.in/">Sahi</a> ;</li>
+  <li><a href="http://seleniumhq.org/">Selenium</a>.</li>
+</ul>
+<p>Intégration continue :</p>
+<ul>
+  <li><a href="http://jenkins-ci.org/">Jenkins</a> ;</li>
+  <li><a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> ;</li>
+  <li><a href="http://continuum.apache.org/">Continuum</a>.</li>
+</ul>
+<p>N'oubliez pas que les outils sont souvent polyvalents !</p></div>
+
+<h2>Merci !</h2>
 
 </body>
 </html>
