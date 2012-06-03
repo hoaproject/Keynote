@@ -58,6 +58,8 @@
 
 <h1>Histoire</h1>
 
+<h2>Introduction</h2>
+
 <div class="fh"><p>Aujourd'hui, le test devient à la mode dans le monde
 industriel. Les outils permettant de les mettre en œuvre sont de plus en plus
 nombreux et de plus en plus évolués, les techniques de travail changent tout
@@ -72,6 +74,9 @@ réponses aux questions qui nous ont été le plus souvent posées.</p></div>
 concevoir un programme répondant à un besoin avec la meilleure
 <strong>qualité</strong> et <strong>assurance</strong> possible, et afin d'y
 arriver, ils décidèrent d'utiliser les <strong>tests</strong>.</p>
+
+<h2>Définition</h2>
+
 <p>L'objectif est d'exécuter un SUT pour système sous test sous certaines
 conditions et contraintes, pour à la fin vérifier la sortie ou l'état de ce SUT.
 Dans le test dit <em>manuel</em>, c'est le testeur qui va écrire toutes les
@@ -88,6 +93,9 @@ machine, ce qui lui offrirait beaucoup d'avantages :</p>
   <li>la machine offre un gain de temps et d'efficacité ;</li>
 </ol>
 <p>À ce stade, on parle de <strong>vérification</strong> de programme.</p></div>
+
+<h2>Test unitaire</h2>
+
 <div class="ie"><p>Et avant de tester le programme dans sa totalité, il est plus
 évident de tester des petites parties, les unes après les autres. Nous allons
 donc chercher quelles sont les parties « <strong>atomiques</strong> » de notre
@@ -122,6 +130,9 @@ n'y a pas de solution simple et rapide permettant d'en changer.</p></div>
 rédaction de leur code avec leur framework de tests unitaires favori. Cependant,
 ils n'ont pas tardé à réaliser que cette façon de faire présentait des
 inconvénients significatifs.</p>
+
+<h2>Testabilité</h2>
+
 <p>Tout d'abord, ils se sont aperçus que pour être <strong>testable</strong>,
 leur code devait forcément suivre un certain nombre de bonnes pratiques de
 développement, et le fait d'écrire leurs tests <em>a posteriori</em> rendait
@@ -135,6 +146,9 @@ d'utilisation.</p>
 <p>Ces trois problèmes étant induits par le fait d'écrire les tests unitaires
 après avoir écrit le code, nos développeurs ont décidé de faire à l'avenir
 l'inverse : écrire les tests unitaires <em>a priori</em>.</p></div>
+
+<h2><em>Test Driven Development</em></h2>
+
 <div class="fh"><p>Ce faisant, ils ont donc commencé à appliquer une méthode de
 développement connue sous l'acronyme TDD pour <em>Test Driven Development</em>.
 Cette méthode impose un développement itératif qui a comme avantage de faciliter
@@ -149,6 +163,9 @@ autorise le développeur a écrire du code mais juste ce qui est nécessaire pou
 exécuter que le test devienne un succès et que la « barre devienne verte ».
 Comme la méthode de travail est itérative, nous recommençons ce processus en
 écrivant un nouveau test et ainsi de suite.</p>
+
+<h2>Régression</h2>
+
 <p>Parfois, la modification du code peut invalider un test déjà existant. Nous
 parlons de <strong>régression</strong>. Mais grâce aux tests justement, ces
 régressions sont détectées immédiatement et peuvent être corriger rapidement
@@ -163,6 +180,9 @@ nos développeurs ont écrit des tests <strong>positifs</strong> qui symbolisent
 un succès, mais aussi des tests <strong>négatifs</strong> qui symbolisent un
 échec. Ils voulaient être sûr que le code faisait ce qu'il devait faire et ne
 faisait pas ce qu'il ne devait pas faire.</p>
+
+<h2>Couverture</h2>
+
 <p>Les résultats étaient nettement meilleurs et leur code était devenu de bien
 meilleur qualité. Mais ce n'était pas suffisant car dans certains cas, ils
 découvraient encore des erreurs inatendues et difficiles à détecter. Ils ont
@@ -191,6 +211,9 @@ ultime étant la couverture <em>tous-les-chemins</em>.</p>
 détecter toutes les couvertures. La couverture la plus utilisée est
 <em>tous-les-nœuds</em>, elle reste faible mais c'est toujours une
 avancée !</p></div>
+
+<h2><em>ping-pong</em></h2>
+
 <div class="fh"><p>Mais nos développeurs ont trouvé une solution supplémentaire
 pour améliorer la qualité de leur code directement à la source : travailler en
 <strong>binôme</strong>. Ils se partagent ainsi le même écran, le même clavier
@@ -217,6 +240,9 @@ membre est amené à travailler sur l'ensemble du code, car les binômes sont tr
 souvent modifiés et le partage des connaissances se fait donc au fil de l'eau de
 manière transparent. Les membres de l'équipe ont tous une vision globale du code
 du programme.</p></div>
+
+<h2><em>Mock</em></h2>
+
 <div class="ie"><p>Une vision globale mais pas totale. Dans certains cas, nos
 amis devaient travailler sur du code qui nécessitait des parties encore non
 développées ou finalisées. Par exemple, il arrive fréquemment qu'un test ait
@@ -249,6 +275,9 @@ développement. Il est donc devenu totalement inutile d'allouer du temps
 spécifique à l'écriture des tests, ce qui facilite la planification du projet et
 a permis d'améliorer la maîtrise des délais. Mais également, à chaque instant du
 projet, notre équipe était certaine que l'existant fonctionnait.</p></div>
+
+<h2>Test d'intégration</h2>
+
 <div class="fh"><p>Toutefois, même si les parties unitaires étaient de qualité,
 des erreurs pouvaient apparaître au moment d'assembler ces parties. Pour
 reprendre notre métaphore sur la maison, les briques étaient toutes bien
@@ -258,6 +287,9 @@ réalisées mais personne n'a pensé à regarder si elles sont
 unitaire est le test d'<strong>intégration</strong>. Le test d'intégration n'est
 pas très différent d'un test unitaire car le SUT est un agrégat d'unités de
 code.</p></div>
+
+<h2>Test structurel</h2>
+
 <div class="ie"><p>En fait, nous manipulons toujours du code. Et quand nous
 testons à partir du code, nous appelons ça le test <strong>structurel</strong>
 (qui comprend la notion de couverture, de CFG etc.). Des outils adaptés au test
@@ -271,15 +303,86 @@ de celui du monde réel une fois que toutes les dépendances ont été mises en
 place, <em>a contrario</em> des tests unitaires qui se basent sur des mocks. Des
 surprises peuvent apparaître. La complémentarité entre les techniques de tests
 est importante.</p></div>
+
+<h2>Test fonctionnel</h2>
+
 <div class="ie"><p>Armés de leurs tests unitaires et d'intégrations, notre
 équipe est donc maintenant certaine de disposer de briques élémentaires fiables
 et compatibles, nécessaires à la construction de leur programme. Cependant, ces
 tests ne leur permettent pas de vérifier que le programme construit à partir de
 ces briques de base répondra aux besoins de ses utilisateurs. Pour reprendre
-encore une fois notre métaphore, la maison est construite mais est-ce la porte
-en haut du mur est pratique à utiliser ? Or, c'est justement le rôle des tests
-<strong>fonctionnels</strong> de vérifier que le code du programme répond aux
-besoin de l'utilisateur.</p></div>
+encore une fois notre métaphore, la maison est construite mais est-ce que la
+porte en haut du mur est pratique à utiliser ? Or, c'est justement le rôle des
+tests <strong>fonctionnels</strong> de vérifier que le code du programme répond
+aux besoin de l'utilisateur.</p>
+<p><em>A l'instar</em> du test unitaire ou d'intégration, le test fonctionnel
+doit valider le comportement du programme mais encore une fois à un niveau
+supérieur. Cependant, il est très différent dans sa forme car il doit permettre
+de valider un comportement fonctionnel et non technique. En conséquence, il est
+totalement indépendant à tout point de vue du langage utilisé pour le
+développement du programme. Il se présente le plus souvent comme un
+<strong>script</strong> essayant d'exprimer des séquences de manière simple et
+permettant d'amener le système dans un état particulier pour ensuite valider cet
+état. L'objectif est de simuler un comportement type d'un utilisateur.</p></div>
+
+<h2>Intégration continue</h2>
+
+<div class="fh"><p>Évidemment, pour que celui soit efficace, il faut la dernière
+verison disponible du programme, compilée, assemblée et utilisable par l'outil
+de test fonctionnel. Or, réunir tous ces paramètres à tout instant est une tâche
+longue et fastidieuse ! C'est la raison pour laquelle notre équipe a mis en
+place une plateforme d'<strong>intégration continue</strong> qui récupère les
+versions successives du code à tester, exécute les tests, compile et assemble le
+programme si tous les indicateurs sont au vert. Le cas échéant, des
+notifications sont émises rapidement afin d'avoir un retour
+<strong>immédiat</strong>. Ainsi, nos programmeurs gagnent vraiment en
+productivité et peuvent corriger leurs erreurs au plus tôt.</p>
+<p>Cependant, les tests fonctionnels ont posé un problème à nos développeurs
+car, de par leur nature, ils ont eu tout d'abord tendance à y décrire
+techniquement plutôt que fonctionnellement la façon dont le programme devrait
+fonctionner. Leurs premiers tests fonctionnels étaient étroitement lié au
+fonctionnement de leur code, et leur maintenance est vite devenue fastidieus car
+chaque modification du code devait obligatoirement être répercutée sur les tests
+concernées. Il leur a cependant suffit de ce dire que les tests fonctionnels
+devaient continuer à passer même après une refonte complète du code pour
+résoudre ce problème. Les tests fonctionnels leur ont également permis de tester
+plusieurs interfaces utilisateur pour leur programme. En effet, un programme
+doit se comporter de la même façon indépendament de la façon dont l'utilisateur
+l'utilise : en ligne de commande, <em>via</em> une interface graphique ou encore
+un navigateur Web.</p></div>
+
+<h2>Conclusion</h2>
+
+<div class="ie"><p>Notre équipe de développement est donc aujourd'hui heureuse
+et à donner naissance à beaucoup de programmes depuis ses premiers pas dans
+l'univers du test. Grâce à la mise en œuvre du TDD et des tests unitaires,
+d'intégration et fonctionnels, elle est aujourd'hui parfaitement à même de
+livrer du code fiable et répondant aux besoins de ses utilisateurs en toute
+confiance. Grâce au binômage, chacun d'eux a une vision plus globale du code et
+aucun membre de l'équipe n'est l'expert exclusif d'une partie du code.
+L'intégration continue leur permet de surveiller automatiquement que les
+modifications ou les évolutions effectués sur leur code n'a pas d'influence
+négative.</p>
+<p>Pour cela, il leur a fallu mettre en œuvre trois types de tests différents,
+chacun d'entre eux étant dédié à un objectif clair et étant complémentaire des
+autres.</p></div>
+<div class="fh"><p>Notre histoire aurait pu être très différente car il n'y a
+pas qu'une seule façon de mettre en œuvre correctement des tests. Il existe
+d'autres méthodes que le TDD, tout aussi pertinente, et différentes façons de
+rédiger des tests, indépendamment de leur nature. De plus, notre histoire se
+déroule au pays des « bisounours », où tout problème a une solution rapide et
+efficace avec un coût temporel ou financier nul, ce qui est très éloigné de la
+réalité. Dans le « vrai monde », il est en effet parfois nécessaire de devoir
+s'adapter pour faire face à des contraintes temporelles ou financières qui ne
+nous permettent pas de mettre en œuvre la totalité des tests que l'on
+souhaiterait utiliser. Dans ce contexte, le plus important est de garder à
+l'esprit que même faire un unique test, à la condition qu'il soit bien écrit
+évidemment, est bien plus pertinent que de ne pas faire de test du tout. Enfin,
+en fonction du langage de programmation utilisé et des outils employés, les
+problèmes rencontrés et leur solution peuvent être très différents.</p>
+<p>Tout ce qui précède n'est donc pas une recette magique permettant d'écrire
+des tests pertinents et de bonne qualité car il faut de toute façon du temps et
+de l'expérience pour y parvenir.</p></div>
 
 </body>
 </html>
