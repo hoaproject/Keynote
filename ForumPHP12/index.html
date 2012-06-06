@@ -16,7 +16,6 @@
 
     div.ie::before,
     div.fh::before,
-    div.bo::before,
     div.pu::before {
         position: absolute;
         left: -7.5em;
@@ -39,10 +38,6 @@
         background: rgba(216, 234, 210, .4);
     }
 
-    div.bo::before {
-        content: "Les deux";
-    }
-
     div.pu::before {
         content: "Public";
     }
@@ -51,47 +46,168 @@
     em.indication {
         color: #777;
     }
+
+    figure {
+        text-align: center;
+        margin: 1.5em auto;
+        width: 500px;
+        height: 375px;
+        box-shadow: 0 0 8px #333;
+        border: 2px #cf2525 solid;
+        border-radius: 2px;
+        background: #fff;
+    }
+
+    svg.hidden {
+        display: none;
+    }
+
+    svg rect, svg path {
+        fill: none;
+        stroke: #000;
+        stroke-width: .5;
+        stroke-linejoin: round;
+    }
+
+    svg rect {
+        stroke-linecap: round;
+    }
+
+    svg text {
+        font-family: "Andale Mono";
+        font-size: 10pt;
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+
+    svg text.small {
+        font-size: 5pt;
+    }
+
+    svg .fill {
+        fill: #000;
+    }
+
+    svg .control > rect {
+        fill: #fff;
+    }
+
+    svg .annotation > text {
+        font-size: 10pt;
+    }
+
+    svg .start {
+        text-anchor: start;
+    }
+
+    svg .end {
+        text-anchor: end;
+    }
   </style>
 </head>
 
 <body>
 
+<svg class="hidden">
+  <defs>
+    <path id="rarrow" class="fill" transform="translate(0 -3)" d="
+      M  0, 0
+      l  5, 3
+      l -5, 3
+      z
+      " />
+    <use id="barrow" xlink:href="#rarrow" transform="rotate(90)" />
+  </defs>
+</svg>
+
 <h1>Histoire</h1>
+
+<figure>
+  <img src="Image/01.png" />
+</figure>
+
+<h2>Présentation</h2>
+
+<div class="fh">
+<figure>
+  <img src="Image/02.png" />
+</figure>
+<p>Bonjour à tous ! Je m'appelle <a href="http://twitter.com/mageekguy">Frédéric
+Hardy</a>. J'ai commencé à mettre en œeuvre des tests sans le savoir en 1995
+lorsque j'ai débuté ma formation universitaire, avant de commencer à réellement
+les mettre en œeuvre en 2005.  J'ai donc appris le test empiriquement, en les
+mettant en pratique dans le cadre de projets plus ou moins complexes. Depuis,
+j'ai créé le framework de tests unitaires <a href="http://atoum.org">atoum</a>
+et j'en suis le développeur principal.</p>
+</div>
+
+<div class="ie">
+<figure>
+  <img src="Image/03.png" />
+</figure>
+<p>Bonjour à tous ! Je m'appelle <a href="http://twitter.com/hoaproject">Ivan
+Enderlin</a>. Je prépare actuellement une thèse en Informatique, spécialée dans
+la sécurité et sûreté du logiciel. Je suis également contributeur de divers
+logiciels open-source comme PHP, Mozilla, Debian etc. Je suis enfin auteur et
+développeur principal de <a href="http://hoa-project.net">Hoa</a>, un ensemble
+de bibliothèques PHP.</p>
+</div>
 
 <h2>Introduction</h2>
 
-<div class="fh"><p>Aujourd'hui, le test devient à la mode dans le monde
-industriel. Les outils permettant de les mettre en œuvre sont de plus en plus
-nombreux et de plus en plus évolués, les techniques de travail changent tout
-comme les mentalités, bref le test se <strong>démocratise</strong> gentiment.
-Cependant, l'information à leur sujet est souvent fragmentée et parcellaire, si
-bien que la plupart des développeurs et futur-testeurs ont des difficultés à les
-appréhender correctement de manière globale et se posent beaucoup de
-questions.</p>
+<div class="fh">
+<figure>
+  <img src="Image/04.png" />
+</figure>
+<p>Aujourd'hui, le test devient à la mode dans le monde industriel. Les outils
+permettant de les mettre en œuvre sont de plus en plus nombreux et toujours plus
+évolués ; les techniques de travail changent tout comme les mentalités ; bref le
+test se <strong>démocratise</strong> gentiment.  Cependant, l'information à leur
+sujet est souvent fragmentée et parcellaire, si bien que la plupart des
+développeurs ont des difficultés à les appréhender correctement de manière
+globale et se posent beaucoup de questions.</p>
 <p>L'histoire que nous allons vous raconter a pour but d'apporter quelques
 réponses aux questions qui nous ont été le plus souvent posées.</p></div>
-<div class="ie">Il était une fois une équipe de développeurs qui souhaitait
-concevoir un programme répondant à un besoin avec la meilleure
-<strong>qualité</strong> et <strong>assurance</strong> possible, et afin d'y
-arriver, ils décidèrent d'utiliser les <strong>tests</strong>.</p>
+<div class="ie">
+<figure>
+  <img src="Image/05.png" />
+</figure>
+<p>Il était une fois une équipe de développeurs qui souhaitait concevoir un
+programme répondant à un besoin avec la meilleure <strong>qualité</strong> et
+<strong>assurance</strong> possible, et afin d'y arriver, ils décidèrent
+d'utiliser les <strong>tests</strong>.</p>
 
 <h2>Définition</h2>
 
-<p>L'objectif est d'exécuter un SUT pour système sous test sous certaines
-conditions et contraintes, pour à la fin vérifier la sortie ou l'état de ce SUT.
-Dans le test dit <em>manuel</em>, c'est le testeur qui va écrire toutes les
-conditions d'exécution du SUT, ainsi que les <strong>oracles</strong> permettant
-de calculer les <strong>verdicts</strong> des tests, tout simplement si les
-tests ont été un succès ou ont échoué. Les tests suivent tous ce proccessus à
-quelques nuances près.</p></div>
-<div class="fh"><p>Cependant, même si c'est le testeur qui va écrire les tests,
-il serait nettement plus confortable pour lui de les faire exécuter par une
-machine, ce qui lui offrirait beaucoup d'avantages :</p>
-<ol>
-  <li>la machine est capable d'exécuter les tests aussi souvent que
-  nécessaire et cela de manière <strong>automatisé</strong> ;</li>
-  <li>la machine offre un gain de temps et d'efficacité ;</li>
-</ol>
+<figure>
+  <img src="Image/06.png" />
+</figure>
+<p>Un test permet de confronter deux mondes : théorique et pratique. L'objectif
+est d'exécuter un SUT pour système sous test sous certaines conditions et
+contraintes, pour à la fin vérifier la sortie ou l'état de ce SUT.</p>
+<figure>
+  <img src="Image/07.png" />
+</figure>
+<p>Dans le test dit <strong>manuel</strong>, c'est le testeur qui va écrire
+toutes les conditions d'exécution du SUT.</p>
+<figure>
+  <img src="Image/09.png" />
+</figure>
+<p>Et les <strong>oracles</strong> permettent de calculer les
+<strong>verdicts</strong> des tests : tout simplement si les tests ont été un
+succès ou un échec.</p>
+<figure>
+  <img src="Image/08.png" />
+</figure>
+<p>Les tests suivent tous ce processus à quelques nuances près.</p></div>
+<div class="fh">
+<figure>
+  <img src="Image/10.png" />
+</figure>
+<p>Cependant, il est nettement plus confortable pour le développeur de faire
+exécuter les tests par une machine, car elle est capable de les exécuter aussi
+souvent que nécessaire, automatiquement, et beaucoup plus efficacement et
+rapidement.</p>
 <p>À ce stade, on parle de <strong>vérification</strong> de programme.</p></div>
 
 <h2>Test unitaire</h2>
@@ -99,37 +215,55 @@ machine, ce qui lui offrirait beaucoup d'avantages :</p>
 <div class="ie"><p>Et avant de tester le programme dans sa totalité, il est plus
 évident de tester des petites parties, les unes après les autres. Nous allons
 donc chercher quelles sont les parties « <strong>atomiques</strong> » de notre
-programme. Le plus souvent, ce seront les fonctions ou les méthodes de classes.
-Ces parties sont les fondations de notre programme, il est nécessaire d'avoir
-<strong>confiance</strong> dans ces fondations avant de bâtir par dessus.</p>
+programme, et le plus souvent, ce seront les fonctions ou les méthodes des
+classes. Pour faire une métaphore, ce serait comme construire une maison sans
+avoir <strong>confiance</strong> dans ces fondations.</p>
+<figure>
+  <img src="Image/12.png" />
+</figure>
 <p>Nous parlons alors de tests <strong>unitaires</strong>, puisqu'ils ont pour
 but de vérifier le fonctionnement de la plus petite unité de code existante, qui
 est alors le SUT évoqué précédemment.</p></div>
 <div class="fh"><p>Notre équipe de développeurs a donc commencé à écrire du
 code, puis ensuite à rédiger les tests correspondants afin de les exécuter
 régulièrement. Cela leur a été d'autant plus facile qu'un test unitaire s'écrit
-souvent dans le même langage que celui utilisé pour écrire le code. Et pour se
-faciliter encore plus la tâche, ils ont utilisé un <strong>framework</strong> de
-tests unitaires, car c'est un outil dont le but est d'organiser, faciliter et
-simplifier l'écriture et l'exécution de un ou plusieurs tests (dans ce cas, on
-parle de <strong>suite</strong> de tests). Un tel framework doit également être
-capable de produire des rapports dans différents formats qui permettront aux
-développeurs de pouvoir localiser avec précision les tests qui ont échoué et la
-raison de cet échec. Ces rapports peuvent également contenir d'autres
-informations, notamment sur des <strong>métriques</strong> permettant de
-qualifier la qualité des tests. Tout ces facteurs nous permettent de savoir
-quelle confiance avoir dans notre code.</p>
+souvent dans le même langage que celui utilisé pour écrire le code.</p>
+<figure>
+  <img src="Image/13.png" />
+</figure>
+<p>Et pour se faciliter encore plus la tâche, ils ont utilisé un
+<strong>framework</strong> de tests unitaires, car c'est un outil dont le but
+est d'organiser, faciliter et simplifier l'écriture et l'exécution de un ou
+plusieurs tests (dans ce cas, on parle de <strong>suite</strong> de tests). Un
+tel framework doit également être capable de produire des rapports dans
+différents formats qui permettront aux développeurs de pouvoir localiser avec
+précision les tests qui ont échoué et la raison de cet échec.</p>
+<figure>
+  <img src="Image/14.png" />
+</figure>
+<p>Ces rapports peuvent également contenir d'autres informations, notamment des
+<strong>métriques</strong> permettant de qualifier la qualité des tests. Tout
+ces facteurs nous permettent de savoir quelle confiance avoir dans notre
+code.</p>
 <p>Le choix d'un framework de test unitaires a été relativement simple pour
 notre équipe de développeur car ils ont tout simplement expérimentés ceux qui
 leur semblaient intéressants. Leur choix a été totalement subjectif, mais ce
-n'est un mal car l'important n'est pas tant l'outil choisi que le fait d'être
-efficace avec. Toutefois, le choix n'est pas anodin car ces outils sont en
-général très <strong>peu compatible</strong> entre eux, et par conséquence, il
-n'y a pas de solution simple et rapide permettant d'en changer.</p></div>
-<div class="ie"><p>Notre équipe écrit donc des tests <em>a posteriori</em> de la
-rédaction de leur code avec leur framework de tests unitaires favori. Cependant,
-ils n'ont pas tardé à réaliser que cette façon de faire présentait des
-inconvénients significatifs.</p>
+n'est pas un mal car l'important n'est pas tant l'outil choisi que le fait
+d'être efficace avec.</p>
+<figure>
+  <img src="Image/15.png" />
+</figure>
+<p>Toutefois, le choix n'est pas anodin car ces outils sont en général très
+<strong>peu compatibles</strong> entre eux, et par conséquence, il n'y a pas de
+solution simple et rapide permettant d'en changer.</p></div>
+<div class="ie">
+<figure>
+  <img src="Image/16.png" />
+</figure>
+<p>Notre équipe écrit donc des tests <em>a posteriori</em> de la rédaction de
+leur code avec leur framework de tests unitaires favori. Cependant, ils n'ont
+pas tardé à réaliser que cette façon de faire présentait des inconvénients
+significatifs.</p>
 
 <h2>Testabilité</h2>
 
@@ -137,76 +271,241 @@ inconvénients significatifs.</p>
 leur code devait forcément suivre un certain nombre de bonnes pratiques de
 développement, et le fait d'écrire leurs tests <em>a posteriori</em> rendait
 cette contrainte difficile à satisfaire. Ils étaient alors obligé de modifier le
-code concerné et de faire plusieurs fois le même travail. De plus, ils se sont
-aperçus qu'ils développaient des fonctionnalités dont ils n'avaient pas besoin,
-ce qui leur faisait encore perdre plus de temps. Enfin, lors de la mise en œuvre
-de leur au sein des tests, ils se rendaient parfois compte qu'il n'était pas
-pratique à utiliser, du fait d'une API mal pensée ou peu adaptée au contexte
-d'utilisation.</p>
+code concerné et de faire plusieurs fois le même travail.</p>
+<figure>
+  <img src="Image/17.png" />
+</figure>
+<p>De plus, ils se sont aperçus qu'ils développaient des fonctionnalités dont
+ils n'avaient pas besoin, ce qui leur faisait encore perdre plus de temps.</p>
+<figure>
+  <img src="Image/18.png" />
+</figure>
+<p>Enfin, lors de la mise en œuvre de leur code au sein des tests, ils se
+rendaient parfois compte qu'il n'était pas pratique à utiliser, du fait d'une
+API mal pensée ou peu adaptée au contexte d'utilisation.</p>
 <p>Ces trois problèmes étant induits par le fait d'écrire les tests unitaires
-après avoir écrit le code, nos développeurs ont décidé de faire à l'avenir
+après avoir écrit le code. À l'avenir, nos développeurs ont décidé de faire
 l'inverse : écrire les tests unitaires <em>a priori</em>.</p></div>
 
 <h2><em>Test Driven Development</em></h2>
 
-<div class="fh"><p>Ce faisant, ils ont donc commencé à appliquer une méthode de
-développement connue sous l'acronyme TDD pour <em>Test Driven Development</em>.
-Cette méthode impose un développement itératif qui a comme avantage de faciliter
-la conception du code. Lorsque l'un de nos développeurs veut écrire du code, il
-commence par écrire le test le plus simple posible permettant de le décrire, et
-en général il consiste à instancier une classe et à appeler une méthode devant
-être testée. Le développeur exécute alors ce test unitaire, qui aboutit
-forcément sur un échec puisque le code correspondant n'existe pas encore. La
-plupart des frameworks de tests matérialise l'échec sous la forme d'un message
-écrit en rouge, d'où l'expression « la barre est rouge ». C'est le signal qui
-autorise le développeur a écrire du code mais juste ce qui est nécessaire pour
-exécuter que le test devienne un succès et que la « barre devienne verte ».
-Comme la méthode de travail est itérative, nous recommençons ce processus en
-écrivant un nouveau test et ainsi de suite.</p>
+<div class="fh">
+<figure>
+  <img src="Image/19.png" />
+</figure>
+<p>Ce faisant, ils ont donc commencé à appliquer une méthode de développement
+connue sous l'acronyme TDD pour <em>Test Driven Development</em>.</p>
+<figure>
+  <img src="Image/20.png" />
+</figure>
+<p>Cette méthode impose un développement itératif qui facilite la conception du
+code. Lorsque l'un de nos développeurs veut écrire du code, il commence par
+écrire le test le plus simple possible permettant de le décrire, et en général
+il consiste à instancier une classe et à appeler la méthode devant être testée.
+Le développeur exécute alors ce test unitaire, qui aboutit forcément sur un
+échec puisque le code correspondant n'existe pas encore.</p>
+<figure>
+  <img src="Image/40.png" />
+</figure>
+<p>La plupart des frameworks de tests matérialise l'échec sous la forme d'un
+message écrit en rouge, d'où l'expression « la barre est rouge ».</p>
+<figure>
+  <img src="Image/44.png" />
+</figure>
+<p>C'est le signal qui autorise le développeur a écrire du code mais juste ce
+qui est nécessaire pour exécuter le test avec succès et que la « barre devienne
+verte ».</p>
+<figure>
+  <img src="Image/21.png" />
+</figure>
+<p>Comme la méthode de travail est itérative, le développeur recommence ce
+processus en écrivant un nouveau test et ainsi de suite jusqu'à ce que le code
+réponde à ses besoins.</p>
 
 <h2>Régression</h2>
 
-<p>Parfois, la modification du code peut invalider un test déjà existant. Nous
-parlons de <strong>régression</strong>. Mais grâce aux tests justement, ces
-régressions sont détectées immédiatement et peuvent être corriger rapidement
-grâce aux rapports générés par notre outil de test.</p></div>
-<div class="ie"><p>Mais parfois, des régressions ont été introduites sans que
-les tests ne puissent les détecter immédiatement. Ils se sont demandés comment
-être sûr qu'un test soit de bonne <strong>qualité</strong> ? Dans un premier
-tant, les tests doivent représenter les <strong>exigences</strong> de notre code
-ou de notre projet. Mais nous voulons que les tests apportent un élément de
-<strong>sûreté</strong> (notamment avec la détection de régression). Pour cela,
-nos développeurs ont écrit des tests <strong>positifs</strong> qui symbolisent
-un succès, mais aussi des tests <strong>négatifs</strong> qui symbolisent un
-échec. Cette approche ajoute de la <strong>sûreté</strong> : le code fait ce
-qu'il doit faire et ne fait pas ce qu'il ne doit pas faire.</p>
+<p>Évidemment, au cours de ce processus, une modification du code peut invalider
+un test déjà existant.  Nous parlons de <strong>régression</strong>. Cependant,
+grâce aux tests justement, ces régressions sont détectées immédiatement et
+peuvent être corriger rapidement grâce aux rapports générés par notre outil de
+test.</p></div>
+<div class="ie"><p>Malheureusement, il peut arriver que des régressions aient
+été introduites sans que les tests ne puissent les détecter immédiatement. Nos
+développeurs se sont demandés comment être sûr qu'un test soit de bonne
+<strong>qualité</strong> ? Dans un premier temps, les tests doivent représenter
+les <strong>exigences</strong> de notre code ou de notre projet. Mais nous
+voulons que les tests apportent un élément de <strong>sûreté</strong> (notamment
+avec la détection de régression).</p>
+<figure>
+  <img src="Image/26.png" />
+</figure>
+<p>Pour cela, nos développeurs ont écrit des tests <strong>positifs</strong> qui
+symbolisent un comportement normal, mais aussi des tests
+<strong>négatifs</strong> qui symbolisent un comportement anormal. Cette
+approche ajoute de la sûreté : le code fait ce qu'il doit faire et ne fait pas
+ce qu'il ne doit pas faire.</p>
 
 <h2>Couverture</h2>
 
-<p>Les résultats étaient nettement meilleurs et leur code était devenu de bien
-meilleur qualité. Mais ce n'était pas suffisant car dans certains cas, ils
-découvraient encore des erreurs inatendues et difficiles à détecter. Ils ont
-voulu qualifier la qualité des tests, savoir à quel point ils pouvaient faire
-confiance dans leurs tests. Heureusement, une métrique très utile dans le cas
-des tests unitaires est la <strong>couverture</strong> du code. Durant
-l'exécution d'un test, le framework utilisé va analyser quelle partie du code a
-été <strong>atteinte</strong> ou couverte. Une fois la suite de tests exécutée
-en entier, l'outil aggrège toutes ces données et nous fournit un rapport
-détaillé sur la couverture. Plus elle est importante et plus cela nous indique
-que nos tests sont de qualité.</p>
+<p>Les résultats étaient nettement plus satisfaisant et leur code était devenu
+de bien meilleur qualité. Mais ce n'était pas suffisant car dans certains cas,
+ils découvraient encore des erreurs inattendues et difficiles à détecter. Ils
+ont voulu qualifier la qualité des tests, savoir à quel point ils pouvaient
+avoir confiance dans leurs tests.</p>
+<figure>
+  <img src="Image/22.png" />
+</figure>
+<p>Heureusement, une <strong>métrique</strong> très utile dans le cas des tests
+unitaires est la <strong>couverture</strong> du code. Durant l'exécution d'un
+test, le framework utilisé va analyser quelle partie du code a été
+<strong>atteinte</strong> ou couverte. Une fois la suite de tests exécutée en
+entier, l'outil agrège toutes ces données et nous fournit un rapport détaillé
+sur la couverture. Plus elle est importante et plus nos tests sont de
+qualité.</p>
+<figure>
+  <svg height="375" viewBox="0 0 320 400">
+    <g class="path">
+      <path d="M 150,  30 L  90, 115" />
+
+      <path d="M 150,  30 L 210, 115" />
+      <path d="M  90, 115 L 150, 200" />
+
+      <path d="M 210, 115 L 150, 200" />
+      <path d="M 150, 200 L  90, 285" />
+
+      <path d="M 150, 200 L 210, 285" />
+      <path d="M  90, 285 L 150, 370" />
+
+      <path d="M 210, 285 L 150, 370" />
+
+      <use xlink:href="#barrow" x="107.5" y="90.5"
+           transform="rotate(33 107.5 90.5)" />
+      <use xlink:href="#barrow" x="192.5" y="90.5"
+           transform="rotate(-33 192.5 90.5)" />
+
+      <use xlink:href="#barrow" x="107.5" y="260.5"
+           transform="rotate(33 107.5 260.5)" />
+      <use xlink:href="#barrow" x="192.5" y="260.5"
+           transform="rotate(-33 192.5 260.5)" />
+
+      <use xlink:href="#barrow" x="135" y="179"
+           transform="rotate(-38 135 179)" />
+      <use xlink:href="#barrow" x="165" y="179"
+           transform="rotate(38 165 179)" />
+
+      <use xlink:href="#barrow" x="132.5" y="345.5"
+           transform="rotate(-38 132.5 345.5)" />
+      <use xlink:href="#barrow" x="167.5" y="345.5"
+           transform="rotate(38 167.5 345.5)" />
+    </g>
+
+
+    <g class="control">
+      <rect x="130" y="10" width="40" height="40" rx="5" ry="5"
+            transform="rotate(45 150 30)" />
+
+      <rect x="70" y="95" width="40" height="40" rx="5" ry="5" />
+      <rect x="190" y="95" width="40" height="40" rx="5" ry="5" />
+
+      <rect x="130" y="180" width="40" height="40" rx="5" ry="5"
+            transform="rotate(45 150 200)" />
+
+      <rect x="70" y="265" width="40" height="40" rx="5" ry="5" />
+      <rect x="190" y="265" width="40" height="40" rx="5" ry="5" />
+
+      <rect x="130" y="350" width="40" height="40" rx="5" ry="5" />
+    </g>
+
+    <g class="label">
+      <text x="150" y="30">A</text>
+
+      <text  x="90" y="115">B</text>
+      <text x="210" y="115">C</text>
+
+      <text x="150" y="200">D</text>
+
+      <text  x="90" y="285">E</text>
+      <text x="210" y="285">F</text>
+
+      <text x="150" y="370">G</text>
+    </g>
+
+    <g class="annotation">
+      <text x="110" y="72.5" class="end">x &lt;= 0</text>
+      <text x="190" y="72.5" class="start">x > 0</text>
+
+      <text  x="60" y="115" class="end">x := -x</text>
+      <text x="240" y="115" class="start">x := 1 - x</text>
+
+      <text x="110" y="242.5" class="end">x := -1</text>
+      <text x="200" y="242.5" class="start">x /= -1</text>
+
+      <text  x="60" y="285" class="end">x := 1</text>
+      <text x="240" y="285" class="start">x := x + 1</text>
+
+      <text x="185" y="370" class="start">writeln(x)</text>
+    </g>
+  </svg>
+</figure>
 <p>Il existe plusieurs niveaux de couverture. En réalité, nous pouvons
 représenter un code par son CFG pour <em>Control Flow Graph</em>. Chaque nœud
-dans ce graphe représente un bloc de code et chaque arc (dirigé) représente un
+dans ce graphe représente un bloc de code et chaque arc (orienté) représente un
 saut d'un nœud vers un autre. Une exécution d'un test sera représenté par un
 chemin dans ce graphe. Des couvertures évidentes apparaissent comme par exemple
 <em>tous-les-arcs</em>. D'autres sont plus difficiles comme par exemple
 <em>tous-les-chemins</em>. En effet, si notre code comporte une boucle,
 peut-être qu'une partie sera <strong>atteignable</strong> uniquement après
 <em>i</em> passages dans cette boucle ; c'est la couverture
-<em>tous-les-<em>i</em>-chemins</em>. Nous pouvons aussi prendre en compte la
-dépendance entre les variables, leurs utilisations etc.</p>
-<p>Plus la couverture est forte et plus le test sera de qualité. L'objectif
-ultime étant la couverture <em>tous-les-chemins</em>.</p>
+<em>tous-les-<em>i</em>-chemins</em>.</p>
+<figure>
+  <svg height="375" viewBox="0 0 300 200">>
+    <g class="control">
+      <path d="M 225, 120 L 225,  20" class="dashed" />
+      <path d="M 225, 160 L 225, 120" />
+      <path d="M 225, 180 L 225, 160" />
+
+      <path d="M 225, 160 L 120, 125" />
+      <path d="M  75, 160 L 120, 125" />
+      <path d="M  75, 160 L  30, 125" />
+
+      <path d="M  30, 125 L  75,  80" />
+      <path d="M 120, 125 L  75,  80" />
+      <path d="M  75,  80 L  75,  60" />
+      <path d="M  75,  60 L 225,  20" />
+
+      <rect x="185"  y="12" width="80" height="16" rx="5" ry="5" />
+      <rect x="185" y="112" width="80" height="16" rx="5" ry="5" />
+      <rect x="185" y="152" width="80" height="16" rx="5" ry="5" />
+      <rect x="185" y="172" width="80" height="16" rx="5" ry="5" />
+
+      <rect  x="1" y="112" width="58" height="26" rx="5" ry="5" />
+      <rect  x="91" y="112" width="58" height="26" rx="5" ry="5" />
+
+      <rect  x="25" y="152" width="100" height="16" rx="5" ry="5" />
+      <rect  x="25"  y="72" width="100" height="16" rx="5" ry="5" />
+      <rect  x="25"  y="52" width="100" height="16" rx="5" ry="5" />
+    </g>
+
+    <g class="label">
+      <text x="225" y="20" class="small">tous-les-chemins</text>
+      <text x="225" y="120" class="small">tous-les-i-chemins</text>
+      <text x="225" y="160" class="small">tous-les-arcs</text>
+      <text x="225" y="180" class="small">tous-les-nœuds</text>
+
+      <text x="30" y="120" class="small">toutes-les-c-</text>
+      <text x="30" y="130" class="small">utilisations</text>
+      <text x="120" y="120" class="small">toutes-les-p-</text>
+      <text x="120" y="130" class="small">utilisations</text>
+
+      <text x="75" y="60" class="small">toutes-les-DU-chemins</text>
+      <text x="75" y="80" class="small">toutes-les-utilisations</text>
+      <text x="75" y="160" class="small">toutes-les-définitions</text>
+    </g>
+  </svg>
+</figure>
+<p>Nous pouvons aussi prendre en compte la dépendance entre les variables, leurs
+utilisations etc., mais l'objectif ultime étant la couverture
+<em>tous-les-chemins</em>.</p>
 <p>Malheureusement, selon les langages, rares sont les frameworks capables de
 détecter toutes les couvertures. La couverture la plus utilisée est
 <em>tous-les-nœuds</em>, elle reste faible mais c'est toujours une
@@ -216,94 +515,129 @@ avancée !</p></div>
 
 <div class="fh"><p>Mais nos développeurs ont trouvé une solution supplémentaire
 pour améliorer la qualité de leur code directement à la source : travailler en
-<strong>binôme</strong>. Ils se partagent ainsi le même écran, le même clavier
-et la même souris.</p>
+<strong>binôme</strong>.</p>
+<figure>
+  <img src="Image/23.png" />
+</figure>
+<p>Ils se partagent ainsi le même écran, le même clavier et la même souris.</p>
 <p>En dehors de l'équipe, certain ont pensé que c'était du gaspillage de
 ressources et qu'il fallait en conséquence arrêter immédiatement. Cependant, il
-a suffit de regarder attentivement ce binôme en train de travailler pour que les
-plus septiques reconnaissent que la paire travaille bien simultanément et en
-équipe. En effet, lorsque l'un a le clavier, l'autre porte un regard critique
-sur le code qu'il écrit, ce qui lui permet de réparer les erreurs de syntaxe, le
-non respect des conventions de codage et de faire des suggestions souvent
-bienvenues pour améliorer la lisibilité, la maintenance ou l'efficacité du code
-ou des tests. De plus, deux cerveaux sont bien plus à même de répertorier
-l'ensemble des cas d'utilisation possibles pour du code, et d'ailleurs, pour y
-parvenir au mieux, nos développeurs pratiquent de temps à autre le
-<strong>ping-pong</strong>. L'un des deux rédige alors le test tandis que
-l'autre écrit le code permettant de l'exécuter avec succès. Les rôles étant
+leur a suffit de regarder attentivement les binômes en train de travailler pour
+qu'ils reconnaissent que la paire travaille bien simultanément et en équipe. En
+effet, lorsque l'un a le clavier, l'autre porte un regard critique sur le code
+qui est écrit, ce qui lui permet de répérer les erreurs de syntaxe, le non
+respect des conventions de codage et de faire des suggestions souvent bienvenues
+pour améliorer la lisibilité, la maintenance ou l'efficacité du code ou des
+tests. De plus, deux cerveaux sont bien plus à même de répertorier l'ensemble
+des cas d'utilisation possibles pour du code.</p>
+<figure>
+  <img src="Image/24.png" />
+</figure>
+<p>Et d'ailleurs, pour y parvenir au mieux, nos développeurs pratiquent de temps
+à autre le <strong>ping-pong</strong>. L'un des deux rédige alors le test tandis
+que l'autre écrit le code permettant de l'exécuter avec succès. Les rôles sont
 régulièrement permutés afin d'éviter la lassitude et détecter plus
 d'erreurs.</p>
+<figure>
+  <img src="Image/25.png" />
+</figure>
 <p>Les résultats sont très impressionnants mais cette façon de travailler est
 éprouvante car elle ne laisse aucun répit aux deux développeurs, et elle ne doit
 donc être utilisée qu'à bon escient. Un dernier avantage du binômage : chaque
 membre est amené à travailler sur l'ensemble du code, car les binômes sont très
 souvent modifiés et le partage des connaissances se fait donc au fil de l'eau de
-manière transparent. Les membres de l'équipe ont tous une vision globale du code
-du programme.</p></div>
+manière transparente. Les membres de l'équipe ont tous une vision globale du
+code du programme.</p></div>
 
 <h2><em>Mock</em></h2>
 
 <div class="ie"><p>Une vision globale mais pas totale. Dans certains cas, nos
 amis devaient travailler sur du code qui nécessitait des parties encore non
-développées ou finalisées. Par exemple, il arrive fréquemment qu'un test ait
-besoin d'accéder à un système de fichiers, à une base de données ou bien encore
-à une connexion réseau, un Web service etc. Or, si ce composant n'existe pas,
-cela est bloquant pour la tâche, et même s'il existe, il n'est pas évident de
-simuler un disfonctionnement pour avoir une suite de test complète.</p></div>
-<div class="fh"><p>C'est pourquoi nos développeurs ont décidé d'utiliser les
-<strong>mocks</strong>. Un mock est capable de simuler une dépendance. Son
-comportement est spécifié par le testeur. Grâce aux mocks, il devient possible
-de simuler des erreurs lors de la sauvegarde d'un fichier ou la parte d'une
-connexion à une base de données ou à un réseau, tout en améliorant la
-portabilité des tests. Un mock fait parti intégrante du test et il sera en
-conséquence toujours disponible indépendamment de son environnement d'exécution.
-Nous remarquons aussi que les mocks améliorent la vitesse d'exécution des tests
-car, étant virtuels, ils ne dépendent d'aucune contrainte technique et
-s'exécutent beaucoup plus rapidement que leurs équivalents du monde réel.
-Lorsqu'un mock simule une connexion à un réseau, la latence du réseau ou des
-serveurs n'a donc plus aucune influence sur la vitesse d'exécution des tests
+développées ou non finalisées, car le code a des <strong>dépendances</strong>.
+Par exemple, il arrive fréquemment qu'un test ait besoin d'accéder à un système
+de fichiers, à une base de données ou bien encore à une connexion réseau, un Web
+service etc.</p>
+<figure>
+  <img src="Image/27.png" />
+</figure>
+<p>Or, si ce composant n'existe pas, cela est bloquant pour la tâche, et même
+s'il existe, il n'est pas évident de simuler un dysfonctionnement pour avoir une
+suite de test complète. C'est pourquoi nos développeurs ont décidé d'utiliser
+les <strong>mocks</strong>.</p></div>
+<div class="fh">
+<figure>
+  <img src="Image/28.png" />
+</figure>
+<p>Un mock est capable de simuler une dépendance. Son comportement est spécifié
+par le testeur. Grâce aux mocks, il devient possible de simuler des erreurs lors
+d'une sauvegarde dans un fichier ou lors d'une connexion à une base de données
+ou encore à un réseau, tout en améliorant la <strong>portabilité</strong> des
+tests. Un mock fait parti intégrante du test et il sera en conséquence toujours
+disponible <strong>indépendamment</strong> de son environnement d'exécution.</p>
+<figure>
+  <img src="Image/29.png" />
+</figure>
+<p>Nous remarquons aussi que les mocks améliorent la <strong>vitesse</strong>
+d'exécution des tests car, étant virtuels, ils ne dépendent d'aucune contrainte
+technique et s'exécutent beaucoup plus rapidement que leurs équivalents du monde
+réel.  Lorsqu'un mock simule une connexion à un réseau, la latence du réseau ou
+des serveurs n'a donc plus aucune influence sur la vitesse d'exécution des tests
 (sauf si le mock le spécifie bien entendu).</p></div>
 <div class="ie"><p>La mise en œuvre des tests unitaires et plus particulièrement
 du TDD ont permis à notre équipe non seulement de gagner en qualité, ce qui
 était l'objectif de départ, mais aussi en productivité et en confiance. D'autres
-effets positifs n'avaient même pas été anticités. Par exemple, au début du
+effets positifs n'avaient même pas été anticipés. Par exemple, au début du
 projet, ils avaient alloué du temps pour la rédaction des test <em>a
-posteriori</em>, temps qui s'était révélé bien souvent insuffisant. Or, avec le
-TDD, l'écriture des tests revient à développer le code du programme, ce qui
-revient à dire que le coût d'écriture des tests est confondu avec le coût du
-développement. Il est donc devenu totalement inutile d'allouer du temps
-spécifique à l'écriture des tests, ce qui facilite la planification du projet et
-a permis d'améliorer la maîtrise des délais. Mais également, à chaque instant du
-projet, notre équipe était certaine que l'existant fonctionnait.</p></div>
+posteriori</em>, temps qui s'était révélé bien souvent insuffisant.</p>
+<figure>
+  <img src="Image/30.png" />
+</figure>
+<p>Or, avec le TDD, l'écriture des tests revient à développer le code du
+programme, ce qui revient à dire que le coût d'écriture des tests est confondu
+avec le coût du développement. Et cerise sur le gâteaux, les développeurs ont
+réalisé que les tests peuvent servir de documentation ! Il est donc devenu
+totalement inutile d'allouer du temps spécifique à l'écriture des tests ou d'une
+catégorie de documentation, ce qui facilite la planification du projet et a
+permis d'améliorer la maîtrise des délais. Mais aussi, à chaque instant, notre
+équipe était certaine que l'existant fonctionnait.</p></div>
 
 <h2>Test d'intégration</h2>
 
-<div class="fh"><p>Toutefois, même si les parties unitaires étaient de qualité,
-des erreurs pouvaient apparaître au moment d'assembler ces parties. Pour
-reprendre notre métaphore sur la maison, les briques étaient toutes bien
-réalisées mais personne n'a pensé à regarder si elles sont
-<strong>compatibles</strong> entre elles.</p>
-<p>Pour cela, une autre technique <strong>complémentaire</strong> au test
-unitaire est le test d'<strong>intégration</strong>. Le test d'intégration n'est
-pas très différent d'un test unitaire car le SUT est un agrégat d'unités de
+<div class="fh">
+<figure>
+  <img src="Image/32.png" />
+</figure>
+<p>Toutefois, même si les parties unitaires étaient de qualité, des erreurs
+pouvaient apparaître au moment d'assembler ces parties. Pour reprendre la
+métaphore sur la maison, les briques sont toutes bien réalisées mais personne
+n'a pensé à regarder si elles sont <strong>compatibles</strong> entre elles.</p>
+<figure>
+  <img src="Image/33.png" />
+</figure>
+<p>Pour cela, une technique <strong>complémentaire</strong> au test unitaire est
+le test d'<strong>intégration</strong>. Le test d'intégration n'est pas très
+différent d'un test unitaire car le SUT est un agrégat d'unités de
 code.</p></div>
 
 <h2>Test structurel</h2>
 
-<div class="ie"><p>En fait, nous manipulons toujours du code. Et quand nous
-testons à partir du code, nous appelons ça le test <strong>structurel</strong>
-ou le test <em>white-box</em> (qui comprend la notion de couverture, de CFG
-etc.). Des outils adaptés au test unitaire seront probablement adaptés au test
-d'intégration.</p></div>
-<div class="fh"><p>Mais attention, les métriques pour qualifer la qualité d'un
-test d'intégration ne sera pas les mêmes. Au lieu d'utiliser la couverture, nous
-utiliserons plutôt les exigences du projet mais aussi d'utiliser toutes les
-dépendances.</p>
-<p>En effet, un test d'intégration se déroule dans un environnement très proche
-de celui du monde réel une fois que toutes les dépendances ont été mises en
-place, <em>a contrario</em> des tests unitaires qui se basent sur des mocks. Des
-surprises peuvent apparaître. La complémentarité entre les techniques de tests
-est importante.</p></div>
+<div class="ie"><p>En fait, nous manipulons toujours du code, nous avons
+toujours accès au code source. Et quand nous testons à partir du code, nous
+appelons ça le test <strong>structurel</strong> ou le test <em>white-box</em>
+(qui comprend la notion de couverture, de CFG etc.). Des outils adaptés au test
+unitaire seront probablement adaptés au test d'intégration.</p></div>
+<div class="fh"><p>Mais attention, les métriques pour qualifier la qualité d'un
+test d'intégration ne seront pas les mêmes.</p>
+<figure>
+  <img src="Image/34.png" />
+</figure>
+<p>C'est normal car les tests d'intégrations viennent compléter les tests
+unitaires, ils offrent une validation à un niveau <strong>supérieur</strong>.
+Un test d'intégration se déroule dans un environnement très proche de celui du
+monde réel une fois que toutes les dépendances ont été mises en place, <em>a
+contrario</em> des tests unitaires qui se basent sur des mocks. Le code peut se
+comporter différemment et dans ce contexte des bugs peuvent apparaîtrent. La
+complémentarité entre les techniques de tests est importante.</p></div>
 
 <h2>Test fonctionnel</h2>
 
@@ -312,45 +646,53 @@ est importante.</p></div>
 et compatibles, nécessaires à la construction de leur programme. Cependant, ces
 tests ne leur permettent pas de vérifier que le programme construit à partir de
 ces briques de base répondra aux besoins de ses utilisateurs. Pour reprendre
-encore une fois notre métaphore, la maison est construite mais est-ce que la
-porte en haut du mur est pratique à utiliser ? Or, c'est justement le rôle des
-tests <strong>fonctionnels</strong> de vérifier que le code du programme répond
-aux besoin de l'utilisateur.</p>
+notre métaphore, la maison est construite mais est-ce que la porte à 3 mètres du
+sol est pratique à utiliser ? Or, c'est justement le rôle des tests
+<strong>fonctionnels</strong> de vérifier que le code du programme répond aux
+besoin de l'utilisateur.</p>
+<figure>
+  <img src="Image/35.png" />
+</figure>
 <p><em>A l'instar</em> du test unitaire ou d'intégration, le test fonctionnel
-doit valider le comportement du programme mais encore une fois à un niveau
-supérieur. Cependant, il est très différent dans sa forme car il doit permettre
-de valider un comportement fonctionnel et non technique. En conséquence, il est
-totalement indépendant à tout point de vue du langage utilisé pour le
-développement du programme. Il se présente le plus souvent comme un
+doit valider le comportement du programme mais, une fois de plus, à un niveau
+<strong>supérieur</strong>. Cependant, il est très différent dans sa forme car
+il doit permettre de valider un comportement fonctionnel et non technique. C'est
+pourquoi il est totalement indépendant à tout point de vue du langage utilisé
+pour le développement du programme. Il se présente le plus souvent comme un
 <strong>script</strong> essayant d'exprimer des séquences de manière simple et
-permettant d'amener le système dans un état particulier pour ensuite valider cet
-état. L'objectif est de simuler un comportement type d'un utilisateur.</p></div>
+naturelle permettant d'amener le système dans un état particulier pour ensuite
+valider cet état. L'objectif est de simuler un comportement type d'un
+utilisateur.</p></div>
 
 <h2>Intégration continue</h2>
 
-<div class="fh"><p>Évidemment, pour que celui soit efficace, il faut la dernière
-verison disponible du programme, compilée, assemblée et utilisable par l'outil
-de test fonctionnel. Or, réunir tous ces paramètres à tout instant est une tâche
-longue et fastidieuse ! C'est la raison pour laquelle notre équipe a mis en
-place une plateforme d'<strong>intégration continue</strong> qui récupère les
-versions successives du code à tester, exécute les tests, compile et assemble le
-programme si tous les indicateurs sont au vert. Le cas échéant, des
-notifications sont émises rapidement afin d'avoir un retour
-<strong>immédiat</strong>. Ainsi, nos programmeurs gagnent vraiment en
-productivité et peuvent corriger leurs erreurs au plus tôt.</p>
+<div class="fh"><p>Évidemment, pour que tout ça soit réalisable, il faut la
+dernière version disponible du programme, compilée, assemblée et utilisable par
+les outils de test. Or, réunir tous ces paramètres à chaque modification du code
+est une tâche longue et fastidieuse !</p>
+<figure>
+  <img src="Image/36.png" />
+</figure>
+<p>C'est la raison pour laquelle notre équipe a mis en place une plateforme
+d'<strong>intégration continue</strong> qui récupère les versions successives du
+code à tester, exécute les tests, compile et assemble le programme si tous les
+indicateurs sont au vert. Le cas échéant, des notifications sont émises
+rapidement afin d'avoir un retour <strong>immédiat</strong>. Ainsi, nos
+programmeurs gagnent vraiment en productivité et peuvent corriger leurs erreurs
+au plus tôt.</p>
 <p>Cependant, les tests fonctionnels ont posé un problème à nos développeurs
-car, de par leur nature, ils ont eu tout d'abord tendance à y décrire
+car, par habitude, ils ont eu tout d'abord tendance à y décrire
 techniquement plutôt que fonctionnellement la façon dont le programme devrait
 fonctionner. Leurs premiers tests fonctionnels étaient étroitement lié au
-fonctionnement de leur code, et leur maintenance est vite devenue fastidieus car
-chaque modification du code devait obligatoirement être répercutée sur les tests
-concernées. Il leur a cependant suffit de ce dire que les tests fonctionnels
-devaient continuer à passer même après une refonte complète du code pour
-résoudre ce problème. Les tests fonctionnels leur ont également permis de tester
-plusieurs interfaces utilisateur pour leur programme. En effet, un programme
-doit se comporter de la même façon indépendament de la façon dont l'utilisateur
-l'utilise : en ligne de commande, <em>via</em> une interface graphique ou encore
-un navigateur Web.</p></div>
+fonctionnement de leur code, et leur maintenance est vite devenue fastidieuse
+car chaque modification du code devait obligatoirement être répercutée sur les
+tests concernées. Il leur a cependant suffit de se dire que les tests
+fonctionnels devaient continuer à passer même après une refonte complète du code
+pour résoudre ce problème. Les tests fonctionnels leur ont également permis de
+tester plusieurs interfaces utilisateur pour leur programme. En effet, un
+programme doit se comporter de la même façon indépendamment de la façon dont
+l'utilisateur l'utilise : en ligne de commande, <em>via</em> une interface
+graphique ou encore un navigateur Web.</p></div>
 
 <h2>Conclusion</h2>
 
@@ -362,11 +704,14 @@ livrer du code fiable et répondant aux besoins de ses utilisateurs en toute
 confiance. Grâce au binômage, chacun d'eux a une vision plus globale du code et
 aucun membre de l'équipe n'est l'expert exclusif d'une partie du code.
 L'intégration continue leur permet de surveiller automatiquement que les
-modifications ou les évolutions effectués sur leur code n'a pas d'influence
+modifications ou les évolutions effectuées sur leur code n'a pas d'influence
 négative.</p>
+<figure>
+  <img src="Image/37.png" />
+</figure>
 <p>Pour cela, il leur a fallu mettre en œuvre trois types de tests différents,
-chacun d'entre eux étant dédié à un objectif clair et étant complémentaire des
-autres.</p></div>
+chacun d'entre eux étant dédié à un objectif clair et étant
+<strong>complémentaire</strong> des autres.</p></div>
 <div class="fh"><p>Notre histoire aurait pu être très différente car il n'y a
 pas qu'une seule façon de mettre en œuvre correctement des tests. Il existe
 d'autres méthodes que le TDD, tout aussi pertinente, et différentes façons de
@@ -381,29 +726,36 @@ l'esprit que même faire un unique test, à la condition qu'il soit bien écrit
 évidemment, est bien plus pertinent que de ne pas faire de test du tout. Enfin,
 en fonction du langage de programmation utilisé et des outils employés, les
 problèmes rencontrés et leur solution peuvent être très différents.</p>
-<p>Tout ce qui précède n'est donc pas une recette magique permettant d'écrire
-des tests pertinents et de bonne qualité car il faut de toute façon du temps et
-de l'expérience pour y parvenir.</p></div>
+<figure>
+  <img src="Image/41.png" />
+</figure>
+<p>Tout ce qui précède n'est donc pas une <strong>recette magique</strong>
+permettant d'écrire des tests pertinents et de bonne qualité car il faut de
+toute façon du temps et de l'expérience pour y parvenir. Écrire un test est un
+<strong>métier</strong>.</p></div>
 
 <h2><em>One more thing</em> : test automatique</h2>
 
-<div class="ie"><p>On a surtout parlé de <em>white-box</em> mais vous aurez
-deviné qu'il existe aussi le <em>black-box</em>. En réalité, c'est le test
-fonctionnel ! Quand on ne connaît pas le code ou que l'on n'y a pas accès, on
-est en boîte noire. On a évoqué un moyen de tester son programme avec des
-scripts écrits manuellement, mais il existe d'autres techniques, plus coûteuses
-cependant et qui nécessitent plus de compétences, comme le MbT pour le test
-<strong>à partir de modèle</strong>. L'idée est d'avoir un modèle formel qui
-décrit l'évolution du système à travers une vision abstraite de son
-fonctionnement. Un modèle est souvent caractérisé par une
-<strong>spécification</strong> la plus formelle possible. C'est grâce à son
-aspect abstrait que le MbT permet de générer des suites de tests automatiquement
-mais aussi d'analyser la <strong>conformance</strong> entre le modèle et le
-code, normalement réalisés <strong>dos-à-dos</strong> par des équipes
-différentes. On peut également <strong>animer</strong> un modèle pour détecter
-les erreurs de conceptions.</p>
+<div class="ie">
+<figure>
+  <img src="Image/42.png" />
+</figure>
+<p>On a surtout parlé de <em>white-box</em> mais vous aurez deviné qu'il existe
+aussi le <em>black-box</em>. En réalité, c'est le test fonctionnel ! Quand on ne
+connaît pas le code ou que l'on n'y a pas accès, on est en boîte noire. On a
+évoqué un moyen de tester son programme avec des scripts écrits manuellement,
+mais il existe d'autres techniques, plus coûteuses cependant et qui nécessitent
+plus de compétences, comme le MbT pour le test <strong>à partir de
+modèle</strong>. L'idée est d'avoir un modèle formel qui décrit l'évolution du
+système à travers une vision abstraite de son fonctionnement. Un modèle est
+souvent caractérisé par une <strong>spécification</strong> la plus formelle
+possible. C'est grâce à son aspect abstrait que le MbT permet de générer des
+suites de tests automatiquement mais aussi d'analyser la
+<strong>conformance</strong> entre le modèle et le code, normalement réalisés
+<strong>dos-à-dos</strong> par des équipes différentes. On peut également
+<strong>animer</strong> un modèle pour détecter les erreurs de conceptions.</p>
 <p>Mais comme précisé, ça coûte cher et c'est souvent dédié à des logiciels
-nécessitant une très haute sécurité et sûreté. Heureusement, il existe le le
+nécessitant une très haute sécurité et sûreté. Heureusement, il existe le
 <em>grey-box</em> qui prend le meilleur des deux mondes ! On est sûr le code au
 niveau unitaire et on l'<strong>annote</strong> avec des
 <strong>contrats</strong>. Un contrat est constitué d'une pré-condition, d'une
@@ -412,24 +764,30 @@ les contrats pour <strong>vérifier</strong> notre programme, un peu comme on le
 faisait avec du test unitaire manuel, ou alors <strong>valider</strong> notre
 programme. L'idée est alors d'utiliser la pré-condition pour générer des données
 de tests et utiliser la post-condition et les invariants comme oracle.</p>
-<p>Vous aurez compris que l'élément clé dans le test automatique est la
-spécification (donnée par l'utilisateur) la génération des données (par la
+<p>Vous aurez compris que les éléments clés dans le test automatique est la
+spécification (donnée par l'utilisateur) et la génération des données (par la
 machine) : comment générer des données réalistes ? Il faut assurer la meilleure
 couverture possible et le plus efficacement possible. Que choisir : génération
-aléatoire, statique, dynamique, <em>concolic</em>, <em>fuzzing</em> … ? Autant
-de domaines à découvrir (sans mauvais jeu de mots) !</p>
+aléatoire, statique, dynamique, <em>concolic</em>, <em>fuzzing</em>,
+<em>search-based</em> … ? Autant de domaines à découvrir (sans mauvais jeu de
+mots) !</p>
 <p>Et c'est bien beau de générer des suites de tests mais comment les
 maintenir : lesquelles conservées, lesquelles mettre à jour, lesquelles
-supprimées ?</p>
+supprimées ? Et on n'a pas non plus parlé des tests paramétrés, ni des tests à
+partir de <em>scenarii</em> etc.</p>
 <p>Heureusement que toutes ces questions ont des réponses, ou des bouts de
-réponses.  En recherche, on voit de plus en plus d'outils « intelligents » qui
+réponses. En recherche, on voit de plus en plus d'outils « intelligents » qui
 mélangent plusieurs techniques et qui sont utilisés dans l'industrie … pour de
-vrai !</p></div>
+vrai ! N'oubliez pas que le test est un <strong>métier</strong>.</p></div>
 
 <h2><em>One more thing<sup>2</sup></em> : quelques outils</h2>
 
-<div class="fh"><p>Du coup, voici quelques outils que vous pourrez utiliser.
-Pour du <em>white-box</em> manuel en PHP :</p>
+<div class="fh">
+<figure>
+  <img src="Image/43.png" />
+</figure>
+<p>Du coup, voici quelques outils que vous pourrez utiliser.  Pour du test
+structurel (<em>white-box</em>) manuel en PHP :</p>
 <ul>
   <li><a href="http://atoum.org">atoum</a> ;</li>
   <li><a href="http://phpunit.de/">PHPUnit</a> ;</li>
@@ -439,26 +797,38 @@ Pour du <em>white-box</em> manuel en PHP :</p>
 <ul>
   <li><a href="https://secure.wikimedia.org/wikipedia/fr/wiki/Praspel">Praspel</a>.</li>
 </ul>
-<p>Pour du <em>black-box</em> manuel en PHP :</p>
+<p>Pour du test fonctionnel (<em>black-box</em>) manuel en PHP :</p>
 <ul>
   <li><a href="http://behat.org/">Behat</a>.</li>
 </ul>
-<p>Pour du <em>black-box</em> manuel pour interface graphique :</p>
+<p>Pour du test fonctionnel (<em>black-box</em>) manuel pour interface
+graphique :</p>
 <ul>
   <li><a href="http://casperjs.org/">CasperJS</a> ;</li>
   <li><a href="http://sahi.co.in/">Sahi</a> ;</li>
   <li><a href="http://seleniumhq.org/">Selenium</a>.</li>
 </ul>
-<p>Intégration continue :</p>
+<p>Enfin, pour de l'intégration continue :</p>
 <ul>
   <li><a href="http://squashtest.org">Squash</a> ;</li>
   <li><a href="http://jenkins-ci.org/">Jenkins</a> ;</li>
-  <li><a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> ;</li>
-  <li><a href="http://continuum.apache.org/">Continuum</a>.</li>
+  <li><a href="http://sonarsource.org/tag/continuous-integration/">Solar</a>.</li>
 </ul>
 <p>N'oubliez pas que les outils sont souvent polyvalents !</p></div>
 
 <h2>Merci !</h2>
+
+<figure>
+  <img src="Image/38.png" />
+</figure>
+
+<figure>
+  <img src="Image/39.png" />
+</figure>
+
+<div class="pu"><p>Bla bla ?</p></div>
+<div class="ie"><p>Bli bli !</p></div>
+<div class="fh"><p>Blo blo !</p></div>
 
 </body>
 </html>
