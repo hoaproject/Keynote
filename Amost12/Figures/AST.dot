@@ -1,0 +1,23 @@
+digraph {
+    margin=0.0;
+
+
+    tag -> a;
+    tag -> tag1;
+    tag -> tag2;
+    tag -> fold;
+
+    tag1 -> b;
+    tag1 -> foo;
+
+    tag2 -> b1;
+    tag2 -> bar;
+
+    fold -> c;
+
+    tag[label="#unfold"];
+    tag1[label="#unfold"];
+    tag2[label="#unfold"];
+    b1[label="b"];
+    fold[label="#fold"];
+}

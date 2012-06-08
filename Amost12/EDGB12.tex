@@ -1,0 +1,1062 @@
+\documentclass[9pt]{beamer}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{pifont}
+\usepackage{wasysym}
+\usepackage{color}
+
+\definecolor{mygreen}{RGB}{27,156,16}
+\definecolor{myred}{RGB}{221,0,17}
+\newcommand{\lighter}[1]{{\color{gray} #1}}
+\newcommand{\green}[1]{{\color{mygreen} #1}}
+\newcommand{\red}[1]{{\color{myred} #1}}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\outline}[0]{
+  \frame{\frametitle{Outline}\tableofcontents[hideallsubsections]}
+}
+\newcommand{\outlinereminder}[0]{
+  \frame{\frametitle{Outline}
+  \tableofcontents[currentsection,subsectionstyle=show/show/hide]}
+}
+
+
+\input{styleLIFC.tex}
+
+\title{Grammar-Based Testing using \\ Realistic Domains in PHP}
+\author{
+    \textbf{Ivan~Enderlin},
+    Frédéric~Dadeau,
+    Alain~Giorgetti,
+    Fabrice~Bouquet
+}
+\date{
+    April 17th, 2012 \\
+    A-MOST, Montréal
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Context}
+
+\begin{block}{Web}
+\begin{itemize}
+\item Its data and its languages: XML, HTML, forms, database queries,
+network protocols…
+\item Strings are the most used and manipulated data
+\item They can be complex
+\end{itemize}
+\end{block}
+
+\begin{block}{PHP}
+\begin{itemize}
+\item Powers more than 75\% of the Web
+\item Had nothing for automated unit test generation
+\item Had no types
+\item Is interpreted, sources are always available
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Contract-Driven Testing}
+
+\begin{block}{Principle}
+Exploits contracts for test purposes:
+\begin{itemize}
+\item uses preconditions to generate test data
+\item uses postconditions and invariants to establish test verdict by runtime
+assertion
+checking
+\end{itemize}
+\end{block}
+
+\begin{block}{Contracts}
+\begin{itemize}
+\item Invented by B. Meyer in 1992 with Eiffel language
+\item Describe a model using annotations
+\item Express formal constraints: pre-, postconditions and invariants
+\item Can be included directly in the source code applied to:
+  \begin{itemize}
+  \item classes attributes
+  \item methods arguments
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Design-by-Contract}
+
+\begin{block}{Semantics of contracts}
+\begin{itemize}
+\item Contractual agreement:
+  \begin{itemize}
+  \item caller commits to satisfy the pre-condition
+  \item called commits to establish its post-condition
+  \end{itemize}
+\item Invariants must be satisfied before and after the execution of the methods
+\end{itemize}
+\end{block}
+
+
+\begin{block}{Issue of contracts}
+\begin{itemize}
+\item often expressed with logic formulæ
+\item hard to generate data
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Previous works}
+
+\begin{itemize}
+\item Realistic domains
+  \begin{itemize}
+  \item structures to automate the validation and the generation of test data
+  \end{itemize}
+\item Praspel, a new specification language
+  \begin{itemize}
+  \item adopts Design-by-Contract paradigm
+  \item based on realistic domains
+  \item implementation in PHP for PHP
+  \end{itemize}
+\item Automated unit test generator: Praspel tool
+  \begin{itemize}
+  \item uses Praspel to perform Contract-Driven Testing
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Motivations and contributions}
+
+\begin{block}{Representing complex textual data}
+\begin{itemize}
+\item Regular expressions are not powerful enough (regular language)
+\item We use grammar to represent these data (algebraic language)
+\end{itemize}
+\end{block}
+
+\begin{block}{Contributions}
+\begin{itemize}
+\item Introduction of grammar-based testing in the Praspel tool
+  \begin{itemize}
+  \item generate and validate complex textual data
+  \item PP, a new grammar description language
+  \end{itemize}
+\item New realistic domains: \code{grammar()} and \code{regex()}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\outline
+
+\section{Context}
+
+\outlinereminder
+
+\subsection{Realistic domains for PHP}
+
+\begin{frame}
+\frametitle{About realistic domains}
+
+\begin{block}{Definition and goal}
+\begin{itemize}
+\item Are intended to be used for test generation purposes
+\item Specify a set of relevant values that can be assigned to a data for a
+specific context in a given program
+\item Provide features for the validation and generation of data values
+\end{itemize}
+\end{block}
+
+\begin{block}{Two important features}
+\begin{itemize}
+\item \textbf{Predicability}, checks if a value belongs to the realistic domain
+\item \textbf{Samplability}, generates values that belong to the realistic
+domain
+\end{itemize}
+\end{block}
+The sampler can be of many kinds: a random generator, an iterator…
+Features are user-defined
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Realistic domains in PHP}
+
+\begin{block}{Implementation}
+Realistic domains as classes providing at least two methods:
+\begin{itemize}
+\item \code{predicate(\$q)}, takes a value \code{\$q} as input, returns a
+boolean indicating the membership of the value to the realistic domain
+\item \code{sample(\$sampler)}, generates values that belong to the realistic
+domain according to a basic numeric-sampler \code{\$sampler}
+\end{itemize}
+\end{block}
+
+\begin{block}{Hierarchical inheritance}
+PHP realistic domains can inherit from each other, thanks to the PHP object
+programming paradigm
+\begin{center}
+\includegraphics[width=6.5cm]{Figures/Realdom_univers.pdf}
+\end{center}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile,t]
+\frametitle{User-defined realistic domain}
+
+\begin{columns}[t]
+
+\begin{column}{.5\textwidth}
+\begin{block}{How to write your own realistic domain?}
+\begin{itemize}
+\item May extend an existing realistic domain
+\item Write the \code{predicate(\$q)} method to add constraint on the
+data sampled by the parent sampler
+\item Write a new \code{sample(\$sampler)} method (optional)
+\end{itemize}
+\end{block}
+\end{column}
+
+\begin{column}{.5\textwidth}
+\begin{exampleblock}{User-defined realistic domain}
+{
+\scriptsize
+\begin{verbatim}
+class Email extends String {
+
+  public function predicate ( $q ) {
+
+    $emailRegex = '...';
+    return parent::predicate$(q)
+        && 0 !== preg_match($emailRegex, $q);
+  }
+
+  public function sample ( $sampler ) {
+
+    $characters  = array(...);
+    $domains     = array(...);
+    return $data = ...;
+  }
+}
+\end{verbatim}
+}
+\code{email()} is intended to contain all email addresses
+\end{exampleblock}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameters}
+
+\begin{block}{Principle}
+Realistic domains can receive parameters of many kinds: constants or realistic
+domains themselves
+\end{block}
+
+\begin{exampleblock}{Constant arguments and realistic domains as arguments}
+\begin{itemize}
+\item \code{boundinteger(7, 42)} contains all the integers between 7 and 42
+\item \code{string(boundinteger(4, 12), 0x20, 0x7e)} is intended to contain all
+the strings of length between 4 and 12 constitued of characters from \code{0x20}
+to \code{0x7e} (Unicode code-points)
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+\subsection{Implementation in Praspel}
+
+\begin{frame}
+\frametitle{Presentation of Praspel}
+
+\begin{block}{Praspel = PHP Realistic Annotation and SPEcification Language}
+\begin{itemize}
+\item Written in the API documentation (\code{/** ... */}) of the PHP code
+\item Expresses contracts using formal constraints, called clauses, like:
+  \begin{itemize}
+  \item \code{@invariant}, class invariant on class attributes
+  \item \code{@requires}, method precondition on class attributes and method
+  arguments
+  \item \code{@ensures}, method postcondition on class attributes, and method
+  arguments and result
+  \item \code{@throwable}, list of throwable exceptions by the method
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{block}{Language properties}
+\begin{itemize}
+\item Assignment of realistic domains to a given data (\code{:})
+\item A predicate $\backslash$\code{pred(…) }(expressed in the PHP
+syntax), enriched with the $\backslash$\code{result} and
+$\backslash$\code{old($e$)} constructs
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Class with annotations}
+
+\begin{exampleblock}{Generic example}
+{
+\small
+\begin{verbatim}
+class C {
+
+    /**
+     * @invariant _foo: float();
+     */
+    protected $_foo = 0;
+
+    /**
+     * @requires  baz:     … or … and
+     *            qux:     … or … or …;
+     * @ensures   \result: …;
+     * @throwable AnException, AnotherException;
+     */
+     public function bar ( $baz, $qux ) {
+
+        return …;
+     }
+}
+\end{verbatim}
+}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Praspel clauses}
+
+\begin{exampleblock}{Example of a short Praspel contract}
+{
+\small
+\begin{verbatim}
+/**
+ * @requires needle:   integer() and
+ *           haystack: array([to integer()], boundinteger(1, 256));
+ * @ensures  \result:  boolean();
+ */
+public function exists ( $needle,  $haystack ) {
+
+    $intersect = array_intersect($haystack, array($needle));
+
+    return 0 < count($intersect);
+}
+\end{verbatim}
+}
+\end{exampleblock}
+
+\end{frame}
+
+\subsection{Automated unit test generator}
+
+\begin{frame}
+\frametitle{Unit test generator and test verdict}
+
+\begin{block}{Contract-Driven Testing}
+The testing process works with the two features provided by the realistic
+domains:
+\begin{itemize}
+\item random test data generation uses the sampler of each realistic domain
+composing the precondition in order to satisfy it ({\em samplability})
+\item test verdict is given by calling the predicate of each realistic domain
+composing the postcondition ({\em predicability})
+\end{itemize}
+\end{block}
+
+\begin{block}{Runtime Assertion Checking and test verdict}
+\begin{itemize}
+\item The RAC is performed by instrumenting the initial PHP code with additional
+code that checks the contract clauses
+\item Detected failures can be of five kinds: precondition, postcondition,
+throwable, invariant or internal precondition (propagation) failure
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%\begin{frame}[fragile]
+%\frametitle{Praspel clauses}
+%
+%\begin{exampleblock}{Example of a short Praspel contract}
+%{
+%\small
+%\begin{verbatim}
+%/**
+% * @requires needle:   integer() and
+% *           haystack: array([to integer()], boundinteger(1, 256));
+% * @ensures  \result:  boolean();
+% */
+%public function exists ( $needle,  $haystack ) {
+%
+%    $intersect = array_intersect($haystack, array($needle));
+%
+%    return 0 < count($intersect);
+%}
+%\end{verbatim}
+%}
+%\begin{overprint}
+%\onslide<1>
+%foo
+%
+%\onslide<2>
+%bar
+%\end{overprint}
+%\end{exampleblock}
+%
+%\end{frame}
+
+\begin{frame}
+\frametitle{Implementation in the Praspel tool}
+
+\begin{block}{Environment for unit testing}
+\begin{itemize}
+\item Extensible and modular framework for generating and executing online tests
+with a random data generator and runtime assertion checker
+\item Praspel and its tools are freely available in Hoa
+(\url{http://hoa-project.net}), a set of libraries for PHP
+\end{itemize}
+\end{block}
+\begin{center}
+\includegraphics[width=9cm]{Figures/Praspel_execution.png}
+\end{center}
+
+\end{frame}
+
+\section{Grammar-based Testing}
+
+\outlinereminder
+
+\subsection{A new grammar description language}
+
+\begin{frame}
+\frametitle{Features of the PP language}
+
+We propose the PP ({\em PHP Parser}) language as a new grammar description
+language because none exists before in PHP
+
+\begin{block}{Token}
+\begin{itemize}
+\item Lexical unit
+\item Represented by the PCRE ({\em Perl Compatible Regular Expression})
+\item Namespaces (operator \code{->} to change namespace)
+\end{itemize}
+\end{block}
+
+\begin{block}{Rule}
+\begin{itemize}
+\item Identified by a name
+\item Sequence of tokens is based on the following operators:
+  \begin{itemize}
+  \item repetition: $e$\code{\{}$x$\code{,}$y$\code{\}}, $e$\code{?},
+  $e$\code{+}, $e$\code{*}
+  \item concatenation: $e_1 \dots e_i \dots e_n$
+  \item disjunction and grouping: $e_1$ \code{$\vert$} $\dots$ \code{$\vert$}
+  $e_i$ \code{$\vert$} $\dots$ \code{$\vert$} $e_n$ and \code{(}$e$\code{)}
+  \item token: \code{<}$t$\code{>} or \code{::}$t$\code{::}
+  \item call a rule: $r$\code{()}
+  \item add a marker: \code{\#}$n$
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Syntax}
+
+\begin{exampleblock}{Simplified XML grammar expressed with PP}
+{
+\footnotesize
+\begin{verbatim}
+%skip   s          \s
+%token  lt         <      -> tag
+%token  tag:skip   \s
+%token  tag:name   \w+
+%token  tag:slash  /
+%token  tag:gt     >      -> default
+%token  content    [^<]+
+
+xml:
+    ::lt:: <name>
+  ( ::slash:: ::gt:: #fold
+  | ::gt:: ( <content> | xml()+ )? ::lt:: ::slash:: ::name:: ::gt:: #unfold )
+\end{verbatim}
+}
+Valid: \code{<a> <b>foo</b> <b>bar</b> <c /> </a>}, \\
+but also: \code{<a>foo</z>}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unification}
+
+\begin{block}{Principle}
+Unification expresses another constraint in grammar. \\
+All tokens $t$\code{[}$i$\code{]} with the same $i$ have the same value locally
+to a rule instance
+\end{block}
+
+\begin{exampleblock}{Unified XML tag names}
+{
+\footnotesize
+\code{xml:} \\
+\code{\quad\quad::lt:: <name\red{[0]}>} \\
+\code{\quad( ::slash:: ::gt:: \#fold} \\
+\code{\quad| ::gt:: ( <content> | xml()+ )? ::lt:: ::slash:: ::name\red{[0]}:: ::gt:: \#unfold )} \\
+}
+Invalid: \code{<a>foo</z>}
+\end{exampleblock}
+
+\end{frame}
+
+\subsection{Grammar-based realistic domain}
+
+\begin{frame}
+\frametitle{Grammar-based realistic domain}
+
+Such a realistic domain has also two features:
+\begin{itemize}
+\item[\Square] \textbf{Predicability}, checks the conformance between the
+data and the grammar
+\item[\Square] \textbf{Samplability}, will generate a data matching the grammar
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Predicability process}
+
+\begin{center}
+\includegraphics[width=8cm]{Figures/Compiling_process.pdf}
+\end{center}
+\begin{itemize}
+\item Lexing: transform a given data into a sequence of tokens
+\item Parsing: analyze this sequence according to the rules
+  \begin{itemize}
+  \item derive from left to right and top to bottom
+  \item grammar is ambiguous: $LL(*)$, implies backtracks
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Abstract Syntax Tree}
+
+Classic compilation process ends by building an AST, which accepts visitors
+(design-pattern) \\
+\begin{exampleblock}{\code{<a> <b>foo</b> <b>bar</b> <c /> </a>} associated AST}
+\begin{center}
+\includegraphics[width=6cm]{Figures/AST.pdf}
+\end{center}
+\end{exampleblock}
+Useful for additional verifications that can not be expressed in the grammar
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Grammar-based realistic domain}
+
+Such a realistic domain has also two features:
+\begin{itemize}
+\item[\checked] \textbf{Predicability}, checks the conformance between the
+data and the grammar
+  \begin{itemize}
+  \item ensured by the parsing process
+  \end{itemize}
+\item[\Square] \textbf{Samplability}, will generate a data matching the grammar
+  \begin{enumerate}
+  \item generate tokens
+  \item generate sequences of tokens
+  \end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Generate tokens}
+
+\begin{columns}[t]
+
+\begin{column}{.55\textwidth}
+\begin{exampleblock}{Example}
+\onslide<+->
+\code{\lighter{([ae]+|[x-z]!)}\{1,3\}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{([ae]+|[x-z]!)\lighter{([ae]+|[x-z]!)}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{([ae]+)\lighter{([ae]+|[x-z]!)}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{[ae][ae]\lighter{([ae]+|[x-z]!)}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{e[ae]\lighter{([ae]+|[x-z]!)}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{ea\lighter{([ae]+|[x-z]!)}} \\
+\onslide<+->
+\quad $\rightarrow$ \code{\lighter{ea}([x-z]!)} \\
+\onslide<+>
+\quad $\rightarrow$ \code{eay!} \\
+\end{exampleblock}
+\end{column}
+
+\begin{column}{.45\textwidth}
+\onslide<1->
+\begin{block}{Approach}
+\begin{itemize}
+\item Random and uniform choices
+\item Isotropic exploration
+\item Naive but tokens are not important here, sequences of tokens are important
+\end{itemize}
+\end{block}
+
+\begin{block}{Repetition unfolding}
+Upper bound of \code{+} and \code{*} is set to a predefined integer
+\end{block}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Rules to generate sequences of tokens}
+
+We propose 3 differents algorithms
+
+\begin{block}{Why?}
+\begin{itemize}
+\item because we can (thanks to Praspel)
+\item because an algorithm to rule them all does not exist
+  \begin{itemize}
+  \item to each context of use is associated an algorithm
+  \item we retain 3 algorithms from the literature
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{block}{Algorithms}
+\begin{itemize}
+\item Random and uniform generation
+\item Bounded exhaustive generation
+\item Coverage-based generation
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Random and uniform generation}
+
+\vspace*{-.7cm}
+
+\begin{columns}[t]
+
+\begin{column}{.6\textwidth}
+\begin{exampleblock}{Example: \code{f()}, \code{g()} and $n = 5$}
+\code{f: <a> g()} \\
+\code{g: ( <b> <c> | <d> | f() )\{1,3\}} \\
+\vspace{2em}
+
+\begin{overprint}
+
+\onslide<1>
+\scriptsize
+\begin{tabular}{rcl}
+$f(5)$ & = & $1 . g(4)$ \\
+$g(4)$ & = & $(0 + 0 + f(4)$ \\
+& & $+ ( 0 + 0 + f(3) ) . ( 0 + 1 + f(1) )$ \\
+& & $+ ( 1 + 0 + f(2) ) . ( 1 + 0 + f(2) )$ \\
+& & $+ ( 0 + 1 + f(1) ) . ( 0 + 0 + f(3) )$ \\
+& & $+ ( 1 + 0 + f(2) ) . ( 0 + 1 + f(1) ) . ( 0 + 1 + f(1) )$ \\
+& & $+ ( 0 + 1 + f(1) ) . ( 1 + 0 + f(2) ) . ( 0 + 1 + f(1) )$ \\
+& & $+ ( 0 + 1 + f(1) ) . ( 0 + 1 + f(1) ) . ( 1 + 0 + f(2) )$ \\
+$f(4)$ & = & $1 . g(3)$ \\
+$g(3)$ & = & $…$
+\end{tabular}
+%p(5, f) = 1 . g(4) \\
+%        = 20
+%p(4, g) =   ( 0 + 0 + p(4, f) ) \\
+%    3     + ( 0 + 0 + p(3, f) ) . ( 0 + 1 + p(1, f) ) \\
+%    4     + ( 1 + 0 + p(2, f) ) . ( 1 + 0 + p(2, f) ) \\
+%    3     + ( 0 + 1 + p(1, f) ) . ( 0 + 0 + p(3, f) ) \\
+%    2     + ( 1 + 0 + p(2, f) ) . ( 0 + 1 + p(1, f) ) . ( 0 + 1 + p(1, f) ) \\
+%    4     + ( 0 + 1 + p(1, f) ) . ( 1 + 0 + p(2, f) ) . ( 0 + 1 + p(1, f) ) \\
+%    1     + ( 0 + 1 + p(1, f) ) . ( 0 + 1 + p(1, f) ) . ( 1 + 0 + p(2, f) ) \\
+%        = 3 + 3 + 4 + 3 + 2 + 4 + 1 \\
+%        = 20 \\
+%
+%p(4, f ) = 1 . g(3) \\
+%         = 3 \\
+%
+%p(3, g) =   ( 0 + 0 + p(3, f) ) \\
+%    0     + ( 0 + 0 + p(2, f) ) . ( 0 + 0 + p(1, f) ) \\
+%    0     + ( 0 + 0 + p(1, f) ) . ( 0 + 0 + p(2, f) ) \\
+%        = 3 \\
+%
+%p(3, f) = 1 . g(2) \\
+%        = 3 \\
+%
+%p(2, g) =     1 + 0 + p(2, f) \\
+%          + ( 0 + 1 + p(1, f) ) . ( 0 + 1 + p(1, f) ) \\
+%        = 3 \\
+%
+%p(2, f) = 1 . g(1) \\
+%        = 1 \\
+%p(1, g) = 1 \\
+%p(1, f) = 0
+
+\onslide<2->
+\footnotesize
+example:
+\begin{center}
+\begin{tabular}{r|c|c|c|c|c|}
+         &  5 &  4 & 3 & 2 & 1 \\
+\hline
+\code{f} & 24 &  3 & 3 & 1 & 0 \\
+\hline
+\code{g} &  - & 24 & 3 & 3 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+choice-point and probability: \\
+\code{h(3) = 20} \\
+\code{i(2) = 6} \\
+\code{j(2) = 14} \\
+\begin{center}
+\code{h: <x> ( }
+$\underbrace{\code{i()}}_{\dfrac{6}{20}}$\code{ | }
+$\underbrace{\code{j()}}_{\dfrac{14}{20}}$\code{ )}
+\end{center}
+\end{overprint}
+
+\end{exampleblock}
+\end{column}
+
+\begin{column}{.4\textwidth}
+\begin{block}{Approach}
+\begin{itemize}
+\item An expected sequence size $n$ and uniform probability distribution among
+all the possible sequences
+\item Recursive method to count all possible sub-structures of size $n$
+\item Counting helps to compute cumulative distribution functions, which
+guide exploration
+\end{itemize}
+\end{block}
+
+\begin{block}{Repetition unfolding}
+Upper bound of \code{+} and \code{*} is set to $n$
+\end{block}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Random and uniform generation}
+
+\begin{block}{Counting function $\psi$}
+\begin{eqnarray*}
+\psi(n, e) & = & \delta_n^1 \text{ \ \ if $e$ is a token} \\
+\psi(n, e_1 \;\cdot\; \dots \;\cdot\; e_k) & = & \sum_{\gamma \,\in\, \Gamma_k^n}\;\;
+                                                 \prod_{\alpha = 1}^k\;\;
+                                                 \psi(\gamma_\alpha, e_\alpha) \\
+\psi(n, e_1 \;\vert\; \dots \;\vert\; e_k) & = & \sum_{\alpha\,=\,1}^k
+                                                 \psi(n, e_\alpha) \\
+\psi(n, e^{\{x,y\}}) & = & \sum_{\alpha\,=\,x}^y\;\;
+                           \sum_{\gamma \,\in\, \Gamma_\alpha^n}\;\;
+                           \prod_{\beta\,=\,1}^\alpha \psi(\gamma_\beta, e) \\
+                     &   & \text{with $0 \le x \le y$}
+\end{eqnarray*}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Bounded exhaustive generation}
+
+\begin{columns}[t]
+
+\begin{column}{.55\textwidth}
+\begin{exampleblock}{Example: \code{f()}, \code{g()} and $n = 10$}
+\code{f: <a> g()} \\
+\code{g: ( <b> <c> | <d> | f() )\{1,3\}} \\
+
+\begin{enumerate}
+\onslide<+->
+\item \code{<a> <b> <c>}
+\onslide<+->
+\item \code{<a> <d>}
+\onslide<+->
+\item \code{<a> <a> <b> <c>}
+\onslide<+->
+\item \code{<a> <a> <d>}
+\onslide<+->
+\item \code{<a> <a> <a> <b> <c>}
+\onslide<+->
+\item \code{<a> <a> <a> <d>}
+\onslide<+->
+\item \code{<a> <a> <a> <a> <a> <b> <c>}
+\item …
+\end{enumerate}
+\onslide<+->
+more than 10000 solutions
+\end{exampleblock}
+\end{column}
+
+\onslide<1->
+\begin{column}{.45\textwidth}
+\begin{block}{Approach}
+\begin{itemize}
+\item Generate all possible sequences (exhaustive) up to a given size $n$
+(bounded)
+\item The algorithm behaves like an iterator
+\item Based on multiset (set with repetition)
+\end{itemize}
+\end{block}
+
+\begin{block}{Repetition unfolding}
+Upper bound of \code{+} and \code{*} is set to $n$
+\end{block}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Bounded exhaustive generation}
+
+\begin{block}{Function $\beta$ for bounded exaustive generation}
+\footnotesize
+\begin{eqnarray}
+\beta(1, e) & = & \{\code{sample}(e)\} \text{ \ \ if $e$ is a token} \nonumber \\ 
+\beta(n, e) & = & \{\} \text{ \ \ if } n \neq 1 \nonumber \\
+\beta(n, e_1 \;\vert\; e_2) & = & \beta(n,e_1) \cup \beta(n,e_2) \nonumber \\
+\beta(n, e_1 \;\cdot\; e_2) & = & \bigcup_{p\,=\,1}^{n-1}
+                                  \beta(p,e_1) \cdot \beta(n - p,e_2) \nonumber \\
+\beta(n, e^{\{x,y\}}) & = & \bigcup_{p\,=\,x}^{y} \beta(n,e^{p}) \nonumber \\
+\beta(n, e^{\star}) & = & \bigcup_{p\,=\,0}^{n} \beta(n,e^{p}) \nonumber \\
+\beta(n,e^{+}) & = & \beta(n, e \;\cdot\; e^{\star}) \nonumber \\
+\beta(n,e^{0}) & = & \{\} \nonumber \\
+\beta(n,e^{1}) & = & \beta(n,e) \nonumber \\
+\beta(n,e^{p}) & = & \beta(n, e \;\cdot\; e^{p-1})\text{ \ \ if } p \ge 2
+\nonumber
+\end{eqnarray}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Coverage-based generation}
+
+\begin{columns}[t]
+
+\begin{column}{.4\textwidth}
+\begin{exampleblock}{Example: \code{f()}, \code{g()}}
+\small
+\code{f: <a> g()} \\
+\code{g: ( <b> <c> | <d> | f() )\{1,3\}} \\
+
+\begin{enumerate}
+\onslide<+->
+\item \code{<a> <d> <b> <c> <a> <d>}
+\end{enumerate}
+1 solution
+\end{exampleblock}
+
+\onslide<1->
+\begin{block}{Repetition unfolding}
+\begin{itemize}
+\item \code{*} is bounded to 0, 1 or 2
+\item \code{+} is unfolded 1 or 2 times
+\item \code{\{x,y\}} is unfolded $x$, $x + 1$, $y - 1$ and $y$ times
+\end{itemize}
+\end{block}
+\end{column}
+
+\onslide<1->
+\begin{column}{.6\textwidth}
+\begin{block}{Approach}
+\begin{itemize}
+\item Reduce the combinatorial explosion
+\item Aims at producing data that activate all the branches of the grammar rules
+\item A rule is said to be covered if and only if its sub-rules have all been
+covered
+\item A token is said to be covered if it has been successfully used in a data
+generation
+\item To ensure diversity, a random choice is made amongst the remaining
+sub-rules of a choice-point to cover
+\item Boundary test generation heuristics to avoid combinatorial explosion and
+guarantee the termination
+\end{itemize}
+\end{block}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Coverage-based generation}
+
+\begin{block}{Coverage-based function $\phi$}
+\begin{eqnarray*}
+\phi(p, e) & = & [\,\code{sample}(e)\,] \text{ \ \ when $e$ is a token} \\
+\phi(p, e_1 \;\cdot\; e_2) & = & \phi(\phi(p, e_1),e_2) \\
+\phi(p, e_1 \;\vert\; \ldots \;\vert\; e_k) & = & \phi(p,e_1) \;\oplus\; \ldots \;\oplus\; \phi(p,e_k) \\
+\phi(p, e^?) & = & [\,] \;\oplus\; \phi(p,e) \\
+\phi(p, e^\star) & = & [\,] \;\oplus\; \bigoplus_{i\,=\,1}^{\infty} \phi(p, \underbrace{e \;\cdot\; \dots \;\cdot\; e}_i)  \\
+\phi(p, e^+) & = & \bigoplus_{i\,=\,1}^{\infty} \phi(p, \underbrace{e \;\cdot\; \dots \;\cdot\; e}_i)  \\
+\phi(p, e^{\{x,y\}}) & = & \bigoplus_{i\,=\,x}^y \phi(p, \underbrace{e \;\cdot\; \dots \;\cdot\; e}_i)
+\end{eqnarray*}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Pros and cons}
+
+\begin{block}{Complex textual data generation}
+\begin{itemize}
+\item Random and uniform generation:
+  \begin{itemize}
+  \item[\green \smiley] fast for small data, diversity of data and fixed size
+  \item[\frownie] counting phase is exponential ($n > 10$ needs at least 2 hours),
+  despite that generation is fast
+  \end{itemize}
+\item Bounded exhaustive generation:
+  \begin{itemize}
+  \item[\green \smiley] fast for small data and exhaustiveness is efficient
+  \item[\frownie] exponential number of data
+  \end{itemize}
+\item Coverage-based generation:
+  \begin{itemize}
+  \item[\green \smiley] fast for medium and big data and diversity of data
+  \item[\frownie] do not consider size of data
+  \end{itemize}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Grammar as a realistic domain}
+
+Such a realistic domain has also two features:
+\begin{itemize}
+\item[\checked] \textbf{Predicability}, checks the conformance between the
+data and the grammar
+  \begin{itemize}
+  \item ensured by the parsing process
+  \end{itemize}
+\item[\checked] \textbf{Samplability}, will generate a data matching the grammar
+  \begin{itemize}
+  \item ensured by one of the three algorithms
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\subsection{Experimentation}
+
+\begin{frame}
+\frametitle{Experimentation}
+
+\begin{block}{Self-validation}
+\begin{itemize}
+\item Generate and validate data with PP and other parsers
+\item Considered grammars: JSON and PCRE, with other parsers from Mozilla Gecko
+and PHP
+\item All produced data were parsed correctly
+\end{itemize}
+\end{block}
+
+\begin{block}{Mutation}
+\begin{itemize}
+\item Then, we consider simple grammar mutation operators
+\item Some generated data were parsed correctly by PP but not by
+other parsers (due to the backtracking)
+\item After fixing the bug, we performed the same kinds of experiments with PP
+and other parsers
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\section{Conclusion}
+
+\outlinereminder
+
+\begin{frame}
+\frametitle{Conclusion}
+
+\begin{block}{What have we seen?}
+\begin{itemize}
+\item Realistic domains specifying data and providing two useful features for
+automated test generation: predicability and samplability
+\item Praspel, a new Design-by-Contract language implementing realistic domains
+\item Praspel tool: a test generation and execution framework to automate unit
+testing in PHP
+\item Grammar-based Testing is introduced in Praspel
+\item PP, a new grammar description language
+\item Two new realistic domains join the standard library
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusion}
+
+\begin{block}{Future works}
+\begin{itemize}
+\item Extend case studies in order to evaluate the relevance of the
+coverage-based test generation, in terms of fault detection and code coverage of
+the system under test
+\item Improve the generation algorithms so as to avoid rejection as much as
+possible (look at UDITA)
+\item Implement Praspel into other languages (e.g. Java, C, Javascript)
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Thanks!}
+
+\begin{center}
+Thank you for your attention! Any questions?
+\end{center}
+
+\end{frame}
+
+\end{document}

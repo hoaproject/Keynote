@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="yes"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C/DTD SVG 1.1//EN"
+                     "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 400 130" class="debug-on">
+
+  <style>
+    rect, path, circle {
+      fill: none;
+      stroke: #000;
+      stroke-width: .5;
+      stroke-linejoin: round;
+    }
+
+    rect {
+      stroke-linecap: round;
+    }
+
+    circle {
+      fill: #fff;
+    }
+
+    text {
+      font-family: "Andale Mono";
+      font-size: 10pt;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .em {
+      font-style: italic;
+    }
+
+    .small {
+      font-size: 7pt;
+    }
+
+    .start {
+      text-anchor: start;
+    }
+
+    .end {
+      text-anchor: end;
+    }
+
+    .fill {
+      fill: #000;
+    }
+
+    rect.viewport {
+      stroke-width: 0;
+    }
+
+    .debug-on rect.viewport {
+      stroke-width: 1;
+    }
+  </style>
+
+  <rect x="0" y="0" width="100%" height="100%" class="viewport" />
+
+  <defs>
+    <path id="rarrow" class="fill" transform="translate(0 -3)" d="
+      M  0, 0
+      l  5, 3
+      l -5, 3
+      z
+      " />
+    <use id="tarrow" xlink:href="#rarrow" transform="rotate(-90)" />
+    <use id="larrow" xlink:href="#rarrow" transform="rotate(180)" />
+    <use id="barrow" xlink:href="#rarrow" transform="rotate( 90)" />
+  </defs>
+
+  <g>
+    <rect x="10" y="10" width="100" height="80" />
+    <text x="60" y="22" class="em">text</text>
+    <text x="60" y="47">abcdefghi…</text>
+
+    <rect x="150" y="10" width="100" height="80" />
+    <text x="200" y="22" class="em">sequence</text>
+
+    <rect x="160" y="40" width="80"  height="15" />
+    <text x="165" y="47" class="start">ab</text>
+    <text x="235" y="47" class="end em small">[data]</text>
+
+    <rect x="160" y="60" width="80"  height="15" />
+    <text x="165" y="67" class="start">cde</text>
+    <text x="235" y="67" class="end em small">[data]</text>
+
+    <text x="165" y="80" class="start">…</text>
+
+    <path d="M 160, 47 c -10, 0 -10, 17 0, 17" />
+    <path d="M 160, 67 c -10, 0 -10, 17 0, 17" />
+
+    <rect x="290" y="10" width="100" height="80" />
+    <text x="340" y="22" class="em">trace/AST</text>
+    <path d="M 315, 55 L 335, 45" />
+    <path d="M 315, 55 L 335, 65" />
+    <path d="M 335, 65 L 355, 55" />
+    <path d="M 335, 65 L 355, 75" />
+    <circle cx="315" cy="55" r="6" />
+    <circle cx="335" cy="45" r="6" />
+    <circle cx="335" cy="65" r="6" />
+    <circle cx="355" cy="55" r="6" />
+    <circle cx="355" cy="75" r="6" />
+
+    <path d="M  80, 90 c 0, 20 100, 20  100, 5" />
+    <path d="M 220, 90 c 0, 20 100, 20  100, 5" />
+    <text x="130" y="115" class="em">lexing</text>
+    <text x="270" y="115" class="em">parsing</text>
+    <use xlink:href="#tarrow " x="180" y="95" />
+    <use xlink:href="#tarrow " x="320" y="95" />
+  </g>
+</svg>
