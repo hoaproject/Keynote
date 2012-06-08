@@ -1,0 +1,78 @@
+
+%      _         _             _                     _                     
+%  ___| |_ _   _| | ___    ___| |_    ___ ___  _   _| | ___ _   _ _ __ ___ 
+% / __| __| | | | |/ _ \  / _ \ __|  / __/ _ \| | | | |/ _ \ | | | '__/ __|
+% \__ \ |_| |_| | |  __/ |  __/ |_  | (_| (_) | |_| | |  __/ |_| | |  \__ \
+% |___/\__|\__, |_|\___|  \___|\__|  \___\___/ \__,_|_|\___|\__,_|_|  |___/
+%          |___/                                                           
+%
+
+\setbeamercovered{transparent}
+\usetheme{Warsaw}
+% enlever [red] dans le \documentclass si utilisation de la suite :
+\usecolortheme[RGB={202,31,39}]{structure} % rouge
+
+%\setbeamertemplate{background}{\includegraphics[height=96mm,width=128mm]{fond.png}}
+
+% definition de la couleur du fond des blocks
+\definecolor{ArrierePlanBodyW}{rgb}{0.5,0.5,0.5} % si ecriture blanche
+\definecolor{ArrierePlanBodyB}{rgb}{0.9,0.9,0.9} % si ecriture noire
+% definition de la couleur des slides
+\definecolor{ArrierePlan}{rgb}{1,1,1}
+
+\definecolor{darkred}{rgb}{0.6,0,0}
+
+\definecolor{toutnoir}{rgb}{0,0,0}
+
+% selection de la couleur du fond des slides
+\setbeamercolor{background canvas}{bg=ArrierePlan} 
+% selection de la couleur du fond des block avec ecriture noire
+\setbeamercolor{block body}{use=structure,fg=black,bg=ArrierePlanBodyB}
+% selection de la couleur du fond des block avec ecriture blanche
+%\setbeamercolor{block body}{use=structure,fg=white,bg=ArrierePlanBodyW}
+
+%\setbeamercolor{section in head/foot}{toutnoir}
+
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle \hfill \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+\setbeamercovered{dynamic}
+%\logo{\includegraphics[height=1cm]{./img/logo_petit-tr.png}}
+% \defbeamertemplate*{headline}{split theme}
+% {%
+%   \begin{beamercolorbox}{section in head/foot}
+%     \insertsectionnavigationhorizontal{2cm}{\includegraphics[height=2cm]{./img/logo_petit-tr.png}}{}
+%   \end{beamercolorbox}%
+%  }
+
+\defbeamertemplate*{headline}{}
+{%
+%   \begin{beamercolorbox}[wd=.1\paperwidth,ht=\tempdimb]{section in head/foot}
+%      \vbox to 1cm{\vfil\includegraphics[.1\paperwidth]{./img/logo_petit-tr.png}\vfil}%
+%   \end{beamercolorbox}
+  \leavevmode%
+  \begin{beamercolorbox}[wd=.095\paperwidth,ht=1.45cm]{section in head/foot}%
+    \vbox to 1.45cm{\vfill\hspace*{1mm}\includegraphics[height=1.25cm]{lifc.png}\vfill}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.405\paperwidth,ht=1.45cm]{section in head/foot}%
+    \vbox to 1.45cm{\vfil\insertsectionnavigation{.4\paperwidth}\vfil}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=1.45cm]{subsection in head/foot}%
+    \vbox to 1.45cm{\vfil\insertsubsectionnavigation{.4\paperwidth}\vfil}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.17\paperwidth,ht=1.45cm]{section in head/foot}%
+%     \vbox to 1.5cm{\vfil\includegraphics[width=.145\paperwidth]{./img/ufc2.pdf}\vfill}%
+%      \vbox to 1.5cm{\vfill\includegraphics[width=.185\paperwidth]{./img/ufc2.pdf}\vfill}%
+      \vbox to 1.45cm{\vfill\hspace*{-0.1mm}\includegraphics[height=1.45cm]{ufc2.pdf}\vfill}%
+  \end{beamercolorbox}%
+}
+
