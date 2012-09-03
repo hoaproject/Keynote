@@ -9,7 +9,8 @@ This article presentation has been presented in April 17th, 2012, at Montréal
 (Quebec, Canada), for [The 8th Workshop on Advances in Model Based
 Testing](https://sites.google.com/site/amost2012/) (A-MOST'12), co-located with
 [The Fifth IEEE International Conference on Software Testing, Verification and
-Validation](icst2012.soccerlab.polymtl.ca/Content/home/index.php) (ICST'12).
+Validation](http://icst2012.soccerlab.polymtl.ca/Content/home/index.php)
+(ICST'12).
 
 ## Paper abstract
 
