@@ -5,11 +5,25 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
 # Grammar-based Testing using Realistic Domains in PHP
 
-This article presentation has been presented in April 17, 2012, at Montréal
+This article presentation has been presented in April 17th, 2012, at Montréal
 (Quebec, Canada), for [The 8th Workshop on Advances in Model Based
 Testing](https://sites.google.com/site/amost2012/) (A-MOST'12), co-located with
 [The Fifth IEEE International Conference on Software Testing, Verification and
 Validation](icst2012.soccerlab.polymtl.ca/Content/home/index.php) (ICST'12).
+
+## Paper abstract
+
+This paper presents an integration of grammar-based testing in a framework for
+contract-based testing in PHP. It relies on the notion of realistic domains,
+that make it possible to assign domains to data, by means of contract assertions
+written inside the source code of a PHP application. Then a test generation tool
+uses the contracts to generate relevant test data for unit testing. Finally a
+runtime assertion checker validates the assertions inside the contracts (among
+others membership of data to realistic domains) to establish the conformance
+verdict. We introduce here the possibility to generate and validate complex
+textual data specified by a grammar written in a dedicated grammar description
+language. This approach is tool-supported and experimented on the validation of
+web applications.
 
 ## Quick usage
 
