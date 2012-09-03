@@ -8,6 +8,21 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 This article presentation has been presented in November 9, 2012, at Paris
 (France), for [The 23rd IFIP International Conference on Testing Software and Systems](http://ictss2011.lri.fr/) (ICTSS'12).
 
+## Paper abstrcat
+
+We introduce in this paper a new specification language named Praspel, for PHP
+Realistic Annotation and SPEcification Language. This language is based on the
+Design-by-Contract paradigm. Praspel clauses annotate methods of a PHP class in
+order to both specify their contracts, using pre- and postconditions, and assign
+realistic domains to the method parameters. A realistic domain describes a set
+of concrete, and hopefully relevant, values that can be assigned to the data of
+a program (class attributes and method parameters).
+
+Praspel is implemented into a unit test generator for PHP that offers a random
+test data generator, which computes test data, coupled with a runtime assertion
+checker, which decides whether a test passes or fails by checking the
+satisfaction of the contracts at run-time.
+
 ## Quick usage
 
 This presentation is written in Latex. A PDF is already available in
