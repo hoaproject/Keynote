@@ -6,7 +6,8 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 # Anatomie du test
 
 This presentation has been presented in June 5, 2012, at Paris (France), for the
-[ForumPHP'12](http://afup.org/pages/forumphp2012/).
+[ForumPHP'12](http://afup.org/pages/forumphp2012/), with [Frédéric
+Hardy](https://twitter.com/mageekguy).
 
 ## Abstract (in french)
 
@@ -40,5 +41,4 @@ efficace et produire ainsi un logiciel de la qualité que vous désirez.
 ## Quick usage
 
 The slides were very light, so the file `index.html` only contains slides images
-and notes. The conference has been presented in duo with [Frédéric
-Hardy](https://twitter.com/mageekguy) and in french.
+and notes.
