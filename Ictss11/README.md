@@ -5,10 +5,11 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
 # Praspel: A Specification Language for Contract-Driven Testing in PHP
 
-This article presentation has been presented in November 9, 2012, at Paris
-(France), for [The 23rd IFIP International Conference on Testing Software and Systems](http://ictss2011.lri.fr/) (ICTSS'12).
+This article presentation has been presented in November 9th, 2012, at Paris
+(France), for [The 23rd IFIP International Conference on Testing Software and
+Systems](http://ictss2011.lri.fr/) (ICTSS'12).
 
-## Paper abstrcat
+## Paper abstract
 
 We introduce in this paper a new specification language named Praspel, for PHP
 Realistic Annotation and SPEcification Language. This language is based on the
