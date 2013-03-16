@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hoa Apex'13, ouverture</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="../Template/Css/DZSlides.css" rel="stylesheet" />
+  <link type="text/css" href="../Template/Css/Theme.css"    rel="stylesheet" />
+</head>
+<body>
+
+<section class="front">
+  <h1>Hoa Apex'13, ouverture</h1>
+
+  <p class="center"><img src="../Template/Media/Image/Hoa.png" alt="Logo de Hoa" /></p>
+  <footer>23-24 mars, Hoa Apex'13, Le Locle</footer>
+</section>
+
+<section>
+  <h1>Qui suis-je ?</h1>
+
+  <p><ul>
+    <li>Ivan <span class="lastname">Enderlin</span></li>
+    <li>doctorant en Informatique
+    (<a href="http://www.femto-st.fr/fr/Departements-de-recherche/DISC/Presentation/">DISC</a>/<a href="http://www.inria.fr/">INRIA</a>)</li>
+    <li><em lang="en">leader</em> et développeur de Hoa</li>
+    <li>contributeur <a href="http://php.net/">PHP</a>,
+    <a href="https://mozilla.org/">Mozilla</a>,
+    <a href="http://debian.org/">Debian</a> … open-source</li>
+    <li>expert invité au <a href="http://w3.org/">W3C</a> (HTML, CSS et
+    WebApp)</li>
+    <li><a href="https://twitter.com/#!/hoaproject">@hoaproject</a>,
+    #hoaproject</li>
+  </ul></p>
+
+  <p class="thus">
+  <math>
+    <mrow>
+      <mtext>ivan.enderlin@</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>hoa-project.net</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>femto-st.fr</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>inria.fr</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+  </p>
+</section>
+
+<section>
+  <h1>Qui êtes-vous ?</h1>
+
+  <ul>
+    <li data-item="">utilisateurs</li>
+    <li data-item="+">contributeurs</li>
+    <li data-item="+">entreprises</li>
+    <li data-item="+"><em lang="en">geeks</em>/<em lang="en">nerds</em></li>
+    <li data-item="+">…</li>
+    <li data-item="=">la communauté de Hoa !</li>
+  </ul>
+  <p class="center">Bienvenu :-)</p>
+</section>
+
+<section>
+  <h1>Où sommes-nous ?</h1>
+
+  <div id="map" style="width: 400px; height: 300px"></div>
+  <script src="http://static.hoa-project.net/Javascript/Leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([47.054789, 6.742918], 13);
+
+    L.tileLayer('http://static.hoa-project.net/Map/Tiles/{z}/{x}/{y}.png', {
+      minZoom: 1,
+      maxZoom: 7
+    }).addTo(map);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '© &lt;a href="http://osm.org/copyright">OpenStreetMap&lt;/a> contributors',
+      minZoom: 7
+    }).addTo(map);
+
+    var icon = L.icon({
+        iconUrl: 'http://static.hoa-project.net/Map/Marker.svg',
+        iconSize: [28, 45],
+        iconAnchor: [14, 44],
+        popupAnchor: [2, -45]
+    });
+
+    L.marker([47.054789, 6.742918], {icon: icon})
+     .bindPopup('&lt;p class="tcenter">ici&lt;/p>')
+     .addTo(map);
+  </script>
+</section>
+
+<section>
+  <h1>Plan</h1>
+
+  <p>Historique 2012, les points principaux :</p>
+  <ul>
+    <li>sources</li>
+    <li>documentations</li>
+    <li>diffusions</li>
+    <li>communauté</li>
+    <li>projets</li>
+    <li>en avant pour 2013</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Sources</h1>
+
+  <p>Mercurial → Git</p>
+  <ul>
+    <li><a href="http://git.hoa-project.net/">git.hoa-project.net</a></li>
+    <li>un dépôt par bibliothèques (e.g. <code>Library/Stream.git</code>)</li>
+    <li>un dépôt principal en lecture-seule : <code>Central.git</code></li>
+    <li>tous les autres dépôts ont été migrés également (<code>W3.git</code>,
+    <code>Keynote.git</code>, <code>Embryo.git</code>,
+    <code>Static.git</code> …)</li>
+    <li>deux <em lang="en">commiters</em> pour l'instant : hywan et
+    iraphael</li>
+  </ul>
+  <p>Bhoat : notre petit robot qui maintient les sources (synchronisation,
+  <em lang="en">automatic-merge</em>, distribution …)</p>
+</section>
+
+<section>
+  <h1>Distribution des sources</h1>
+
+  <p>Github :</p>
+  <ul>
+    <li>miroir principal :
+    <a href="https://github.com/hoaproject">github.com/hoaproject</a></li>
+    <li><em lang="en">issues</em> et <em lang="en">Pull-Requests</em></li>
+  </ul>
+  <p>Composer et Packagist :</p>
+  <ul>
+    <li>gestionnaire de dépendances</li>
+    <li>basé sur Github</li>
+  </ul>
+  <p>Archives :</p>
+  <ul>
+    <li><a href="http://download.hoa-project.net/">download.hoa-project.net</a></li>
+    <li><code>Central.git</code>, <code>Library/<em>*</em>.git</code> et
+    <code>Embryo.git</code></li>
+    <li><code>.zip</code>, <code>.tar.gz</code>, <del><code>.phar</code></del>
+    (bientôt restauré)</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Bibliothèques</h1>
+
+  <p>Structure enrichie :</p>
+  <ul>
+    <li>sources à la racine</li>
+    <li><code>Bin/</code> accessible <em>via</em> <code>hoa
+    <em>library</em>:<em>command</em></code></li>
+    <li><code>README.md</code>, description et exemples</li>
+    <li><code>composer.json</code>, pour Composer</li>
+  </ul>
+  <p>États : existantes → matures → finalisées</p>
+  <p class="thus">Plus de nouvelles bibliothèques, uniquement de la
+  finalisation</p>
+</section>
+
+<section>
+  <h1>Nouveau site</h1>
+
+  <ul>
+    <li>design : simple et élégant</li>
+    <li>page d'accueil : description et activités</li>
+    <li>plateforme : mobile, tablette, papier …</li>
+    <li><a href="http://preview.hoa-project.net/">preview.hoa-project.net</a></li>
+    <li>nouvelles sections : blog, événement, à propos</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Documentations</h1>
+
+  <p>Amélioré :</p>
+  <ul>
+    <li>mini-tutoriel</li>
+    <li>manuel d'apprentissage : 9 chapitres</li>
+    <li><em lang="en">hack book</em> : 10 chapitres</li>
+  </ul>
+  <p>Nouveauté :</p>
+  <ul>
+    <li><em>awecode</em> : quand le code rencontre la vidéo</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Diffusions</h1>
+
+  <ul>
+    <li>blog : ≈ 100 lectures dans les 48h</li>
+    <li>conférences : AMOST'12, ForumPHP'12 et CSTVA'13</li>
+    <li>industrie : VeryLastRoom, Service public de Wallonie …</li>
+    <li>recherche : deux articles</li>
+    <li>réseau sociaux : ≈ 400 <em lang="en">followers</em> sur Twitter</li>
+    <li>plus de 1500 installations depuis Composer en 6 mois</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Communauté</h1>
+
+  <p>3 pays : France, Suisse et Belgique <small>(+ 2 pays pour les contributeurs)</small></p>
+  <p>Forum :</p>
+  <ul>
+    <li>fréquenté régulièrement mais peu</li>
+    <li>à l'« écart » du site</li>
+  </ul>
+  <p>IRC :</p>
+  <ul>
+    <li><a href="irc://irc.freenode.org#hoaproject">irc.freenode.org
+    #hoaproject</a></li>
+    <li>entre 10 et 20 personnes par jour</li>
+    <li>très actif !</li>
+  </ul>
+  <p>Bonus : pack contributeur</p>
+</section>
+
+<section>
+  <h1>Projets actifs</h1>
+
+  <ul>
+    <li>le blog du site</li>
+    <li><a href="https://github.com/osaris/jekxyl">Jekxyl</a>, générateur de
+    pages statiques basé sur XYL</li>
+    <li><a href="http://hoathis.net/">Hoathis.net</a>, dépôt pour les
+    bibliothèques Hoathis (utilisateurs, non-standard)</li>
+    <li>Bhoat, améliorer le robot pour plus d'interactivités</li>
+    <li>compilateur LESSCSS</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Bilan 2012</h1>
+
+  <p>Très positif !</p>
+  <ul>
+    <li>plus de contributeurs</li>
+    <li>plus de documentations</li>
+    <li>plus proche de l'industrie et des outils</li>
+    <li>plus d'intérêts</li>
+  </ul>
+  <p class="thus">Preuve : cet événement !</p>
+</section>
+
+<section>
+  <h1>En avant pour 2013 !</h1>
+
+  <p>Poursuites :</p>
+  <ul>
+    <li>documentation (surtout manuel d'apprentissage et <em lang="en">hack
+    book</em>)</li>
+    <li><em lang="en">rolling-release</em></li>
+    <li>finalisation de plus de bibliothèques</li>
+  </ul>
+  <p>Nouveaux travaux :</p>
+  <ul>
+    <li><a href="http://ci.hoa-project.net/">ci.hoa-project.net</a></li>
+    <li>Praspel + atoum = ♥</li>
+    <li>association officielle</li>
+    <li>plus de projets basés sur Hoa</li>
+  </ul>
+</section>
+
+<section class="thanks">
+  <h1>Remerciements &amp; questions</h1>
+
+  <p>Un grand merci pour votre attention !</p>
+  <p>Des questions ?</p>
+  <p class="thus"><a href="http://hoa-project.net/">hoa-project.net</a></p>
+</section>
+
+<section>
+  <h1>Mais … que faisons-nous ici ?</h1>
+
+  <ul contenteditable="true">
+    <li>…</li>
+  </ul>
+</section>
+
+<script src="../Template/Script/DZSlides.js"></script>
+
+</body>
+</html>
