@@ -103,7 +103,7 @@ Dz.onkeydown = function(aEvent) {
     aEvent.preventDefault();
     this.toggleContent();
   }
-  if (aEvent.keyCode == 79) { // o
+  if (aEvent.keyCode == 27) { // esc
     aEvent.preventDefault();
     this.toggleView();
   }
