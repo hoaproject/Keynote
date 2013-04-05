@@ -1,0 +1,174 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Package 1.2 by F. Bouquet
+%%
+%% 1.0, 7/7/12 -- Definition style
+%% 1.1, 14/7/12 -- Ajout de block
+%% 1.2, 15/7/12 -- Ajout paramtrage logo avec variable logofemto et surcharge block, example et alert
+%% 1.3, 26/9/12 -- Ajout vspace en fin de block
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemefemto}[2012/07/10 beamer theme femto package]
+
+\usetheme{default}
+
+\graphicspath{{Images/}}
+
+\def\logofemto{femto_disc.pdf}
+
+\definecolor{Rouge}{rgb}{0.79,.12,.15}
+\definecolor{VertFemto}{rgb}{0.68,.75,.27}
+\definecolor{BleuFemto}{rgb}{0.18,.31,.56}
+\definecolor{CyanFemto}{rgb}{0.24,.42,.60}
+\definecolor{GrisFemto}{rgb}{0.67,.67,.68}
+
+\setbeamercolor{itemize item}{fg=VertFemto}
+\setbeamercolor{itemize subitem}{fg=GrisFemto}
+\setbeamercolor{itemize subsubitem}{fg=CyanFemto}
+
+% selection de la couleur du fond des slides
+\setbeamercolor{background canvas}{bg=white} 
+% selection de la couleur du fond des block avec ecriture noire
+%\setbeamercolor{block body}{use=structure,fg=black,bg=ArrierePlanBodyB}
+% selection de la couleur du fond des block avec ecriture blanche
+%\setbeamercolor{block body}{use=structure,fg=white,bg=ArrierePlanBodyW}
+\setbeamercolor{structure}{fg=BleuFemto}
+
+%%%%%%%%%%%%%%%%%%
+%%
+%% Page officielle
+%%
+
+\setbeamertemplate{title page}
+{
+
+\vskip 10mm 
+\usebeamerfont{title}\usebeamercolor[fg]{title}\LARGE\textcolor{GrisFemto}\inserttitle
+\\[0.2cm]
+\large\textcolor{BleuFemto}\insertauthor
+\\[0.2cm]
+\normalsize\textcolor{GrisFemto}\insertinstitute
+\\[0.4cm]
+\footnotesize\textcolor{GrisFemto}\insertsubtitle \\
+\footnotesize\textcolor{GrisFemto}\insertdate
+\\[0.4cm]
+
+\includegraphics[width=7mm]{ufc.pdf}%
+\hspace*{0.2cm}\raisebox{-0.5mm}{\includegraphics[width=6mm]{cnrs.pdf}}%
+\hspace*{0.2cm}\raisebox{0.15cm}{\includegraphics[width=13mm]{ensmm.pdf}}%
+\hspace*{0.2cm}\includegraphics[width=12mm]{utbm.pdf}\hspace*{0.2cm}\includegraphics[width=1.5cm]{inria.pdf}
+
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%
+%% pied de page
+%%
+
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=-0.4cm]{section in head/foot}%
+    {\hspace*{1mm}\includegraphics[width=0.7cm]{ufc.pdf}}%
+  \end{beamercolorbox}%
+  \hbox{\begin{beamercolorbox}[wd=.4\paperwidth,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle \hfill \insertframenumber{} / \inserttotalframenumber%
+  \end{beamercolorbox}}%
+}
+
+%\setbeamercovered{dynamic}
+   
+%%%%%%%%%%%%%%%%%%%%%
+%%
+%% haut de page
+%%
+
+\defbeamertemplate*{headline}{tree theme}
+{%
+	%\leavevmode %% Pour quitter le mode verticale
+	\begin{beamercolorbox}[wd=.1\paperwidth,ht=0.8cm]{section in head/foot}%
+    \hspace*{1mm}\includegraphics[width=1.5cm]{\logofemto}%
+  \end{beamercolorbox}%
+	\begin{beamercolorbox}[wd=0.5\paperwidth,ht=-0.4cm, dp=1.125ex,%
+		leftskip=1.6cm,rightskip=.3cm plus1fil]{section in head/foot}
+		\usebeamerfont{section in head/foot}%
+			\hskip6pt
+			 \ifnum\thesection>0 
+			\insertsectionnavigationhorizontal{.5\textwidth}{\hspace{0.2cm}}{\hspace{0.1cm}}
+			\fi
+	\end{beamercolorbox}
+	\begin{beamercolorbox}[wd=0.5\paperwidth,dp=1.125ex,leftskip=1.6cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+		\usebeamerfont{subsection in head/foot}
+		\ifnum\thesection>0 
+		\ifnum\thesubsection>0
+		{\hskip12pt$\llcorner~\ldots$ \insertsubsectionhead }
+		\else
+		\vskip2ex
+		\fi
+		\else
+		\vskip2ex		
+		\fi	
+	\end{beamercolorbox}
+   \begin{beamercolorbox}[wd=3cm,leftskip=\textwidth,ht=1.35cm]{section in head/foot}%
+      {\hspace*{-3.8cm}\includegraphics[width=3.8cm]{abeille.pdf}\vfill}%
+  \end{beamercolorbox}%
+    \vskip-6ex
+   \ifnum\theframenumber>1
+    \noindent\textcolor{GrisFemto}{\rule{0.7\textwidth}{1pt}} % La ligne pleine
+   \fi
+  \vskip-7ex %Pour remonter la frame
+}
+
+
+%  \logo{\includegraphics[height=0.5cm]{ufc.pdf}}
+
+\setbeamercolor{mybox}{fg=white,bg=GrisFemto}
+\setbeamercolor{myboxC}{fg=black,bg=GrisFemto!20}
+
+\setbeamercolor{mydefB}{fg=white,bg=BleuFemto}
+\setbeamercolor{mydefBC}{fg=black,bg=BleuFemto!10}
+\setbeamercolor{mydefET}{fg=white,bg=VertFemto}
+\setbeamercolor{mydefEC}{fg=black,bg=VertFemto!10}
+\setbeamercolor{mydefAT}{fg=white,bg=red}
+\setbeamercolor{mydefAC}{fg=black,bg=red!10}
+
+\newenvironment{femtoTitleBlock}[1]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mybox,lower=mybox]{\vskip1ex\begin{center}#1\end{center}\vspace{2mm}}%
+ }{\end{beamerboxesrounded}}
+
+\newenvironment{femtoBlock}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefB,lower=mydefBC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\renewenvironment{block}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefB,lower=mydefBC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\newenvironment{femtoRemark}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mybox,lower=myboxC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+ 
+\newenvironment{femtoExample}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefET,lower=mydefEC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\renewenvironment{example}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefET,lower=mydefEC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\renewenvironment{exampleblock}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefET,lower=mydefEC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+ 
+\newenvironment{femtoAlert}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefAT,lower=mydefAC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\renewenvironment{alert}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefAT,lower=mydefAC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+\renewenvironment{alertblock}[2]{\begin{beamerboxesrounded}%
+ [center,shadow=true,rounded=true,upper=mydefAT,lower=mydefAC]{#1}#2}{\end{beamerboxesrounded}\vspace{2mm}}
+
+
+%\newcommand{\MyDefinition}[2]{\begin{beamerboxesrounded} [center,shadow=true,rounded=true,upper=mydefT,lower=mydefC]{#1} #2 \end{beamerboxesrounded}}
+
+\setbeamertemplate{frametitle}{\hspace{-5mm}\textbf{\textcolor{BleuFemto} \insertframetitle}}
