@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hoa, un ensemble de bibliothèques (AFUP Lyon'12, Lyon)</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+</head>
+<body>
+
+<section>
+  <h1>Hoa, un ensemble de bibliothèques</h1>
+
+  <div class="tcenter">
+    <img src="Image/AFUPLyon.png"
+         alt="Logo de l'AFUP Lyon"
+         width="400px"
+         class="center" />
+  </div>
+</section>
+
+<section>
+  <h1>Qui sommes-nous ?</h1>
+
+  <p>Ivan Enderlin :</p>
+  <ul style="clear: both">
+    <li>doctorant en Informatique (DISC, INRIA)</li>
+    <li><em lang="en">leader</em> et développeur de Hoa</li>
+    <li>contributeur PHP, Mozilla, Debian, atoum… open-source</li>
+    <li>expert invité au W3C (HTML, CSS et WebApp)</li>
+    <li>@hoaproject, #hoaproject</li>
+  </ul>
+
+  <math>
+    <mrow>
+      <mtext>ivan.enderlin@</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>hoa-project.net</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>atoum.org</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>inria.fr</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+</section>
+
+<section>
+  <h1>Qui sommes-nous ?</h1>
+
+  <p>Julien Bianchi</p>
+  <ul>
+    <li>foo</li>
+    <li>bar</li>
+    <li>baz</li>
+    <li>qux</li>
+  </ul>
+
+  <math>
+    <mrow>
+      <mtext>julien.bianchi@</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>atoum.org</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>hoa-project.net</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>…</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+</section>
+
+<section>
+  <h1>Qui êtes-vous ?</h1>
+
+  <ul>
+    <li data-item="">utilisateurs</li>
+    <li data-item="+">contributeurs</li>
+    <li data-item="+">entreprises</li>
+    <li data-item="+"><em lang="en">geeks</em>/<em lang="en">nerds</em></li>
+    <li data-item="+">…</li>
+    <li data-item="=">la commnauté lyonnaise PHP !</li>
+  </ul>
+
+  <p>Bienvenu :-) !</p>
+</section>
+
+<section>
+  <h1>Bibliothèque</h1>
+
+  <q>Une bibliothèque est un ensemble de fonctionnalités dédiées à la résolution
+  d'un problème précis et isolé, grâce à son abstraction la plus élevée</q>
+  <q>L'abstraction permet de s'adapter à plus de formes de problèmes</q>
+  <p>La Forme est dans l'abstraction</p>
+</section>
+
+<section>
+  <h1>Contributions</h1>
+
+  <p>Hoa :</p>
+  <ul>
+    <li>un ensemble de bibliothèques PHP <strong>modulaires</strong>,
+    <strong>extensibles</strong> et <strong>structurées</strong></li>
+    <li>un pont entre le monde de la recherche et de l'industrie</li>
+    <li>un environnement pour développer des bibliothèques</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>Présentation du projet</li>
+    <li></li>
+  </ol>
+</section>
+
+<section>
+  <h1>Projets distribués</h1>
+
+  <ul>
+    <li><code>Central</code> : l'ensemble de toutes les bibliothèques Hoa</li>
+    <li><code>Library/<em>*</em></code> : bibliothèques isolées</li>
+    <li><code>Literature</code> : manuels et une partie de la documentation</li>
+    <li><code>Keynote</code> : toutes les présentations</li>
+    <li><code>W3</code> et <code>Static</code> : le site Web de Hoa</li>
+    <li><code>Bhoat</code> : le robot qui maintient les différents projets de
+    Hoa</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Sources <small>(exemple pour <code>Hoa\Core</code>)</small></h1>
+
+  <p><em>Via</em> Git, <code><em>project</em>.git</code> :</p>
+  <pre><code class="language-shell">$ git clone http://git.hoa-project.net/Library/Core.git</code></pre>
+  <p><em>Via</em> Github, sans <code>Library/</code>, exemple avec
+  <code>Hoa\Core</code> :</p>
+  <pre><code class="language-shell">$ git clone https://github.com/hoaproject/Core.git</code></pre>
+  <p><em>Via</em> Composer, avec le schéma :</p>
+  <pre><code class="language-json">{ "require": { "hoa/core": "dev-master" }, "minimum-stability": "dev" }</code></pre>
+  <p>… puis :</p>
+  <pre><code class="language-shell">$ composer install</code></pre>
+  <p><em>Via</em> les archives sur download.hoa-project.net</p>
+</section>
+
+<section>
+  <h1>Bibliothèques</h1>
+
+  <p>Structure enrichie :</p>
+  <ul>
+    <li>sources à la racine</li>
+    <li><code>Bin/</code> accessible <em>via</em> <code>hoa
+    <em>library</em>:<em>command</em></code></li>
+    <li><code>Documentation/</code> pour le <em lang="en">hack book</em></li>
+    <li><code>README.md</code>, description et exemples</li>
+    <li><code>composer.json</code> pour Composer</li>
+  </ul>
+  <p>États : existantes → matures → finalisées</p>
+</section>
+
+<section>
+  <h1>Quelques chiffres<sup>*</sup></h1>
+
+  <p>Nombre de :</p>
+  <ul>
+    <li>bibliothèques : > 50 (dont 15 finalisées)</li>
+    <li>fichiers : 565</li>
+    <li>lignes de code : ≃ 107 000</li>
+    <li><em lang="en">commits</em> : > 1 700</li>
+    <li>contributeurs : 27</li>
+    <li>installations <em>via</em> Packagist <small>(depuis septembre
+    2012)</small> : > 42 000</li>
+    <li>sur Github : > 180 <em lang="en">forks</em> et 155 ★</li>
+  </ul>
+
+  <p><small>entre le 1 janvier 2013 et aujourd'hui</small></p>
+</section>
+
+<section>
+  <h1>Litératures</h1>
+
+  <p>Documentations :</p>
+  <ul>
+    <li>mini-tutoriel</li>
+    <li>manuel d'apprentissage : 9 chapitres</li>
+    <li><em lang="en">hack book</em> : 15 chapitres</li>
+  </ul>
+
+  <p>Recherche : 3 articles en conférences internationales</p>
+  <p>Autres événements industriels <small>(dont 2 par l'AFUP, merci !)</small>,
+  formations <small>(récemment : JDév' à Polytechniques)</small> etc.</p>
+</section>
+
+<section>
+  <h1>Communauté</h1>
+
+  <ul>
+    <li>3 pays : France, Suisse et Belgique <small>(+ 2 autres pays
+    ponctuellement)</small></li>
+    <li>IRC : irc.freenode.org #hoaproject</li>
+    <li>Mailing-lists</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Hoa\Websocket</h1>
+</section>
+
+<section>
+  <h1>Hoa\Ruler</h1>
+</section>
+
+<section>
+  <h1>Hoa\Praspel</h1>
+</section>
+
+<section>
+  <h1>Hoathis\Atoum</h1>
+</section>
+
+
+<div id="progress-bar"></div>
+
+<script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+
+</body>
+</html>
