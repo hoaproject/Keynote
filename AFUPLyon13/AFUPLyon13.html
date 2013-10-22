@@ -7,7 +7,7 @@
   <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
   <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
 
-  <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="Static/Css/Keynote.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -27,11 +27,19 @@
 
   <p>Ivan Enderlin :</p>
   <ul>
-    <li>doctorant en Informatique (DISC, INRIA)</li>
+    <li>doctorant en Informatique
+        (<a href="http://disc.univ-fcomte.fr/">DISC</a>,
+         <a href="http://www.inria.fr/">INRIA</a>)</li>
     <li><em lang="en">leader</em> et développeur de Hoa</li>
-    <li>contributeur PHP, Mozilla, Debian, atoum… open-source</li>
-    <li>expert invité au W3C (HTML, CSS et WebApp)</li>
-    <li>@hoaproject, #hoaproject</li>
+    <li>contributeur
+        <a href="http://php.net/">PHP</a>,
+        <a href="http://mozilla.org/">Mozilla</a>,
+        <a href="http://debian.org/">Debian</a>,
+        <a href="http://atoum.org/">atoum</a>… open-source</li>
+    <li>expert invité au
+        <a href="http://w3.org/">W3C</a> (HTML, CSS et WebApp)</li>
+    <li><a href="https://twitter.com/hoaproject">@hoaproject</a>,
+        <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
   </ul>
 
   <math>
@@ -145,15 +153,31 @@
 <section>
   <h1>Sources <small>(exemple pour <code>Hoa\Core</code>)</small></h1>
 
-  <p><em>Via</em> Git, <code><em>project</em>.git</code> :</p>
+  <p><img src="http://static.hoa-project.net/Image/Logo/Git.png"
+          alt="Git"
+          class="fright" style="height: 1.3em" />
+     <em>Via</em> <a href="http://git-scm.com/">Git</a>,
+     <code><em>project</em>.git</code> :</p>
   <pre><code class="language-shell">$ git clone http://git.hoa-project.net/Library/Core.git</code></pre>
-  <p><em>Via</em> Github, sans <code>Library/</code> :</p>
+
+  <p><img src="http://static.hoa-project.net/Image/Logo/Github.png"
+          alt="Github"
+          class="fright" style="height: 1.8em" />
+     <em>Via</em> <a href="https://github.com/hoaproject/">Github</a>,
+      sans <code>Library/</code> :</p>
   <pre><code class="language-shell">$ git clone https://github.com/hoaproject/Core.git</code></pre>
-  <p><em>Via</em> Composer, avec le schéma :</p>
+
+  <p><img src="http://static.hoa-project.net/Image/Logo/Composer.png"
+          alt="Composer"
+          class="fright" style="height: 1.8em" />
+     <em>Via</em> <a href="http://getcomposer.org/">Composer</a>,
+       avec le schéma :</p>
   <pre><code class="language-json">{ "require": { "hoa/core": "dev-master" }, "minimum-stability": "dev" }</code></pre>
   <p>… puis :</p>
   <pre><code class="language-shell">$ composer install</code></pre>
-  <p><em>Via</em> les archives sur download.hoa-project.net</p>
+
+  <p><em>Via</em> les archives sur
+     <a href="http://download.hoa-project.net">download.hoa-project.net</a></p>
 </section>
 
 <section>
@@ -192,14 +216,16 @@
 <section>
   <h1>Litératures</h1>
 
-  <p>Documentations :</p>
+  <p><a href="http://hoa-project.net/Literature.html">Documentations</a> :</p>
   <ul>
     <li>mini-tutoriel</li>
     <li>manuel d'apprentissage : 9 chapitres</li>
     <li><em lang="en">hack book</em> : 15 chapitres</li>
   </ul>
-
-  <p>Recherche : 3 articles en conférences internationales</p>
+  <p><a href="http://hoa-project.net/Awecode.html">Awecode</a> : quand le code
+     rencontre la vidéo</p>
+  <p><a href="http://hoa-project.net/Literature.html#Recherche">Recherche</a> :
+      3 articles en conférences internationales</p>
   <p>Autres événements industriels <small>(dont 2 par l'AFUP, merci !)</small>,
   formations <small>(récemment : JDév' à Polytechniques)</small> etc.</p>
 </section>
@@ -212,7 +238,28 @@
     ponctuellement)</small></li>
     <li>IRC : irc.freenode.org #hoaproject</li>
     <li>Mailing-lists</li>
+    <li>Association à but non-lucratif</li>
   </ul>
+</section>
+
+<section>
+  <h1>Hoa\Router</h1>
+</section>
+
+<section>
+  <h1>Hoa\View</h1>
+</section>
+
+<section>
+  <h1>Hoa\Dispatcher</h1>
+</section>
+
+<section>
+  <h1>HMVC</h1>
+</section>
+
+<section>
+  <h1>Flux uniformisés</h1>
 </section>
 
 <section>
@@ -231,13 +278,21 @@
   <h1>Hoathis\Atoum</h1>
 </section>
 
+<section>
+  <h1>Symfony</h1>
+</section>
+
+<section>
+  <h1>Sohoa</h1>
+</section>
+
 
 <div id="progress-bar"></div>
 
-<script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
-<script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
-<script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
-<script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+<script src="Static/Javascript/Keynote.js"></script>
+<script src="Static/Javascript/Prism.js"></script>
+<script src="Static/Javascript/Prism.hoa.js"></script>
+<script src="Static/Javascript/Prism.plugin.line.js"></script>
 
 </body>
 </html>
