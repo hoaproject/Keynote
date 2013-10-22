@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Hoa, un ensemble de bibliothèques (AFUP Lyon'13, Lyon)</title>
+  <title>Hoa, un ensemble de bibliothèques PHP (AFUP Lyon'13, Lyon)</title>
   <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
   <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
   <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
@@ -11,8 +11,19 @@
 </head>
 <body>
 
+<script src="Static/Javascript/Hoa.js"></script>
+
+<!--
+
+modulaires
+extensibles
+structurées
+rolling-release
+
+-->
+
 <section>
-  <h1>Hoa, un ensemble de bibliothèques</h1>
+  <h1>Hoa, un ensemble de bibliothèques PHP</h1>
 
   <div class="tcenter">
     <img src="Image/AFUPLyon.png"
@@ -112,7 +123,7 @@
   <q>Une bibliothèque est un ensemble de fonctionnalités dédiées à la résolution
   d'un problème précis et isolé, grâce à son abstraction la plus élevée</q>
   <q>L'abstraction permet de s'adapter à plus de formes de problèmes</q>
-  <p>La Forme est dans l'abstraction</p>
+  <p>La Force est dans l'abstraction</p>
 </section>
 
 <section>
@@ -137,10 +148,11 @@
 </section>
 
 <section>
-  <h1>Projets distribués</h1>
+  <h1>Projets distribués<sup>*</sup></h1>
 
   <ul>
-    <li><code>Central</code> : l'ensemble de toutes les bibliothèques Hoa</li>
+    <li><code>Central</code> : l'ensemble de toutes les bibliothèques Hoa
+    (standards) et Hoathis (utilisateurs)</li>
     <li><code>Library/<em>*</em></code> : bibliothèques isolées</li>
     <li><code>Literature</code> : manuels et une partie de la documentation</li>
     <li><code>Keynote</code> : toutes les présentations</li>
@@ -148,10 +160,11 @@
     <li><code>Bhoat</code> : le robot qui maintient les différents projets de
     Hoa</li>
   </ul>
+  <p><small>(liste non exhaustive !)</small></p>
 </section>
 
 <section>
-  <h1>Sources <small>(exemple pour <code>Hoa\Core</code>)</small></h1>
+  <h1>Sources<small>, e.g. <code>Hoa\Core</code></small></h1>
 
   <p><img src="http://static.hoa-project.net/Image/Logo/Git.png"
           alt="Git"
@@ -183,16 +196,34 @@
 <section>
   <h1>Bibliothèques</h1>
 
-  <p>Structure enrichie :</p>
   <ul>
     <li>sources à la racine</li>
     <li><code>Bin/</code> accessible <em>via</em> <code>hoa
     <em>library</em>:<em>command</em></code></li>
     <li><code>Documentation/</code> pour le <em lang="en">hack book</em></li>
+    <li><code>Test/</code> pour les tests</li>
     <li><code>README.md</code>, description et exemples</li>
     <li><code>composer.json</code> pour Composer</li>
   </ul>
-  <p>États : existantes → matures → finalisées</p>
+  <div id="library_states" class="schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper = Hoa.Graph(Hoa.$('#library_states'), 600, 150);
+      var grid  = paper.grid(0, 0, 600, 150, 3, 1);
+      var step1 = grid.push(paper.rect(0, 0, 120, 90, 3, 'existantes'));
+      var step2 = grid.push(paper.rect(0, 0, 120, 90, 3, 'matures'));
+      var step3 = grid.push(paper.rect(0, 0, 120, 90, 3, 'finalisées'));
+
+      paper.link.between(step1, step2);
+      paper.link.between(step2, step3);
+  });
+  </script>
+
+</section>
+
+<section>
+  <h1>Rolling-release</h1>
 </section>
 
 <section>
@@ -209,7 +240,6 @@
     2012)</small> : > 42 000</li>
     <li>sur Github : > 180 <em lang="en">forks</em> et 155 ★</li>
   </ul>
-
   <p><small>entre le 1 janvier 2013 et aujourd'hui</small></p>
 </section>
 
@@ -228,6 +258,14 @@
       3 articles en conférences internationales</p>
   <p>Autres événements industriels <small>(dont 2 par l'AFUP, merci !)</small>,
   formations <small>(récemment : JDév' à Polytechniques)</small> etc.</p>
+</section>
+
+<section>
+  <h1>Awecode<small>, e.g. <code>Hoa\Websocket</code></small></h1>
+
+  <!--
+  <iframe src="http://hoa-project.net/Awecode/Websocket.html"></iframe>
+  -->
 </section>
 
 <section>
@@ -293,6 +331,8 @@
 <script src="Static/Javascript/Prism.js"></script>
 <script src="Static/Javascript/Prism.hoa.js"></script>
 <script src="Static/Javascript/Prism.plugin.line.js"></script>
+<script src="Static/Javascript/Hoa.Graph.js"></script>
+<script src="Static/Javascript/Hoa.Graph.style.js"></script>
 
 </body>
 </html>
