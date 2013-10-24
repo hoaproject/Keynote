@@ -147,6 +147,10 @@ rolling-release
   </ol>
 </section>
 
+<section class="chapter">
+  <div>1</div>
+</section>
+
 <section>
   <h1>Projets distribués<sup>*</sup></h1>
 
@@ -256,8 +260,9 @@ rolling-release
      rencontre la vidéo</p>
   <p><a href="http://hoa-project.net/Literature.html#Recherche">Recherche</a> :
       3 articles en conférences internationales</p>
-  <p>Autres événements industriels <small>(dont 2 par l'AFUP, merci !)</small>,
-  formations <small>(récemment : JDév' à Polytechniques)</small> etc.</p>
+  <p>Autres événements communutaires, industriels <small>(dont 2 par l'AFUP,
+  merci !)</small>, formations etc.</p>
+  <p><small>(traduction en cours vers l'anglais)</small></p>
 </section>
 
 <section>
@@ -276,24 +281,71 @@ rolling-release
     ponctuellement)</small></li>
     <li>IRC : irc.freenode.org #hoaproject</li>
     <li>Mailing-lists</li>
-    <li>Association à but non-lucratif</li>
+    <li><a href="http://hoa-project.net/Foundation.html">Association</a> à but
+    non-lucratif, objectifs :
+    <blockquote>soutenir le projet Hoa en développant, déployant et faisant la
+    promotion des logiciels libres issus de Hoa Project, de ses produits dérivés
+    et des projets associés</blockquote></li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <div>2</div>
+</section>
+
+<section>
+  <h1>Bibliothèques</h1>
+
+  <p>Avantages :</p>
+  <ul>
+    <li>Moins de code</li>
+    <li>Abstraite</li>
+    <li>Assemblage</li>
+    <li>Performance</li>
+  </ul>
+
+  <p>Inconvénients :</p>
+  <ul>
+    <li>Non full-stacks</li>
+    <li>Plus lent à démarrer mais pas à maintenir ou évoluer</li>
   </ul>
 </section>
 
 <section>
-  <h1>Hoa\Router</h1>
+  <h1>Hoa\Core</h1>
+
+  <p>Architecture générale :</p>
+  <div id="libraries_architecture" class="schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper       = Hoa.Graph(Hoa.$('#libraries_architecture'), 610, 350);
+      var core        = paper.rect( 10, 250, 590, 90, 3, 'Core');
+      var exception   = paper.rect( 10, 150, 110, 90, 3, 'Exception');
+      var consistency = paper.rect(130, 150, 110, 90, 3, 'Consistency');
+      var protocol    = paper.rect(250, 150, 110, 90, 3, 'Protocol');
+      var event       = paper.rect(370, 150, 110, 90, 3, 'Event');
+      var other       = paper.rect(490, 150, 110, 90, 3, '…');
+      var libraries   = paper.rect( 10,  10, 590, 90, 3, 'Bibliothèques');
+
+  });
+  </script>
 </section>
 
 <section>
-  <h1>Hoa\View</h1>
+  <h1>Protocole <code>hoa://</code></h1>
+
+  <!--
+  dans les exemples, parler de Hoa\Registry
+  -->
 </section>
 
 <section>
-  <h1>Hoa\Dispatcher</h1>
+  <h1>Événements et écouteurs</h1>
 </section>
 
 <section>
-  <h1>HMVC</h1>
+  <h1>Consistence</h1>
 </section>
 
 <section>
@@ -302,6 +354,18 @@ rolling-release
 
 <section>
   <h1>Hoa\Websocket</h1>
+
+  <!--
+  listeners + streams
+  -->
+</section>
+
+<section>
+  <h1>Hoa\Console</h1>
+</section>
+
+<section>
+  <h1>Hoa\Compiler</h1>
 </section>
 
 <section>
