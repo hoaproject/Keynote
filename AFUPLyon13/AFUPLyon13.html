@@ -253,14 +253,6 @@ rolling-release
 </section>
 
 <section>
-  <h1>Awecode<small>, e.g. <code>Hoa\Websocket</code></small></h1>
-
-  <!--
-  <iframe src="http://hoa-project.net/Awecode/Websocket.html"></iframe>
-  -->
-</section>
-
-<section>
   <h1>Communauté</h1>
 
   <ul>
@@ -646,9 +638,9 @@ $server->run();</code></pre>
   <p>Flux : <code>Hoa\Socket\Client</code> écoute <code>127.0.0.1:8889</code></p>
   <p>Écouteurs : les mêmes (hérités de <code>Hoa\Websocket\Connection</code>)</p>
   <p>Exemple en CLI d'un prompt qui envoie des messages :</p>
-  <pre style="max-height: 300px"><code class="language-php">$readline = new \Hoa\Console\Readline();
-$client   = new \Hoa\Websocket\Client(
-    new \Hoa\Socket\Client('tcp://127.0.0.1:8889')
+  <pre style="max-height: 300px"><code class="language-php">$readline = new Hoa\Console\Readline();
+$client   = new Hoa\Websocket\Client(
+    new Hoa\Socket\Client('tcp://127.0.0.1:8889')
 );
 $client->setHost('localhost');
 $client->connect();
@@ -849,6 +841,140 @@ $processus->run();
 
 <section>
   <h1>Hoa\Compiler</h1>
+
+  <p>Analyser et manipuler des données textuelles</p>
+  <p><code>Hoa\Compiler\Llk</code> est un compilateur de compilateurs :</p>
+  <ul>
+    <li>compile une grammaire en compilateur</li>
+    <li>compilateur = analyseur lexical + analyseur syntaxique</li>
+    <div id="compiler" class="verbatim schema"></div>
+    <script>
+    Hoa.Document.onReady(function ( ) {
+
+        var paper    = Hoa.Graph(Hoa.$('#compiler'), 760, 180);
+        var grid     = paper.grid(0, 0, 760, 180, 5, 2);
+        var word     = grid.push(paper.rect(0, 0, 140, 80, 3, 'mot'), 0, 0);
+        var sequence = grid.push(paper.rect(0, 0, 140, 80, 3, 'séquence'), 2, 0);
+        var trace    = grid.push(paper.rect(0, 0, 140, 80, 3, 'résultat'), 4, 0);
+        grid.push(paper.rect(0, 0, 140, 50, 3, 'abcdef'), 0, 1);
+        grid.push(paper.rect(0, 0, 380, 50, 3, '[[a ⟼ …], [bc ⟼ …], [d ⟼ …], [ef ⟼ …]]'), 2, 1);
+        grid.push(paper.rect(0, 0, 140, 50, 3, 'valide/invalide'), 4, 1);
+
+        paper.link.between(word, sequence, 'analyseur lexical');
+        paper.link.between(sequence, trace, 'analyseur syntaxique');
+    });
+    </script>
+    <li>séquence valide transformée en AST (arbre)</li>
+  </ul>
+  <p>Grammaire écrite en langage PP <small>(langage maison)</small></p>
+</section>
+
+<section>
+  <h1>Grammaire <small>simplifiée</small> de JSON</h1>
+
+  <p>Lexèmes (unité lexicale, atomique) :</p>
+  <pre style="max-height: 180px"><code class="language-pp">%skip   space          \s
+// Scalars.
+%token  true           true
+%token  false          false
+%token  null           null
+// Strings.
+%token  quote_         "        -> string
+%token  string:string  [^"]+
+%token  string:_quote  "        -> default
+// Objects.
+%token  brace_         {
+%token _brace          }
+// Arrays.
+%token  bracket_       \[
+%token _bracket        \]
+// Rest.
+%token  colon          :
+%token  comma          ,
+%token  number         \d+</code></pre>
+  <p>Règles :</p>
+  <pre style="max-height: 180px"><code class="language-pp">value:
+    &lt;true> | &lt;false> | &lt;null> | string() | object() | array() | number()
+
+string:
+    ::quote_:: &lt;string> ::_quote::
+
+number:
+    &lt;number>
+
+#object:
+    ::brace_:: pair() ( ::comma:: pair() )* ::_brace::
+
+#pair:
+    string() ::colon:: value()
+
+#array:
+    ::bracket_:: value() ( ::comma:: value() )* ::_bracket::</code></pre>
+</section>
+
+<section>
+  <h1>Analyser du JSON</h1>
+
+  <p>Manuellement :</p>
+  <pre style="max-height: 310px"><code class="language-php">// 1. Load grammar.
+$compiler = Hoa\Compiler\Llk::load(new Hoa\File\Read('Json.pp'));
+
+// 2. Parse a data.
+$ast      = $compiler->parse('{"foo": true, "bar": [null, 42]}');
+
+// 3. Dump the AST.
+$dump     = new Hoa\Compiler\Visitor\Dump();
+echo $dump->visit($ast);
+
+/**
+ * Will output:
+ *     >  #object
+ *     >  >  #pair
+ *     >  >  >  token(string:string, foo)
+ *     >  >  >  token(true, true)
+ *     >  >  #pair
+ *     >  >  >  token(string:string, bar)
+ *     >  >  >  #array
+ *     >  >  >  >  token(null, null)
+ *     >  >  >  >  token(number, 42)
+ */</code></pre>
+  <p>En ligne de commande :</p>
+  <pre><code class="language-shell">$ hoa compiler:pp Json.pp &lt;( echo '{"foo": true, "bar": [null, 42]}' ) -v dump</code></pre>
+</section>
+
+<section>
+  <h1>Finaliser la compilation</h1>
+
+  <p>Utiliser <code>Hoa\Visit</code> pour visiter l'arbre</p>
+  <p>Opérations possibles :</p>
+  <ul>
+    <li><em lang="en">pretty-printer</em></li>
+    <li>vérification de types</li>
+    <li>optimisations diverses</li>
+    <li>transformation vers un autre langage (e.g. PHP, asm…)</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Génération de données</h1>
+
+  <p><em lang="en">Grammar-based data generation</em> :</p>
+  <ul>
+    <li>article publié et présenté à
+        <a href="https://sites.google.com/site/amost2012/">A-MOST 2012</a>,
+        conférence internationale</li>
+    <li>plusieurs algorithmes : isotropique, aléatoire et uniforme, exhaustive
+        bornée, par couverture</li>
+  </ul>
+  <p>Exemple avec la grammaire des… <a href="http://pcre.org/">PCRE</a>
+     <small>(voir <code>Hoa\Regex</code>)</small></p>
+  <pre><code class="language-shell">$ hoa praspel:shell
+// …
+> regex: /fo{2,4}ba[rz]+/
+> .sample regex
+'foobazzz'
+> .sample regex
+'foooobazrzrzrzz'</code></pre>
 </section>
 
 <section>
