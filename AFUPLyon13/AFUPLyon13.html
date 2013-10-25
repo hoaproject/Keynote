@@ -951,8 +951,11 @@ echo $dump->visit($ast);
     <li><em lang="en">pretty-printer</em></li>
     <li>vérification de types</li>
     <li>optimisations diverses</li>
-    <li>transformation vers un autre langage (e.g. PHP, asm…)</li>
+    <li>exécution<sup>*</sup></li>
+    <li>transformation vers un autre langage (e.g. PHP, opcode, asm…)<sup>**</sup></li>
   </ul>
+  <p class="break"><small><sup>*</sup> « interprétation »</small></p>
+  <p><small><sup>**</sup> « compilation »</small></p>
 </section>
 
 <section>
@@ -979,6 +982,62 @@ echo $dump->visit($ast);
 
 <section>
   <h1>Hoa\Ruler</h1>
+
+  <p>Bel exemple d'utilisation de <code>Hoa\Compiler</code>, par
+     <a href="http://verylastroom.com/">VeryLastRoom</a></p>
+  <p>Moteur de règles, écrites dans un langage dédié, proche d'SQL</p>
+  <pre><code class="language-php">$ruler = new Hoa\Ruler();
+
+// 1. Write a rule.
+$rule  = 'group in ("customer", "guest") and points > 30';
+
+// 2. Create a context.
+$context           = new Hoa\Ruler\Context();
+$context['group']  = 'customer';
+$context['points'] = function ( ) {
+
+    return 42;
+};
+
+// 3. Assert!
+var_dump(
+    $ruler->assert($rule, $context)
+);</code></pre>
+</section>
+
+<section>
+  <h1>Fonctionnement</h1>
+
+  <div id="ruler" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper        = Hoa.Graph(Hoa.$('#ruler'), 780, 300);
+      var grid         = paper.grid(0, 0, 780, 300, 6, 3);
+      var rule         = grid.push(paper.rect(0, 0, 110, 80, 3, 'règle'), 0, 1);
+      var compiler     = grid.push(paper.rect(0, 0, 110, 80, 3, 'AST'), 1, 1);
+      var vinterpreter = grid.push(paper.rect(0, 0, 110, 80, 3, 'interpréteur'), 2, 1);
+      var model        = grid.push(paper.rect(0, 0, 110, 80, 3, 'modèle'), 3, 1);
+      var vasserter    = grid.push(paper.rect(0, 0, 110, 80, 3, 'asserteur'), 5, 0);
+      var vcompiler    = grid.push(paper.rect(0, 0, 110, 80, 3, 'PHP code'), 5, 1);
+      var vdisassembly = grid.push(paper.rect(0, 0, 110, 80, 3, 'règle'), 5, 2);
+
+      paper.link.between(rule, compiler, '');
+      paper.link.between(compiler, vinterpreter, '');
+      paper.link.between(vinterpreter, model, '');
+      paper.link.between(model, vasserter, '');
+      paper.link.between(model, vcompiler, '');
+      paper.link.between(model, vdisassembly, '');
+  });
+  </script>
+  <p>Exemple de compilation vers PHP :</p>
+  <pre><code class="language-php">$database->save(
+    serialize(
+        Hoa\Ruler::interprete(
+            'logged(user) and group in ("customer", "guest") and points > 30'
+        ) // rule → AST → interpreter → model
+    ) // model → serialized
+);</code></pre>
 </section>
 
 <section>
