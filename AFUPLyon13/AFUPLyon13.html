@@ -874,6 +874,26 @@ $processus->run();</code></pre>
 </section>
 
 <section>
+    <h1>(Hoa|Symfony)\Console</h1>
+
+    <p>symfony/console :</p>
+    <ul>
+      <li>Très <strong>haut niveau</strong> d'abstraction (<code>Dialog</code>, <code>ProgressBar</code>)</li>
+      <li>Orientée <strong>commandes</strong>, peu d'intaractivité</li>
+      <li><code>Application</code>, <code>Command</code></li>
+      <li>API <code>Process</code> dans un composant dédié</li>
+    </ul>
+
+    <p>hoa/console :</p>
+    <ul>
+      <li><strong>Plus bas niveau</strong> d'abstraction (<code>Cursor</code>, <code>Readline</code>)</li>
+      <li>Orientée <strong>terminal</strong>, très interactif</li>
+      <li><code>Router</code>, <code>Dispatcher</code>, <code>Controller</code></li>
+      <li>API <code>Processus</code> intégrée</li>
+    </ul>
+</section>
+
+<section>
   <h1>Hoa\Compiler</h1>
 
   <p>Analyser et manipuler des données textuelles</p>
