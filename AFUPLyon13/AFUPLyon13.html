@@ -1212,16 +1212,17 @@ var_dump(
   <ul>
     <li>une dépendance vers la bibliothèque qu'il intègre</li>
     <li>une dépendance vers <a href="">Hoa\Core</a></li>
-    <li>des <em>adapters</em> pour connecter la libraire</li>
+    <li>des <em>adapters</em>/services pour connecter la libraire</li>
   </ul>
   <div id="api_adapter" class="schema" style="height: 200px"></div>
   <script>
   Hoa.Document.onReady(function ( ) {
 
       var paper      = Hoa.Graph(Hoa.$('#api_adapter'), 610, 200);
-      var core       = paper.rect( 10,  20, 190, 90, 3, 'Hoa\\Core');
-      var library    = paper.rect(210,  20, 190, 90, 3, 'Hoa\\<Library>');
-      var adapter    = paper.rect(410,  20, 190, 90, 3, 'Adapters');
+      var core       = paper.rect( 10,  20, 140, 90, 3, 'Hoa\\Core');
+      var library    = paper.rect(160,  20, 140, 90, 3, 'Hoa\\<Library>');
+      var adapters   = paper.rect(310,  20, 140, 90, 3, 'Adapters');
+      var services   = paper.rect(460,  20, 140, 90, 3, 'Services');
       var bundle     = paper.rect( 10, 120, 590, 90, 0, 'Bundle');
 
   });
