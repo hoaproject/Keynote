@@ -1206,6 +1206,67 @@ var_dump(
 </section>
 
 <section>
+  <h1>Une question d'API</h1>
+
+  <p>Un bundle contient au moins :</p>
+  <ul>
+    <li>une dépendance vers la bibliothèque qu'il intègre</li>
+    <li>une dépendance vers <a href="">Hoa\Core</a></li>
+    <li>des <em>adapters</em> pour connecter la libraire</li>
+  </ul>
+  <div id="api_adapter" class="schema" style="height: 200px"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper      = Hoa.Graph(Hoa.$('#api_adapter'), 610, 200);
+      var core       = paper.rect( 10,  20, 190, 90, 3, 'Hoa\\Core');
+      var library    = paper.rect(210,  20, 190, 90, 3, 'Hoa\\<Library>');
+      var adapter    = paper.rect(410,  20, 190, 90, 3, 'Adapters');
+      var bundle     = paper.rect( 10, 120, 590, 90, 0, 'Bundle');
+
+  });
+  </script>
+</section>
+
+<section>
+  <h1>Adapter l'API</h1>
+
+  <p>Tout est dans la bibliothèque, on <strong>implémente</strong> juste les <strong>interfaces</strong> de Symfony :</p>
+  <pre data-line="5-6,17,23-24,29"><code class="language-php">use Hoa\Stringbuffer\ReadWrite;
+use Hoa\Xml\Exception\Exception as XmlException;
+use Hoa\Xyl\Interpreter\Html\Html;
+use Hoa\Xyl\Xyl;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Templating\TemplateNameParserInterface;
+
+class Engine implements EngineInterface
+{
+    public function render($name, array $parameters = array())
+    {
+        if (false === $this->exists($name)) {
+            throw new \InvalidArgumentException(…);
+        }
+
+        try {
+            $xyl = new Xyl($this->load($name), new ReadWrite(), new Html());
+        } catch (XmlException $exception) {
+            throw new \RuntimeException(…);
+        }
+
+        try {
+            $xyl->interprete();
+            $xyl->render();
+        } catch(\Exception $exception) {
+            throw new \RuntimeException(…);
+        }
+
+        return $xyl->getOutputStream()->readAll();
+    }
+}
+  </code></pre>
+</section>
+
+<section>
   <h1>Hoathis\BenchBundle</h1>
 
   <ul>
@@ -1214,8 +1275,7 @@ var_dump(
     <li>Installation :
         <pre><code class="language-json">{ "require-dev": { "hoathis/bench-bundle": "dev-master" } }</code></pre></li>
     <li>Démarrage :
-        <pre><code class="language-php">&lt;?php
-//app/AppKernel.php
+        <pre><code class="language-php">//app/AppKernel.php
 
 if (in_array($this->getEnvironment(), array('dev', 'test'))) {
     …
