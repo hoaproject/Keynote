@@ -103,21 +103,6 @@ rolling-release
 </section>
 
 <section>
-  <h1>Qui êtes-vous ?</h1>
-
-  <ul>
-    <li data-item="">utilisateurs</li>
-    <li data-item="+">contributeurs</li>
-    <li data-item="+">entreprises</li>
-    <li data-item="+"><em lang="en">geeks</em>/<em lang="en">nerds</em></li>
-    <li data-item="+">…</li>
-    <li data-item="=">la commnauté lyonnaise PHP !</li>
-  </ul>
-
-  <p>Bienvenu :-) !</p>
-</section>
-
-<section>
   <h1>Bibliothèque</h1>
 
   <q>Une bibliothèque est un ensemble de fonctionnalités dédiées à la résolution
@@ -241,7 +226,7 @@ rolling-release
     <li><em lang="en">commits</em> : > 1 700</li>
     <li>contributeurs : 27</li>
     <li>installations <em>via</em> Packagist <small>(depuis septembre
-    2012)</small> : > 42 000</li>
+    2012)</small> : > 43 000</li>
     <li>sur Github : > 180 <em lang="en">forks</em> et 155 ★</li>
   </ul>
   <p><small>entre le 1 janvier 2013 et aujourd'hui</small></p>
@@ -298,16 +283,17 @@ rolling-release
 
   <p>Avantages :</p>
   <ul>
-    <li>Moins de code</li>
-    <li>Abstraite</li>
-    <li>Assemblage</li>
-    <li>Performance</li>
+    <li data-item="++">une tâche = une bibliothèque</li>
+    <li data-item="++">abstraite</li>
+    <li data-item="++">réutilisation de code</li>
+    <li data-item="++">meilleures performances (cache, optimisation…)</li>
+    <li data-item="++">assemblage (pas de « boîtes noires »)</li>
+    <li data-item="++">maintenance facilitée</li>
   </ul>
 
-  <p>Inconvénients :</p>
+  <p>Inconvénient :</p>
   <ul>
-    <li>Non full-stacks</li>
-    <li>Plus lent à démarrer mais pas à maintenir ou évoluer</li>
+    <li data-item="--">non <em lang="en">full-stack</em></li>
   </ul>
 </section>
 
@@ -320,7 +306,7 @@ rolling-release
   Hoa.Document.onReady(function ( ) {
 
       var paper       = Hoa.Graph(Hoa.$('#libraries_architecture'), 610, 350);
-      var core        = paper.rect( 10, 250, 590, 90, 3, 'Core');
+      var core        = paper.rect( 10, 250, 590, 90, 3, 'Base du noyau');
       var exception   = paper.rect( 10, 150, 110, 90, 3, 'Exception');
       var consistency = paper.rect(130, 150, 110, 90, 3, 'Consistency');
       var protocol    = paper.rect(250, 150, 110, 90, 3, 'Protocol');
@@ -335,21 +321,75 @@ rolling-release
 <section>
   <h1>Protocole <code>hoa://</code></h1>
 
-  <!--
-  dans les exemples, parler de Hoa\Registry
-  -->
+  <p>Format :
+     <code>hoa://<em>Root</em>[/<em>Component</em>]*[#<em>anchor</em>]</code></p>
+  <p>Abstrait l'accès à des ressources :</p>
+  <ul>
+    <li><code>hoa://Application</code>, à l'application</li>
+    <li><code>hoa://Data</code>, aux données de l'application</li>
+    <li><code>hoa://Library</code>, aux bibliothèques</li>
+  </ul>
+  <pre><code class="language-php">Hoa\Registry::set('foo', 'bar');
+var_dump(resolve('hoa://Library/Registry#foo'));</code></pre>
+  <pre><code class="language-php">require 'hoa://Data/Configuration/.Cache/Foo.php';</code></pre>
+  <pre><code class="language-shell">$ hoa compiler:pp hoa://Library/Json/Grammar.pp &lt;( echo '[1, 2, 3]' ) -v dump</code></pre>
+  <pre><code class="language-shell">$ hoa core:resolve --tree hoa://</code></pre>
 </section>
 
 <section>
-  <h1>Événements et écouteurs</h1>
+  <h1>Événements &amp; écouteurs</h1>
+
+  <p>Événements : asynchrones <small>(à l'enregistrement)</small>, anonymes
+     <small>(à l'utilisation)</small>, large diffussion à travers des composants
+     isolés</p>
+  <pre><code class="language-php">event('hoa://Event/Exception')->attach(new Hoa\File\Write('Foo.log'));</code></pre>
+  <p class="break">Écouteurs : synchrones <small>(à l'enregistrement)</small>,
+     identifiés <small>(à l'utilisation)</small>, interactions proches entre un
+     ou quelques composants</p>
+  <pre><code class="language-php">$server = new Hoa\Websocket\Server(…);
+$server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+
+    $source = $bucket->getSource(); // instanceof Hoa\Core\Event\Source
+    $data   = $bucket->getData();   // Array
+});</code></pre>
 </section>
 
 <section>
   <h1>Consistence</h1>
+
+  <p>Dans et entre les versions de PHP et Hoa :</p>
+  <ul>
+    <li><code>from</code>/<code>import</code>, manipule les classes</li>
+    <li><code>dnew</code>, <em lang="en">dynamic new</em></li>
+    <pre><code class="language-php">$object = dnew('(Symfony or Hoathis or Hoa)\Foo\Bar');</code></pre>
+    <li>gestion des entités et des mots-clés (<code>entityExists</code>,
+        <code>isKeyword</code>, <code>isIdentifier</code>…)</li>
+    <li><code>xcallable</code>, supporte et étend les
+        <em lang="en">callables</em> de PHP</li>
+    <li>compatibilité pour les versions antérieures (e.g.
+        <code>trait_exists</code> pour 5.3)</li>
+    <li>etc.</li>
+  </ul>
 </section>
 
 <section>
   <h1>Flux uniformisés</h1>
+
+  <p>Flux de PHP très puissants (!) uniformisés à travers plusieurs API et
+     interfaces de <code>Hoa\Stream</code> :</p>
+  <ul>
+    <li><code>In</code>, <code>Out</code>, <code>Bufferable</code>,
+    <code>Lockable</code>, <code>Pathable</code>, <code>Pointable</code>,
+    <code>Statable</code>, <code>Touchable</code> etc.</li>
+    <li>filtres : entre la source et votre programme</li>
+    <li><em lang="en">wrappers</em> : <code>hoa://<em>…</em></code>,
+        <code>afup://<em>…</em></code> etc.</li>
+    <li>flux composites : des flux qui embarquent des flux (e.g. un flux
+        XML lit sur un flux fichier)</li>
+    <li>etc.</li>
+  </ul>
+  <p>Exemples : <code>Hoa\File</code>, <code>Hoa\Socket</code>,
+     <code>Hoa\Http</code>…</p>
 </section>
 
 <section>
