@@ -1284,6 +1284,11 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
     $bundles[] = new \Hoathis\Bundle\BenchBundle\BenchBundle();
 }
         </code></pre></li>
+    <li><a href="">
+        <img src="http://static.hoa-project.net/Image/Logo/Github.png"
+             alt="Github"
+             style="height: 1.8em" />
+        Code source</a></li>
   </ul>
 </section>
 
@@ -1303,12 +1308,13 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
     }
 }
         </code></pre></li>
-    <li>Helper <a href="">Twig</a> :
+    <li>Helper <a href="http://twig.sensiolabs.org/">Twig</a> :
         <pre><code class="language-html">{% benchstart 'listing' %}
+
 {% for item in items %} … {% endfor %}
+
 {% benchstop 'listing' %}
         </code></pre></li>
-    <li>…</li>
   </ul>
 </section>
 
