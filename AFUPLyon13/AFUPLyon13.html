@@ -128,7 +128,9 @@ rolling-release
 
   <ol>
     <li>Présentation du projet</li>
-    <li></li>
+    <li>Quelques fondamentaux de Hoa</li>
+    <li>Bibliothèques phares</li>
+    <li>Conclusion</li>
   </ol>
 </section>
 
@@ -166,14 +168,14 @@ rolling-release
           alt="Github"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="https://github.com/hoaproject/">Github</a>,
-      sans <code>Library/</code> :</p>
+     sans <code>Library/</code> :</p>
   <pre><code class="language-shell">$ git clone https://github.com/hoaproject/Core.git</code></pre>
 
   <p><img src="http://static.hoa-project.net/Image/Logo/Composer.png"
           alt="Composer"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="http://getcomposer.org/">Composer</a>,
-       avec le schéma :</p>
+     avec le schéma :</p>
   <pre><code class="language-json">{ "require": { "hoa/core": "dev-master" }, "minimum-stability": "dev" }</code></pre>
   <p>… puis :</p>
   <pre><code class="language-shell">$ composer install</code></pre>
@@ -229,7 +231,7 @@ rolling-release
     2012)</small> : > 43 000</li>
     <li>sur Github : > 180 <em lang="en">forks</em> et 155 ★</li>
   </ul>
-  <p><small>entre le 1 janvier 2013 et aujourd'hui</small></p>
+  <p><small><sup>*</sup> entre le 1 janvier 2013 et aujourd'hui</small></p>
 </section>
 
 <section>
@@ -340,7 +342,7 @@ var_dump(resolve('hoa://Library/Registry#foo'));</code></pre>
   <h1>Événements &amp; écouteurs</h1>
 
   <p>Événements : asynchrones <small>(à l'enregistrement)</small>, anonymes
-     <small>(à l'utilisation)</small>, large diffussion à travers des composants
+     <small>(à l'utilisation)</small>, large diffusion à travers des composants
      isolés</p>
   <pre><code class="language-php">event('hoa://Event/Exception')->attach(new Hoa\File\Write('Foo.log'));</code></pre>
   <p class="break">Écouteurs : synchrones <small>(à l'enregistrement)</small>,
@@ -375,17 +377,19 @@ $server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
 <section>
   <h1>Flux uniformisés</h1>
 
-  <p>Flux de PHP très puissants (!) uniformisés à travers plusieurs API et
+  <p>Flux de PHP très puissants (!), uniformisés à travers plusieurs API et
      interfaces de <code>Hoa\Stream</code> :</p>
   <ul>
     <li><code>In</code>, <code>Out</code>, <code>Bufferable</code>,
     <code>Lockable</code>, <code>Pathable</code>, <code>Pointable</code>,
-    <code>Statable</code>, <code>Touchable</code> etc.</li>
+    <code>Statable</code>, <code>Touchable</code>
+    etc<small><small><code>able</code></small></small>.</li>
     <li>filtres : entre la source et votre programme</li>
     <li><em lang="en">wrappers</em> : <code>hoa://<em>…</em></code>,
-        <code>afup://<em>…</em></code> etc.</li>
-    <li>flux composites : des flux qui embarquent des flux (e.g. un flux
-        XML lit sur un flux fichier)</li>
+        <code>afup://<em>…</em></code>
+        etc<small><small>://</small></small>.</li>
+    <li>flux composites : des flux qui embarquent des flux, e.g. un flux
+        XML lit sur un flux fichier</li>
     <li>etc.</li>
   </ul>
   <p>Exemples : <code>Hoa\File</code>, <code>Hoa\Socket</code>,
@@ -393,15 +397,454 @@ $server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
 </section>
 
 <section>
+  <div>3</div>
+</section>
+
+<section>
   <h1>Hoa\Websocket</h1>
 
-  <!--
-  listeners + streams
-  -->
+  <p>WebSocket, protocole réseau standardisé
+     (<a href="https://tools.ietf.org/html/rfc6455">RFC6455</a>), full-duplex et
+     bidirectionnel ; communication <em>via</em> TCP ;
+     <em lang="en">handshake</em> <em>via</em> HTTP :</p>
+  <ul>
+    <li data-item="++">interactivité</li>
+    <li data-item="++">temps-réel</li>
+  </ul>
+  <p><code>Hoa\Websocket</code> propose un client et un serveur !</p>
+  <ul>
+    <li>support de la RFC6455 et
+        feu-<a href="https://tools.ietf.org/wg/hybi/draft-ietf-hybi-thewebsocketprotocol/">Hybi00</a>
+        <small>(ancien standard)</small></li>
+    <li>passe la <a href="http://autobahn.ws/testsuite/">suite de test
+        Autobahn</a> <small>(utilisée par Mozilla, Google, Microsoft, Apache,
+        Facebook, Red Hat…)</small></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Un message WebSocket<sup>*</sup></h1>
+
+  <pre style="background: none"> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-------+-+-------------+-------------------------------+
+|F|R|R|R| <strong>opcode</strong>|M| Payload len |    Extended payload length    |
+|I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
+|N|V|V|V|       |S|             |   (if payload len==126/127)   |
+| |1|2|3|       |K|             |                               |
++-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
+|     Extended payload length continued, if payload len == 127  |
++ - - - - - - - - - - - - - - - +-------------------------------+
+|                               |Masking-key, if MASK set to 1  |
++-------------------------------+-------------------------------+
+| Masking-key (continued)       |          Payload Data         |
++-------------------------------- - - - - - - - - - - - - - - - +
+:                     Payload Data continued ...                :
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+|                     Payload Data continued ...                |
++---------------------------------------------------------------+</pre>
+  <p><small><sup>*</sup>
+     <a href="https://tools.ietf.org/html/rfc6455#section-5.2">5.2.
+     <em lang="en">Base Framing Protocol</em></a></small></p>
+</section>
+
+<section>
+  <h1>Un serveur WebSocket</h1>
+
+  <p>Flux : <code>Hoa\Socket\Server</code> écoute
+     <code>127.0.0.1:8889</code></p>
+  <p>Écouteurs : <code>open</code>, <code>message</code>,
+  <code>binary-message</code>, <code>ping</code>, <code>error</code> et
+  <code>close</code></p>
+  <p>Exemple d'un écho :</p>
+  <pre><code class="language-php">$server = new Hoa\Websocket\Server(
+    new Hoa\Socket\Server('tcp://127.0.01:8889')
+);
+$server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+
+    $message = $bucket->getData()['message'];
+
+    echo 'Message: ', $message, "\n";
+    $bucket->getSource()->send($message);
+
+    return;
+});
+$server->run();</code></pre>
+</section>
+
+<section>
+  <h1>Un client WebSocket <small>(<code>.html</code>)</small></h1>
+
+  <p class="tright">
+    <button onclick="websocketFlip()">↻</button>
+  </p>
+  <div id="websocket_flip" class="flip-container" style="height: 380px">
+    <div class="flipper">
+      <div class="front">
+        <pre><code class="language-markup">&lt;input type="text" id="input" placeholder="Message…" />
+&lt;pre id="output">&lt;/pre>
+
+&lt;script>
+  var host   = 'ws://127.0.0.1:8889';
+  var socket = null;
+  var input  = document.getElementById('input');
+  var output = document.getElementById('output');
+  var print  = function ( message ) {
+
+      var samp       = document.createElement('samp');
+      samp.innerHTML = message + '\n';
+      output.appendChild(samp);
+
+      return;
+  };
+
+  input.addEventListener('keyup', function ( evt ) {
+
+      if(13 === evt.keyCode) {
+
+          var msg = input.value;
+
+          if(!msg)
+              return;
+
+          try {
+
+              socket.send(msg);
+              input.value = '';
+              input.focus();
+          }
+          catch ( e ) {
+
+              console.log(e);
+          }
+
+          return;
+      }
+  });
+
+  try {
+
+      socket = new WebSocket(host);
+      socket.onopen = function ( ) {
+
+          print('connection is opened');
+          input.focus();
+
+          return;
+      };
+      socket.onmessage = function ( msg ) {
+
+          print(msg.data);
+
+          return;
+      };
+      socket.onclose = function ( ) {
+
+          print('connection is closed');
+
+          return;
+      };
+  }
+  catch ( e ) {
+
+      console.log(e);
+  }
+&lt;/script></code></pre>
+      </div>
+      <div class="back">
+        <input type="text" id="websocket_flip_input" placeholder="Message…" />
+        <pre id="websocket_flip_output" style="min-height: 300px"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var websocketFlip;
+
+    (function ( ) {
+
+        var host   = 'ws://127.0.0.1:8889';
+        var socket = null;
+        var input  = Hoa.$('#websocket_flip_input');
+        var output = Hoa.$('#websocket_flip_output');
+        var print  = function ( message ) {
+
+            var samp       = document.createElement('samp');
+            samp.innerHTML = message + '\n';
+            output.appendChild(samp);
+
+            return;
+        };
+
+        input.addEventListener('keyup', function ( evt ) {
+
+            if(13 === evt.keyCode) {
+
+                var msg = input.value;
+
+                if(!msg)
+                    return;
+
+                try {
+
+                    socket.send(msg);
+                    input.value = '';
+                    input.focus();
+                }
+                catch ( e ) {
+
+                    console.log(e);
+                }
+
+                return;
+            }
+        });
+
+        websocketFlip = function ( ) {
+
+            $('#websocket_flip').classList.toggle('toggle');
+
+            if(null === socket || WebSocket.OPEN !== socket.readyState) {
+
+                try {
+                    socket = new WebSocket(host);
+                    socket.onopen = function ( ) {
+
+                        print('connection is opened');
+                        input.focus();
+
+                        return;
+                    };
+                    socket.onmessage = function ( msg ) {
+
+                        print(msg.data);
+
+                        return;
+                    };
+                    socket.onclose = function ( ) {
+
+                        print('connection is closed');
+
+                        return;
+                    };
+                }
+                catch ( e ) {
+
+                    console.log(e);
+                }
+            }
+            else
+                socket.close();
+        }
+    })()
+  </script>
+</section>
+
+<section>
+  <h1>Un client WebSocket <small>(<code>.php</code>)</small></h1>
+
+  <p>Flux : <code>Hoa\Socket\Client</code> écoute <code>127.0.0.1:8889</code></p>
+  <p>Écouteurs : les mêmes (hérités de <code>Hoa\Websocket\Connection</code>)</p>
+  <p>Exemple en CLI d'un prompt qui envoie des messages :</p>
+  <pre style="max-height: 300px"><code class="language-php">$readline = new \Hoa\Console\Readline();
+$client   = new \Hoa\Websocket\Client(
+    new \Hoa\Socket\Client('tcp://127.0.0.1:8889')
+);
+$client->setHost('localhost');
+$client->connect();
+
+do {
+
+    $line = $readline->readLine('> ');
+
+    if(false === $line || 'quit' === $line)
+        break;
+
+    $client->send($line);
+
+} while(true);</code></pre>
+</section>
+
+<section>
+  <h1>Un serveur WebSocket</h1>
+
+  <p>Exemple <del>d'un écho</del> de <em lang="en">broadcast</em> :</p>
+  <pre data-line="9"><code class="language-php">$server = new Hoa\Websocket\Server(
+    new Hoa\Socket\Server('tcp://127.0.01:8889')
+);
+$server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+
+    $message = $bucket->getData()['message'];
+
+    echo 'Message: ', $message, "\n";
+    $bucket->getSource()->broadcast($message);
+
+    return;
+});
+$server->run();</code></pre>
 </section>
 
 <section>
   <h1>Hoa\Console</h1>
+
+  <p>Basée sur le standard
+     <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-048.pdf">ECMA-48</a>
+     et des API très proches de
+     <a href="http://linux.org/">Linux</a>,
+     <a href="http://freebsd.org/">FreeBSD</a> ou
+     <a href="https://en.wikipedia.org/wiki/UNIX_System_V">System V</a></p>
+  <ul>
+    <li><code>Console</code>, socle commun</li>
+    <li><code>Cursor</code>, pour manipuler le curseur</li>
+    <li><code>Window</code>, pour manipuler la fenêtre</li>
+    <li><code>GetOption</code>, pour manipuler les options d'une commande</li>
+    <li><code>Readline</code>, pour une lecture avancée de ligne</li>
+    <li><code>Processus</code>, pour manipuler des processus</li>
+    <li>etc.</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Jouer avec le curseur</h1>
+
+  <pre><code class="language-php">use Hoa\Console\Cursor as Cursor;</code></pre>
+  <p>Les couleurs :</p>
+  <pre><code class="language-php">Cursor::colorize('underlined foreground(yellow) background(#932e2e)');
+echo 'foo';
+Cursor::colorize('!underlined background(normal)');
+echo 'bar';
+</code></pre>
+  <p>Les déplacements :</p>
+  <pre><code class="language-php">Cursor::save();
+Cursor::hide();
+Cursor::move('← ← ← ↓ ↓');
+Cursor::clear('↔');
+echo 'New line!';
+Cursor::restore();
+Cursor::show();</code></pre>
+  <p>Mais aussi : <code>getPosition</code>, <code>moveTo</code>,
+     <code>setStyle</code> etc.</p>
+</section>
+
+<section>
+  <h1>Jouer avec la fenêtre</h1>
+
+  <pre><code class="language-php">use Hoa\Console\Window as Window;</code></pre>
+  <p>La taille et la position :</p>
+  <pre><code class="language-php">Window::setSize(80, 50);
+var_dump(Window::getPosition());</code></pre>
+  <p>L'état :</p>
+  <pre><code class="language-php">Window::minimize();
+Window::restore();
+Window::raise();
+Window::lower();</code></pre>
+  <p>Le contenu :</p>
+  <pre><code class="language-php">Window::scroll('↑ ↑ ↑');
+Window::refresh();</code></pre>
+  <p>Mais aussi : <code>setTitle</code>, <code>getTitle</code>,
+     <code>getLabel</code>, <code>copy</code> etc.</p>
+</section>
+
+<section>
+  <h1>Lecture avancée de ligne</h1>
+
+  <p>Opérations supportées : édition avancée, historique, auto-complétion et
+     UTF-8 :</p>
+  <ul>
+    <li><kbd>↑</kbd> et <kbd>↓</kbd>, manipuler l'historique</li>
+    <li><kbd>←</kbd> et <kbd>→</kbd>, déplacer le curseur sur la ligne</li>
+    <li><kbd>Ctrl</kbd> + <kbd>A</kbd>, se déplacer au début,
+        <kbd>E</kbd> en fin</li>
+    <li><kbd>Ctrl</kbd> + <kbd>B</kbd>, se déplacer en arrière d'un mot,
+         <kbd>F</kbd> en avant</li>
+    <li><kbd>⌫</kbd>, supprimer un caractère</li>
+    <li><kbd>Ctrl</kbd> + <kbd>W</kbd>, supprimer jusqu'au début du mot</li>
+    <li><kbd>⇥</kbd>, pour auto-compléter le mot</li>
+    <li><kbd>↵</kbd>, pour envoyer la ligne</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Auto-complétion</h1>
+
+  <p><code>Hoa\Console\Readline\Autocompletion\Word</code> avec la liste des
+     fonctions PHP :</p>
+  <pre><code class="language-php">$readline = new Hoa\Console\Readline();
+$readline->setAutocompleter(new Hoa\Console\Readline\Autocompleter\Word(
+    get_defined_functions()['internal']
+));
+
+do {
+
+    $line = $readline->readLine('> ');
+
+    if(false === $line || 'quit' === $line)
+        break;
+
+    echo $line, "\n";
+
+} while(true);</code></pre>
+  <p>Fonctionne avec un <em lang="en">pipe</em> ou une redirection !</p>
+</section>
+
+<section>
+  <h1>Ajouter un raccourci</h1>
+
+  <p>Inverser la casse de la ligne avec <kbd>Ctrl</kbd> + <kbd>R</kbd> :</p>
+  <pre><code class="language-php">$readline->addMapping('\C-R', function ( Hoa\Console\Readline $self ) {
+
+    // Clear the line.
+    Hoa\Console\Cursor::clear('↔');
+    echo $self->getPrefix();
+
+    // Get the line text.
+    $line = $self->getLine();
+
+    // New line.
+    $new  = null;
+
+    // Loop over all characters.
+    for($i = 0, $max = $self->getLineLength(); $i &lt; $max; ++$i) {
+
+        $char = mb_substr($line, $i, 1);
+
+        if($char === $lower = mb_strtolower($char))
+            $new .= mb_strtoupper($char);
+        else
+            $new .= $lower;
+    }
+
+    // Set the new line.
+    $self->setLine($new);
+
+    // Set the buffer (and let the readline echoes or not).
+    $self->setBuffer($new);
+
+    // The readline will continue to read.
+    return $self::STATE_CONTINUE;
+});</code></pre>
+</section>
+
+<section>
+  <h1>Processus</h1>
+
+  <p>Exécution rapide :</p>
+  <pre><code class="language-php">var_dump(Hoa\Console\Processus::execute('id -u -n');</code></pre>
+  <p>Exécution « dynamique », écouteurs <code>start</code>, <code>stop</code>,
+     <code>input</code>, <code>output</code> et <code>timeout</code> :</p>
+  <pre><code class="language-php">$processus = new Hoa\Console\Processus($command);
+$processus->on('input', function ( $bucket ) {
+
+    $bucket->getSource()->writeAll(…);
+
+    return false; // means to close the pipe.
+});
+$processus->on('output', function ( $bucket ) {
+
+    echo $bucket->getData()['line'], "\n";
+});
+$processus->run();
+  </code></pre>
 </section>
 
 <section>
