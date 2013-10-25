@@ -1206,6 +1206,52 @@ var_dump(
 </section>
 
 <section>
+  <h1>Hoathis\BenchBundle</h1>
+
+  <ul>
+    <li>Bundle basé sur la bibliothèque <a href="http://hoa-project.net/Literature/Hack/Bench.html">Hoa\Bench</a></li>
+    <li>Totalement intégré au <em>profiler</em> et à la console</li>
+    <li>Installation :
+        <pre><code class="language-json">{ "require-dev": { "hoathis/bench-bundle": "dev-master" } }</code></pre></li>
+    <li>Démarrage :
+        <pre><code class="language-php">&lt;?php
+//app/AppKernel.php
+
+if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+    …
+
+    $bundles[] = new \Hoathis\Bundle\BenchBundle\BenchBundle();
+}
+        </code></pre></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Hoathis\BenchBundle</h1>
+
+  <ul>
+    <li>Service <em>bench</em> dans les controlleurs :
+        <pre><code class="language-php">class FooController extends Controller {
+    public function barAction()
+    {
+        $this->container->get('bench')->foo->start();
+        …
+        $this->container->get('bench')->foo->stop();
+
+        return new Response();
+    }
+}
+        </code></pre></li>
+    <li>Helper <a href="">Twig</a> :
+        <pre><code class="language-html">{% benchstart 'listing' %}
+{% for item in items %} … {% endfor %}
+{% benchstop 'listing' %}
+        </code></pre></li>
+    <li>…</li>
+  </ul>
+</section>
+
+<section>
   <h1>Sohoa</h1>
 
   <p>Hoa est un ensemble de bibliothèques</p>
