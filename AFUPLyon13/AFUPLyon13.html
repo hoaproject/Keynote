@@ -1048,7 +1048,7 @@ var_dump(
 </section>
 
 <section>
-  <h1>Hoa\Praspel</h1>
+  <h1>Praspel</h1>
 
   <p><em lang="en">PHP Realistic Annotation and SPEcification Language</em></p>
   <p class="break">Programmation par contrat</p>
@@ -1057,6 +1057,7 @@ var_dump(
   <p>Inclue dans les commentaires <code>/** … */</code> du code source au niveau
      des données : attributs et méthodes</p>
   <p class="break">Sujet de thèse, développée au DISC et à l'INRIA</p>
+  <p>3 articles scientifiques publiés et 1 journal en préparation</p>
   <p>Unir plusieurs théories au sein d'un langage simple et efficace</p>
 </section>
 
@@ -1065,9 +1066,11 @@ var_dump(
 
   <p><em lang="en">Design-by-Contract</em> :</p>
   <ul>
-    <li><em lang="en">caller</em> : « je m'engage à satisfaire ta précondition »</li>
-    <li><em lang="en">callee</em> : « je m'engage à établir ma postcondition »</li>
-    <li>invariants satisfaits avant et après l'exécution du <em lang="en">callee</em></li>
+    <li data-item="—"><em lang="en">caller</em> : « je m'engage à satisfaire ta
+        précondition »</li>
+    <li data-item="—"><em lang="en">callee</em> : « je m'engage à établir ma
+        postcondition »</li>
+    <li data-item="">invariants satisfaits avant et après l'exécution du <em lang="en">callee</em></li>
   </ul>
   <div id="design_by_contract" class="verbatim schema"></div>
   <script>
@@ -1127,33 +1130,29 @@ var_dump(
     <ul>
       <li data-item="">préambule</li>
       <li data-item="+">données de test</li>
-      <li data-item="+">exécution</li>
       <li data-item="+">oracle</li>
-      <li data-item="=">test</li>
+      <li data-item="=">cas de test</li>
     </ul>
   </div>
   <div class="fright" style="width: 65%">
     <ul>
       <li data-item=""> </li>
       <li data-item="++">génération de données automatique<sup>*</sup></li>
-      <li data-item=""> </li>
       <li data-item="++">fournie par le contrat</li>
-      <li data-item="++">écrit avec l'API d'atoum
+      <li data-item="++">écrit avec l'API d'atoum<sup>**</sup>
         <ul>
           <li>parce qu'atoum c'est bien !</li>
+          <li><em lang="en">hackable</em></li>
           <li>intégré aux outils industriels</li>
-          <li>cocorico</li>
         </ul>
       </li>
     </ul>
   </div>
-  <p class="clear break"><sup>*</sup> Amusons-nous avec <code>hoa
-     praspel:shell</code> !</p>
-  <p><sup>**</sup> Amusons-nous avec… <code>Hoathis\Atoum</code> !</p>
-</section>
-
-<section>
-  <h1>Hoathis\Atoum</h1>
+  <p class="clear break">Suite de test : ensemble de cas de tests</p>
+  <p><small><sup>*</sup> Amusons-nous avec <code>hoa
+     praspel:shell</code> !</small></p>
+  <p><small><sup>**</sup> Amusons-nous avec… <code>hoa hoathis
+     atoum:generate</code> !</small></p>
 </section>
 
 <section>
