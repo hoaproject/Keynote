@@ -636,7 +636,7 @@ $server->run();</code></pre>
   <h1>Un client WebSocket <small>(<code>.php</code>)</small></h1>
 
   <p>Flux : <code>Hoa\Socket\Client</code> écoute <code>127.0.0.1:8889</code></p>
-  <p>Écouteurs : les mêmes (hérités de <code>Hoa\Websocket\Connection</code>)</p>
+  <p>Écouteurs : les mêmes</p>
   <p>Exemple en CLI d'un prompt qui envoie des messages :</p>
   <pre style="max-height: 300px"><code class="language-php">$readline = new Hoa\Console\Readline();
 $client   = new Hoa\Websocket\Client(
@@ -685,15 +685,21 @@ $server->run();</code></pre>
      <a href="http://linux.org/">Linux</a>,
      <a href="http://freebsd.org/">FreeBSD</a> ou
      <a href="https://en.wikipedia.org/wiki/UNIX_System_V">System V</a></p>
-  <ul>
-    <li><code>Console</code>, socle commun</li>
-    <li><code>Cursor</code>, pour manipuler le curseur</li>
-    <li><code>Window</code>, pour manipuler la fenêtre</li>
-    <li><code>GetOption</code>, pour manipuler les options d'une commande</li>
-    <li><code>Readline</code>, pour une lecture avancée de ligne</li>
-    <li><code>Processus</code>, pour manipuler des processus</li>
-    <li>etc.</li>
-  </ul>
+  <div id="console_architecture" class="schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper          = Hoa.Graph(Hoa.$('#console_architecture'), 780, 330);
+      var console        = paper.rect( 10, 230, 760, 90, 3, 'Console');
+      var cursor         = paper.rect( 10, 120, 110, 90, 3, 'Cursor');
+      var window         = paper.rect(140, 120, 110, 90, 3, 'Window');
+      var getoption      = paper.rect(270, 120, 110, 90, 3, 'GetOption');
+      var readline       = paper.rect(400, 120, 110, 90, 3, 'Readline');
+      var autocompletion = paper.rect(400,  10, 110, 90, 3, 'Autocomp.');
+      var processus      = paper.rect(530, 120, 110, 90, 3, 'Processus');
+      var other          = paper.rect(660, 120, 110, 90, 3, '…');
+  });
+  </script>
 </section>
 
 <section>
@@ -835,8 +841,7 @@ $processus->on('output', function ( $bucket ) {
 
     echo $bucket->getData()['line'], "\n";
 });
-$processus->run();
-  </code></pre>
+$processus->run();</code></pre>
 </section>
 
 <section>
@@ -866,7 +871,7 @@ $processus->run();
     </script>
     <li>séquence valide transformée en AST (arbre)</li>
   </ul>
-  <p>Grammaire écrite en langage PP <small>(langage maison)</small></p>
+  <p>Grammaire écrite en langage PP (langage maison)</p>
 </section>
 
 <section>
@@ -952,7 +957,7 @@ echo $dump->visit($ast);
     <li>vérification de types</li>
     <li>optimisations diverses</li>
     <li>exécution<sup>*</sup></li>
-    <li>transformation vers un autre langage (e.g. PHP, opcode, asm…)<sup>**</sup></li>
+    <li>transformation vers un autre langage (e.g. opcode, asm…)<sup>**</sup></li>
   </ul>
   <p class="break"><small><sup>*</sup> « interprétation »</small></p>
   <p><small><sup>**</sup> « compilation »</small></p>
@@ -970,7 +975,7 @@ echo $dump->visit($ast);
         bornée, par couverture</li>
   </ul>
   <p>Exemple avec la grammaire des… <a href="http://pcre.org/">PCRE</a>
-     <small>(voir <code>Hoa\Regex</code>)</small></p>
+     (voir <code>Hoa\Regex</code>)</p>
   <pre><code class="language-shell">$ hoa praspel:shell
 // …
 > regex: /fo{2,4}ba[rz]+/
@@ -983,8 +988,10 @@ echo $dump->visit($ast);
 <section>
   <h1>Hoa\Ruler</h1>
 
-  <p>Bel exemple d'utilisation de <code>Hoa\Compiler</code>, par
-     <a href="http://verylastroom.com/">VeryLastRoom</a></p>
+  <img src="http://static.hoa-project.net/Image/WhoUse/Verylastroom.png"
+       class="banner" style="right: 15%" />
+
+  <p>Bel exemple d'utilisation de <code>Hoa\Compiler</code></p>
   <p>Moteur de règles, écrites dans un langage dédié, proche d'SQL</p>
   <pre><code class="language-php">$ruler = new Hoa\Ruler();
 
@@ -1042,6 +1049,107 @@ var_dump(
 
 <section>
   <h1>Hoa\Praspel</h1>
+
+  <p><em lang="en">PHP Realistic Annotation and SPEcification Language</em></p>
+  <p class="break">Programmation par contrat</p>
+  <p>Décrit un modèle en utilisant des annotations</p>
+  <p>Contraintes formelles : pré-, postconditions et invariants</p>
+  <p>Inclue dans les commentaires <code>/** … */</code> du code source au niveau
+     des données : attributs et méthodes</p>
+  <p class="break">Sujet de thèse, développée au DISC et à l'INRIA</p>
+  <p>Unir plusieurs théories au sein d'un langage simple et efficace</p>
+</section>
+
+<section>
+  <h1>Que faire d'un contrat ?</h1>
+
+  <p><em lang="en">Design-by-Contract</em> :</p>
+  <ul>
+    <li><em lang="en">caller</em> : « je m'engage à satisfaire ta précondition »</li>
+    <li><em lang="en">callee</em> : « je m'engage à établir ma postcondition »</li>
+    <li>invariants satisfaits avant et après l'exécution du <em lang="en">callee</em></li>
+  </ul>
+  <div id="design_by_contract" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper      = Hoa.Graph(Hoa.$('#design_by_contract'), 800, 150);
+      var grid       = paper.grid(0, 0, 800, 150, 5, 1);
+      var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+      var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
+      var method     = grid.push(paper.circle(0, 0, 30));
+      var _method    = paper.text(390, 20, 'méthode');
+      var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
+      var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+
+      paper.link.between(invariant1, pre);
+      paper.link.between(pre, method);
+      paper.link.between(method, post);
+      paper.link.between(post, invariant2);
+  });
+  </script>
+  <p><em lang="en">Contract-based testing</em> :</p>
+  <ul>
+    <li>utilise les préconditions pour générer des données de tests</li>
+    <li>utilise les postconditions et invariants pour établir le verdict sur
+    test</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Exemple basique</h1>
+
+  <pre><code class="language-php">class C {
+
+    /**
+     * @invariant foo: float();
+     */
+    protected $foo = 0;
+
+    /**
+     * @requires x      : integer() or string('a', 'z', 1);
+     * @ensures  \result: boolean();
+     */
+    public function f ( $x ) { … }
+}</code></pre>
+  <ul>
+    <li><code>@invariant</code>, invariant</li>
+    <li><code>@requires</code>, précondition</li>
+    <li><code>@ensures</code>, postcondition</li>
+    <li>et d'autres : <code>@throwable</code>, <code>@behavior</code> etc.</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Qu'est-ce qu'un test ?</h1>
+
+  <div class="fleft">
+    <ul>
+      <li data-item="">préambule</li>
+      <li data-item="+">données de test</li>
+      <li data-item="+">exécution</li>
+      <li data-item="+">oracle</li>
+      <li data-item="=">test</li>
+    </ul>
+  </div>
+  <div class="fright" style="width: 65%">
+    <ul>
+      <li data-item=""> </li>
+      <li data-item="++">génération de données automatique<sup>*</sup></li>
+      <li data-item=""> </li>
+      <li data-item="++">fournie par le contrat</li>
+      <li data-item="++">écrit avec l'API d'atoum
+        <ul>
+          <li>parce qu'atoum c'est bien !</li>
+          <li>intégré aux outils industriels</li>
+          <li>cocorico</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <p class="clear break"><sup>*</sup> Amusons-nous avec <code>hoa
+     praspel:shell</code> !</p>
+  <p><sup>**</sup> Amusons-nous avec… <code>Hoathis\Atoum</code> !</p>
 </section>
 
 <section>
