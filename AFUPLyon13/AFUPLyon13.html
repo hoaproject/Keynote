@@ -53,23 +53,25 @@ rolling-release
         <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
   </ul>
 
-  <math>
-    <mrow>
-      <mtext>ivan.enderlin@</mtext>
-      <mo>{</mo>
-      <mtable>
-        <mtr>
-          <mtd><mtext>hoa-project.net</mtext></mtd>
-        </mtr>
-        <mtr>
-          <mtd><mtext>atoum.org</mtext></mtd>
-        </mtr>
-        <mtr>
-          <mtd><mtext>inria.fr</mtext></mtd>
-        </mtr>
-      </mtable>
-    </mrow>
-  </math>
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net</mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org</mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>inria.fr</mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
 </section>
 
 <section>
@@ -103,12 +105,14 @@ rolling-release
 </section>
 
 <section>
-  <h1>Bibliothèque</h1>
+  <h1>Philosophie</h1>
 
-  <q>Une bibliothèque est un ensemble de fonctionnalités dédiées à la résolution
-  d'un problème précis et isolé, grâce à son abstraction la plus élevée</q>
-  <q>L'abstraction permet de s'adapter à plus de formes de problèmes</q>
-  <p>La Force est dans l'abstraction</p>
+  <blockquote>Une bibliothèque est un ensemble de fonctionnalités dédiées à la
+  résolution d'un problème précis et isolé, grâce à son abstraction la plus
+  élevée</blockquote>
+  <blockquote>L'abstraction permet de s'adapter à plus de formes de
+  problèmes</blockquote>
+  <p class="tcenter">La Force est dans l'abstraction</p>
 </section>
 
 <section>
@@ -128,18 +132,18 @@ rolling-release
 
   <ol>
     <li>Présentation du projet</li>
-    <li>Quelques fondamentaux de Hoa</li>
+    <li>Quelques fondamentaux</li>
     <li>Bibliothèques phares</li>
     <li>Conclusion</li>
   </ol>
 </section>
 
 <section class="chapter">
-  <div>1</div>
+  <h1>1 <span>Présentation du projet</span></h1>
 </section>
 
 <section>
-  <h1>Projets distribués<sup>*</sup></h1>
+  <h1>Projets distribués</h1>
 
   <ul>
     <li><code>Central</code> : l'ensemble de toutes les bibliothèques Hoa
@@ -151,7 +155,7 @@ rolling-release
     <li><code>Bhoat</code> : le robot qui maintient les différents projets de
     Hoa</li>
   </ul>
-  <p><small><sup>*</sup> liste non exhaustive !</small></p>
+  <p><a href="http://git.hoa-project.net">Liste complète</a></p>
 </section>
 
 <section>
@@ -185,7 +189,7 @@ rolling-release
 </section>
 
 <section>
-  <h1>Bibliothèques</h1>
+  <h1>Structure des bibliothèques</h1>
 
   <ul>
     <li>sources à la racine</li>
@@ -214,7 +218,15 @@ rolling-release
 </section>
 
 <section>
-  <h1>Rolling-release</h1>
+  <h1><em lang="en">Rolling-release</em></h1>
+
+  <ul>
+    <li>Pas de version !</li>
+    <li><em lang="en">master</em> toujours fonctionnel</li>
+    <li><em lang="en">Tags</em> réguliers pour des mises à jour non
+        quotidiennes</li>
+    <li>Nécessite une grande qualité (tests, API etc.)</li>
+  </ul>
 </section>
 
 <section>
@@ -228,7 +240,7 @@ rolling-release
     <li><em lang="en">commits</em> : > 1 700</li>
     <li>contributeurs : 27</li>
     <li>installations <em>via</em> Packagist <small>(depuis septembre
-    2012)</small> : > 43 000</li>
+    2012)</small> : > 44 000</li>
     <li>sur Github : > 180 <em lang="en">forks</em> et 155 ★</li>
   </ul>
   <p><small><sup>*</sup> entre le 1 janvier 2013 et aujourd'hui</small></p>
@@ -258,22 +270,24 @@ rolling-release
   <ul>
     <li>3 pays : France, Suisse et Belgique <small>(+ 2 autres pays
     ponctuellement)</small></li>
-    <li>IRC : irc.freenode.org #hoaproject</li>
-    <li>Mailing-lists</li>
+    <li>IRC :
+        <a href="irc://irc.freenode.net#hoaproject">irc.freenode.org#hoaproject</a></li>
+    <li>Mailing-lists @lists.hoa-project.net : <em lang="en">development</em>,
+        <em lang="en">support</em>, <em lang="en">internal</em> etc.</li>
     <li><a href="http://hoa-project.net/Foundation.html">Association</a> à but
     non-lucratif, objectifs :
-    <blockquote>soutenir le projet Hoa en développant, déployant et faisant la
-    promotion des logiciels libres issus de Hoa Project, de ses produits dérivés
-    et des projets associés</blockquote></li>
+    <p class="break"><em>soutenir le projet Hoa en développant, déployant et
+    faisant la promotion des logiciels libres issus de Hoa Project, de ses
+    produits dérivés et des projets associés</em></p></li>
   </ul>
 </section>
 
 <section class="chapter">
-  <div>2</div>
+  <h1>2 <span>Quelques fondamentaux</span></h1>
 </section>
 
 <section>
-  <h1>Bibliothèques</h1>
+  <h1>Bibliothèque</h1>
 
   <p>Avantages :</p>
   <ul>
@@ -310,6 +324,7 @@ rolling-release
 
   });
   </script>
+  <p>Charge en &lt; 5ms.</p>
 </section>
 
 <section>
@@ -324,7 +339,7 @@ rolling-release
     <li><code>hoa://Library</code>, aux bibliothèques</li>
   </ul>
   <pre><code class="language-php">Hoa\Registry::set('foo', 'bar');
-var_dump(resolve('hoa://Library/Registry#foo'));</code></pre>
+var_dump(resolve('hoa://Library/Registry#foo')); // string(3) "bar"</code></pre>
   <pre><code class="language-php">require 'hoa://Data/Configuration/.Cache/Foo.php';</code></pre>
   <pre><code class="language-shell">$ hoa compiler:pp hoa://Library/Json/Grammar.pp &lt;( echo '[1, 2, 3]' ) -v dump</code></pre>
   <pre><code class="language-shell">$ hoa core:resolve --tree hoa://</code></pre>
@@ -388,8 +403,8 @@ $server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
      <code>Hoa\Http</code>…</p>
 </section>
 
-<section>
-  <div>3</div>
+<section class="chapter">
+  <h1>3 <span>Bibliothèques phares</span></h1>
 </section>
 
 <section>
@@ -403,12 +418,12 @@ $server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
     <li data-item="++">interactivité</li>
     <li data-item="++">temps-réel</li>
   </ul>
-  <p><code>Hoa\Websocket</code> propose un client et un serveur !</p>
+  <p><code>Hoa\Websocket</code> propose un client et un serveur :</p>
   <ul>
     <li>support de la RFC6455 et
         feu-<a href="https://tools.ietf.org/wg/hybi/draft-ietf-hybi-thewebsocketprotocol/">Hybi00</a>
         <small>(ancien standard)</small></li>
-    <li>passe la <a href="http://autobahn.ws/testsuite/">suite de test
+    <li>passe la <a href="http://autobahn.ws/testsuite/">suite de tests
         Autobahn</a> <small>(utilisée par Mozilla, Google, Microsoft, Apache,
         Facebook, Red Hat…)</small></li>
   </ul>
@@ -827,7 +842,7 @@ do {
   <h1>Processus</h1>
 
   <p>Exécution rapide :</p>
-  <pre><code class="language-php">var_dump(Hoa\Console\Processus::execute('id -u -n');</code></pre>
+  <pre><code class="language-php">var_dump(Hoa\Console\Processus::execute('id -u -n'));</code></pre>
   <p>Exécution « dynamique », écouteurs <code>start</code>, <code>stop</code>,
      <code>input</code>, <code>output</code> et <code>timeout</code> :</p>
   <pre><code class="language-php">$processus = new Hoa\Console\Processus($command);
@@ -959,8 +974,8 @@ echo $dump->visit($ast);
     <li>exécution<sup>*</sup></li>
     <li>transformation vers un autre langage (e.g. opcode, asm…)<sup>**</sup></li>
   </ul>
-  <p class="break"><small><sup>*</sup> « interprétation »</small></p>
-  <p><small><sup>**</sup> « compilation »</small></p>
+  <p class="break"><small><sup>*</sup> « langage interprété »</small></p>
+  <p><small><sup>**</sup> « langage compilé »</small></p>
 </section>
 
 <section>
@@ -1041,7 +1056,7 @@ var_dump(
   <pre><code class="language-php">$database->save(
     serialize(
         Hoa\Ruler::interprete(
-            'logged(user) and group in ("customer", "guest") and points > 30'
+            'group in ("customer", "guest") and points > 30'
         ) // rule → AST → interpreter → model
     ) // model → serialized
 );</code></pre>
@@ -1056,7 +1071,9 @@ var_dump(
   <p>Contraintes formelles : pré-, postconditions et invariants</p>
   <p>Inclue dans les commentaires <code>/** … */</code> du code source au niveau
      des données : attributs et méthodes</p>
-  <p class="break">Sujet de thèse, développée au DISC et à l'INRIA</p>
+  <p class="break">Sujet de thèse, effectuée au
+     <a href="http://disc.univ-fcomte.fr/">DISC</a> et à
+     l'<a href="http://www.inria.fr/">INRIA</a></p>
   <p>3 articles scientifiques publiés et 1 journal en préparation</p>
   <p>Unir plusieurs théories au sein d'un langage simple et efficace</p>
 </section>
@@ -1080,8 +1097,8 @@ var_dump(
       var grid       = paper.grid(0, 0, 800, 150, 5, 1);
       var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
       var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
-      var method     = grid.push(paper.circle(0, 0, 30));
-      var _method    = paper.text(390, 20, 'méthode');
+      var method     = grid.push(paper.circle(0, 0, 25));
+      var _method    = paper.text(400, 20, 'méthode');
       var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
       var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
 
@@ -1142,7 +1159,7 @@ var_dump(
       <li data-item="++">écrit avec l'API d'atoum<sup>**</sup>
         <ul>
           <li>parce qu'atoum c'est bien !</li>
-          <li><em lang="en">hackable</em></li>
+          <li>aussi <em lang="en">hackable</em> que Hoa</li>
           <li>intégré aux outils industriels</li>
         </ul>
       </li>
@@ -1161,8 +1178,38 @@ var_dump(
 
 <section>
   <h1>Sohoa</h1>
+
+  <p>Hoa est un ensemble de bibliothèques</p>
+  <p>Sohoa est un framework construit avec Hoa :</p>
+  <ul>
+    <li>projet guidé et maintenu par la communauté</li>
+    <li>premiers balbutiements</li>
+    <li>permet d'éprouver et améliorer Hoa</li>
+    <li>propose des sur-couches « applicatives » aux bibliothèques
+        standards</li>
+  </ul>
+  <p>Voir <a href="https://github.com/sohoa">github.com/sohoa</a></p>
 </section>
 
+<section class="chapter">
+  <h1>4 <span>Conclusion</span></h1>
+</section>
+
+<section>
+  <h1>Contributions</h1>
+
+  <p>Hoa :</p>
+  <ul>
+    <li>un ensemble de bibliothèques PHP <strong>modulaires</strong>,
+    <strong>extensibles</strong> et <strong>structurées</strong></li>
+    <li>un pont entre le monde de la recherche et de l'industrie</li>
+    <li>un environnement pour développer des bibliothèques</li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <h1>Merci ! <span>☺︎</span></h1>
+</section>
 
 <div id="progress-bar"></div>
 
