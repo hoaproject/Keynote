@@ -79,11 +79,28 @@ rolling-release
 
   <p>Julien Bianchi</p>
   <ul>
-    <li>foo</li>
-    <li>bar</li>
-    <li>baz</li>
-    <li>qux</li>
+    <li>Développeur <a href="http://php.net/">PHP</a> & <a href="http://resume.github.io/?jubianchi#mylanguages">…</a></li>
+    <li>Contributeur <a href="http://atoum.org/">atoum</a></li>
+    <li>QA <a href="https://twitter.com/PMSIpilot">@PMSIpilot</a></li>
+    <li>Campeur
+        <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a>,
+        <a href="irc://irc.freenode.net##atoum">##atoum</a></li>
   </ul>
+
+  <math>
+    <mrow>
+      <mtext>@julbianchi</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>twitter.com</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>github.com</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
 
   <math>
     <mrow>
@@ -95,9 +112,6 @@ rolling-release
         </mtr>
         <mtr>
           <mtd><mtext>hoa-project.net</mtext></mtd>
-        </mtr>
-        <mtr>
-          <mtd><mtext>…</mtext></mtd>
         </mtr>
       </mtable>
     </mrow>
@@ -227,6 +241,12 @@ rolling-release
         quotidiennes</li>
     <li>Nécessite une grande qualité (tests, API etc.)</li>
   </ul>
+
+  <br/>
+
+  <h2><em lang="en">Composer</em></h2>
+  <blockquote>For every branch, a package <strong>development version</strong> will be created. [...] <code>master</code> results in a <code>dev-master</code> version.</blockquote>
+  <p>Il faudra donc utiliser <code>@dev</code> dans vos fichiers <code>composer.json</code></p>
 </section>
 
 <section>
@@ -860,6 +880,26 @@ $processus->run();</code></pre>
 </section>
 
 <section>
+    <h1>(Hoa|Symfony)\Console</h1>
+
+    <p>symfony/console :</p>
+    <ul>
+      <li>Très <strong>haut niveau</strong> d'abstraction (<code>Dialog</code>, <code>ProgressBar</code>)</li>
+      <li>Orientée <strong>commandes</strong>, peu d'intaractivité</li>
+      <li><code>Application</code>, <code>Command</code></li>
+      <li>API <code>Process</code> dans un composant dédié</li>
+    </ul>
+
+    <p>hoa/console :</p>
+    <ul>
+      <li><strong>Plus bas niveau</strong> d'abstraction (<code>Cursor</code>, <code>Readline</code>)</li>
+      <li>Orientée <strong>terminal</strong>, très interactif</li>
+      <li><code>Router</code>, <code>Dispatcher</code>, <code>Controller</code></li>
+      <li>API <code>Processus</code> intégrée</li>
+    </ul>
+</section>
+
+<section>
   <h1>Hoa\Compiler</h1>
 
   <p>Analyser et manipuler des données textuelles</p>
@@ -1174,6 +1214,134 @@ var_dump(
 
 <section>
   <h1>Symfony</h1>
+
+  <p>Intégration très simple :</p>
+  <ul>
+    <li>compatible <a href="http://www.php-fig.org/psr/psr-0/">PSR-0</a></li>
+    <li>bibliothèques disponibles dans <a href="https://packagist.org/search/?q=hoa/">packagist</a></li>
+    <li>une <strong>bibliothèques</strong> → un <strong>bundle</strong></li>
+    <li>les bundles sont <strong>des ponts</strong> entre Hoa et <a href="http://symfony.com/">Symfony</a></li>
+  </ul>
+
+  <p>Plusieurs bundles disponibles :</p>
+  <ul>
+    <li><a href="https://github.com/rezzza/RulerBundle">RulerBundle</a> : Moteur de règles</li>
+    <li><a href="https://github.com/Atipik/Hoa-WebSocket-Bundle">Hoa-WebSocket-Bundle</a> : Client/Serveur WebSocket</li>
+    <li><a href="https://github.com/Atipik/Hoa-WebSocket-Bundle">BenchBundle</a> : Analyse de performance</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Une question d'API</h1>
+
+  <p>Un bundle contient au moins :</p>
+  <ul>
+    <li>une dépendance vers la bibliothèque qu'il intègre</li>
+    <li>une dépendance vers <a href="">Hoa\Core</a></li>
+    <li>des <em>adapters</em>/services pour connecter la libraire</li>
+  </ul>
+  <div id="api_adapter" class="schema" style="height: 200px"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper      = Hoa.Graph(Hoa.$('#api_adapter'), 610, 200);
+      var core       = paper.rect( 10,  20, 140, 90, 3, 'Hoa\\Core');
+      var library    = paper.rect(160,  20, 140, 90, 3, 'Hoa\\<Library>');
+      var adapters   = paper.rect(310,  20, 140, 90, 3, 'Adapters');
+      var services   = paper.rect(460,  20, 140, 90, 3, 'Services');
+      var bundle     = paper.rect( 10, 120, 590, 90, 0, 'Bundle');
+
+  });
+  </script>
+</section>
+
+<section>
+  <h1>Adapter l'API</h1>
+
+  <p>Tout est dans la bibliothèque, on <strong>implémente</strong> juste les <strong>interfaces</strong> de Symfony :</p>
+  <pre data-line="5,8,17,23-24,29"><code class="language-php">use Hoa\Stringbuffer\ReadWrite;
+use Hoa\Xml\Exception\Exception as XmlException;
+use Hoa\Xyl\Interpreter\Html\Html;
+use Hoa\Xyl\Xyl;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Templating\TemplateNameParserInterface;
+
+class Engine implements EngineInterface
+{
+    public function render($name, array $parameters = array())
+    {
+        if (false === $this->exists($name)) {
+            throw new \InvalidArgumentException(…);
+        }
+
+        try {
+            $xyl = new Xyl($this->load($name), new ReadWrite(), new Html());
+        } catch (XmlException $exception) {
+            throw new \RuntimeException(…);
+        }
+
+        try {
+            $xyl->interprete();
+            $xyl->render();
+        } catch(\Exception $exception) {
+            throw new \RuntimeException(…);
+        }
+
+        return $xyl->getOutputStream()->readAll();
+    }
+}
+  </code></pre>
+</section>
+
+<section>
+  <h1>Hoathis\BenchBundle</h1>
+
+  <ul>
+    <li>Bundle basé sur la bibliothèque <a href="http://hoa-project.net/Literature/Hack/Bench.html">Hoa\Bench</a></li>
+    <li>Totalement intégré au <em>profiler</em> et à la console</li>
+    <li>Installation :
+        <pre><code class="language-json">{ "require-dev": { "hoathis/bench-bundle": "dev-master" } }</code></pre></li>
+    <li>Démarrage :
+        <pre><code class="language-php">//app/AppKernel.php
+
+if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+    …
+
+    $bundles[] = new \Hoathis\Bundle\BenchBundle\BenchBundle();
+}
+        </code></pre></li>
+    <li><a href="">
+        <img src="http://static.hoa-project.net/Image/Logo/Github.png"
+             alt="Github"
+             style="height: 1.8em" />
+        Code source</a></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Hoathis\BenchBundle</h1>
+
+  <ul>
+    <li>Service <em>bench</em> dans les controlleurs :
+        <pre><code class="language-php">class FooController extends Controller {
+    public function barAction()
+    {
+        $this->container->get('bench')->foo->start();
+        …
+        $this->container->get('bench')->foo->stop();
+
+        return new Response();
+    }
+}
+        </code></pre></li>
+    <li>Helper <a href="http://twig.sensiolabs.org/">Twig</a> :
+        <pre><code class="language-html">{% benchstart 'listing' %}
+
+{% for item in items %} … {% endfor %}
+
+{% benchstop 'listing' %}
+        </code></pre></li>
+  </ul>
 </section>
 
 <section>
