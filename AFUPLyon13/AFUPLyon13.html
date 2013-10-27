@@ -77,19 +77,21 @@ rolling-release
 <section>
   <h1>Qui sommes-nous ?</h1>
 
-  <p>Julien Bianchi</p>
+  <p>Julien Bianchi :</p>
   <ul>
-    <li>Développeur <a href="http://php.net/">PHP</a> & <a href="http://resume.github.io/?jubianchi#mylanguages">…</a></li>
-    <li>Contributeur <a href="http://atoum.org/">atoum</a></li>
+    <li>développeur <a href="http://php.net/">PHP</a> &amp;
+        <a href="http://resume.github.io/?jubianchi#mylanguages">…</a></li>
+    <li>contributeur <a href="http://atoum.org/">atoum</a></li>
     <li>QA <a href="https://twitter.com/PMSIpilot">@PMSIpilot</a></li>
-    <li>Campeur
+    <li>campeur
         <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a>,
         <a href="irc://irc.freenode.net##atoum">##atoum</a></li>
   </ul>
 
+  <p class="tcenter break">
   <math>
     <mrow>
-      <mtext>@julbianchi</mtext>
+      <mtext>@jubianchi</mtext>
       <mo>{</mo>
       <mtable>
         <mtr>
@@ -101,7 +103,7 @@ rolling-release
       </mtable>
     </mrow>
   </math>
-
+  <br />
   <math>
     <mrow>
       <mtext>julien.bianchi@</mtext>
@@ -116,6 +118,7 @@ rolling-release
       </mtable>
     </mrow>
   </math>
+  </p>
 </section>
 
 <section>
@@ -148,6 +151,7 @@ rolling-release
     <li>Présentation du projet</li>
     <li>Quelques fondamentaux</li>
     <li>Bibliothèques phares</li>
+    <li>Au-delà de Hoa</li>
     <li>Conclusion</li>
   </ol>
 </section>
@@ -175,21 +179,21 @@ rolling-release
 <section>
   <h1>Sources<small>, e.g. <code>Hoa\Core</code></small></h1>
 
-  <p><img src="http://static.hoa-project.net/Image/Logo/Git.png"
+  <p><img src="Static/Image/Logo/Git.png"
           alt="Git"
           class="fright" style="height: 1.3em" />
      <em>Via</em> <a href="http://git-scm.com/">Git</a>,
      <code><em>project</em>.git</code> :</p>
   <pre><code class="language-shell">$ git clone http://git.hoa-project.net/Library/Core.git</code></pre>
 
-  <p><img src="http://static.hoa-project.net/Image/Logo/Github.png"
+  <p><img src="Static/Image/Logo/Github.png"
           alt="Github"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="https://github.com/hoaproject/">Github</a>,
      sans <code>Library/</code> :</p>
   <pre><code class="language-shell">$ git clone https://github.com/hoaproject/Core.git</code></pre>
 
-  <p><img src="http://static.hoa-project.net/Image/Logo/Composer.png"
+  <p><img src="Static/Image/Logo/Composer.png"
           alt="Composer"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="http://getcomposer.org/">Composer</a>,
@@ -241,12 +245,11 @@ rolling-release
         quotidiennes</li>
     <li>Nécessite une grande qualité (tests, API etc.)</li>
   </ul>
-
-  <br/>
-
-  <h2><em lang="en">Composer</em></h2>
-  <blockquote>For every branch, a package <strong>development version</strong> will be created. [...] <code>master</code> results in a <code>dev-master</code> version.</blockquote>
-  <p>Il faudra donc utiliser <code>@dev</code> dans vos fichiers <code>composer.json</code></p>
+  <p>Composer :</p>
+  <blockquote>For every branch, a package <strong>development version</strong>
+  will be created. [...] <code>master</code> results in a
+  <code>dev-master</code> version.</blockquote>
+  <p>Utiliser <code>@dev</code> dans vos fichiers <code>composer.json</code></p>
 </section>
 
 <section>
@@ -294,7 +297,7 @@ rolling-release
         <a href="irc://irc.freenode.net#hoaproject">irc.freenode.org#hoaproject</a></li>
     <li>Mailing-lists @lists.hoa-project.net : <em lang="en">development</em>,
         <em lang="en">support</em>, <em lang="en">internal</em> etc.</li>
-    <li><a href="http://hoa-project.net/Foundation.html">Association</a> à but
+  <li><a href="http://hoa-project.net/Foundation.html">Association</a> à but
     non-lucratif, objectifs :
     <p class="break"><em>soutenir le projet Hoa en développant, déployant et
     faisant la promotion des logiciels libres issus de Hoa Project, de ses
@@ -880,21 +883,21 @@ $processus->run();</code></pre>
 </section>
 
 <section>
-    <h1>(Hoa|Symfony)\Console</h1>
+    <h1>(Hoa or Symfony)\Console</h1>
 
-    <p>symfony/console :</p>
+    <p>Symfony :</p>
     <ul>
-      <li>Très <strong>haut niveau</strong> d'abstraction (<code>Dialog</code>, <code>ProgressBar</code>)</li>
-      <li>Orientée <strong>commandes</strong>, peu d'intaractivité</li>
+      <li>Très <strong>haut niveau</strong> d'abstraction (<code>Dialog</code>,
+      <code>ProgressBar</code>)</li>
+      <li>Orientée <strong>commandes</strong>, peu d'intéractivité</li>
       <li><code>Application</code>, <code>Command</code></li>
       <li>API <code>Process</code> dans un composant dédié</li>
     </ul>
-
-    <p>hoa/console :</p>
+    <p>Hoa :</p>
     <ul>
       <li><strong>Plus bas niveau</strong> d'abstraction (<code>Cursor</code>, <code>Readline</code>)</li>
       <li>Orientée <strong>terminal</strong>, très interactif</li>
-      <li><code>Router</code>, <code>Dispatcher</code>, <code>Controller</code></li>
+      <li><code>Router</code>, <code>Dispatcher</code>, <code>Kit</code></li>
       <li>API <code>Processus</code> intégrée</li>
     </ul>
 </section>
@@ -1138,7 +1141,7 @@ var_dump(
       var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
       var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
       var method     = grid.push(paper.circle(0, 0, 25));
-      var _method    = paper.text(400, 20, 'méthode');
+      var _method    = paper.text(400, 30, 'méthode');
       var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
       var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
 
@@ -1176,7 +1179,8 @@ var_dump(
     <li><code>@invariant</code>, invariant</li>
     <li><code>@requires</code>, précondition</li>
     <li><code>@ensures</code>, postcondition</li>
-    <li>et d'autres : <code>@throwable</code>, <code>@behavior</code> etc.</li>
+    <li>et d'autres : <code>@throwable</code>, <code>@behavior</code>,
+        <code>@description</code> etc.</li>
   </ul>
 </section>
 
@@ -1212,45 +1216,54 @@ var_dump(
      atoum:generate</code> !</small></p>
 </section>
 
+<section class="chapter">
+  <h1>4 <span>Au-delà de Hoa</span></h1>
+</section>
+
 <section>
   <h1>Symfony</h1>
 
   <p>Intégration très simple :</p>
   <ul>
     <li>compatible <a href="http://www.php-fig.org/psr/psr-0/">PSR-0</a></li>
-    <li>bibliothèques disponibles dans <a href="https://packagist.org/search/?q=hoa/">packagist</a></li>
-    <li>une <strong>bibliothèques</strong> → un <strong>bundle</strong></li>
-    <li>les bundles sont <strong>des ponts</strong> entre Hoa et <a href="http://symfony.com/">Symfony</a></li>
+    <li>bibliothèques disponibles dans
+        <a href="https://packagist.org/search/?q=hoa/">Packagist</a></li>
+    <li>une bibliothèque = un <em lang="en">bundle</em></li>
+    <li>les <em lang="en">bundles</em> sont <strong>des ponts</strong> entre Hoa
+        et <a href="http://symfony.com/">Symfony</a></li>
   </ul>
 
-  <p>Plusieurs bundles disponibles :</p>
+  <p>Plusieurs bundles disponibles :</p>
   <ul>
-    <li><a href="https://github.com/rezzza/RulerBundle">RulerBundle</a> : Moteur de règles</li>
-    <li><a href="https://github.com/Atipik/Hoa-WebSocket-Bundle">Hoa-WebSocket-Bundle</a> : Client/Serveur WebSocket</li>
-    <li><a href="https://github.com/Atipik/Hoa-WebSocket-Bundle">BenchBundle</a> : Analyse de performance</li>
+    <li><a href="https://github.com/rezzza/RulerBundle/tree/2.0">RulerBundle</a>,
+        moteur de règles</li>
+    <li><a href="https://github.com/Atipik/Hoa-WebSocket-Bundle">Hoa-WebSocket-Bundle</a>,
+        client/serveur WebSocket</li>
+    <li><a href="https://github.com/jubianchi/HoathisBenchBundle">HoathisBenchBundle</a>,
+        analyse de performances</li>
   </ul>
 </section>
 
 <section>
   <h1>Une question d'API</h1>
 
-  <p>Un bundle contient au moins :</p>
+  <p>Un <em lang="en">bundle</em> contient au moins :</p>
   <ul>
     <li>une dépendance vers la bibliothèque qu'il intègre</li>
-    <li>une dépendance vers <a href="">Hoa\Core</a></li>
-    <li>des <em>adapters</em>/services pour connecter la libraire</li>
+    <li>une dépendance vers Hoa\Core</li>
+    <li>des <em lang="en">adapters</em>/services pour connecter la
+        bibliothèque</li>
   </ul>
-  <div id="api_adapter" class="schema" style="height: 200px"></div>
+  <div id="api_adapter" class="schema"></div>
   <script>
   Hoa.Document.onReady(function ( ) {
 
-      var paper      = Hoa.Graph(Hoa.$('#api_adapter'), 610, 200);
-      var core       = paper.rect( 10,  20, 140, 90, 3, 'Hoa\\Core');
-      var library    = paper.rect(160,  20, 140, 90, 3, 'Hoa\\<Library>');
-      var adapters   = paper.rect(310,  20, 140, 90, 3, 'Adapters');
-      var services   = paper.rect(460,  20, 140, 90, 3, 'Services');
-      var bundle     = paper.rect( 10, 120, 590, 90, 0, 'Bundle');
-
+      var paper    = Hoa.Graph(Hoa.$('#api_adapter'), 620, 210);
+      var bundle   = paper.rect( 10,  10, 590, 90, 0, 'Bundle');
+      var core     = paper.rect( 10, 110, 140, 90, 3, 'Hoa\\Core');
+      var library  = paper.rect(160, 110, 140, 90, 3, 'Hoa\\<Library>');
+      var adapters = paper.rect(310, 110, 140, 90, 3, 'Adapters');
+      var services = paper.rect(460, 110, 140, 90, 3, 'Services');
   });
   </script>
 </section>
@@ -1258,8 +1271,10 @@ var_dump(
 <section>
   <h1>Adapter l'API</h1>
 
-  <p>Tout est dans la bibliothèque, on <strong>implémente</strong> juste les <strong>interfaces</strong> de Symfony :</p>
-  <pre data-line="5,8,17,23-24,29"><code class="language-php">use Hoa\Stringbuffer\ReadWrite;
+  <p>Tout est dans la bibliothèque</p>
+  <p>Juste <strong>implémenter</strong> les <strong>interfaces</strong> de
+     Symfony :</p>
+  <pre data-line="5,8,17,23-24,29" style="max-height: 350px"><code class="language-php">use Hoa\Stringbuffer\ReadWrite;
 use Hoa\Xml\Exception\Exception as XmlException;
 use Hoa\Xyl\Interpreter\Html\Html;
 use Hoa\Xyl\Xyl;
@@ -1289,59 +1304,48 @@ class Engine implements EngineInterface
 
         return $xyl->getOutputStream()->readAll();
     }
-}
-  </code></pre>
+}</code></pre>
 </section>
 
 <section>
   <h1>Hoathis\BenchBundle</h1>
 
-  <ul>
-    <li>Bundle basé sur la bibliothèque <a href="http://hoa-project.net/Literature/Hack/Bench.html">Hoa\Bench</a></li>
-    <li>Totalement intégré au <em>profiler</em> et à la console</li>
-    <li>Installation :
-        <pre><code class="language-json">{ "require-dev": { "hoathis/bench-bundle": "dev-master" } }</code></pre></li>
-    <li>Démarrage :
-        <pre><code class="language-php">//app/AppKernel.php
-
-if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-    …
-
+  <p><em lang="en">Bundle</em> basé sur la bibliothèque
+      <a href="http://hoa-project.net/Literature/Hack/Bench.html">Hoa\Bench</a></p>
+  <p>Totalement intégré au <em lang="en">profiler</em> et à la console</p>
+  <p>Installation :</p>
+  <pre><code class="language-json">{ "require-dev": { "hoathis/bench-bundle": "dev-master" } }</code></pre>
+  <p>Démarrage (<code>app/AppKernel.php</code>) :</p>
+  <pre><code class="language-php">if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+    // …
     $bundles[] = new \Hoathis\Bundle\BenchBundle\BenchBundle();
-}
-        </code></pre></li>
-    <li><a href="">
-        <img src="http://static.hoa-project.net/Image/Logo/Github.png"
-             alt="Github"
-             style="height: 1.8em" />
-        Code source</a></li>
+}</code></pre>
+  <p>Voir <a href="https://github.com/jubianchi/HoathisBenchBundle">github.com/jubianchi/HoathisBenchBundle</a></p>
   </ul>
 </section>
 
 <section>
   <h1>Hoathis\BenchBundle</h1>
 
-  <ul>
-    <li>Service <em>bench</em> dans les controlleurs :
-        <pre><code class="language-php">class FooController extends Controller {
+  <p>Service <em>bench</em> dans les controlleurs :</p>
+  <pre><code class="language-php">class FooController extends Controller
+{
     public function barAction()
     {
         $this->container->get('bench')->foo->start();
-        …
+        //…
         $this->container->get('bench')->foo->stop();
 
         return new Response();
     }
-}
-        </code></pre></li>
-    <li>Helper <a href="http://twig.sensiolabs.org/">Twig</a> :
-        <pre><code class="language-html">{% benchstart 'listing' %}
+}</code></pre></li>
+  <p><em lang="en">Helper</em>
+     <a href="http://twig.sensiolabs.org/">Twig</a> :</p>
+  <pre><code class="language-markup">{% benchstart 'listing' %}
 
 {% for item in items %} … {% endfor %}
 
-{% benchstop 'listing' %}
-        </code></pre></li>
-  </ul>
+{% benchstop 'listing' %}</code></pre></li>
 </section>
 
 <section>
@@ -1360,7 +1364,7 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 </section>
 
 <section class="chapter">
-  <h1>4 <span>Conclusion</span></h1>
+  <h1>5 <span>Conclusion</span></h1>
 </section>
 
 <section>
@@ -1373,6 +1377,7 @@ if (in_array($this->getEnvironment(), array('dev', 'test'))) {
     <li>un pont entre le monde de la recherche et de l'industrie</li>
     <li>un environnement pour développer des bibliothèques</li>
   </ul>
+  <p class="break tcenter"><em class="en">Hackability!</em></p>
 </section>
 
 <section class="chapter">
