@@ -887,17 +887,17 @@ $processus->run();</code></pre>
 
     <p>Symfony :</p>
     <ul>
-      <li>Très haut niveau d'abstraction (<code>Dialog</code>,
+      <li>très haut niveau d'abstraction (<code>Dialog</code>,
           <code>ProgressBar</code>)</li>
-      <li>Orientée commandes, peu d'intéractivité</li>
+      <li>orientée commandes, peu d'intéractivité</li>
       <li><code>Application</code>, <code>Command</code></li>
       <li>API <code>Process</code> dans un composant dédié</li>
     </ul>
     <p>Hoa :</p>
     <ul>
-      <li>Plus bas niveau d'abstraction (<code>Cursor</code>,
+      <li>plus bas niveau d'abstraction (<code>Cursor</code>,
           <code>Readline</code>)</li>
-      <li>Orientée terminal, très interactif</li>
+      <li>orientée terminal, très interactif</li>
       <li><code>Router</code>, <code>Dispatcher</code>, <code>Kit</code></li>
       <li>API <code>Processus</code> intégrée</li>
     </ul>
@@ -1120,6 +1120,31 @@ var_dump(
 </section>
 
 <section>
+  <h1>Exemple basique</h1>
+
+  <pre><code class="language-php">class C {
+
+    /**
+     * @invariant foo: float();
+     */
+    protected $foo = 0;
+
+    /**
+     * @requires x      : integer() or string('a', 'z', 1);
+     * @ensures  \result: boolean();
+     */
+    public function f ( $x ) { … }
+}</code></pre>
+  <ul>
+    <li><code>@invariant</code>, invariant</li>
+    <li><code>@requires</code>, précondition</li>
+    <li><code>@ensures</code>, postcondition</li>
+    <li>et d'autres : <code>@throwable</code>, <code>@behavior</code>,
+        <code>@description</code> etc.</li>
+  </ul>
+</section>
+
+<section>
   <h1>Que faire d'un contrat ?</h1>
 
   <p><em lang="en">Design-by-Contract</em> :</p>
@@ -1154,31 +1179,6 @@ var_dump(
     <li>utilise les préconditions pour générer des données de tests</li>
     <li>utilise les postconditions et invariants pour établir le verdict sur
     test</li>
-  </ul>
-</section>
-
-<section>
-  <h1>Exemple basique</h1>
-
-  <pre><code class="language-php">class C {
-
-    /**
-     * @invariant foo: float();
-     */
-    protected $foo = 0;
-
-    /**
-     * @requires x      : integer() or string('a', 'z', 1);
-     * @ensures  \result: boolean();
-     */
-    public function f ( $x ) { … }
-}</code></pre>
-  <ul>
-    <li><code>@invariant</code>, invariant</li>
-    <li><code>@requires</code>, précondition</li>
-    <li><code>@ensures</code>, postcondition</li>
-    <li>et d'autres : <code>@throwable</code>, <code>@behavior</code>,
-        <code>@description</code> etc.</li>
   </ul>
 </section>
 
