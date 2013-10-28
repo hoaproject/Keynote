@@ -179,21 +179,21 @@ rolling-release
 <section>
   <h1>Sources<small>, e.g. <code>Hoa\Core</code></small></h1>
 
-  <p><img src="Static/Image/Logo/Git.png"
+  <p><img src="http://static.hoa-project.net/Image/Logo/Git.png"
           alt="Git"
           class="fright" style="height: 1.3em" />
      <em>Via</em> <a href="http://git-scm.com/">Git</a>,
      <code><em>project</em>.git</code> :</p>
   <pre><code class="language-shell">$ git clone http://git.hoa-project.net/Library/Core.git</code></pre>
 
-  <p><img src="Static/Image/Logo/Github.png"
+  <p><img src="http://static.hoa-project.net/Image/Logo/Github.png"
           alt="Github"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="https://github.com/hoaproject/">Github</a>,
      sans <code>Library/</code> :</p>
   <pre><code class="language-shell">$ git clone https://github.com/hoaproject/Core.git</code></pre>
 
-  <p><img src="Static/Image/Logo/Composer.png"
+  <p><img src="http://static.hoa-project.net/Image/Logo/Composer.png"
           alt="Composer"
           class="fright" style="height: 1.8em" />
      <em>Via</em> <a href="http://getcomposer.org/">Composer</a>,
@@ -246,9 +246,9 @@ rolling-release
     <li>Nécessite une grande qualité (tests, API etc.)</li>
   </ul>
   <p>Composer :</p>
-  <blockquote>For every branch, a package <strong>development version</strong>
+  <blockquote><em lang="en">For every branch, a package “development version”
   will be created. [...] <code>master</code> results in a
-  <code>dev-master</code> version.</blockquote>
+  <code>dev-master</code> version.</em></blockquote>
   <p>Utiliser <code>@dev</code> dans vos fichiers <code>composer.json</code></p>
 </section>
 
@@ -511,7 +511,7 @@ $server->run();</code></pre>
   <div id="websocket_flip" class="flip-container" style="height: 380px">
     <div class="flipper">
       <div class="front">
-        <pre><code class="language-markup">&lt;input type="text" id="input" placeholder="Message…" />
+        <pre data-line="5,44"><code class="language-markup">&lt;input type="text" id="input" placeholder="Message…" />
 &lt;pre id="output">&lt;/pre>
 
 &lt;script>
@@ -671,6 +671,25 @@ $server->run();</code></pre>
 </section>
 
 <section>
+  <h1>Un serveur WebSocket</h1>
+
+  <p>Exemple <del>d'un écho</del> de <em lang="en">broadcast</em> :</p>
+  <pre data-line="9"><code class="language-php">$server = new Hoa\Websocket\Server(
+    new Hoa\Socket\Server('tcp://127.0.01:8889')
+);
+$server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
+
+    $message = $bucket->getData()['message'];
+
+    echo 'Message: ', $message, "\n";
+    $bucket->getSource()->broadcast($message);
+
+    return;
+});
+$server->run();</code></pre>
+</section>
+
+<section>
   <h1>Un client WebSocket <small>(<code>.php</code>)</small></h1>
 
   <p>Flux : <code>Hoa\Socket\Client</code> écoute <code>127.0.0.1:8889</code></p>
@@ -693,25 +712,6 @@ do {
     $client->send($line);
 
 } while(true);</code></pre>
-</section>
-
-<section>
-  <h1>Un serveur WebSocket</h1>
-
-  <p>Exemple <del>d'un écho</del> de <em lang="en">broadcast</em> :</p>
-  <pre data-line="9"><code class="language-php">$server = new Hoa\Websocket\Server(
-    new Hoa\Socket\Server('tcp://127.0.01:8889')
-);
-$server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
-
-    $message = $bucket->getData()['message'];
-
-    echo 'Message: ', $message, "\n";
-    $bucket->getSource()->broadcast($message);
-
-    return;
-});
-$server->run();</code></pre>
 </section>
 
 <section>
@@ -887,16 +887,17 @@ $processus->run();</code></pre>
 
     <p>Symfony :</p>
     <ul>
-      <li>Très <strong>haut niveau</strong> d'abstraction (<code>Dialog</code>,
-      <code>ProgressBar</code>)</li>
-      <li>Orientée <strong>commandes</strong>, peu d'intéractivité</li>
+      <li>Très haut niveau d'abstraction (<code>Dialog</code>,
+          <code>ProgressBar</code>)</li>
+      <li>Orientée commandes, peu d'intéractivité</li>
       <li><code>Application</code>, <code>Command</code></li>
       <li>API <code>Process</code> dans un composant dédié</li>
     </ul>
     <p>Hoa :</p>
     <ul>
-      <li><strong>Plus bas niveau</strong> d'abstraction (<code>Cursor</code>, <code>Readline</code>)</li>
-      <li>Orientée <strong>terminal</strong>, très interactif</li>
+      <li>Plus bas niveau d'abstraction (<code>Cursor</code>,
+          <code>Readline</code>)</li>
+      <li>Orientée terminal, très interactif</li>
       <li><code>Router</code>, <code>Dispatcher</code>, <code>Kit</code></li>
       <li>API <code>Processus</code> intégrée</li>
     </ul>
@@ -1015,7 +1016,7 @@ echo $dump->visit($ast);
     <li>vérification de types</li>
     <li>optimisations diverses</li>
     <li>exécution<sup>*</sup></li>
-    <li>transformation vers un autre langage (e.g. opcode, asm…)<sup>**</sup></li>
+    <li>transformation vers un autre langage (e.g. bytecode, asm…)<sup>**</sup></li>
   </ul>
   <p class="break"><small><sup>*</sup> « langage interprété »</small></p>
   <p><small><sup>**</sup> « langage compilé »</small></p>
@@ -1045,9 +1046,6 @@ echo $dump->visit($ast);
 
 <section>
   <h1>Hoa\Ruler</h1>
-
-  <img src="http://static.hoa-project.net/Image/WhoUse/Verylastroom.png"
-       class="banner" style="right: 15%" />
 
   <p>Bel exemple d'utilisation de <code>Hoa\Compiler</code></p>
   <p>Moteur de règles, écrites dans un langage dédié, proche d'SQL</p>
@@ -1229,8 +1227,8 @@ var_dump(
     <li>bibliothèques disponibles dans
         <a href="https://packagist.org/search/?q=hoa/">Packagist</a></li>
     <li>une bibliothèque = un <em lang="en">bundle</em></li>
-    <li>les <em lang="en">bundles</em> sont <strong>des ponts</strong> entre Hoa
-        et <a href="http://symfony.com/">Symfony</a></li>
+    <li>les <em lang="en">bundles</em> sont des ponts entre Hoa et
+        <a href="http://symfony.com/">Symfony</a></li>
   </ul>
 
   <p>Plusieurs bundles disponibles :</p>
@@ -1272,8 +1270,7 @@ var_dump(
   <h1>Adapter l'API</h1>
 
   <p>Tout est dans la bibliothèque</p>
-  <p>Juste <strong>implémenter</strong> les <strong>interfaces</strong> de
-     Symfony :</p>
+  <p>Juste implémenter les interfaces de Symfony :</p>
   <pre data-line="5,8,17,23-24,29" style="max-height: 350px"><code class="language-php">use Hoa\Stringbuffer\ReadWrite;
 use Hoa\Xml\Exception\Exception as XmlException;
 use Hoa\Xyl\Interpreter\Html\Html;
@@ -1382,6 +1379,12 @@ class Engine implements EngineInterface
 
 <section class="chapter">
   <h1>Merci ! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
 </section>
 
 <div id="progress-bar"></div>
