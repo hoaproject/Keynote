@@ -1310,7 +1310,6 @@ class Engine implements EngineInterface
     $bundles[] = new \Hoathis\Bundle\BenchBundle\BenchBundle();
 }</code></pre>
   <p>Voir <a href="https://github.com/jubianchi/HoathisBenchBundle">github.com/jubianchi/HoathisBenchBundle</a></p>
-  </ul>
 </section>
 
 <section>
@@ -1327,14 +1326,14 @@ class Engine implements EngineInterface
 
         return new Response();
     }
-}</code></pre></li>
+}</code></pre>
   <p><em lang="en">Helper</em>
      <a href="http://twig.sensiolabs.org/">Twig</a> :</p>
   <pre><code class="language-markup">{% benchstart 'listing' %}
 
 {% for item in items %} … {% endfor %}
 
-{% benchstop 'listing' %}</code></pre></li>
+{% benchstop 'listing' %}</code></pre>
 </section>
 
 <section>
