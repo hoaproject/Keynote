@@ -6,7 +6,7 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 # Praspel, un langage de spécification par contrats
 
 This presentation has been presented in June 24th, 2014, at Lyon (France), for
-the [PHPTour'13](http://afup.org/pages/phptourlyon2014/).
+the [PHPTour'14](http://afup.org/pages/phptourlyon2014/).
 
 ## Abstract (in french)
 
