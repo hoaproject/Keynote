@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Praspel, un langage de spécification par contrats (PHPTour'14, Lyon)</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+
+  <style>
+    .draw line {
+        stroke: #000;
+        stroke-width: 2;
+    }
+
+    .draw circle {
+        fill: #000;
+        stroke-width: 0;
+
+    }
+
+    .north📌 {
+        text-anchor: middle;
+        dominant-baseline: central;
+        transform: translate(0, 1em);
+    }
+
+    .north-east📌 {
+        text-anchor: end;
+        dominant-baseline: central;
+        transform: translate(-.5em, 1em);
+    }
+
+    .east📌 {
+        text-anchor: end;
+        dominant-baseline: central;
+        transform: translate(-.5em, 0);
+    }
+
+    .south-east📌 {
+        text-anchor: end;
+        dominant-baseline: auto;
+        transform: translate(-.5em, -.5em);
+    }
+
+    .south📌 {
+        text-anchor: middle;
+        dominant-baseline: auto;
+        transform: translate(0, -.5em);
+    }
+
+    .south-west📌 {
+        text-anchor: start;
+        dominant-baseline: auto;
+        transform: translate(.5em, -.5em);
+    }
+
+    .west📌 {
+        text-anchor: start;
+        dominant-baseline: central;
+        transform: translate(.5em, 0);
+    }
+
+    .north-west📌 {
+        text-anchor: start;
+        dominant-baseline: central;
+        transform: translate(.5em, 1em);
+    }
+  </style>
+</head>
+<body>
+
+<script src="http://static.hoa-project.net/Javascript/Hoa.js"></script>
+
+<section>
+  <h1>Praspel, un langage de spécification par contrats</h1>
+
+  <div class="tcenter">
+    <img src="http://afup.org/templates/phptourlyon2014/medias/images/logo.png"
+         alt="Logo du PHPTour"
+         width="300px"
+         class="center" />
+    <p class="break"><small><time datetime="2014-06-24">24 juin 2014</time></small></p>
+  </div>
+</section>
+
+<section>
+  <h1>Qui sommes-nous ?</h1>
+
+  <p>Ivan Enderlin :</p>
+  <ul>
+    <li>doctorant en Informatique
+        (<a href="http://disc.univ-fcomte.fr/">DISC</a>,
+         <a href="http://www.inria.fr/">INRIA</a>)</li>
+    <li><em lang="en">leader</em> et développeur de Hoa</li>
+    <li>contributeur
+        <a href="http://php.net/">PHP</a>,
+        <a href="http://mozilla.org/">Mozilla</a>,
+        <a href="http://debian.org/">Debian</a>,
+        <a href="http://atoum.org/">atoum</a>… open-source</li>
+    <li>expert invité au
+        <a href="http://w3.org/">W3C</a> (HTML, CSS et WebApp)</li>
+    <li><a href="https://twitter.com/hoaproject">@hoaproject</a>,
+        <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+  </ul>
+
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net</mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org</mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>inria.fr</mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
+</section>
+
+<section>
+  <h1>Qui sommes-nous ?</h1>
+
+  <p>Julien Bianchi :</p>
+  <ul>
+    <li>développeur <a href="http://php.net/">PHP</a> &amp;
+        <a href="http://resume.github.io/?jubianchi#mylanguages">…</a></li>
+    <li>contributeur <a href="http://atoum.org/">atoum</a></li>
+    <li>QA <a href="https://twitter.com/PMSIpilot">@PMSIpilot</a></li>
+    <li>campeur
+        <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a>,
+        <a href="irc://irc.freenode.net##atoum">##atoum</a></li>
+  </ul>
+
+  <p class="tcenter break">
+  <math>
+    <mrow>
+      <mtext>@jubianchi</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>twitter.com</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>github.com</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+  <br />
+  <math>
+    <mrow>
+      <mtext>julien.bianchi@</mtext>
+      <mo>{</mo>
+      <mtable>
+        <mtr>
+          <mtd><mtext>atoum.org</mtext></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>hoa-project.net</mtext></mtd>
+        </mtr>
+      </mtable>
+    </mrow>
+  </math>
+  </p>
+</section>
+
+<section>
+  <h1>Définitions</h1>
+
+  <p><em lang="en">System Under Test</em> (<strong>SUT</strong>) : système qui
+  sera exécuté</p>
+  <div class="break">
+    <div class="fleft">
+      <ul>
+        <li data-item=" ">préambule</li>
+        <li data-item="+">données</li>
+        <li data-item="+">oracle</li>
+        <li data-item="="><strong>cas de test</strong></li>
+      </ul>
+    </div>
+    <div class="fright" style="width: 75%">
+      <ul>
+        <li data-item=":">place le SUT dans un état particulier</li>
+        <li data-item=":"><strong>test</strong>, pour exécuter le SUT</li>
+        <li data-item=":">établit le verdict, est-ce que le produit de
+        l’exécution et l’état du SUT après son exécution sont ceux attendus ou
+        non ?</li>
+      </ul>
+    </div>
+  </div>
+  <p class="break clear">Valeurs du verdict : <span class="👍">succès</span>,
+                                              <span class="👎">échec</span> ou
+                                              inconclusif</p>
+  <p class="break"><strong>Suite de test</strong> : ensemble de cas de tests</p>
+</section>
+
+<section>
+  <h1>Nature des tests</h1>
+
+  <div class="schema">
+    <svg width="700" height="400" viewBox="60 0 780 480" class="draw">
+
+        <defs>
+            <marker id="arrowHead"
+                    viewBox="0 0 10 10" 
+                    refX="1" refY="5"
+                    markerWidth="6" 
+                    markerHeight="6"
+                    orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+        </defs>
+
+      <g>
+        <line x1="375" y1="250" x2="650" y2="250"
+              marker-end="url(#arrowHead)" />
+
+        <text x="650" y="250" class="north-west📌">Support de</text>
+        <text x="650" y="265" class="north-west📌">conception</text>
+
+        <circle cx="465" cy="250" r="3" />
+        <circle cx="565" cy="250" r="3" />
+
+        <text x="465" y="235" class="south📌">Boîte</text>
+        <text x="465" y="250" class="south📌">noire</text>
+        <text x="565" y="235" class="south📌">Boîte</text>
+        <text x="565" y="250" class="south📌">blanche</text>
+      </g>
+
+      <g>
+        <line x1="375" y1="250" x2="375" y2="50"
+              marker-end="url(#arrowHead)" />
+
+        <text x="375" y="50" class="south-east📌">Taille du système</text>
+
+        <circle cx="375" cy="210" r="3" />
+        <circle cx="375" cy="170" r="3" />
+        <circle cx="375" cy="130" r="3" />
+        <circle cx="375" cy="90"  r="3" />
+
+        <text x="375" y="210" class="east📌">Unitaire</text>
+        <text x="375" y="170" class="east📌">Composant</text>
+        <text x="375" y="130" class="east📌">Intégration</text>
+        <text x="375" y="90"  class="east📌">Système</text>
+      </g>
+
+      <g transform="rotate(45 375 250)">
+        <line x1="375" y1="250" x2="375" y2="450"
+              marker-end="url(#arrowHead)" />
+
+        <text x="375" y="450" class="north-west📌">Type de test</text>
+
+        <circle cx="375" cy="290" r="3" />
+        <circle cx="375" cy="330" r="3" />
+        <circle cx="375" cy="370" r="3" />
+        <circle cx="375" cy="410" r="3" />
+
+        <text x="375" y="290" class="west📌">Fonctionnel</text>
+        <text x="375" y="330" class="west📌">Robustesse</text>
+        <text x="375" y="370" class="west📌">Performance</text>
+        <text x="375" y="410" class="west📌">Utilisabilité</text>
+      </g>
+    </svg>
+
+    <p>Nous faisons du test boîte noire, unitaire et fonctionnel.</p>
+  </div>
+</section>
+
+<section>
+  <h1><em lang="en">Design by Contract</em></h1>
+
+  <p>Contrat :</p>
+  <ul>
+    <li>inventé par B. Meyer en 1992 dans le langage Eiffel</li>
+    <li>décrit un modèle en utilisant des annotations</li>
+    <li>exprime des contraintes formelles : préconditions, postconditions et
+    invariants</li>
+    <li data-item="—"><em lang="en">caller</em> : « je m'engage à satisfaire ta
+        précondition »</li>
+    <li data-item="—"><em lang="en">callee</em> : « je m'engage à établir ma
+        postcondition »</li>
+    <li data-item="">invariants satisfaits avant et après l'exécution du
+        <em lang="en">callee</em></li>
+  </ul>
+
+  <div id="design_by_contract" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper      = Hoa.Graph(Hoa.$('#design_by_contract'), 800, 150);
+      var grid       = paper.grid(0, 0, 800, 150, 5, 1);
+      var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+      var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
+      var method     = grid.push(paper.circle(0, 0, 25));
+      var _method    = paper.text(400, 30, 'méthode');
+      var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
+      var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+
+      paper.link.between(invariant1, pre);
+      paper.link.between(pre, method);
+      paper.link.between(method, post);
+      paper.link.between(post, invariant2);
+  });
+  </script>
+</section>
+
+<section>
+  <h1>Langages de contrats</h1>
+
+  <p>Chaque « grand » langage à un langage de contrat :</p>
+  <ul>
+    <li><em lang="en">Java Modeling Language</em> (JML) pour Java</li>
+    <li><em lang="en">ANSI/C Specification Language</em> (ACSL) pour C</li>
+    <li><em lang="en">Spec#</em> pour C#</li>
+    <li><em lang="en">JSConTest</em> pour Javascript</li>
+  </ul>
+  <p class="break">Pour PHP ? Rien !</p>
+</section>
+
+<section>
+  <h1><em lang="en">Contract-based Testing</em></h1>
+
+  <p>Principe :</p>
+  <ul>
+    <li>utilise les préconditions pour générer des données de tests</li>
+    <li>utilise les postcondtions et invariants pour établir le verdict du
+        test à l'exécution, grâce à un <em lang="en">Runtime Assertion
+        Checker</em> (RAC)</li>
+  </ul>
+
+  <p class="break">Problèmes :</p>
+  <ul>
+    <li>contraintes souvent exprimées avec des formules logiques</li>
+    <li>difficile de générer de données</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Contributions</h1>
+
+  <p>Faire du <em lang="en">contract-based testing</em> en PHP en 3 étapes :</p>
+  <ol>
+    <li>un (nouveau) langage de contrats :
+    <ul>
+      <li>adapter à PHP</li>
+      <li>pragmatique</li>
+      <li>facile à utiliser pour le développeur</li>
+      <li>assemblant plusieurs méthodes de test</li>
+    </ul>
+    </li>
+    <li>des générateurs de données, pour tous les types usuels</li>
+    <li>générer automatiquement des suites de tests unitaires</li>
+  </ol>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>Praspel et les domaines réalistes</li>
+    <li>Génération automatique de données</li>
+    <li>Génération automatique de tests unitaires</li>
+    <li>Extension <code>atoum/praspel-extension</code></li>
+    <li>Conclusion</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>1 <span>Praspel et les domaines réalistes</span></h1>
+</section>
+
+<section>
+  <h1>Vue générale</h1>
+</section>
+
+<section>
+  <h1>Clauses</h1>
+</section>
+
+<section>
+  <h1>Constructions</h1>
+</section>
+
+<section>
+  <h1>Exemples</h1>
+</section>
+
+<section>
+  <h1>Domaines réalistes</h1>
+</section>
+
+<section>
+  <h1>Univers <math><msub><mi mathvariant="normal">U</mi><mtext>realdom</mtext></msub></math></h1>
+</section>
+
+<section class="chapter">
+  <h1>2 <span>Génération automatique de données</span></h1>
+</section>
+
+<section>
+  <h1>Génération standard</h1>
+</section>
+
+<section>
+  <h1>Génération de tableaux</h1>
+</section>
+
+<section>
+  <h1>Génération de chaînes de caractères</h1>
+</section>
+
+<section>
+  <h1>Génération d'objets</h1>
+</section>
+
+<section class="chapter">
+  <h1>3 <span>Génération automatique de tests unitaires</span></h1>
+</section>
+
+<section>
+  <h1>Objectifs de tests</h1>
+</section>
+
+<section>
+  <h1>Critère de couvertures sur les contrats</h1>
+</section>
+
+<section>
+  <h1>Génération de suites de tests atoum</h1>
+</section>
+
+<section class="chapter">
+  <h1>4 <span>Extension<br /><small><code>atoum/praspel-extension</code></span></small></h1>
+</section>
+
+<section>
+  <h1>Des nouveaux « <em lang="en">asserters</em> »</h1>
+</section>
+
+<section>
+  <h1>Génération de données</h1>
+</section>
+
+<section class="chapter">
+  <h1>5 <span>Conclusion</span></small></h1>
+</section>
+
+<section>
+  <h1>Outillage</h1>
+</section>
+
+<section>
+  <h1>Quelques liens</h1>
+
+  <ul>
+    <li>thèse : …</li>
+    <li>documentation : …</li>
+    <li>extension atoum : …</li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <h1>Merci ! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
+</section>
+
+<div id="progress-bar"></div>
+
+<script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Hoa.Graph.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Hoa.Graph.style.js"></script>
+
+</body>
+</html>
