@@ -94,7 +94,8 @@
     <li>doctorant en Informatique
         (<a href="http://disc.univ-fcomte.fr/">DISC</a>,
          <a href="http://www.inria.fr/">INRIA</a>)</li>
-    <li><em lang="en">leader</em> et développeur de Hoa</li>
+    <li><em lang="en">leader</em> et développeur de
+        <a href="http://hoa-project.net/">Hoa</a></li>
     <li>contributeur
         <a href="http://php.net/">PHP</a>,
         <a href="http://mozilla.org/">Mozilla</a>,
@@ -177,31 +178,33 @@
 <section>
   <h1>Définitions</h1>
 
-  <p><em lang="en">System Under Test</em> (<strong>SUT</strong>) : système qui
-  sera exécuté</p>
-  <div class="break">
-    <div class="fleft">
-      <ul>
-        <li data-item=" ">préambule</li>
-        <li data-item="+">données</li>
-        <li data-item="+">oracle</li>
-        <li data-item="="><strong>cas de test</strong></li>
-      </ul>
+  <div class="incremental">
+    <p><em lang="en">System Under Test</em> (<strong>SUT</strong>) : système qui
+    sera exécuté</p>
+    <div class="break">
+      <div class="fleft">
+        <ul>
+          <li data-item=" ">préambule</li>
+          <li data-item="+">données</li>
+          <li data-item="+">oracle</li>
+          <li data-item="="><strong>cas de test</strong></li>
+        </ul>
+      </div>
+      <div class="fright" style="width: 75%">
+        <ul>
+          <li data-item=":">place le SUT dans un état particulier</li>
+          <li data-item=":"><strong>test</strong>, pour exécuter le SUT</li>
+          <li data-item=":">établit le verdict, est-ce que le produit de
+          l’exécution et l’état du SUT après son exécution sont ceux attendus ou
+          non ?</li>
+        </ul>
+      </div>
     </div>
-    <div class="fright" style="width: 75%">
-      <ul>
-        <li data-item=":">place le SUT dans un état particulier</li>
-        <li data-item=":"><strong>test</strong>, pour exécuter le SUT</li>
-        <li data-item=":">établit le verdict, est-ce que le produit de
-        l’exécution et l’état du SUT après son exécution sont ceux attendus ou
-        non ?</li>
-      </ul>
-    </div>
+    <p class="break clear">Valeurs du verdict : <span class="👍">succès</span>,
+                                                <span class="👎">échec</span> ou
+                                                inconclusif</p>
+    <p class="break"><strong>Suite de test</strong> : ensemble de cas de tests</p>
   </div>
-  <p class="break clear">Valeurs du verdict : <span class="👍">succès</span>,
-                                              <span class="👎">échec</span> ou
-                                              inconclusif</p>
-  <p class="break"><strong>Suite de test</strong> : ensemble de cas de tests</p>
 </section>
 
 <section>
@@ -210,90 +213,103 @@
   <div class="schema">
     <svg width="700" height="400" viewBox="60 0 780 480" class="draw">
 
-        <defs>
-            <marker id="arrowHead"
-                    viewBox="0 0 10 10" 
-                    refX="1" refY="5"
-                    markerWidth="6" 
-                    markerHeight="6"
-                    orient="auto">
-                <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-        </defs>
+      <defs>
+          <marker id="arrowHead"
+                  viewBox="0 0 10 10" 
+                  refX="1" refY="5"
+                  markerWidth="6" 
+                  markerHeight="6"
+                  orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+      </defs>
 
-      <g>
-        <line x1="375" y1="250" x2="650" y2="250"
-              marker-end="url(#arrowHead)" />
+      <g class="incremental">
+        <g>
+          <line x1="375" y1="250" x2="650" y2="250"
+                marker-end="url(#arrowHead)" />
 
-        <text x="650" y="250" class="north-west📌">Support de</text>
-        <text x="650" y="265" class="north-west📌">conception</text>
+          <text x="650" y="250" class="north-west📌">Support de</text>
+          <text x="650" y="265" class="north-west📌">conception</text>
 
-        <circle cx="465" cy="250" r="3" />
-        <circle cx="565" cy="250" r="3" />
+          <circle cx="465" cy="250" r="3" />
+          <circle cx="565" cy="250" r="3" />
 
-        <text x="465" y="235" class="south📌">Boîte</text>
-        <text x="465" y="250" class="south📌">noire</text>
-        <text x="565" y="235" class="south📌">Boîte</text>
-        <text x="565" y="250" class="south📌">blanche</text>
-      </g>
+          <text x="465" y="235" class="south📌">Boîte</text>
+          <text x="465" y="250" class="south📌">noire</text>
+          <text x="565" y="235" class="south📌">Boîte</text>
+          <text x="565" y="250" class="south📌">blanche</text>
+        </g>
 
-      <g>
-        <line x1="375" y1="250" x2="375" y2="50"
-              marker-end="url(#arrowHead)" />
+        <g>
+          <line x1="375" y1="250" x2="375" y2="50"
+                marker-end="url(#arrowHead)" />
 
-        <text x="375" y="50" class="south-east📌">Taille du système</text>
+          <text x="375" y="50" class="south-east📌">Taille du système</text>
 
-        <circle cx="375" cy="210" r="3" />
-        <circle cx="375" cy="170" r="3" />
-        <circle cx="375" cy="130" r="3" />
-        <circle cx="375" cy="90"  r="3" />
+          <circle cx="375" cy="210" r="3" />
+          <circle cx="375" cy="170" r="3" />
+          <circle cx="375" cy="130" r="3" />
+          <circle cx="375" cy="90"  r="3" />
 
-        <text x="375" y="210" class="east📌">Unitaire</text>
-        <text x="375" y="170" class="east📌">Composant</text>
-        <text x="375" y="130" class="east📌">Intégration</text>
-        <text x="375" y="90"  class="east📌">Système</text>
-      </g>
+          <text x="375" y="210" class="east📌">Unitaire</text>
+          <text x="375" y="170" class="east📌">Composant</text>
+          <text x="375" y="130" class="east📌">Intégration</text>
+          <text x="375" y="90"  class="east📌">Système</text>
+        </g>
 
-      <g transform="rotate(45 375 250)">
-        <line x1="375" y1="250" x2="375" y2="450"
-              marker-end="url(#arrowHead)" />
+        <g transform="rotate(45 375 250)">
+          <line x1="375" y1="250" x2="375" y2="450"
+                marker-end="url(#arrowHead)" />
 
-        <text x="375" y="450" class="north-west📌">Type de test</text>
+          <text x="375" y="450" class="north-west📌">Type de test</text>
 
-        <circle cx="375" cy="290" r="3" />
-        <circle cx="375" cy="330" r="3" />
-        <circle cx="375" cy="370" r="3" />
-        <circle cx="375" cy="410" r="3" />
+          <circle cx="375" cy="290" r="3" />
+          <circle cx="375" cy="330" r="3" />
+          <circle cx="375" cy="370" r="3" />
+          <circle cx="375" cy="410" r="3" />
 
-        <text x="375" y="290" class="west📌">Fonctionnel</text>
-        <text x="375" y="330" class="west📌">Robustesse</text>
-        <text x="375" y="370" class="west📌">Performance</text>
-        <text x="375" y="410" class="west📌">Utilisabilité</text>
+          <text x="375" y="290" class="west📌">Fonctionnel</text>
+          <text x="375" y="330" class="west📌">Robustesse</text>
+          <text x="375" y="370" class="west📌">Performance</text>
+          <text x="375" y="410" class="west📌">Utilisabilité</text>
+        </g>
       </g>
     </svg>
 
-    <p>Nous faisons du test boîte noire, unitaire et fonctionnel.</p>
+    <div class="incremental">
+      <p>Nous faisons du test boîte noire, unitaire et fonctionnel.</p>
+    </div>
   </div>
 </section>
 
 <section>
   <h1><em lang="en">Design by Contract</em></h1>
 
-  <p>Contrat :</p>
-  <ul>
-    <li>inventé par B. Meyer en 1992 dans le langage Eiffel</li>
-    <li>décrit un modèle en utilisant des annotations</li>
-    <li>exprime des contraintes formelles : préconditions, postconditions et
-    invariants</li>
-    <li data-item="—"><em lang="en">caller</em> : « je m'engage à satisfaire ta
-        précondition »</li>
-    <li data-item="—"><em lang="en">callee</em> : « je m'engage à établir ma
-        postcondition »</li>
-    <li data-item="">invariants satisfaits avant et après l'exécution du
-        <em lang="en">callee</em></li>
-  </ul>
+  <div class="incremental">
+    <div>
+      <p>Contrat :</p>
+      <ul>
+        <li>inventé par B. Meyer en 1992 dans le langage Eiffel</li>
+        <li>décrit un modèle en utilisant des annotations</li>
+        <li>exprime des contraintes formelles : préconditions, postconditions et
+        invariants</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li data-item="—"><em lang="en">caller</em> : « je m'engage à satisfaire ta
+            précondition »</li>
+        <li data-item="—"><em lang="en">callee</em> : « je m'engage à établir ma
+            postcondition »</li>
+        <li data-item="">invariants satisfaits avant et après l'exécution du
+            <em lang="en">callee</em></li>
+      </ul>
+    </div>
 
-  <div id="design_by_contract" class="verbatim schema"></div>
+    <div id="design_by_contract" class="verbatim schema"></div>
+  </div>
+
   <script>
   Hoa.Document.onReady(function ( ) {
 
@@ -324,25 +340,31 @@
     <li><em lang="en">Spec#</em> pour C#</li>
     <li><em lang="en">JSConTest</em> pour Javascript</li>
   </ul>
-  <p class="break">Pour PHP ? Rien !</p>
+  <p class="break incremental"><span>Pour PHP ?</span> <span class="👎">Rien !</span></p>
 </section>
 
 <section>
   <h1><em lang="en">Contract-based Testing</em></h1>
 
-  <p>Principe :</p>
-  <ul>
-    <li>utilise les préconditions pour générer des données de tests</li>
-    <li>utilise les postcondtions et invariants pour établir le verdict du
-        test à l'exécution, grâce à un <em lang="en">Runtime Assertion
-        Checker</em> (RAC)</li>
-  </ul>
+  <div class="incremental">
+    <div>
+      <p>Principe :</p>
+      <ul>
+        <li>utilise les préconditions pour générer des données de tests</li>
+        <li>utilise les postcondtions et invariants pour établir le verdict du
+            test à l'exécution, grâce à un <em lang="en">Runtime Assertion
+            Checker</em> (RAC)</li>
+      </ul>
+    </div>
 
-  <p class="break">Problèmes :</p>
-  <ul>
-    <li>contraintes souvent exprimées avec des formules logiques</li>
-    <li>difficile de générer de données</li>
-  </ul>
+    <div>
+      <p class="break">Problèmes :</p>
+      <ul>
+        <li>contraintes souvent exprimées avec des formules logiques</li>
+        <li>difficile de générer de données</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -381,10 +403,99 @@
 
 <section>
   <h1>Vue générale</h1>
+
+  <pre id="overview"><code class="language-php">class C {
+
+    /**
+     * @invariant I;
+     */
+    protected $a;
+
+    /**
+     * @requires P;
+     * @behavior α {
+     *     @description 'Apply the α process.';
+     *     @requires P_α;
+     *     @behavior β {
+     *         @requires  P_α_β;
+     *         @ensures   Q_α_β;
+     *         @throwable T_α_β;
+     *     }
+     * }
+     * @behavior γ {
+     *     @requires P_γ;
+     *     …
+     * }
+     * @default {
+     *     @description 'Apply the fallback process.';
+     *     @ensures   Q_D;
+     *     @throwable T_D;
+     * }
+     */
+     public function f ( ) { }
+}</code></pre>
+  <div class="incremental incremental-overlay">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('4')">
+       <code>@invariant</code> exprime un invariant</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('9,12,14,20')">
+       <code>@requires</code> exprime une précondition</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('15,25')">
+       <code>@ensures</code> exprime une postcondition normale</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('16,26')">
+       <code>@throwable</code> exprime une postcondition exceptionnelle ;
+       de la forme <code>T_C with T_E</code></p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('10,19')">
+       <code>@behavior</code> exprime un comportement</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('23')">
+       <code>@default</code> exprime un comportement par défaut, avec une clause
+       <code>@requires</code> implicite</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('11,24')">
+       <code>@description</code> décrit informellement un comportement</p>
+  </div>
 </section>
 
 <section>
-  <h1>Clauses</h1>
+  <h1>Expressions</h1>
+
+  <p><code>P</code>, <code>Q</code> et <code>T_E</code> représente une
+  expressions :</p>
+  <ul>
+    <li>une déclaration</li>
+    <li>un prédicat</li>
+    <li>une qualification</li>
+  </ul>
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Déclaration :</p>
+      <ul>
+        <li>associe un ou plusieurs domaines réalistes à une variable du SUT
+        (arguments) ou du modèle (<code>let</code>)</li>
+        <li>plusieurs = disjonction de domaines réalistes</li>
+        <li><code>\result</code> représente le résultat du SUT</li>
+        <li><code>\old(<em>i</em>)</code> représente la valeur de
+        <code><em>i</em></code> dans le pré-état (avant l'exécution du SUT)</li>
+      </ul>
+    </div>
+    <div>
+      <p>Prédicat : </p>
+      <ul>
+        <li>toutes les constructions de Praspel supportent la
+        <strong>validation</strong> et la <strong>génération</strong> mais…</li>
+        <li>toutes les contraintes ne peuvent pas être exprimées</li>
+        <li><code>\pred(<code><em>p</em></code>)</code> où
+        <code><em>p</em></code> est du code PHP pur (en forme normale
+        conjonctive, CNF)</li>
+      </ul>
+    </div>
+    <div>
+      <p>Qualification :</p>
+      <ul>
+        <li>qualifier une donnée avec un adjectif</li>
+        <li>« mot-clé » représentant des constraintes usuelles</li>
+        <li>facilite la vie, facile à lire, évite les erreurs</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -487,6 +598,31 @@
 <script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Hoa.Graph.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Hoa.Graph.style.js"></script>
+<script>
+  Hoa.namespace([HTMLElement], {
+
+      guard: function ( ) {
+
+          return true;
+      },
+      body : function ( element ) {
+
+          return {
+
+              highlightLines: function ( lines ) {
+
+                  element.setAttribute('data-line', lines);
+                  Prism.hooks.run(
+                      'after-highlight',
+                      {
+                          element: element.querySelector('code')
+                      }
+                  );
+              }
+          };
+      }
+  });
+</script>
 
 </body>
 </html>
