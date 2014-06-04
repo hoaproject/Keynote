@@ -21,6 +21,28 @@
 
     }
 
+    .draw rect,
+    .draw path {
+        fill: none;
+        stroke: #000;
+        stroke-width: 1;
+        stroke-linejoin: round;
+    }
+
+    .draw .arrow {
+        fill: #000;
+    }
+
+    .draw rect {
+        stroke-linecap: round;
+    }
+
+    text,
+    .middle📌 {
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+
     .north📌 {
         text-anchor: middle;
         dominant-baseline: central;
@@ -67,6 +89,11 @@
         text-anchor: start;
         dominant-baseline: central;
         transform: translate(.5em, 1em);
+    }
+
+    .draw .code-like {
+        font-family: Pre;
+        font-size: 12pt;
     }
   </style>
 </head>
@@ -220,27 +247,11 @@
                   markerWidth="6" 
                   markerHeight="6"
                   orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
+              <path d="M 0 0 L 10 5 L 0 10 z" class="arrow" />
           </marker>
       </defs>
 
       <g class="incremental">
-        <g>
-          <line x1="375" y1="250" x2="650" y2="250"
-                marker-end="url(#arrowHead)" />
-
-          <text x="650" y="250" class="north-west📌">Support de</text>
-          <text x="650" y="265" class="north-west📌">conception</text>
-
-          <circle cx="465" cy="250" r="3" />
-          <circle cx="565" cy="250" r="3" />
-
-          <text x="465" y="235" class="south📌">Boîte</text>
-          <text x="465" y="250" class="south📌">noire</text>
-          <text x="565" y="235" class="south📌">Boîte</text>
-          <text x="565" y="250" class="south📌">blanche</text>
-        </g>
-
         <g>
           <line x1="375" y1="250" x2="375" y2="50"
                 marker-end="url(#arrowHead)" />
@@ -256,6 +267,22 @@
           <text x="375" y="170" class="east📌">Composant</text>
           <text x="375" y="130" class="east📌">Intégration</text>
           <text x="375" y="90"  class="east📌">Système</text>
+        </g>
+
+        <g>
+          <line x1="375" y1="250" x2="650" y2="250"
+                marker-end="url(#arrowHead)" />
+
+          <text x="650" y="250" class="north-west📌">Support de</text>
+          <text x="650" y="265" class="north-west📌">conception</text>
+
+          <circle cx="465" cy="250" r="3" />
+          <circle cx="565" cy="250" r="3" />
+
+          <text x="465" y="235" class="south📌">Boîte</text>
+          <text x="465" y="250" class="south📌">noire</text>
+          <text x="565" y="235" class="south📌">Boîte</text>
+          <text x="565" y="250" class="south📌">blanche</text>
         </g>
 
         <g transform="rotate(45 375 250)">
@@ -351,7 +378,7 @@
       <p>Principe :</p>
       <ul>
         <li>utilise les préconditions pour générer des données de tests</li>
-        <li>utilise les postcondtions et invariants pour établir le verdict du
+        <li>utilise les postconditions et invariants pour établir le verdict du
             test à l'exécution, grâce à un <em lang="en">Runtime Assertion
             Checker</em> (RAC)</li>
       </ul>
@@ -399,6 +426,269 @@
 
 <section class="chapter">
   <h1>1 <span>Praspel et les domaines réalistes</span></h1>
+</section>
+
+<section>
+  <h1>Domaines réalistes</h1>
+
+  <div class="incremental">
+  <div>
+    <p>Naïvement, les domaines réalistes :</p>
+    <ul>
+      <li>raffinent les types usuels, comme les entiers, les chaînes de
+      caractères, les tableaux etc.</li>
+      <li>permettent d'exprimer des données plus complexes, comme des
+      grammaires, des graphes etc.</li>
+    </ul>
+  </div>
+  <div>
+    <p class="break"><strong>Réaliste</strong> signifie qu'ils sont conçus pour
+    spécifier des domaines de données pertinents pour un contexte spécifique ;
+    exemple : une adresse email</p>
+  </div>
+  </div>
+</section>
+
+<section>
+  <h1>Caractéristiques</h1>
+
+  <p>Conçus pour répondre aux problématiques du test. Ils ont les deux
+  caractéristiques suivantes :</p>
+  <ul class="incremental">
+    <li>la <strong>prédicabilité</strong> qui permet de valider qu'une donnée
+    appartient à l'ensemble des valeurs décrites par le domaine réaliste</li>
+    <li>la <strong>générabilité</strong> qui permet de générer une valeur
+    décrite par le domaine réaliste</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Implémentation</h1>
+
+  <p><small>(Dans notre implémentation,)</small> un domaine réaliste est une classe</p>
+  <p>Les caractéristiques sont représentées par les méthodes :</p>
+  <ul>
+    <li><code>predicate($q)</code> où <code>$q</code> est la valeur à valider</li>
+    <li><code>sample($sampler)</code> où <code>$sampler</code> est un
+    <strong>générateur numérique</strong> :  il génère uniquement des entiers et
+    des réels, et permet de guider la génération d’une donnée ; par exemple,
+    le générateur numérique est utilisé pour choisir un caractère parmi une
+    plage de caractères donnée</li>
+  </ul>
+  <p>Seul générateur numérique disponible : pseudo-aléatoire</p>
+</section>
+
+<section>
+  <h1>Hiérarchie</h1>
+
+  <p>Classification verticale</p>
+  <p>Héritage permet de raffiner les caractéristiques :</p>
+  <ul>
+    <li><code>Color</code> hérite de <code>String</code></li>
+    <li><code>Boundinteger</code> hérite de <code>Integer</code></li>
+    <li>tous sont enfants de la classe <code>Realdom</code></li>
+  </ul>
+  <p>Univers
+     <math><msub><mi mathvariant="normal">U</mi><mtext>realdom</mtext></msub></math> :</p>
+
+  <svg width="640" height="190" viewBox="0 0 640 190" class="draw">
+
+    <style>
+      .fruit {
+          stroke-dasharray: 3;
+      }
+
+      .structural > rect {
+          stroke-width: 2;
+      }
+    </style>
+
+    <g class="incremental">
+      <g>
+        <line x1="615" y1="180" x2="615" y2="20" marker-end="url(#arrowHead)" />
+        <text x="630" y="95" transform="rotate(90 630 95)">héritage</text>
+      </g>
+
+      <g>
+        <rect x="10" y="130" width="590" height="50" rx="10" ry="10" />
+        <text x="285" y="155" class="code-like">undefined</text>
+      </g>
+
+      <g>
+        <rect  x="10" y="70" width="90" height="50" rx="10" ry="10" />
+        <rect x="110" y="70" width="90" height="50" rx="10" ry="10" />
+        <rect x="210" y="70" width="90" height="50" rx="10" ry="10" />
+        <rect x="310" y="70" width="90" height="50" rx="10" ry="10" />
+        <text  x="55" y="95" class="code-like">boolean</text>
+        <text x="155" y="95" class="code-like">integer</text>
+        <text x="255" y="95" class="code-like">float</text>
+        <text x="355" y="95" class="code-like">string</text>
+      </g>
+
+      <g class="structural">
+        <rect x="410" y="70" width="90" height="50" rx="10" ry="10" />
+        <rect x="510" y="70" width="90" height="50" rx="10" ry="10" />
+        <text x="455" y="95" class="code-like">array</text>
+        <text x="555" y="95" class="code-like">class</text>
+      </g>
+
+      <g class="fruit">
+        <rect  x="10" y="10" width="290" height="50" rx="10" ry="10" />
+        <text x="157" y="35">bibliothèque standard</text>
+      </g>
+
+      <g class="fruit">
+        <rect x="310" y="10" width="290" height="50" rx="10" ry="10" />
+        <text x="457" y="35">bibliothèque utilisateur</text>
+      </g>
+    </g>
+  </svg>
+</section>
+
+<section>
+  <h1>Paramètres</h1>
+
+  <div class="incremental">
+    <div>
+      <p><em>A l'instar</em> des fonctions, un domaine réaliste est paramétrable :</p>
+      <ul>
+        <li>pour représenter des structures de données complexes (tableaux
+        imbriqués, graphes, automates, arbres…)</li>
+        <li>typage :
+            <code class="language-php">'Integer size'</code></li>
+        <li>multi-typage :
+            <code class="language-php">'Integer|Float bigSize'</code></li>
+        <li>valeur optionnelle :
+            <code class="language-php">'Integer size' => 7</code></li>
+        <li>utiliser la valeur par défaut : avec <code>default</code> ou
+            <code>…</code></li>
+      </ul>
+    </div>
+    <div>
+      <p>Exemples d'appels :</p>
+      <ul>
+        <li><code>string('a', 'z', 4..12)</code></li>
+        <li><code>string(…,…, 7)</code></li>
+        <li><code>string('α', 'ω', 7)</code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Exemple</h1>
+
+  <pre id="boundinteger"><code class="language-php">class        Boundinteger
+  extends    Integer
+  implements IRealdom\Interval,
+             IRealdom\Finite,
+             IRealdom\Nonconvex,
+             IRealdom\Enumerable {
+
+    protected $_arguments = [
+        'Constinteger lower' => PHP_INT_MIN,
+        'Constinteger upper' => PHP_INT_MAX
+    ];
+
+    public function predicate ( $q ) {
+
+        return    parent::predicate($q)
+               &amp;&amp; $q >= $this['lower']->getConstantValue()
+               &amp;&amp; $q &lt;= $this['upper']->getConstantValue();
+    }
+
+    public function sample ( $sampler ) {
+
+        return $sampler->getInteger(
+            $this['lower']->sample($sampler),
+            $this['upper']->sample($sampler)
+        );
+    }
+
+    // ...
+}</code></pre>
+  <div class="incremental incremental-overlay">
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('1')">
+       Implémentation : un domaine réaliste = une classe</p>
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('2')">
+       Hiérarchie : <code>Boundinteger</code> hérite de <code>Integer</code></p>
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('3-6')">
+       Classification : caractérisation du domaine réaliste</p>
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('8-11')">
+       Paramètres : <code>lower</code> et <code>upper</code></p>
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('13-18')">
+       Caractéristique de prédicabililité</p>
+    <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('20-26')">
+       Caractéristique de générabilité</p>
+  </div>
+</section>
+
+<section>
+  <h1>Classification</h1>
+
+  <p>Classification transversale : horizontale</p>
+  <p>Interfaces aidant à caractériser les domaines réalistes :</p>
+  <ul>
+    <li><code>Constant</code>, immuable avec une valeur (<code>42</code> du
+    domaine réaliste <code>Constinteger</code>)</li>
+    <li><code>Interval</code>, intervalle avec une borne inférieure et
+    supérieure (qui peuvent être réduites dynamiquement)</li>
+    <li><code>Finite</code>, ensemble de valeurs fini</li>
+    <li><code>Nonconvex</code>,  avec des valeurs exclues (des trous)</li>
+    <li><code>Enumerable</code>, dont les valeurs peuvent être énumérées</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Bibliothèque standard</h1>
+
+  <ul style="columns: 3; -moz-columns: 3; -webkit-columns: 3">
+    <li><code>Undefined</code></li>
+    <li><code>Array</code></li>
+    <li><code>Boolean</code></li>
+    <li><code>Class</code></li>
+    <li><code>Float</code></li>
+    <li><code>Integer</code></li>
+    <li><code>String</code></li>
+    <li><code>Bag</code></li>
+    <li><code>Boundfloat</code></li>
+    <li><code>Boundinteger</code></li>
+    <li><code>Color</code></li>
+    <li><code>Constarray</code></li>
+    <li><code>Constboolean</code></li>
+    <li><code>Constfloat</code></li>
+    <li><code>Constinteger</code></li>
+    <li><code>Constnull</code></li>
+    <li><code>Conststring</code></li>
+    <li><code>Date</code></li>
+    <li><code>Empty</code></li>
+    <li><code>Even</code></li>
+    <li><code>Grammar</code></li>
+    <li><code>Natural</code></li>
+    <li><code>Number</code></li>
+    <li><code>Object</code></li>
+    <li><code>Odd</code></li>
+    <li><code>Regex</code></li>
+    <li><code>Smallfloat</code></li>
+    <li><code>Smallinteger</code></li>
+    <li><code>Timestamp</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Praspel</h1>
+
+  <p><em lang="en">PHP Realistic Annotation and SPEcification Language</em></p>
+  <ul>
+    <li>un langage et un <em lang="en">framework</em> de test à partir de
+        <strong>contrats</strong></li>
+    <li>un langage d'<strong>annotation</strong> (formellement un
+        <em lang="en">Behavioral Interface Specification Language</em>), écrit
+        dans les commentaires <code>/** … */</code></li>
+    <li>permet d'exprimer des préconditions, postconditions et invariants</li>
+    <li>inspiré de JML et ACSL, mais inspiré seulement</li>
+    <li>utilise intensivement les domaines réalistes</li>
+  </ul>
 </section>
 
 <section>
@@ -477,6 +767,10 @@
       </ul>
     </div>
     <div>
+      <pre><code class="language-php">// Add an example</code></pre>
+    </div>
+
+    <div>
       <p>Prédicat : </p>
       <ul>
         <li>toutes les constructions de Praspel supportent la
@@ -488,6 +782,10 @@
       </ul>
     </div>
     <div>
+      <pre><code class="language-php">// Add an example</code></pre>
+    </div>
+
+    <div>
       <p>Qualification :</p>
       <ul>
         <li>qualifier une donnée avec un adjectif</li>
@@ -495,23 +793,14 @@
         <li>facilite la vie, facile à lire, évite les erreurs</li>
       </ul>
     </div>
+    <div>
+      <pre><code class="language-php">// Add an example</code></pre>
+    </div>
   </div>
 </section>
 
 <section>
-  <h1>Constructions</h1>
-</section>
-
-<section>
   <h1>Exemples</h1>
-</section>
-
-<section>
-  <h1>Domaines réalistes</h1>
-</section>
-
-<section>
-  <h1>Univers <math><msub><mi mathvariant="normal">U</mi><mtext>realdom</mtext></msub></math></h1>
 </section>
 
 <section class="chapter">
