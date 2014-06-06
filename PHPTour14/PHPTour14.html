@@ -857,6 +857,26 @@
 <section>
   <h1>Génération de tableaux</h1>
 
+  <p>Dans PHP :</p>
+  <ul>
+    <li>très utilisés</li>
+    <li>représentent toutes sortes de collections</li>
+    <li>associatifs (<em lang="en">hashmaps</em>)</li>
+  </ul>
+
+  <p class="break">Dans Praspel :</p>
+  <ul>
+    <li>la génération standard introduit trop de rejets</li>
+    <li>impossible d'exprimer des contraintes précises</li>
+    <li>utilisation de la construction <code>\pred(<em>p</em>)</code></li>
+  </ul>
+
+  <p class="break">Processus dédié à la génération de tableaux nécessaire</p>
+</section>
+
+<section>
+  <h1>Approche</h1>
+
   <ol>
     <li>étude des propriétés les plus populaires sur les tableaux (sur plus de
         60 projets, plus 5 millions de LOC) ; retenues :</p>
@@ -1086,7 +1106,7 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
               font-weigh: bold;
               color: red;
               transform: rotate(-45deg)">
-    censored
+    censuré
   </div>
 </section>
 
@@ -1113,7 +1133,328 @@ a is unique</code></pre>
 </section>
 
 <section>
+  <h1>Génération de tableaux</h1>
+
+  <p>Résumé :</p>
+  <ul>
+    <li>prédicabilité : domaine réaliste <code>array</code> avec le solveur</li>
+    <li>générabilité : avec le solveur</li>
+  </ul>
+  <p class="break">Mission suivante ? Les chaînes de caractères !</p>
+</section>
+
+<section>
   <h1>Génération de chaînes de caractères</h1>
+
+  <p>Avec les tableaux, le type le plus utilisé</p>
+  <p>Représente des données vastes et <strong>complexes</strong> :</p>
+  <ul>
+    <li>base de données (requêtes SQL…)</li>
+    <li>protocoles de communication (HTTP, WebSocket…)</li>
+    <li>descriptions d'objets (XML, JSON…)</li>
+    <li>etc.</li>
+  </ul>
+  <p class="break">Moyen rapide et simple de spécifier des chaînes de
+  caractères (voire des langages) nécessaire</p>
+</section>
+
+<section>
+  <h1>Grammaires</h1>
+
+  <p>En 1956, N. Chomsky établit une <strong>hiérarchie</strong> des langages
+  formels :</p>
+  <ol>
+    <li>grammaires générales (<em lang="en">unrestricted grammars</em>)</li>
+    <li>grammaires contextuelles (<em lang="en">context-sensitive
+        grammars</em>)</li>
+    <li>grammaires algébriques (<em lang="en">context-free grammars</em>)</li>
+    <li>grammaires régulières (<em lang="en">regular grammars</em>)</li>
+  </ol>
+  <p class="break">Exemples :</p>
+  <ul>
+    <li>langages réguliers : expressions régulières POSIX ou PCRE</li>
+    <li>langages algébriques : JavaCC, yacc, PP</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Langage PP</h1>
+
+  <p>Informellement : grammaire = lexèmes + règles</p>
+  <div class="incremental incremental-overlay">
+    <div>
+      <ul>
+        <li>lexème : plus petite unité lexicale composant un mot (donnée
+            textuelle)</li>
+      </ul>
+      <pre><code>%token <em>namespace_in</em>:<em>name</em> <em>value</em> -&gt; <em>namespace_out</em></code></pre>
+      <p>Exemple :</p>
+      <pre><code class="language-pp">%token number \d+</code></pre>
+    </div>
+    <div>
+      <ul>
+        <li>règle : décrit l'enchaînement des lexèmes les uns par rapport aux
+            autres</li>
+      </ul>
+      <ul class="break">
+        <li><code><em>rule</em>()</code> : pour <strong>appeler</strong> une
+            règle</li>
+        <li><code>&lt;<em>token</em>&gt;</code> et
+            <code>::<em>token</em>::</code> : pour <strong>déclarer</strong> un
+            lexème</li>
+        <li><code>|</code> : pour une <strong>disjonction</strong> (un
+            choix)</li>
+        <li><code>(<em>…</em>)</code> : pour <strong>grouper</strong></li>
+        <li><code><em>e</em>?</code>,
+            <code><em>e</em>+</code>,
+            <code><em>e</em>*</code> et
+            <code><em>e</em>{<em>x</em>,<em>y</em>}</code> pour
+            <strong>répéter</strong></li>
+        <li><code>#<em>node</em></code> pour créer un <strong>nœud</strong></li>
+        <li><code><em>token</em>[<em>i</em>]</code> pour
+        <strong>unifier</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Exemple <small>simplifiée</small> avec JSON</h1>
+
+  <p>Lexèmes (unité lexicale, atomique) :</p>
+  <pre style="max-height: 180px"><code class="language-pp">%skip   space          \s
+// Scalars.
+%token  true           true
+%token  false          false
+%token  null           null
+// Strings.
+%token  quote_         "        -> string
+%token  string:string  [^"]+
+%token  string:_quote  "        -> default
+// Objects.
+%token  brace_         {
+%token _brace          }
+// Arrays.
+%token  bracket_       \[
+%token _bracket        \]
+// Rest.
+%token  colon          :
+%token  comma          ,
+%token  number         \d+</code></pre>
+  <p>Règles :</p>
+  <pre style="max-height: 180px"><code class="language-pp">value:
+    &lt;true> | &lt;false> | &lt;null> | string() | object() | array() | number()
+
+string:
+    ::quote_:: &lt;string> ::_quote::
+
+number:
+    &lt;number>
+
+#object:
+    ::brace_:: pair() ( ::comma:: pair() )* ::_brace::
+
+#pair:
+    string() ::colon:: value()
+
+#array:
+    ::bracket_:: value() ( ::comma:: value() )* ::_bracket::</code></pre>
+</section>
+
+<section>
+  <h1>Reconnaissance de mots</h1>
+
+  <div id="parsers" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper    = Hoa.Graph(Hoa.$('#parsers'), 800, 180);
+      var grid     = paper.grid(0, 0, 800, 180, 5, 2);
+      var word     = grid.push(paper.rect(0, 0, 140, 80, 3, 'mot'), 0, 0);
+      var sequence = grid.push(paper.rect(0, 0, 140, 80, 3, 'séquence'), 2, 0);
+      var trace    = grid.push(paper.rect(0, 0, 140, 80, 3, 'résultat'), 4, 0);
+      grid.push(paper.rect(0, 0, 140, 50, 3, '7 + 42'), 0, 1);
+      grid.push(paper.rect(0, 0, 360, 50, 3, '[[7 ⟼ …], [+ ⟼ …], [42 ⟼ …]]'), 2, 1);
+      grid.push(paper.rect(0, 0, 140, 50, 3, 'valide/invalide'), 4, 1);
+
+      paper.link.between(word, sequence, 'analyseur lexical');
+      paper.link.between(sequence, trace, 'analyseur syntaxique');
+  });
+  </script>
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Analyseur lexical :</p>
+      <pre style="height: 280px"><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --token-sequence
+  #  namespace     token name            token value           offset
+----------------------------------------------------------------------
+  0  default       bracket_              [                          0
+  1  default       number                1                          1
+  2  default       comma                 ,                          2
+  3  default       bracket_              [                          4
+  4  default       number                1                          5
+  5  default       comma                 ,                          6
+  6  default       bracket_              [                          8
+  7  default       number                2                          9
+  8  default       comma                 ,                         10
+  9  default       number                3                         12
+ 10  default       _bracket              ]                         13
+ 11  default       comma                 ,                         14
+ 12  default       number                5                         16
+ 13  default       _bracket              ]                         17
+ 14  default       comma                 ,                         18
+ 15  default       number                8                         20
+ 16  default       _bracket              ]                         21
+ 17  default       EOF                                             23</code></pre>
+    </div>
+    <div>
+      <p>Analyseur syntaxique :</p>
+      <pre><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --visitor dump
+>  #array
+>  >  token(number, 1)
+>  >  #array
+>  >  >  token(number, 1)
+>  >  >  #array
+>  >  >  >  token(number, 2)
+>  >  >  >  token(number, 3)
+>  >  >  token(number, 5)
+>  >  token(number, 8)</code></pre>
+      <p>Résultat sous forme d'arbre : <em lang="en">Abstract Syntax
+         Tree</em> (AST)</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1><em lang="en">Grammar-based Testing</em></h1>
+
+  <p>Grammaires culturellement utilisées pour valider</p>
+  <p class="break">Idée : utiliser une grammaire pour générer des données</p>
+  <p class="break">Principe : parcourir/explorer la grammaire</p>
+  <div id="grammar_based_testing" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper    = Hoa.Graph(Hoa.$('#grammar_based_testing'), 800, 180);
+      var grid     = paper.grid(0, 0, 800, 180, 5, 2);
+      var grammar  = grid.push(paper.rect(0, 0, 140, 80, 3, 'grammaire'), 0, 0);
+      var sequence = grid.push(paper.rect(0, 0, 140, 80, 3, 'séquence'), 2, 0);
+      var word     = grid.push(paper.rect(0, 0, 140, 80, 3, 'mot'), 4, 0);
+      grid.push(paper.rect(0, 0, 140, 50, 3, 'PP'), 0, 1);
+      grid.push(paper.rect(0, 0, 360, 50, 3, '[[7 ⟼ …], [+ ⟼ …], [42 ⟼ …]]'), 2, 1);
+      grid.push(paper.rect(0, 0, 140, 50, 3, '7 + 42'), 4, 1);
+
+      paper.link.between(grammar, sequence, 'génération');
+      paper.link.between(sequence, word, 'concrétisation');
+  });
+  </script>
+  <p>Trois algorithmes pour la génération</p>
+  <p>Un algorithme pour la concrétisation</p>
+</section>
+
+<section>
+  <h1>Algorithmes de génération</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Génération aléatoire et uniforme</p>
+      <ul>
+        <li data-item="👍">rapide pour des petites données, grande diversité,
+            taille de la séquence
+            <math class="tex"><mi mathvariant="normal">n</mi></math> fixe</li>
+        <li data-item="👎">pré-calcul exponentiel, génération très rapide</li>
+      </ul>
+      <p class="break">Exemples avec
+         <math class="tex"><mi mathvariant="normal">n</mi><mo>=</mo><mn>5</mn></math> :</p>
+      <pre><code class="language-json">[null, true]</code></pre>
+      <pre><code class="language-json">[[false]]</code></pre>
+      <pre><code class="language-json">[-2 , "oD"]</code></pre>
+    </div>
+    <div>
+      <p>Génération exhaustive bornée</p>
+      <ul>
+        <li data-item="👍">rapide pour des petites données, exhaustivité</li>
+        <li data-item="👎">nombre exponentiel de données</li>
+      </ul>
+      <p class="break">Exemple avec la borne
+         <math class="tex"><mi mathvariant="normal">n</mi><mo>=</mo><mn>15</mn></math> :</p>
+      <pre><code class="language-json">true
+false
+null
+"y"
+{"D/5-": true}
+{"b": true, "A_=M": true}
+{"A&amp;&lt;": true, "=8o^": false}
+{"WA": true, "};2z": null}
+{"r": true, "'*uT": "nRx0"}
+{"FyD": true, "i>": [true]}
+…</code></pre>
+      <p>Au total : <math class="tex"><mn>356 327</mn></math> séquences !</p>
+    </div>
+    <div>
+      <p>Génération basée sur la couverture :</p>
+      <ul>
+        <li data-item="👍">rapide pour des données de taille moyenne ou grande,
+            bonne diversité</li>
+        <li data-item="👎">ne considère pas de taille</li>
+      </ul>
+      <p class="break">Exemple :</p>
+      <pre><code class="language-json">false
+null
+{"axIy#Y": [true, 0.31260e-87060470]}
+{"x6: ": "!_`{", "yi*dj": [true], "2q": [true, true, true]}
+{"YM!vgx": true, "DP)": true}</code></pre>
+      <p>Toute la grammaire (lexèmes et règles) est couverte !</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Concrétisation</h1>
+
+  <div id="concretisation" class="verbatim schema"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper = Hoa.Graph(Hoa.$('#concretisation'), 800, 180);
+      var grid  = paper.grid(0, 0, 800, 180, 5, 2);
+      var pcre  = grid.push(paper.rect(0, 0, 140, 80, 3, 'PCRE'), 0, 0);
+      var ast   = grid.push(paper.rect(0, 0, 140, 80, 3, 'AST'), 2, 0);
+      var word  = grid.push(paper.rect(0, 0, 140, 80, 3, 'mot'), 4, 0);
+      grid.push(paper.rect(0, 0, 140, 50, 3, '\\w[3-7]+'), 0, 1);
+      grid.push(paper.rect(0, 0, 140, 50, 3, '(arbre)'), 2, 1);
+      grid.push(paper.rect(0, 0, 140, 50, 3, 'f377'), 4, 1);
+
+      paper.link.between(pcre, ast, 'analyseurs');
+      paper.link.between(ast, word, 'génération isotropique');
+  });
+  </script>
+  <p>Lexèmes exprimés avec des PCRE</p>
+  <p>Analyses les lexèmes avec la grammaire des PCRE</p>
+  <p>Algorithme de génération isotropique :</p>
+  <ul>
+    <li>aléatoire</li>
+    <li>uniformité locale (et non globale)</li>
+  </ul>
+  <p>Appliqué sur chaque élément d'une séquence</p>
+</section>
+
+<section>
+  <h1>Génération de chaînes de caractères</h1>
+
+  <p>Résumé :</p>
+  <ul>
+    <li>prédicabilité : grâce aux analyseurs (lexicaux et syntaxiques)</li>
+    <li>générabilité : grâce aux algorithmes de générations et de
+        concrétisation</li>
+  </ul>
+  <p class="break">Deux nouveaux domaines réalistes :
+     <code>grammar(<math class="tex"><mi mathvariant="normal">F</mi></math>)</code>
+     et
+     <code>regex(<math class="tex"><mi mathvariant="normal">R</mi></math>)</code>
+     (sucre syntaxique :
+     <code>/<math class="tex"><mi mathvariant="normal">R</mi></math>/</code>)</p>
+
+  <p class="break">Mission suivante ? Les objets !</p>
 </section>
 
 <section>
