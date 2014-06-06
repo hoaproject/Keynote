@@ -230,7 +230,7 @@
     <p class="break clear">Valeurs du verdict : <span class="👍">succès</span>,
                                                 <span class="👎">échec</span> ou
                                                 inconclusif</p>
-    <p class="break"><strong>Suite de test</strong> : ensemble de cas de tests</p>
+    <p class="break"><strong>Suite de tests</strong> : ensemble de cas de tests</p>
   </div>
 </section>
 
@@ -489,7 +489,7 @@
     <li>tous sont enfants de la classe <code>Realdom</code></li>
   </ul>
   <p>Univers
-     <math><msub><mi mathvariant="normal">U</mi><mtext>realdom</mtext></msub></math> :</p>
+     <math class="tex"><msub><mi mathvariant="normal">U</mi><mtext>realdom</mtext></msub></math> :</p>
 
   <svg width="640" height="190" viewBox="0 0 640 190" class="draw">
 
@@ -809,10 +809,307 @@
 
 <section>
   <h1>Génération standard</h1>
+
+  <p>Génération par défaut</p>
+  <p>Totalement pseudo-aléatoire</p>
+  <p><math class="tex">
+       <mi mathvariant="normal">V</mi>
+     </math> l'ensemble des variables (des préconditions et
+  invariants)</p>
+  <p><math class="tex">
+       <mi mathvariant="normal">v</mi>
+       <mo>∈</mo>
+       <mi mathvariant="normal">V</mi>
+     </math> une variable de la forme : <code>v: t_1(…) or … or t_n(…)</code></p>
+  <div id="standard_generation" class="verbatim schema" style="width: 300px"></div>
+  <script>
+  Hoa.Document.onReady(function ( ) {
+
+      var paper      = Hoa.Graph(Hoa.$('#standard_generation'), 300, 300);
+      var grid       = paper.grid(0, 0, 300, 300, 3, 3);
+
+      var pick      = grid.push(paper.circle(0, 0, 20), 1, 0);
+      var sample    = grid.push(paper.circle(0, 0, 20), 0, 1);
+      var predicate = grid.push(paper.circle(0, 0, 20), 1, 2);
+      var pred      = grid.push(paper.circle(0, 0, 20), 2, 1);
+
+//      paper.arc.between(pick, sample);
+//      paper.arc.between(sample, predicate);
+//      paper.arc.between(predicate, pred);
+//      paper.arc.between(pred, pick);
+
+
+//      var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+//      var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
+//      var method     = grid.push(paper.circle(0, 0, 25));
+//      var _method    = paper.text(400, 30, 'méthode');
+//      var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
+//      var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
+//
+//      paper.link.between(invariant1, pre);
+//      paper.link.between(pre, method);
+//      paper.link.between(method, post);
+//      paper.link.between(post, invariant2);
+  });
+  </script>
 </section>
 
 <section>
   <h1>Génération de tableaux</h1>
+
+  <ol>
+    <li>étude des propriétés les plus populaires sur les tableaux (sur plus de
+        60 projets, plus 5 millions de LOC) ; retenues :</p>
+        <ul>
+          <li><code>count</code></li>
+          <li><code>array_key_exists</code></li>
+          <li><code>in_array</code></li>
+        </ul>
+    </li>
+    <li><small>(syntaxe)</small> extension de Praspel pour les inclure
+        nativement</li>
+    <li><small>(sémantique)</small> transformation en propriétés
+         ensemblistes</li>
+    <li>solveur ensembliste</li>
+  </ol>
+</section>
+
+<section>
+  <h1>Syntaxe des propriétés</h1>
+
+  <p>Déclaration de tableau :
+     <code>a: array(<math class="tex"><mi mathvariant="normal">D</mi></math>,
+                    <math class="tex"><mi mathvariant="normal">L</mi></math>)</code></p>
+
+  <div class="incremental incremental-overlay break">
+    <div>
+      <p>Paire :
+         <code>a[<math class="tex"><mi mathvariant="normal">K</mi></math>]:
+               <math class="tex"><mi mathvariant="normal">V</mi></math></code></p>
+      <ul>
+        <li>toute valeur dans
+            <math class="tex"><mi mathvariant="normal">K</mi></math> est la clé
+            d'une paire dans le tableau <code>a</code></li>
+        <li>toute paire dont la clé est dans
+            <math class="tex"><mi mathvariant="normal">K</mi></math> a sa valeur
+            dans <math class="tex"><mi mathvariant="normal">V</mi></math></li>
+      </ul>
+      <p>Exemple :</p>
+      <pre><code>a[7..8]: true or 42</code></pre>
+      <p>équivaut à :</p>
+      <pre><code class="language-php">   array_key_exists(7, $a)
+&amp;&amp; array_key_exists(8, $a)
+&amp;&amp; (in_array(true, $a) || in_array(42, $a))
+&amp;&amp; ($a[7] === true     || $a[7] === 42)
+&amp;&amp; ($a[8] === true     || $a[8] === 42)</code></pre>
+    </div>
+    <div>
+      <p>Clé :
+         <code>a[<math class="tex"><mi mathvariant="normal">K</mi></math>]: _</code></p>
+      <ul>
+        <li>toute valeur de
+            <math class="tex"><mi mathvariant="normal">K</mi></math> doit être
+            une clé du tableau <code>a</code></li>
+      </ul>
+      <p>Exemple :</p>
+      <pre><code>a[7..8]: _</code></pre>
+      <p>équivaut à :</p>
+      <pre><code class="language-php">   array_key_exists(7, $a)
+&amp;&amp; array_key_exists(8, $a)</code></pre>
+    </div>
+    <div>
+      <p>Valeur :
+         <code>a[_]: <math class="tex"><mi mathvariant="normal">V</mi></math></code></p>
+      <ul>
+        <li>toute valeur de
+            <math class="tex"><mi mathvariant="normal">V</mi></math> doit être
+            une valeur du tableau <code>a</code></li>
+      </ul>
+      <p>Exemple :</p>
+      <pre><code>a[_]: 'foo'</code></pre>
+      <p>équivaut à :</p>
+      <pre><code class="language-php">in_array('foo', $a)</code></pre>
+    </div>
+    <div>
+      <p>Unicité : <code>a is unique</code></p>
+      <ul>
+        <li>toutes les clés sont uniques (intrinsèque au tableau)</li>
+        <li>toutes les valeurs sont uniques</li>
+      </ul>
+      <p>Exemple :</p>
+      <pre><code>a is unique</code></pre>
+      <p>équivaut à :</p>
+      <pre><code class="language-php">// for simple cases
+count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
+    </div>
+    <div>
+      <p>Mais aussi…</p>
+      <p><code>a[<math class="tex"><mi mathvariant="normal">K</mi></math>]!:
+               <math class="tex"><mi mathvariant="normal">V</mi></math></code></p>
+      <ul>
+        <li>toute valeur de
+            <math class="tex"><mi mathvariant="normal">K</mi></math> est la clé
+            d'une paire dans le tableau <code>a</code></li>
+        <li>toute paire dont la clé est dans
+            <math class="tex"><mi mathvariant="normal">K</mi></math> n'a pas sa
+            valeur dans <math class="tex"><mi mathvariant="normal">V</mi></math></li>
+      </ul>
+      <p><code>a[<math class="tex"><mi mathvariant="normal">K</mi></math>]!: _</code></p>
+      <ul>
+        <li>aucune paire du tableau <code>a</code> n'a sa clé dans
+           <math class="tex"><mi mathvariant="normal">K</mi></math></li>
+      </ul>
+      <p><code>a[_]!: <math class="tex"><mi mathvariant="normal">V</mi></math></code></p>
+      <ul>
+        <li>…</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Sémantique ensemblistes</h1>
+
+  <p class="break">Un <em lang="en">Constraint Satisfaction Problem</em> et
+     un triplet
+     <math class="tex">
+       (
+       <mi mathvariant="normal">Σ</mi>,
+       <mi mathvariant="normal">Δ</mi>,
+       <mi mathvariant="normal">Π</mi>
+       )
+     </math> où…</p>
+  <p class="break">Les variables
+     <math class="tex">
+       <mi mathvariant="normal">σ</mi>
+       <mo>∈</mo>
+       <mi mathvariant="normal">Σ</mi>
+     </math> sont
+     la taille <math class="tex"><mi mathvariant="normal">S</mi></math>,
+     les ensembles <math class="tex"><mi mathvariant="normal">X</mi></math> et
+     <math class="tex"><mi mathvariant="normal">Y</mi></math>,
+     la fonction totale
+     <math class="tex"><mi mathvariant="normal">H</mi></math>…</p>
+  <p class="break">Cardinalité :
+     <math class="tex">
+       <mi>card</mi>
+       (
+       <mi mathvariant="normal">X</mi>
+       )
+       <mo>=</mo>
+       <mi mathvariant="normal">S</mi>
+     </math>,
+     <math class="tex">
+       <mi mathvariant="normal">S</mi>
+       <mo>≥</mo>
+       <mn>0</mn>
+     </math>,
+     <math class="tex">
+       <mi>card</mi>
+       (
+       <mi mathvariant="normal">X</mi>
+       )
+       <mo>≥</mo>
+       <mi>card</mi>
+       (
+       <mi mathvariant="normal">Y</mi>
+       )
+     </math>
+     …</p>
+  <p class="break">Domaines et co-domaines :
+     <math class="tex">
+       <mi mathvariant="normal">Y</mi>
+       <mo>=</mo>
+       <mover accent="true">
+         <mi mathvariant="normal">H</mi>
+         <mo>^</mo>
+       </mover>
+       (
+       <mi mathvariant="normal">X</mi>
+       )
+     </math>,
+     <math class="tex">
+       <mi mathvariant="normal">X</mi>
+       <mo>=</mo>
+       <munder>
+         <mo>∪</mo>
+         <mrow style="font-size: small">
+          <mn>1</mn>
+          <mo>≤</mo>
+          <mi mathvariant="normal">i</mi>
+          <mo>≤</mo>
+          <mi mathvariant="normal">j</mi>
+         </mrow>
+       </munder>
+       <msub>
+         <mi mathvariant="normal">X</mi>
+         <mi mathvariant="normal">i</mi>
+       </msub>
+     </math>…</p>
+  <p class="break">Paires :
+     <math class="tex">
+       <mi mathvariant="normal">K</mi>
+       <mo>⊆</mo>
+       <mi mathvariant="normal">X</mi>
+     </math>,
+     <math class="tex">
+       <mover accent="true">
+         <mi mathvariant="normal">H</mi>
+         <mo>^</mo>
+       </mover>
+       (
+       <mi mathvariant="normal">K</mi>
+       )
+       <mo>⊆</mo>
+       <mi mathvariant="normal">V</mi>
+     </math>,
+     <math class="tex">
+       <mover accent="true">
+         <mi mathvariant="normal">H</mi>
+         <mo>^</mo>
+       </mover>
+       (
+       <mi mathvariant="normal">K</mi>
+       )
+       <mo>∩</mo>
+       <mi mathvariant="normal">V</mi>
+       <mo>=</mo>
+       <mo>∅</mo>
+     </math>…</p>
+  <div style="position: absolute;
+              top: 50%;
+              left: 0;
+              right: 0;
+              text-align: center;
+              font-family: Pre;
+              font-size: 6em;
+              font-weigh: bold;
+              color: red;
+              transform: rotate(-45deg)">
+    censored
+  </div>
+</section>
+
+<section>
+  <h1>Solveur ensembliste</h1>
+
+  <p>Fonctionne en deux étapes :</p>
+  <ul>
+    <li>propagation et consistance (basée sur un algorithme AC3)</li>
+    <li><em lang="en">labelling</em></li>
+  </ul>
+  <p>Exemple :</p>
+  <pre><code>length: 0..5 or 10
+a     : array([to string('a', 'e', 1)], length)
+a[0]  : 'b' or 'c'
+a is unique</code></pre>
+  <p>a comme solution possible :</p>
+  <pre data-line="2"><code class="language-php">[
+    0 => 'c',
+    1 => 'd',
+    2 => 'a',
+    3 => 'e'
+]</code></pre>
 </section>
 
 <section>
