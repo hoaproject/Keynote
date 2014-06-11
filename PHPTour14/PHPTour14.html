@@ -1529,18 +1529,24 @@ null
 
   <p>Générer des tests mais… pour tester <strong>quoi</strong> ?</p>
   <p>Quels sont nos objectifs de tests ?</p>
-  <p class="break">Couverture du code ?</p>
-  <ul>
-    <li>boîte noire : le code <small>(corps des méthodes)</small> n'est
-        <span class="👎">pas</span> utilisé</li>
-  </ul>
-  <p>Couverture des contrats ?</p>
-  <ul>
-    <li>le contrat reflète le <strong>comportement des données et du
-        code</strong></li>
-    <li>idée : couvrir les données</li>
-    <li>idée : couvrir la structure du contrat</li>
-  </ul>
+  <div class="incremental">
+    <p class="break">Couverture du code ?</p>
+    <ul>
+      <li>boîte noire : le code <small>(corps des méthodes)</small> n'est
+          <span class="👎">pas</span> utilisé</li>
+    </ul>
+    <p>Couverture des contrats ?</p>
+    <ul class="incremental">
+      <li>le contrat reflète le <strong>comportement des données et du
+          code</strong></li>
+      <li>idée n°1 : couvrir les données</li>
+      <li>idée n°2 : couvrir la structure du contrat</li>
+      <li>hypothèse :
+          couverture du contrat
+          <math class="tex"><mover accent="false"><mo>≈</mo><mtext>?</mtext></mover></math>
+          couverture du code ?</li>
+    </ul>
+  </div>
 </section>
 
 <section>
@@ -1548,10 +1554,15 @@ null
 
   <div class="incremental incremental-overlay">
     <div>
+      <p>Exemple fil rouge :</p>
+      <pre><code>// e<span class="highlight">xam</span>ple</code></pre>
+    </div>
+    <div>
       <p>Critère de Couverture de <strong>Clause</strong></p>
       <ul>
         <li>vise à couvrir la structure d'un contrat</li>
       </ul>
+      <pre><code>// example</code></pre>
     </div>
     <div>
       <p>Critère de Couverture de <strong>Domaine</strong></p>
@@ -1559,6 +1570,7 @@ null
         <li>raffine le Critère de Couverture de Clause</li>
         <li>vise à couvrir tous les domaines réalistes</li>
       </ul>
+      <pre><code>// example</code></pre>
     </div>
     <div>
       <p>Critère de Couverture de <strong>Prédicat</strong></p>
@@ -1567,6 +1579,7 @@ null
         <li>vise à couvrir tous les prédicats
             (construction <code>\pred(<em>p</em>)</code>)</li>
       </ul>
+      <pre><code>// example</code></pre>
     </div>
     <div>
       <p><strong>Combinaisons</strong></p>
@@ -1625,10 +1638,43 @@ null
 </section>
 
 <section>
-  <h1>Génération de suites de tests atoum</h1>
+  <h1>Suite de tests unitaires</h1>
 
-  <p>atoum :</p>
-  <p>Générer des suites de tests écrites avec l'API d'atoum</p>
+  <ol>
+    <li>choix d'un critère de couverture de contrat</li>
+    <li>génération d'une suite de tests</li>
+  </ol>
+  <p class="break">Comment l'exécuter ?</p>
+  <ul>
+    <li>Praspel sait le faire avec son RAC mais…</li>
+    <li>… l'isolation des tests, les rapports, l'intégration aux multiples
+        outils etc. nécessitent un temps de développement et de maintenance
+        important !</li>
+  </ul>
+  <p class="break">Idée : transformer les suites de tests Praspel en suites
+     écrites avec l'API d'atoum</p>
+</section>
+
+<section>
+  <h1>Pourquoi atoum ?</h1>
+
+  <p class="👍">Les plus :</p>
+  <ul>
+    <li>simple, moderne et intuitif</li>
+    <li>un des <em lang="en">frameworks</em> de tests les plus
+    utilisés dans l'industrie</li>
+    <li>gratuit et <em lang="en">open-source</em></li>
+    <li>intégré ou inclu dans plusieurs IDE et outils majeurs
+        <small>(Netbeans, Eclipse, Vim, Travis-CI, Jenkins,
+        Coveralls…)</small></li>
+    <li>multiples sortes d'exécutions et formats de rapports</li>
+    <li><em lang="en">hackable</em></li>
+  </ul>
+  <p class="👎">Les moins :</p>
+  <ul>
+    <li>pas de générateur automatique de données</li>
+    <li>pas de contrat</li>
+  </ul>
 </section>
 
 <section class="chapter">
@@ -1636,11 +1682,118 @@ null
 </section>
 
 <section>
-  <h1>Des nouveaux « <em lang="en">asserters</em> »</h1>
+  <h1>Fonctionnalités</h1>
+
+  <p>Nouvelle extension dans atoum <code>atoum/praspel-extension</code> :</p>
+  <ol>
+    <li>exposer les domaines réalistes</li>
+    <li>exposer les générateurs automatiques de données</li>
+    <li>transformer des contrats Praspel en suites de tests atoum</li>
+  </ol>
+  <p class="break">Installer :</p>
+  <pre><code class="language-shell">$ composer require atoum/praspel-extension *
+$ composer install</code></pre>
+  <pre><code class="language-php">$runner->addExtension(new \Atoum\PraspelExtension\Manifest());</code></pre>
 </section>
 
 <section>
-  <h1>Génération de données</h1>
+  <h1>Des nouveaux « <em lang="en">asserters</em> »</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <ul>
+        <li><code>realdom</code> pour créer des <strong>disjonctions de domaines
+           réalistes</strong></li>
+      </ul>
+      <pre><code class="language-php">$interval = $this->realdom->boundinteger(7, 13)
+                          ->or
+                          ->boundinteger(42, 153);</code></pre>
+    </div>
+    <div>
+      <ul>
+        <li><code>realdom</code> pour créer des <strong>disjonctions de domaines
+           réalistes</strong></li>
+        <li><code>sample</code> pour générer <strong>une</strong> donnée</li>
+      </ul>
+      <pre><code class="language-php">$interval = $this->realdom->boundinteger(7, 13)
+                          ->or
+                          ->boundinteger(42, 153);
+
+var_dump(
+    $this->sample($interval)
+); // int(84)</code></pre>
+    </div>
+    <div>
+      <ul>
+        <li><code>realdom</code> pour créer des <strong>disjonctions de domaines
+           réalistes</strong></li>
+        <li><code>sample</code> pour générer <strong>une</strong> donnée</li>
+        <li><code>sampleMany</code> pour générer <strong>plusieurs</strong>
+            données</li>
+      </ul>
+      <pre><code class="language-php">$interval = $this->realdom->boundinteger(7, 13)
+                          ->or
+                          ->boundinteger(42, 153);
+
+foreach($this->sampleMany($interval, 1024) as $i)
+    $this->integer($i)->isGreaterThan(7);</code></pre>
+    </div>
+    <div>
+      <ul>
+        <li><code>realdom</code> pour créer des <strong>disjonctions de domaines
+           réalistes</strong></li>
+        <li><code>sample</code> pour générer <strong>une</strong> donnée</li>
+        <li><code>sampleMany</code> pour générer <strong>plusieurs</strong>
+            données</li>
+        <li><code>predicate</code> pour vérifier qu'une donnée
+            <strong>appartient</strong> à une disjonction de domaines
+            réalistes</li>
+      </ul>
+      <pre><code class="language-php">$interval = $this->realdom->boundinteger(7, 13)
+                          ->or
+                          ->boundinteger(42, 153);
+
+var_dump($this->predicate(21, $interval)); // boolean(false)
+var_dump($this->predicate(42, $interval)); // boolean(true)</code></pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Exemples</h1>
+
+  <p>Générer une chaîne de caractères à partir d'une expression régulière :</p>
+  <pre><code class="language-php">$realdom = $this->realdom->regex('/[\w\-_]+(\.[\w\-\_]+)*@\w\.(net|org)/');
+$this->string($this->sample($realdom))
+      ->contains(…)->…;</code></pre>
+  <p>Générer des dates relatives :</p>
+  <pre><code class="language-php">$realdom = $this->realdom->date(
+    'd/m H:i',
+    $this->realdom->boundinteger(
+        $this->realdom->timestamp('yesterday'),
+        $this->realdom->timestamp('next Monday')
+    )
+);
+
+foreach($this->sampleMany($realdom, 10) as $date)
+    var_dump($date);</code></pre>
+</section>
+
+<section>
+  <h1>Générer des suites de tests</h1>
+
+  <p>Classe :</p>
+  <pre><code class="language-php">// example</code></pre>
+  <p>Générer la suite de tests :</p>
+  <pre><code class="language-shell">$ praspel generate --class C</code></pre>
+  <p>Exécuter la suite de tests :</p>
+  <pre><code class="language-shell">$ atoum --files …</code></pre>
+</section>
+
+<section>
+  <h1>Exemples dans Hoa</h1>
+
+  <p>…</p>
 </section>
 
 <section class="chapter">
@@ -1649,15 +1802,51 @@ null
 
 <section>
   <h1>Outillage</h1>
+
+  <p>Implémenté dans Hoa :</p>
+  <ul>
+    <li>un ensemble de bibliothèques PHP modulaires, extensibles et
+        structurées</li>
+    <li>un pont entre le monde de la recherche et de l'industrie</li>
+  </ul>
+  <p>Nous avons vu :</p>
+  <ul>
+    <li><code>Hoa\Realdom</code> pour les domaines réalistes</li>
+    <li><code>Hoa\Praspel</code> pour Praspel</li>
+    <li><code>Hoa\Compiler</code> pour le compilateur</li>
+    <li><code>Hoa\Regex</code> pour les expressions régulières</li>
+  </ul>
 </section>
 
 <section>
-  <h1>Quelques liens</h1>
+  <h1>Publications</h1>
+
+  <p>Articles scientifiques en conférences internationales :</p>
+  <ul>
+    <li><cite lang="en">A Constraint Solver for PHP Arrays</cite>, présenté à
+        CSTVA 2013</li>
+    <li><cite lang="en">Grammar-Based Testing using Realistic Domains in
+        PHP</cite>, présenté à A-MOST 2012</li>
+    <li><cite lang="en">Praspel: A Specification Language for Contract-Driven
+        Testing in PHP</cite>, présenté à ICTSS 2011</li>
+  </ul>
+  <p>Un journal en attente</p>
+  <p>Thèse</p>
+</section>
+
+<section>
+  <h1>Nous avons vu…</h1>
 
   <ul>
-    <li>thèse : …</li>
-    <li>documentation : …</li>
-    <li>extension atoum : …</li>
+    <li>les domaines réalistes : des structures permettant de valider et générer
+        des données</li>
+    <li>Praspel, un nouveau langage de contrat pour PHP, simple, pragmatique et
+        extensible</li>
+    <li><em lang="en">contract-based testing</em> avec Praspel : générer des
+        suites de test à partir de contrats, grâce aux domaines réalistes et aux
+        critères de couvertures de contrats</li>
+    <li>extension <code>atoum/praspel-extension</code> pour utiliser les outils
+        de Praspel dans atoum</li>
   </ul>
 </section>
 
