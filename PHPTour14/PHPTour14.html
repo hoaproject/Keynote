@@ -101,6 +101,19 @@
 
 <script src="http://static.hoa-project.net/Javascript/Hoa.js"></script>
 
+<svg width="0" height="0">
+  <defs>
+      <marker id="arrowHead"
+              viewBox="0 0 10 10" 
+              refX="1" refY="5"
+              markerWidth="6" 
+              markerHeight="6"
+              orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" class="arrow" />
+      </marker>
+  </defs>
+</svg>
+
 <section>
   <h1>Praspel, un langage de spécification par contrats</h1>
 
@@ -237,21 +250,10 @@
 <section>
   <h1>Nature des tests</h1>
 
-  <div class="schema">
-    <svg width="700" height="400" viewBox="60 0 780 480" class="draw">
+  <div class="incremental">
+    <div class="schema">
+      <svg width="700" height="400" viewBox="60 0 780 480" class="draw incremental">
 
-      <defs>
-          <marker id="arrowHead"
-                  viewBox="0 0 10 10" 
-                  refX="1" refY="5"
-                  markerWidth="6" 
-                  markerHeight="6"
-                  orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" class="arrow" />
-          </marker>
-      </defs>
-
-      <g class="incremental">
         <g>
           <line x1="375" y1="250" x2="375" y2="50"
                 marker-end="url(#arrowHead)" />
@@ -301,12 +303,10 @@
           <text x="375" y="370" class="west📌">performance</text>
           <text x="375" y="410" class="west📌">utilisabilité</text>
         </g>
-      </g>
-    </svg>
-
-    <div class="incremental">
-      <p>Nous faisons du test unitaire, boîte noire et fonctionnel.</p>
+      </svg>
     </div>
+
+    <p>Nous faisons du test unitaire, boîte noire et fonctionnel.</p>
   </div>
 </section>
 
@@ -458,13 +458,15 @@
 
   <p>Conçus pour répondre aux problématiques du test. Ils ont les deux
   caractéristiques suivantes :</p>
-  <ul class="incremental">
-    <li>la <strong>prédicabilité</strong> qui permet de valider qu'une donnée
-    appartient à l'ensemble des valeurs décrites par le domaine réaliste</li>
-    <li>la <strong>générabilité</strong> qui permet de générer une valeur
-    décrite par le domaine réaliste</li>
-  </ul>
-  <p class="break">Très important !</p>
+  <div class="incremental">
+    <ul class="incremental">
+      <li>la <strong>prédicabilité</strong> qui permet de valider qu'une donnée
+      appartient à l'ensemble des valeurs décrites par le domaine réaliste</li>
+      <li>la <strong>générabilité</strong> qui permet de générer une valeur
+      décrite par le domaine réaliste</li>
+    </ul>
+    <p class="break">Très important !</p>
+  </div>
 </section>
 
 <section>
@@ -1144,12 +1146,12 @@ a is unique</code></pre>
 <section>
   <h1>Synthèse</h1>
 
-  <ul class="incremental">
-    <li data-item="✔︎"><span class="👍">prédicabilité</span> : domaine réaliste
-        <code>array</code> avec le solveur</li>
-    <li data-item="✔︎"><span class="👍">générabilité</span> : avec le solveur</li>
-  </ul>
   <div class="incremental">
+    <ul class="incremental">
+      <li data-item="✔︎"><span class="👍">prédicabilité</span> : domaine réaliste
+          <code>array</code> avec le solveur</li>
+      <li data-item="✔︎"><span class="👍">générabilité</span> : avec le solveur</li>
+    </ul>
     <p class="break">Mission suivante ? Les chaînes de caractères !</p>
   </div>
 </section>
@@ -1450,21 +1452,21 @@ null
 <section>
   <h1>Synthèse</h1>
 
-  <ul class="incremental">
-    <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce aux
-        analyseurs (lexicaux et syntaxiques)</li>
-    <li data-item="✔︎"><span class="👍">générabilité</span> : grâce aux algorithmes
-        de générations et de concrétisation</li>
-  </ul>
   <div class="incremental">
-      <p class="break">Deux nouveaux domaines réalistes :
-         <code>grammar(<math class="tex"><mi mathvariant="normal">F</mi></math>)</code>
-         et
-         <code>regex(<math class="tex"><mi mathvariant="normal">R</mi></math>)</code>
-         (sucre syntaxique :
-         <code>/<math class="tex"><mi mathvariant="normal">R</mi></math>/</code>)</p>
+    <ul class="incremental">
+      <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce aux
+          analyseurs (lexicaux et syntaxiques)</li>
+      <li data-item="✔︎"><span class="👍">générabilité</span> : grâce aux algorithmes
+          de générations et de concrétisation</li>
+    </ul>
+    <p class="break">Deux nouveaux domaines réalistes :
+       <code>grammar(<math class="tex"><mi mathvariant="normal">F</mi></math>)</code>
+       et
+       <code>regex(<math class="tex"><mi mathvariant="normal">R</mi></math>)</code>
+       (sucre syntaxique :
+       <code>/<math class="tex"><mi mathvariant="normal">R</mi></math>/</code>)</p>
 
-      <p class="break">Mission suivante ? Les objets !</p>
+    <p class="break">Mission suivante ? Les objets !</p>
   </div>
 </section>
 
@@ -1500,23 +1502,21 @@ null
 <section>
   <h1>Synthèse</h1>
 
-  <ul class="incremental">
-    <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce à
-        <code class="php">instanceof</code> et <code>@invariant</code></li>
-    <li data-item="✔︎"><span class="👍">générabilité</span> : grâce au nouvel
-        algorithme</li>
-  </ul>
   <div class="incremental">
-      <p class="break">Un nouveau domaine réaliste :
-         <code>class(<math class="tex"><mi mathvariant="normal">C</mi></math>)</code>
-         (sucre syntaxique :
-         <code>\<math class="tex"><mi mathvariant="normal">C</mi></math></code>
-         tout simplement)</p>
-
-      <p class="break">Nous savons générer efficacement tous les types de
-         données usuels</p>
-
-      <p class="break">Mission suivante ? Générer des tests unitaires !</p>
+    <ul class="incremental">
+      <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce à
+          <code class="php">instanceof</code> et <code>@invariant</code></li>
+      <li data-item="✔︎"><span class="👍">générabilité</span> : grâce au nouvel
+          algorithme</li>
+    </ul>
+    <p class="break">Un nouveau domaine réaliste :
+       <code>class(<math class="tex"><mi mathvariant="normal">C</mi></math>)</code>
+       (sucre syntaxique :
+       <code>\<math class="tex"><mi mathvariant="normal">C</mi></math></code>
+       tout simplement)</p>
+    <p class="break">Nous savons générer efficacement tous les types de
+       données usuels</p>
+    <p class="break">Mission suivante ? Générer des tests unitaires !</p>
   </div>
 </section>
 
@@ -1585,7 +1585,7 @@ null
       <p>Treillis</p>
       <div class="schema">
         <svg width="600" height="300" viewBox="0 0 600 300"
-             class="draw">
+             class="draw incremental">
 
           <g>
             <text x="100" y="290" class="south📌">Couverture Domaine</text>
@@ -1606,7 +1606,15 @@ null
           </g>
 
           <g>
-            <text x="300" y="10" class="north📌">Couverture All-G</text>
+            <switch>
+              <foreignObject x="230" y="5" width="300" height="30"
+                             requiredExtensions="http://www.w3.org/1999/xhtml">
+                <style>p { font-size: 1.05em }</style>
+                <p>Couverture
+                   <em lang="en">All</em>-<math class="tex"><mi mathvariant="normal">G</mi></math></p>
+              </foreignObject>
+              <text x="300" y="10" class="north📌">Couverture All-G</text>
+            </switch>
             <line x1="280" y1="45" x2="220" y2="115" marker-end="url(#arrowHead)" />
             <line x1="320" y1="45" x2="380" y2="115" marker-end="url(#arrowHead)" />
           </g>
