@@ -305,8 +305,9 @@
         </g>
       </svg>
     </div>
-
-    <p>Nous faisons du test unitaire, boîte noire et fonctionnel.</p>
+    <p>Nous : test <strong>unitaire</strong>, boîte
+       <strong>noire</strong> et <strong>fonctionnel</strong>
+       <span class="bibliography"><a href="http://dx.doi.org/10.1007/s10009-003-0128-3">📖</a></span></p>
   </div>
 </section>
 
@@ -317,7 +318,11 @@
     <div>
       <p>Contrat :</p>
       <ul>
-        <li>inventé par B. Meyer en 1992 dans le langage Eiffel</li>
+        <li>inventé par B. Meyer en 1992 dans
+            <a href="https://en.wikipedia.org/wiki/Eiffel_%28programming_language%29">le
+            langage Eiffel</a>
+            <span class="bibliography"><a href="http://dl.acm.org/citation.cfm?id=SERIES9753.6876">📖</a></span>
+            <span class="bibliography"><a href="http://dx.doi.org/10.1007/BFb0022115">📖</a></span></li>
         <li>décrit un modèle en utilisant des annotations</li>
         <li>exprime des contraintes formelles : préconditions, postconditions et
         invariants</li>
@@ -362,10 +367,14 @@
 
   <p>Chaque « grand » langage à un langage de contrat :</p>
   <ul>
-    <li><em lang="en">Java Modeling Language</em> (JML) pour Java</li>
-    <li><em lang="en">ANSI/C Specification Language</em> (ACSL) pour C</li>
-    <li><em lang="en">Spec#</em> pour C#</li>
-    <li><em lang="en">JSConTest</em> pour Javascript</li>
+    <li><em lang="en">Java Modeling Language</em> (JML) pour Java
+        <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-1-4615-5229-1_12">📖</a></span></li>
+    <li><em lang="en">ANSI/C Specification Language</em> (ACSL) pour C
+        <span class="bibliography"><a href="http://frama-c.com/download/acsl-implementation-Fluorine-20130601.pdf">📖</a></span></li>
+    <li><em lang="en">Spec#</em> pour C#
+        <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-540-30569-9_3">📖</a></span></li>
+    <li><em lang="en">JSConTest</em> pour Javascript
+        <span class="bibliography"><a href="http://dx.doi.org/10.5381/jot.2012.11.1.a6">📖</a></span></li>
   </ul>
   <p class="break incremental"><span>Pour PHP ?</span> <span class="👎">Rien !</span></p>
 </section>
@@ -374,12 +383,17 @@
   <h1><em lang="en">Contract-based Testing</em></h1>
 
   <div class="incremental">
-    <div>
+    <p>Inventé par B. K. Aichernig en 2003
+       <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-540-40007-3_3">📖</a></span></p>
+
+    <div class="break">
       <p>Principe :</p>
       <ul>
-        <li>utilise les préconditions pour générer des données de tests</li>
-        <li>utilise les postconditions et invariants pour établir le verdict du
-            test à l'exécution, grâce à un <em lang="en">Runtime Assertion
+        <li>utilise les <strong>préconditions</strong> pour
+            <strong>générer</strong> des données de tests</li>
+        <li>utilise les <strong>postconditions</strong> et
+            <strong>invariants</strong> pour établir le <strong>verdict</strong>
+            du test à l'exécution, grâce à un <em lang="en">Runtime Assertion
             Checker</em> (RAC)</li>
       </ul>
     </div>
@@ -388,7 +402,7 @@
       <p class="break">Problèmes :</p>
       <ul>
         <li>contraintes souvent exprimées avec des formules logiques</li>
-        <li>difficile d'en générer de données</li>
+        <li><strong>difficile</strong> d'en générer de données</li>
       </ul>
     </div>
   </div>
@@ -400,6 +414,7 @@
   <p>Faire du <em lang="en">contract-based testing</em> en PHP en 3 étapes :</p>
   <ol>
     <li>un (nouveau) langage de contrats :
+        <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-642-24580-0_6">📖</a></span>
     <ul>
       <li>adapter à PHP</li>
       <li>pragmatique</li>
@@ -407,7 +422,9 @@
       <li>assemblant plusieurs méthodes de test</li>
     </ul>
     </li>
-    <li>des générateurs de données :</p>
+    <li>des générateurs de données :
+        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICST.2012.136">📖</a></span>
+        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span>
     <ul>
       <li>pour tous les types usuels</li>
     </ul>
@@ -439,16 +456,16 @@
   <div>
     <p>Naïvement, les domaines réalistes :</p>
     <ul>
-      <li>raffinent les types usuels, <small>comme les entiers, les chaînes de
-      caractères, les tableaux etc.</small></li>
-      <li>permettent d'exprimer des données plus complexes, <small>comme des
-      grammaires, des graphes etc.</small></li>
+      <li><strong>raffinent</strong> les types usuels, comme les entiers, les
+          chaînes de caractères, les tableaux etc.</li>
+      <li>permettent d'exprimer des données plus <strong>complexes</strong>,
+          comme des grammaires, des graphes etc.</li>
     </ul>
   </div>
   <div>
     <p class="break"><strong>Réaliste</strong> signifie qu'ils sont conçus pour
-    spécifier des domaines de données pertinents pour un contexte spécifique ;
-    exemple : une adresse email</p>
+       spécifier des domaines de données <strong>pertinents</strong> pour un
+       contexte <strong>spécifique</strong> ; exemple : une adresse email</p>
   </div>
   </div>
 </section>
@@ -456,9 +473,9 @@
 <section>
   <h1>Caractéristiques</h1>
 
-  <p>Conçus pour répondre aux problématiques du test. Ils ont les deux
-  caractéristiques suivantes :</p>
+  <p>Conçus pour répondre aux problématiques du test</p>
   <div class="incremental">
+    <p>Ils ont les deux caractéristiques suivantes :</p>
     <ul class="incremental">
       <li>la <strong>prédicabilité</strong> qui permet de valider qu'une donnée
       appartient à l'ensemble des valeurs décrites par le domaine réaliste</li>
@@ -488,7 +505,7 @@
 <section>
   <h1>Hiérarchie</h1>
 
-  <p>Classification verticale</p>
+  <p>Classification <strong>verticale</strong></p>
   <p>Héritage permet de raffiner les caractéristiques :</p>
   <ul>
     <li><code>Color</code> hérite de <code>String</code></li>
@@ -513,7 +530,7 @@
     <g class="incremental">
       <g>
         <line x1="615" y1="180" x2="615" y2="20" marker-end="url(#arrowHead)" />
-        <text x="630" y="95" transform="rotate(90 630 95)">héritage</text>
+        <text x="630" y="95" transform="rotate(90 630 95)">couches</text>
       </g>
 
       <g>
@@ -557,7 +574,8 @@
 
   <div class="incremental">
     <div>
-      <p><em>A l'instar</em> des fonctions, un domaine réaliste est paramétrable :</p>
+      <p><em>A l'instar</em> des fonctions, un domaine réaliste est
+         <strong>paramétrable</strong> :</p>
       <ul>
         <li>pour représenter des structures de données complexes (tableaux
         imbriqués, graphes, automates, arbres…)</li>
@@ -633,8 +651,9 @@
 <section>
   <h1>Classification</h1>
 
-  <p>Classification transversale : horizontale</p>
-  <p>Interfaces aidant à caractériser les domaines réalistes :</p>
+  <p>Classification transversale : <strong>horizontale</strong></p>
+  <p>Interfaces aidant à <strong>caractériser</strong> les domaines
+     réalistes :</p>
   <ul>
     <li><code>Constant</code>, immuable avec une valeur (<code>42</code> du
     domaine réaliste <code>Constinteger</code>)</li>
@@ -690,7 +709,8 @@
     <li>un langage et un <em lang="en">framework</em> de test à partir de
         <strong>contrats</strong></li>
     <li>un langage d'<strong>annotation</strong> (formellement un
-        <em lang="en">Behavioral Interface Specification Language</em>), écrit
+        <em lang="en">Behavioral Interface Specification
+        Language</em><span class="bibliography"><a href="http://dl.acm.org/citation.cfm?id=2187678">📖</a></span>), écrit
         dans les commentaires <code>/** … */</code></li>
     <li>permet d'exprimer des préconditions, postconditions et invariants</li>
     <li>inspiré de JML et ACSL, mais inspiré seulement</li>
@@ -765,8 +785,8 @@
     <div>
       <p>Déclaration :</p>
       <ul>
-        <li>associe un ou plusieurs domaines réalistes à une variable du SUT
-        (arguments) ou du modèle (<code>let</code>)</li>
+        <li><strong>associe</strong> un ou plusieurs domaines réalistes à une
+           variable du SUT (arguments) ou du modèle (<code>let</code>)</li>
         <li>plusieurs = disjonction de domaines réalistes</li>
         <li><code>\result</code> représente le résultat du SUT</li>
         <li><code>\old(<em>i</em>)</code> représente la valeur de
@@ -781,11 +801,12 @@
       <p>Prédicat : </p>
       <ul>
         <li>toutes les constructions de Praspel supportent la
-        <strong>validation</strong> et la <strong>génération</strong> mais…</li>
-        <li>toutes les contraintes ne peuvent pas être exprimées</li>
+            <strong>validation</strong> et la <strong>génération</strong>
+            mais…</li>
+        <li>… toutes les contraintes ne peuvent pas être exprimées</li>
         <li><code>\pred(<code><em>p</em></code>)</code> où
-        <code><em>p</em></code> est du code PHP pur (en forme normale
-        conjonctive, CNF)</li>
+            <code><em>p</em></code> est du code PHP pur (un prédicat en forme
+            normale conjonctive, CNF)</li>
       </ul>
     </div>
     <div>
@@ -795,13 +816,15 @@
     <div>
       <p>Qualification :</p>
       <ul>
-        <li>qualifier une donnée avec un adjectif</li>
-        <li>« mot-clé » représentant des constraintes usuelles</li>
+        <li>qualifier une donnée avec un <strong>adjectif</strong></li>
+        <li>« mot-clé » représentant des contraintes
+            <strong>usuelles</strong></li>
         <li>facilite la vie, facile à lire, évite les erreurs</li>
       </ul>
     </div>
     <div>
-      <pre><code class="language-php">// Add an example</code></pre>
+      <p>Exemple :</p>
+      <pre><code class="language-php">aCollection is sorted</code></pre>
     </div>
   </div>
 </section>
@@ -1126,7 +1149,7 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
 
   <p>Fonctionne en deux étapes :</p>
   <ul>
-    <li>propagation et consistance (basées sur un algorithme AC3)</li>
+    <li>propagation et consistance</li>
     <li><em lang="en">labelling</em></li>
   </ul>
   <p>Exemple :</p>
@@ -1183,10 +1206,11 @@ a is unique</code></pre>
     <li>grammaires algébriques (<em lang="en">context-free grammars</em>)</li>
     <li>grammaires régulières (<em lang="en">regular grammars</em>)</li>
   </ol>
-  <p class="break">Exemples :</p>
+  <p class="break">Exemples de…</p>
   <ul>
-    <li>langages réguliers : expressions régulières POSIX ou PCRE</li>
-    <li>langages algébriques : JavaCC, yacc, PP</li>
+    <li>… langages réguliers : expressions régulières POSIX ou PCRE</li>
+    <li>… langages algébriques : JavaCC, yacc, <span class="👍">PP
+        (nouveau !)</span></li>
   </ul>
 </section>
 
@@ -1230,7 +1254,7 @@ a is unique</code></pre>
 <section>
   <h1>Exemple <small>simplifiée</small> avec JSON</h1>
 
-  <p>Lexèmes (unité lexicale, atomique) :</p>
+  <p>Lexèmes :</p>
   <pre style="max-height: 180px"><code class="language-pp">%skip   space          \s
 // Scalars.
 %token  true           true
@@ -1372,7 +1396,8 @@ number:
         <li data-item="👍">rapide pour des petites données, grande diversité,
             taille de la séquence
             <math class="tex"><mi mathvariant="normal">n</mi></math> fixe</li>
-        <li data-item="👎">pré-calcul exponentiel, génération très rapide</li>
+        <li data-item="👎">pré-calcul exponentiel mais génération très
+            rapide</li>
       </ul>
       <p class="break">Exemples avec
          <math class="tex"><mi mathvariant="normal">n</mi><mo>=</mo><mn>5</mn></math> :</p>
@@ -1763,7 +1788,7 @@ var_dump($this->predicate(42, $interval)); // boolean(true)</code></pre>
   <h1>Exemples</h1>
 
   <p>Générer une chaîne de caractères à partir d'une expression régulière :</p>
-  <pre><code class="language-php">$realdom = $this->realdom->regex('/[\w\-_]+(\.[\w\-\_]+)*@\w\.(net|org)/');
+  <pre><code class="language-php">$realdom = $this->realdom->regex('/[\w\-_]+(\.[\w\-\_]+)*@\w+\.(net|org)/');
 $this->string($this->sample($realdom))
       ->contains(…)->…;</code></pre>
   <p>Générer des dates relatives :</p>
@@ -1813,7 +1838,7 @@ foreach($this->sampleMany($realdom, 10) as $date)
   <ul>
     <li><code>Hoa\Realdom</code> pour les domaines réalistes</li>
     <li><code>Hoa\Praspel</code> pour Praspel</li>
-    <li><code>Hoa\Compiler</code> pour le compilateur</li>
+    <li><code>Hoa\Compiler</code> pour le compilateur et le langage PP</li>
     <li><code>Hoa\Regex</code> pour les expressions régulières</li>
   </ul>
 </section>
