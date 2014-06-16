@@ -318,7 +318,7 @@
     <div>
       <p>Contrat :</p>
       <ul>
-        <li>inventé par B. Meyer en 1992 dans
+        <li>inventé par B. Meyer en 1992 dans
             <a href="https://en.wikipedia.org/wiki/Eiffel_%28programming_language%29">le
             langage Eiffel</a>
             <span class="bibliography"><a href="http://dl.acm.org/citation.cfm?id=SERIES9753.6876">📖</a></span>
@@ -477,10 +477,11 @@
   <div class="incremental">
     <p>Ils ont les deux caractéristiques suivantes :</p>
     <ul class="incremental">
-      <li>la <strong>prédicabilité</strong> qui permet de valider qu'une donnée
-      appartient à l'ensemble des valeurs décrites par le domaine réaliste</li>
-      <li>la <strong>générabilité</strong> qui permet de générer une valeur
-      décrite par le domaine réaliste</li>
+      <li>la <strong>prédicabilité</strong> permet de valider qu'une donnée
+          appartient à l'ensemble des valeurs décrites par le domaine
+          réaliste</li>
+      <li>la <strong>générabilité</strong> permet de générer une valeur décrite
+          par le domaine réaliste</li>
     </ul>
     <p class="break">Très important !</p>
   </div>
@@ -704,7 +705,8 @@
 <section>
   <h1>Praspel</h1>
 
-  <p><em lang="en">PHP Realistic Annotation and SPEcification Language</em></p>
+  <p><em lang="en">PHP Realistic Annotation and SPEcification
+     Language</em> :</p>
   <ul>
     <li>un langage et un <em lang="en">framework</em> de test à partir de
         <strong>contrats</strong></li>
@@ -794,10 +796,6 @@
       </ul>
     </div>
     <div>
-      <pre><code class="language-php">// Add an example</code></pre>
-    </div>
-
-    <div>
       <p>Prédicat : </p>
       <ul>
         <li>toutes les constructions de Praspel supportent la
@@ -810,10 +808,6 @@
       </ul>
     </div>
     <div>
-      <pre><code class="language-php">// Add an example</code></pre>
-    </div>
-
-    <div>
       <p>Qualification :</p>
       <ul>
         <li>qualifier une donnée avec un <strong>adjectif</strong></li>
@@ -822,19 +816,118 @@
         <li>facilite la vie, facile à lire, évite les erreurs</li>
       </ul>
     </div>
-    <div>
-      <p>Exemple :</p>
-      <pre><code class="language-php">aCollection is sorted</code></pre>
-    </div>
   </div>
 </section>
 
 <section>
-  <h1>Exemples</h1>
+  <h1>Exemple</h1>
+
+  <pre id="filesystem"><code class="language-php">class Filesystem {
+
+    const SIZE = 1024;
+
+    /**
+     * @invariant _usage: boundinteger(0, static::SIZE);
+     */
+    protected $_usage = 0;
+
+    /**
+     * @invariant _map: array([to class('File')], 0..0xffff);
+     */
+    protected $_map = array();
+
+    /**
+     * @ensures \result: this->_usage;
+     */
+    public function getUsage ( ) { /* … */ }
+
+    /**
+     * @requires file: class('File') and
+     *           index: 0..0xffff or void;
+     * @behavior full {
+     *     @description 'The filesystem is full.';
+     *     @requires  \pred('$this->getUsage() + $file->getSize()
+     *                           > static::SIZE');
+     *     @ensures   \none;
+     *     @throwable AllocationException e with
+     *                    file->isAttached(): false and
+     *                    e->getFilesystem(): this;
+     * }
+     * @default {
+     *     @ensures file->isAttached: true and
+     *              \result: boolean();
+     * }
+     */
+    public function store ( File $file, $index = null ) { /* … */ }
+}</code></pre>
+  <div class="incremental incremental-overlay">
+    <p onincrement="Hoa.$('#filesystem').hoa.highlightLines('6,11,21')">
+       Exemple de déclarations de domaines réalistes</p>
+    <p onincrement="Hoa.$('#filesystem').hoa.highlightLines('22')">
+       Exemple d'une disjonction de domaines réalistes</p>
+    <p onincrement="Hoa.$('#filesystem').hoa.highlightLines('16')">
+       Le résultat est représenté par <code>\result</code></p>
+    <p onincrement="Hoa.$('#filesystem').hoa.highlightLines('25-26')">
+       Exemple d'un prédicat</p>
+  </div>
 </section>
 
 <section>
   <h1>Description de tableaux</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Dans PHP, un tableau est toujours <strong>associatif</strong>
+         (<em lang="en">map</em>) : collection de paires clé-valeur</p>
+      <p class="break">Tableau <strong>homogène</strong> :</p>
+      <ul>
+        <li>toutes les clés ont le même type…</li>
+        <li>… ainsi que toutes les valeurs</li>
+      </ul>
+      <p class="break">Tableau <strong>hétérogène</strong> :</p>
+      <ul>
+        <li>clés avec des types potentiellement distincts…</li>
+        <li>… tout comme les valeurs</li>
+      </ul>
+    </div>
+    <div>
+      <p>Dans Praspel,
+         <code>array(<math class="tex"><mi mathvariant="normal">D</mi></math>,
+                     <math class="tex"><mi mathvariant="normal">L</mi></math>)</code> où :</p>
+      <ul>
+        <li><math class="tex"><mi mathvariant="normal">D</mi></math>
+            décrit les domaines (clés) et codomaines (valeurs)</li>
+        <li><math class="tex"><mi mathvariant="normal">L</mi></math>
+            décrit la longueur du tableau</li>
+        <li><math class="tex"><mi mathvariant="normal">D</mi></math>
+            est une liste de <strong>descriptions</strong> de paires
+            <code>from <math class="tex"><mi mathvariant="normal">K</mi></math>
+                  to <math class="tex"><mi mathvariant="normal">V</mi></math></code>, où
+            <math class="tex"><mi mathvariant="normal">K</mi></math> et
+            <math class="tex"><mi mathvariant="normal">V</mi></math>
+            sont des disjonctions de domaines réalistes</li>
+      </ul>
+      <p>Exemples :</p>
+      <pre id="array"><code>a1: array([to boolean()], 7..42)
+a2: array([from 0..5 or 10      to integer()], 7)
+a3: array([from 0..10           to boolean(),
+           from 20..30          to float()], 7)
+a4: array([from 0..10 or 20..30 to boolean() or float()], 7)</code></pre>
+      <div class="incremental incremental-overlay">
+        <p onincrement="Hoa.$('#array').hoa.highlightLines('1')">
+           Tableau homogène de booléens, avec une longueur comprise entre 7 et
+           42</p>
+        <p onincrement="Hoa.$('#array').hoa.highlightLines('2')">
+           Tableau homogène : longueur 7, clés : entiers entre 0 et 5 ou 10, et
+           valeurs : entiers</p>
+        <p onincrement="Hoa.$('#array').hoa.highlightLines('3-5')">
+           Tableaux hétérogènes : peuvent contenir <code>(5, true)</code> et
+           <code>(25, 4.2)</code> mais…</p>
+        <p>… <code>a4</code> peut contenir la paire <code>(5, 4.2)</code> alors
+           que <code>a3</code> ne peut pas la contenir</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="chapter">
@@ -895,17 +988,18 @@
   <ul>
     <li>très utilisés</li>
     <li>représentent toutes sortes de collections</li>
-    <li>associatifs (<em lang="en">hashmaps</em>)</li>
+    <li>associatifs</li>
   </ul>
 
   <p class="break">Dans Praspel :</p>
   <ul>
-    <li>la génération standard introduit trop de rejets</li>
-    <li>impossible d'exprimer des contraintes précises</li>
+    <li>la génération standard introduit trop de <strong>rejets</strong></li>
+    <li>impossible d'exprimer des <strong>contraintes précises</strong></li>
     <li>utilisation de la construction <code>\pred(<em>p</em>)</code></li>
   </ul>
 
-  <p class="break">Processus dédié à la génération de tableaux nécessaire</p>
+  <p class="break">👉 Processus <strong>dédié</strong> à la génération de
+     tableaux nécessaire</p>
 </section>
 
 <section>
@@ -923,7 +1017,7 @@
     <li><small>(syntaxe)</small> extension de Praspel pour les inclure
         nativement</li>
     <li><small>(sémantique)</small> transformation en propriétés
-         ensemblistes</li>
+        ensemblistes</li>
     <li>solveur ensembliste</li>
   </ol>
 </section>
@@ -1148,10 +1242,10 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
   <h1>Solveur ensembliste</h1>
 
   <p>Fonctionne en deux étapes :</p>
-  <ul>
+  <ol>
     <li>propagation et consistance</li>
     <li><em lang="en">labelling</em></li>
-  </ul>
+  </ol>
   <p>Exemple :</p>
   <pre><code>length: 0..5 or 10
 a     : array([to string('a', 'e', 1)], length)
@@ -1173,9 +1267,12 @@ a is unique</code></pre>
     <ul class="incremental">
       <li data-item="✔︎"><span class="👍">prédicabilité</span> : domaine réaliste
           <code>array</code> avec le solveur</li>
-      <li data-item="✔︎"><span class="👍">générabilité</span> : avec le solveur</li>
+      <li data-item="✔︎"><span class="👍">générabilité</span> : avec le solveur
+          (<em lang="en">labelling</em>)</li>
     </ul>
-    <p class="break">Mission suivante ? Les chaînes de caractères !</p>
+    <p class="break">Travaux publiés dans CSTVA 2013
+       <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></p>
+    <p class="break">👉 Mission suivante ? Les chaînes de caractères !</p>
   </div>
 </section>
 
@@ -1187,18 +1284,18 @@ a is unique</code></pre>
   <ul>
     <li>base de données (requêtes SQL…)</li>
     <li>protocoles de communication (HTTP, WebSocket…)</li>
-    <li>descriptions d'objets (XML, JSON…)</li>
+    <li>descriptions d'objets ou de documents (XML, JSON…)</li>
     <li>etc.</li>
   </ul>
-  <p class="break">Moyen rapide et simple de spécifier des chaînes de
-  caractères (voire des langages) nécessaire</p>
+  <p class="break">👉 Moyen rapide et simple de <strong>spécifier</strong> des
+     chaînes de caractères (voire des langages) nécessaire</p>
 </section>
 
 <section>
   <h1>Grammaires</h1>
 
-  <p>En 1956, N. Chomsky établit une <strong>hiérarchie</strong> des langages
-  formels :</p>
+  <p>En 1956, N. Chomsky établit une <strong>hiérarchie</strong> des langages
+  formels<span class="bibliography"><a href="http://dx.doi.org/10.1109/TIT.1956.1056813">📖</a></span> :</p>
   <ol>
     <li>grammaires générales (<em lang="en">unrestricted grammars</em>)</li>
     <li>grammaires contextuelles (<em lang="en">context-sensitive
@@ -1210,6 +1307,7 @@ a is unique</code></pre>
   <ul>
     <li>… langages réguliers : expressions régulières POSIX ou PCRE</li>
     <li>… langages algébriques : JavaCC, yacc, <span class="👍">PP
+        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICST.2012.136">📖</a></span>
         (nouveau !)</span></li>
   </ul>
 </section>
@@ -1220,8 +1318,8 @@ a is unique</code></pre>
   <p>Informellement : grammaire = lexèmes + règles</p>
   <div class="incremental incremental-overlay break">
     <div>
-      <p>Lexème : plus petite unité lexicale composant un mot (donnée
-         textuelle)</p>
+      <p>Lexème : plus petite <strong>unité lexicale</strong> composant un mot
+         (donnée textuelle)</p>
       <pre><code>%token <em>namespace_in</em>:<em>name</em> <em>value</em> -&gt; <em>namespace_out</em></code></pre>
       <p>Exemple :</p>
       <pre><code class="language-pp">%token number \d+</code></pre>
@@ -1230,7 +1328,7 @@ a is unique</code></pre>
       <p>Règle : décrit l'enchaînement des lexèmes les uns par rapport aux
          autres</p>
       <ul>
-        <li><code><em>rule</em>()</code> : pour <strong>appeler</strong> une
+        <li><code><em>rule</em>()</code> : pour <strong>invoquer</strong> une
             règle</li>
         <li><code>&lt;<em>token</em>&gt;</code> et
             <code>::<em>token</em>::</code> : pour <strong>déclarer</strong> un
@@ -1351,8 +1449,8 @@ number:
 >  >  >  >  token(number, 3)
 >  >  >  token(number, 5)
 >  >  token(number, 8)</code></pre>
-      <p>Résultat sous forme d'arbre : <em lang="en">Abstract Syntax
-         Tree</em> (AST)</p>
+      <p>Résultat sous forme d'<strong>arbre</strong> : <em lang="en">Abstract
+         Syntax Tree</em> (AST)</p>
     </div>
   </div>
 </section>
@@ -1361,7 +1459,8 @@ number:
   <h1><em lang="en">Grammar-based Testing</em></h1>
 
   <p>Grammaires culturellement utilisées pour valider</p>
-  <p class="break">Idée : les utiliser pour générer des données</p>
+  <p class="break">Idée : les utiliser pour générer des données
+     <span class="bibliography"><a href="http://doi.acm.org/10.1145/1101908.1101969">📖</a></span></p>
   <p class="break">Principe : parcourir/explorer une grammaire et construire une
      séquence de lexèmes</p>
   <div id="grammar_based_testing" class="verbatim schema"></div>
@@ -1391,7 +1490,8 @@ number:
 
   <div class="incremental incremental-overlay">
     <div>
-      <p>Génération <strong>aléatoire et uniforme</strong> :</p>
+      <p>Génération <strong>aléatoire et uniforme</strong>, basé sur les travaux
+      de P. Flajolet<span class="bibliography"><a href="http://dx.doi.org/10.1016/0304-3975(94)90226-7">📖</a></span> :</p>
       <ul>
         <li data-item="👍">rapide pour des petites données, grande diversité,
             taille de la séquence
@@ -1406,7 +1506,9 @@ number:
       <pre><code class="language-json">[-2 , "oD"]</code></pre>
     </div>
     <div>
-      <p>Génération <strong>exhaustive bornée</strong> :</p>
+      <p>Génération <strong>exhaustive bornée</strong> :
+         <span class="bibliography"><a href="http://doi.ieeecomputersociety.org/10.1109/ASE.2001.989787">📖</a></span>
+         <span class="bibliography"><a href="http://doi.acm.org/10.1145/1007512.1007531">📖</a></span></p>
       <ul>
         <li data-item="👍">rapide pour des petites données, exhaustivité</li>
         <li data-item="👎">nombre exponentiel de données</li>
@@ -1464,9 +1566,10 @@ null
       paper.link.between(ast, word, 'génération isotropique');
   });
   </script>
-  <p>Lexèmes exprimés avec des PCRE</p>
-  <p>Analyses les lexèmes avec la grammaire des PCRE</p>
-  <p>Algorithme de génération isotropique :</p>
+  <p>Lexèmes exprimés avec des <a href="http://pcre.org/">PCRE</a></p>
+  <p>Analyses les lexèmes avec la grammaire des PCRE <small>(au format
+     PP)</small></p>
+  <p>Algorithme de génération aléatoire isotropique :</p>
   <ul>
     <li>aléatoire</li>
     <li>uniformité locale (et non globale)</li>
@@ -1490,16 +1593,18 @@ null
        <code>regex(<math class="tex"><mi mathvariant="normal">R</mi></math>)</code>
        (sucre syntaxique :
        <code>/<math class="tex"><mi mathvariant="normal">R</mi></math>/</code>)</p>
+    <p class="break">Tableaux publiés dans A-MOST 2012
+       <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICST.2012.136">📖</a></span></p>
 
-    <p class="break">Mission suivante ? Les objets !</p>
+    <p class="break">👉 Mission suivante ? Les objets !</p>
   </div>
 </section>
 
 <section>
   <h1>Génération d'objets</h1>
 
-  <p>Objet : aggrégation d'attributs et de méthodes, tous deux annotés par des
-     contrats Praspel</p>
+  <p>Objet : <strong>aggrégation</strong> d'attributs et de méthodes, tous deux
+     annotés par des contrats Praspel</p>
   <p class="break">Deux approches pour générer :</p>
   <ol>
     <li>appeler le constructeur puis les méthodes pour placer l'objet dans
@@ -1515,7 +1620,7 @@ null
   <h1>Principe</h1>
 
   <ul>
-    <li>générer les paramètre du constructeur à l'aide de sa précondition
+    <li>générer les paramètres du constructeur à l'aide de sa précondition
         (<code>@requires</code>)</li>
     <li>pour chaque attribut, générer une valeur à l'aide de son invariant
        (<code>@invariant</code>)</li>
@@ -1539,9 +1644,9 @@ null
        (sucre syntaxique :
        <code>\<math class="tex"><mi mathvariant="normal">C</mi></math></code>
        tout simplement)</p>
-    <p class="break">Nous savons générer efficacement tous les types de
-       données usuels</p>
-    <p class="break">Mission suivante ? Générer des tests unitaires !</p>
+    <p class="break">Nous savons générer efficacement <strong>tous</strong> les
+       types de données usuels</p>
+    <p class="break">👉 Mission suivante ? Générer des tests unitaires !</p>
   </div>
 </section>
 
@@ -1569,7 +1674,7 @@ null
       <li>hypothèse :
           couverture du contrat
           <math class="tex"><mover accent="false"><mo>≈</mo><mtext>?</mtext></mover></math>
-          couverture du code ?</li>
+          couverture du code</li>
     </ul>
   </div>
 </section>
@@ -1667,7 +1772,7 @@ null
 
   <ol>
     <li>choix d'un critère de couverture de contrat</li>
-    <li>génération d'une suite de tests</li>
+    <li>génération d'une suite de tests satisfaisants le critère</li>
   </ol>
   <p class="break">Comment l'exécuter ?</p>
   <ul>
@@ -1677,7 +1782,7 @@ null
         important !</li>
   </ul>
   <p class="break">Idée : transformer les suites de tests Praspel en suites
-     écrites avec l'API d'atoum</p>
+     écrites avec l'API d'<a href="http://atoum.org/">atoum</a></p>
 </section>
 
 <section>
@@ -1690,8 +1795,12 @@ null
     utilisés dans l'industrie</li>
     <li>gratuit et <em lang="en">open-source</em></li>
     <li>intégré ou inclu dans plusieurs IDE et outils majeurs
-        <small>(Netbeans, Eclipse, Vim, Travis-CI, Jenkins,
-        Coveralls…)</small></li>
+        <small>(<a href="https://netbeans.org/">Netbeans</a>,
+        <a href="http://eclipse.org/">Eclipse</a>,
+        <a href="http://vim.org/">Vim</a>,
+        <a href="http://travis-ci.com/">Travis-CI</a>,
+        <a href="http://jenkins-ci.org/">Jenkins</a>,
+        <a href="https://coveralls.io/">Coveralls</a>…)</small></li>
     <li>multiples sortes d'exécutions et formats de rapports</li>
     <li><em lang="en">hackable</em></li>
   </ul>
@@ -1790,7 +1899,7 @@ var_dump($this->predicate(42, $interval)); // boolean(true)</code></pre>
   <p>Générer une chaîne de caractères à partir d'une expression régulière :</p>
   <pre><code class="language-php">$realdom = $this->realdom->regex('/[\w\-_]+(\.[\w\-\_]+)*@\w+\.(net|org)/');
 $this->string($this->sample($realdom))
-      ->contains(…)->…;</code></pre>
+     ->contains(…)->…;</code></pre>
   <p>Générer des dates relatives :</p>
   <pre><code class="language-php">$realdom = $this->realdom->date(
     'd/m H:i',
@@ -1807,18 +1916,31 @@ foreach($this->sampleMany($realdom, 10) as $date)
 <section>
   <h1>Générer des suites de tests</h1>
 
-  <p>Classe :</p>
-  <pre><code class="language-php">// example</code></pre>
-  <p>Générer la suite de tests :</p>
-  <pre><code class="language-shell">$ praspel generate --class C</code></pre>
-  <p>Exécuter la suite de tests :</p>
-  <pre><code class="language-shell">$ atoum --files …</code></pre>
+  <p>Classe <code>Project\HelloWorld</code></p>
+  <p class="break">Générer la suite de tests :</p>
+  <pre><code class="language-shell">$ praspel generate --class 'Project\HelloWorld' --test-root .</code></pre>
+  <p class="break">Exécuter la suite de tests :</p>
+  <pre><code class="language-shell">$ atoum --files Path/To/Our/Generated/Test.php
+> Total test duration: 0.01 second.
+> Total test memory usage: 0.50 Mb.
+> Code coverage value: 100.00%
+> Running duration: 0.06 second.
+> Success (1 test, 1/1 method, 0 void method,
+           0 skipped method, 1 assertion)!</code></pre>
 </section>
 
 <section>
   <h1>Exemples dans Hoa</h1>
 
-  <p>…</p>
+  <p>Contient des contrats <strong>et</strong> des tests manuels</p>
+  <p>Commandes <code>hoa test:<em>*</em></code> basées sur les API de
+     l'extension <code>atoum/praspel-extension</code></p>
+  <p class="break">Pour générer les tests de la classe
+     <code>Hoa\Math\Util</code> :</p>
+  <pre><code class="language-shell">$ hoa test:generate --classes Hoa.Math.Util</code></pre>
+  <p>puis :</p>
+  <pre><code class="language-shell">$ hoa test:run --namespaces Hoa.Math</code></pre>
+  <p>Et le tour est joué !</p>
 </section>
 
 <section class="chapter">
@@ -1828,7 +1950,7 @@ foreach($this->sampleMany($realdom, 10) as $date)
 <section>
   <h1>Outillage</h1>
 
-  <p>Implémenté dans Hoa :</p>
+  <p>Implémenté dans <a href="http://hoa-project.net/">Hoa</a> :</p>
   <ul>
     <li>un ensemble de bibliothèques PHP modulaires, extensibles et
         structurées</li>
@@ -1836,10 +1958,14 @@ foreach($this->sampleMany($realdom, 10) as $date)
   </ul>
   <p>Nous avons vu :</p>
   <ul>
-    <li><code>Hoa\Realdom</code> pour les domaines réalistes</li>
-    <li><code>Hoa\Praspel</code> pour Praspel</li>
-    <li><code>Hoa\Compiler</code> pour le compilateur et le langage PP</li>
-    <li><code>Hoa\Regex</code> pour les expressions régulières</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Realdom"><code>Hoa\Realdom</code></a>
+        pour les domaines réalistes</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Praspel"><code>Hoa\Praspel</code></a>
+        pour Praspel</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a>
+        pour le compilateur et le langage PP</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Regex"><code>Hoa\Regex</code></a>
+        pour les expressions régulières</li>
   </ul>
 </section>
 
@@ -1848,15 +1974,20 @@ foreach($this->sampleMany($realdom, 10) as $date)
 
   <p>Articles scientifiques en conférences internationales :</p>
   <ul>
-    <li><cite lang="en">A Constraint Solver for PHP Arrays</cite>, présenté à
-        CSTVA 2013</li>
-    <li><cite lang="en">Grammar-Based Testing using Realistic Domains in
-        PHP</cite>, présenté à A-MOST 2012</li>
-    <li><cite lang="en">Praspel: A Specification Language for Contract-Driven
-        Testing in PHP</cite>, présenté à ICTSS 2011</li>
+    <li><a href="http://hoa-project.net/Event/Cstva13.html"><cite lang="en">A
+        Constraint Solver for PHP Arrays</cite></a>, présenté à CSTVA en 2013
+        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></li>
+    <li><a href="http://hoa-project.net/Event/Amost12.html"><cite lang="en">Grammar-Based
+        Testing using Realistic Domains in PHP</cite></a>, présenté à
+        A-MOST en 2012
+        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICST.2012.136">📖</a></span></li>
+    <li><a href="http://hoa-project.net/Event/Ictss11.html"><cite lang="en">Praspel:
+        A Specification Language for Contract-Driven Testing in PHP</cite></a>,
+        présenté à ICTSS en 2011
+        <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-642-24580-0_6">📖</a></span></li>
   </ul>
   <p>Un journal en attente</p>
-  <p>Thèse</p>
+  <p>Thèse soutenue très prochainement 😱</p>
 </section>
 
 <section>
@@ -1870,6 +2001,9 @@ foreach($this->sampleMany($realdom, 10) as $date)
     <li><em lang="en">contract-based testing</em> avec Praspel : générer des
         suites de test à partir de contrats, grâce aux domaines réalistes et aux
         critères de couvertures de contrats</li>
+    <li><em lang="en">random-</em>,
+        <em lang="en">solver-</em> et
+        <em lang="en">grammar-based testing</em></li>
     <li>extension <code>atoum/praspel-extension</code> pour utiliser les outils
         de Praspel dans atoum</li>
   </ul>
