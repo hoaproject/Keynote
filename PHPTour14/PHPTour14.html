@@ -323,9 +323,10 @@
             langage Eiffel</a>
             <span class="bibliography"><a href="http://dl.acm.org/citation.cfm?id=SERIES9753.6876">📖</a></span>
             <span class="bibliography"><a href="http://dx.doi.org/10.1007/BFb0022115">📖</a></span></li>
-        <li>décrit un modèle en utilisant des annotations</li>
-        <li>exprime des contraintes formelles : préconditions, postconditions et
-        invariants</li>
+        <li>décrit un <strong>modèle</strong> en utilisant des
+            <strong>annotations</strong></li>
+        <li>exprime des contraintes formelles : <strong>préconditions</strong>,
+            <strong>postconditions</strong> et <strong>invariants</strong></li>
       </ul>
     </div>
     <div>
@@ -365,7 +366,7 @@
 <section>
   <h1>Langages de contrats</h1>
 
-  <p>Chaque « grand » langage à un langage de contrat :</p>
+  <p>Chaque « grand » langage de programmation à un langage de contrat :</p>
   <ul>
     <li><em lang="en">Java Modeling Language</em> (JML) pour Java
         <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-1-4615-5229-1_12">📖</a></span></li>
@@ -402,7 +403,7 @@
       <p class="break">Problèmes :</p>
       <ul>
         <li>contraintes souvent exprimées avec des formules logiques</li>
-        <li><strong>difficile</strong> d'en générer de données</li>
+        <li><strong>difficile</strong> d'en générer des données</li>
       </ul>
     </div>
   </div>
@@ -411,7 +412,7 @@
 <section>
   <h1>Contributions</h1>
 
-  <p>Faire du <em lang="en">contract-based testing</em> en PHP en 3 étapes :</p>
+  <p>Faire du <em lang="en">contract-based testing</em> en PHP en 3 étapes</p>
   <ol>
     <li>un (nouveau) langage de contrats :
         <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-642-24580-0_6">📖</a></span>
@@ -492,15 +493,17 @@
 
   <p><small>(Dans notre implémentation,)</small> un domaine réaliste est une classe</p>
   <p>Les caractéristiques sont représentées par les méthodes :</p>
-  <ul>
-    <li><code>predicate($q)</code> où <code>$q</code> est la valeur à valider</li>
-    <li><code>sample($sampler)</code> où <code>$sampler</code> est un
-    <strong>générateur numérique</strong> :  il génère uniquement des entiers et
-    des réels, et permet de guider la génération d’une donnée ; par exemple,
-    le générateur numérique est utilisé pour choisir un caractère parmi une
-    plage de caractères donnée</li>
+  <div class="incremental">
+    <ul class="incremental">
+      <li><code>predicate($q)</code> où <code>$q</code> est la valeur à valider</li>
+      <li><code>sample($sampler)</code> où <code>$sampler</code> est un
+      <strong>générateur numérique</strong> :  il génère uniquement des entiers et
+      des réels, et permet de guider la génération d’une donnée ; par exemple,
+      le générateur numérique est utilisé pour choisir un caractère parmi une
+      plage de caractères donnée</li>
   </ul>
-  <p>Seul générateur numérique disponible : pseudo-aléatoire</p>
+    <p>Seul générateur numérique disponible : pseudo-aléatoire</p>
+  </div>
 </section>
 
 <section>
@@ -669,7 +672,7 @@
 <section>
   <h1>Bibliothèque standard</h1>
 
-  <ul style="columns: 3; -moz-columns: 3; -webkit-columns: 3">
+  <ol style="columns: 3; -moz-columns: 3; -webkit-columns: 3">
     <li><code>Undefined</code></li>
     <li><code>Array</code></li>
     <li><code>Boolean</code></li>
@@ -699,7 +702,7 @@
     <li><code>Smallfloat</code></li>
     <li><code>Smallinteger</code></li>
     <li><code>Timestamp</code></li>
-  </ul>
+  </ol>
 </section>
 
 <section>
@@ -713,7 +716,7 @@
     <li>un langage d'<strong>annotation</strong> (formellement un
         <em lang="en">Behavioral Interface Specification
         Language</em><span class="bibliography"><a href="http://dl.acm.org/citation.cfm?id=2187678">📖</a></span>), écrit
-        dans les commentaires <code>/** … */</code></li>
+        dans les commentaires <code>/** <em>…</em> */</code></li>
     <li>permet d'exprimer des préconditions, postconditions et invariants</li>
     <li>inspiré de JML et ACSL, mais inspiré seulement</li>
     <li>utilise intensivement les domaines réalistes</li>
@@ -777,7 +780,7 @@
   <h1>Expressions</h1>
 
   <p><code>P</code>, <code>Q</code> et <code>T_E</code> représente une
-  expressions :</p>
+  expression :</p>
   <ul>
     <li>une déclaration</li>
     <li>un prédicat</li>
@@ -1223,7 +1226,8 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
        <mi mathvariant="normal">V</mi>
        <mo>=</mo>
        <mo>∅</mo>
-     </math>…</p>
+     </math>…
+     <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></p>
   <div style="position: absolute;
               top: 50%;
               left: 0;
@@ -1252,7 +1256,7 @@ a     : array([to string('a', 'e', 1)], length)
 a[0]  : 'b' or 'c'
 a is unique</code></pre>
   <p>a comme solution possible :</p>
-  <pre data-line="2"><code class="language-php">[
+  <pre><code class="language-php">[
     0 => 'c',
     1 => 'd',
     2 => 'a',
@@ -1263,6 +1267,7 @@ a is unique</code></pre>
 <section>
   <h1>Synthèse</h1>
 
+  <p><em lang="en">Solver-based testing</em></p>
   <div class="incremental">
     <ul class="incremental">
       <li data-item="✔︎"><span class="👍">prédicabilité</span> : domaine réaliste
@@ -1318,15 +1323,15 @@ a is unique</code></pre>
   <p>Informellement : grammaire = lexèmes + règles</p>
   <div class="incremental incremental-overlay break">
     <div>
-      <p>Lexème : plus petite <strong>unité lexicale</strong> composant un mot
-         (donnée textuelle)</p>
+      <p>Lexème (<em lang="en">token</em>) : plus petite <strong>unité
+         lexicale</strong> composant un mot (donnée textuelle)</p>
       <pre><code>%token <em>namespace_in</em>:<em>name</em> <em>value</em> -&gt; <em>namespace_out</em></code></pre>
       <p>Exemple :</p>
       <pre><code class="language-pp">%token number \d+</code></pre>
     </div>
     <div>
-      <p>Règle : décrit l'enchaînement des lexèmes les uns par rapport aux
-         autres</p>
+      <p>Règle (<em lang="en">rule</em>) : décrit l'enchaînement des lexèmes les
+         uns par rapport aux autres</p>
       <ul>
         <li><code><em>rule</em>()</code> : pour <strong>invoquer</strong> une
             règle</li>
@@ -1350,7 +1355,7 @@ a is unique</code></pre>
 </section>
 
 <section>
-  <h1>Exemple <small>simplifiée</small> avec JSON</h1>
+  <h1>Exemple <small>simplifié</small> avec JSON</h1>
 
   <p>Lexèmes :</p>
   <pre style="max-height: 180px"><code class="language-pp">%skip   space          \s
@@ -1414,7 +1419,7 @@ number:
   </script>
   <div class="incremental incremental-overlay">
     <div>
-      <p>Analyseur lexical :</p>
+      <p>Analyseur lexical (<em lang="en">lexer</em>) :</p>
       <pre style="height: 280px"><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --token-sequence
   #  namespace     token name            token value           offset
 ----------------------------------------------------------------------
@@ -1438,7 +1443,7 @@ number:
  17  default       EOF                                             23</code></pre>
     </div>
     <div>
-      <p>Analyseur syntaxique :</p>
+      <p>Analyseur syntaxique (<em lang="en">parser</em>) :</p>
       <pre><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --visitor dump
 >  #array
 >  >  token(number, 1)
@@ -1499,21 +1504,23 @@ number:
         <li data-item="👎">pré-calcul exponentiel mais génération très
             rapide</li>
       </ul>
-      <p class="break">Exemples avec
+      <p class="break">Exemples <small>(générations + concrétisations)</small> avec
          <math class="tex"><mi mathvariant="normal">n</mi><mo>=</mo><mn>5</mn></math> :</p>
       <pre><code class="language-json">[null, true]</code></pre>
       <pre><code class="language-json">[[false]]</code></pre>
-      <pre><code class="language-json">[-2 , "oD"]</code></pre>
+      <pre><code class="language-json">[-2, "oD"]</code></pre>
     </div>
     <div>
       <p>Génération <strong>exhaustive bornée</strong> :
          <span class="bibliography"><a href="http://doi.ieeecomputersociety.org/10.1109/ASE.2001.989787">📖</a></span>
          <span class="bibliography"><a href="http://doi.acm.org/10.1145/1007512.1007531">📖</a></span></p>
       <ul>
-        <li data-item="👍">rapide pour des petites données, exhaustivité</li>
+        <li data-item="👍">rapide pour des petites données, exhaustivité
+            <small>(forme de preuve)</small></li>
         <li data-item="👎">nombre exponentiel de données</li>
       </ul>
-      <p class="break">Exemple avec la borne
+      <p class="break">Exemple <small>(génération + concrétisation)</small>
+         avec la borne
          <math class="tex"><mi mathvariant="normal">n</mi><mo>=</mo><mn>15</mn></math> :</p>
       <pre><code class="language-json">true
 false
@@ -1526,7 +1533,8 @@ null
 {"r": true, "'*uT": "nRx0"}
 {"FyD": true, "i>": [true]}
 …</code></pre>
-      <p>Au total : <math class="tex"><mn>356 327</mn></math> séquences !</p>
+      <p>Au total : <math class="tex"><mn>356 327</mn></math> données
+         générées !</p>
     </div>
     <div>
       <p>Génération <strong>basée sur la couverture</strong> :</p>
@@ -1567,9 +1575,9 @@ null
   });
   </script>
   <p>Lexèmes exprimés avec des <a href="http://pcre.org/">PCRE</a></p>
-  <p>Analyses les lexèmes avec la grammaire des PCRE <small>(au format
+  <p>Analyse les lexèmes avec la grammaire des PCRE <small>(au format
      PP)</small></p>
-  <p>Algorithme de génération aléatoire isotropique :</p>
+  <p>Algorithme de génération <strong>aléatoire isotropique</strong> :</p>
   <ul>
     <li>aléatoire</li>
     <li>uniformité locale (et non globale)</li>
@@ -1580,10 +1588,11 @@ null
 <section>
   <h1>Synthèse</h1>
 
+  <p><em lang="en">Grammar-based testing</em></p>
   <div class="incremental">
     <ul class="incremental">
       <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce aux
-          analyseurs (lexicaux et syntaxiques)</li>
+          analyseurs (lexical et syntaxique)</li>
       <li data-item="✔︎"><span class="👍">générabilité</span> : grâce aux algorithmes
           de générations et de concrétisation</li>
     </ul>
@@ -1593,7 +1602,7 @@ null
        <code>regex(<math class="tex"><mi mathvariant="normal">R</mi></math>)</code>
        (sucre syntaxique :
        <code>/<math class="tex"><mi mathvariant="normal">R</mi></math>/</code>)</p>
-    <p class="break">Tableaux publiés dans A-MOST 2012
+    <p class="break">Travaux publiés dans A-MOST 2012
        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICST.2012.136">📖</a></span></p>
 
     <p class="break">👉 Mission suivante ? Les objets !</p>
@@ -1827,7 +1836,8 @@ null
   <p class="break">Installer :</p>
   <pre><code class="language-shell">$ composer require atoum/praspel-extension *
 $ composer install</code></pre>
-  <pre><code class="language-php">$runner->addExtension(new \Atoum\PraspelExtension\Manifest());</code></pre>
+  <pre><code class="language-php">// .atoum.php
+$runner->addExtension(new \Atoum\PraspelExtension\Manifest());</code></pre>
 </section>
 
 <section>
