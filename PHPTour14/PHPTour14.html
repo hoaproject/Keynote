@@ -412,7 +412,7 @@
 <section>
   <h1>Contributions</h1>
 
-  <p>Faire du <em lang="en">contract-based testing</em> en PHP en 3 étapes</p>
+  <p>Faire du <em lang="en">Contract-based Testing</em> en PHP en 3 étapes</p>
   <ol>
     <li>un (nouveau) langage de contrats :
         <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-642-24580-0_6">📖</a></span>
@@ -593,14 +593,6 @@
             <code>…</code></li>
       </ul>
     </div>
-    <div>
-      <p>Exemples d'appels :</p>
-      <ul>
-        <li><code>string('a', 'z', 4..12)</code></li>
-        <li><code>string(…,…, 7)</code></li>
-        <li><code>string('α', 'ω', 7)</code></li>
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -652,6 +644,7 @@
   </div>
 </section>
 
+<!--
 <section>
   <h1>Classification</h1>
 
@@ -668,6 +661,7 @@
     <li><code>Enumerable</code>, dont les valeurs peuvent être énumérées</li>
   </ul>
 </section>
+-->
 
 <section>
   <h1>Bibliothèque standard</h1>
@@ -875,6 +869,7 @@
   </div>
 </section>
 
+<!--
 <section>
   <h1>Description de tableaux</h1>
 
@@ -932,6 +927,7 @@ a4: array([from 0..10 or 20..30 to boolean() or float()], 7)</code></pre>
     </div>
   </div>
 </section>
+-->
 
 <section class="chapter">
   <h1>2 <span>Génération automatique de données</span></h1>
@@ -1267,7 +1263,7 @@ a is unique</code></pre>
 <section>
   <h1>Synthèse</h1>
 
-  <p><em lang="en">Solver-based testing</em></p>
+  <p><em lang="en">Solver-based Testing</em></p>
   <div class="incremental">
     <ul class="incremental">
       <li data-item="✔︎"><span class="👍">prédicabilité</span> : domaine réaliste
@@ -1588,7 +1584,7 @@ null
 <section>
   <h1>Synthèse</h1>
 
-  <p><em lang="en">Grammar-based testing</em></p>
+  <p><em lang="en">Grammar-based Testing</em></p>
   <div class="incremental">
     <ul class="incremental">
       <li data-item="✔︎"><span class="👍">prédicabilité</span> : grâce aux
@@ -1716,20 +1712,7 @@ null
       </div>
     </div>
     <div>
-      <p><strong>Combinaisons</strong></p>
-      <ul>
-        <li>le Critère de Couverture Clause + Domaine vise à couvrir la
-        structure et les domaines réalistes</li>
-        <li>le Critère de Couverture Clause + Prédicat vise à couvrir la
-        structure et les prédicats</li>
-        <li>le Critère de Couverture
-            <em lang="en">All</em>-<math class="tex"><mi mathvariant="normal">G</mi></math>
-            vise à satisfaire les critères Clause, Domaine et Prédicat en même
-            temps</li>
-      </ul>
-    </div>
-    <div>
-      <p>Treillis</p>
+      <p><strong>Combinaisons</strong> (treillis)</p>
       <div class="schema">
         <svg width="600" height="300" viewBox="0 0 600 300"
              class="draw incremental">
@@ -2003,12 +1986,12 @@ foreach($this->sampleMany($realdom, 10) as $date)
         des données</li>
     <li>Praspel, un nouveau langage de contrat pour PHP, simple, pragmatique et
         extensible</li>
-    <li><em lang="en">contract-based testing</em> avec Praspel : générer des
+    <li><em lang="en">Contract-based Testing</em> avec Praspel : générer des
         suites de test à partir de contrats, grâce aux domaines réalistes et aux
         critères de couvertures de contrats</li>
-    <li><em lang="en">random-</em>,
-        <em lang="en">solver-</em> et
-        <em lang="en">grammar-based testing</em></li>
+    <li><em lang="en">Random-</em>,
+        <em lang="en">Solver-</em> et
+        <em lang="en">Grammar-based Testing</em></li>
     <li>extension <code>atoum/praspel-extension</code> pour utiliser les outils
         de Praspel dans atoum</li>
   </ul>
