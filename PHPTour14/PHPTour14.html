@@ -224,13 +224,13 @@
     <div class="break">
       <div class="fleft">
         <ul>
-          <li data-item=" ">préambule</li>
-          <li data-item="+">données</li>
-          <li data-item="+">oracle</li>
+          <li data-item=" ">préambule <small>(<em lang="en">given</em>)</small></li>
+          <li data-item="+">données <small>(<em lang="en">when</em>)</small></li>
+          <li data-item="+">oracle <small>(<em lang="en">then</em>)</small></li>
           <li data-item="="><strong>cas de test</strong></li>
         </ul>
       </div>
-      <div class="fright" style="width: 75%">
+      <div class="fright" style="width: 68%">
         <ul>
           <li data-item=":">place le SUT dans un état particulier</li>
           <li data-item=":"><strong>test</strong>, exécute le SUT</li>
@@ -410,7 +410,7 @@
 </section>
 
 <section>
-  <h1>Contributions</h1>
+  <h1>Solutions</h1>
 
   <p>Faire du <em lang="en">Contract-based Testing</em> en PHP en 3 étapes</p>
   <ol>
@@ -454,20 +454,19 @@
   <h1>Domaines réalistes</h1>
 
   <div class="incremental">
-  <div>
-    <p>Naïvement, les domaines réalistes :</p>
-    <ul>
-      <li><strong>raffinent</strong> les types usuels, comme les entiers, les
-          chaînes de caractères, les tableaux etc.</li>
-      <li>permettent d'exprimer des données plus <strong>complexes</strong>,
-          comme des grammaires, des graphes etc.</li>
-    </ul>
-  </div>
-  <div>
+    <div>
+      <p>Naïvement, les domaines réalistes :</p>
+      <ul>
+        <li><strong>raffinent</strong> les types usuels, comme les entiers, les
+            chaînes de caractères, les tableaux etc.</li>
+        <li>permettent d'exprimer des données plus <strong>complexes</strong>,
+            comme des grammaires, des graphes etc.</li>
+      </ul>
+    </div>
     <p class="break"><strong>Réaliste</strong> signifie qu'ils sont conçus pour
        spécifier des domaines de données <strong>pertinents</strong> pour un
-       contexte <strong>spécifique</strong> ; exemple : une adresse email</p>
-  </div>
+       contexte <strong>spécifique</strong></p>
+    <p class="break">Exemple : adresse email</p>
   </div>
 </section>
 
@@ -488,6 +487,7 @@
   </div>
 </section>
 
+<!--
 <section>
   <h1>Implémentation</h1>
 
@@ -505,11 +505,12 @@
     <p>Seul générateur numérique disponible : pseudo-aléatoire</p>
   </div>
 </section>
+-->
 
 <section>
   <h1>Hiérarchie</h1>
 
-  <p>Classification <strong>verticale</strong></p>
+  <p>Une classification possible : <strong>verticale</strong></p>
   <p>Héritage permet de raffiner les caractéristiques :</p>
   <ul>
     <li><code>Color</code> hérite de <code>String</code></li>
@@ -574,29 +575,6 @@
 </section>
 
 <section>
-  <h1>Paramètres</h1>
-
-  <div class="incremental">
-    <div>
-      <p><em>A l'instar</em> des fonctions, un domaine réaliste est
-         <strong>paramétrable</strong> :</p>
-      <ul>
-        <li>pour représenter des structures de données complexes (tableaux
-        imbriqués, graphes, automates, arbres…)</li>
-        <li>typage :
-            <code class="language-php">'Integer size'</code></li>
-        <li>multi-typage :
-            <code class="language-php">'Integer|Float bigSize'</code></li>
-        <li>valeur optionnelle :
-            <code class="language-php">'Integer size' => 7</code></li>
-        <li>utiliser la valeur par défaut : avec <code>default</code> ou
-            <code>…</code></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
   <h1>Exemple</h1>
 
   <pre id="boundinteger"><code class="language-php">class        Boundinteger
@@ -636,13 +614,39 @@
     <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('3-6')">
        Classification : caractérisation du domaine réaliste</p>
     <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('8-11')">
-       Paramètres : <code>lower</code> et <code>upper</code></p>
+       Paramètres : permet de représenter des structures de données complexes
+       (structures récursives…)</p>
     <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('13-18')">
        Caractéristique de prédicabililité</p>
     <p onincrement="Hoa.$('#boundinteger').hoa.highlightLines('20-26')">
        Caractéristique de générabilité</p>
   </div>
 </section>
+
+<!--
+<section>
+  <h1>Paramètres</h1>
+
+  <div class="incremental">
+    <div>
+      <p><em>A l'instar</em> des fonctions, un domaine réaliste est
+         <strong>paramétrable</strong> :</p>
+      <ul>
+        <li>pour représenter des structures de données complexes (tableaux
+        imbriqués, graphes, automates, arbres…)</li>
+        <li>typage :
+            <code class="language-php">'Integer size'</code></li>
+        <li>multi-typage :
+            <code class="language-php">'Integer|Float bigSize'</code></li>
+        <li>valeur optionnelle :
+            <code class="language-php">'Integer size' => 7</code></li>
+        <li>utiliser la valeur par défaut : avec <code>default</code> ou
+            <code>…</code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+-->
 
 <!--
 <section>
@@ -1126,115 +1130,119 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
        <mi mathvariant="normal">Π</mi>
        )
      </math> où…</p>
-  <p class="break">Les variables
-     <math class="tex">
-       <mi mathvariant="normal">σ</mi>
-       <mo>∈</mo>
-       <mi mathvariant="normal">Σ</mi>
-     </math> sont
-     la taille <math class="tex"><mi mathvariant="normal">S</mi></math>,
-     les ensembles <math class="tex"><mi mathvariant="normal">X</mi></math> et
-     <math class="tex"><mi mathvariant="normal">Y</mi></math>,
-     la fonction totale
-     <math class="tex"><mi mathvariant="normal">H</mi></math>…</p>
-  <p class="break">Cardinalité :
-     <math class="tex">
-       <mi>card</mi>
-       (
-       <mi mathvariant="normal">X</mi>
-       )
-       <mo>=</mo>
-       <mi mathvariant="normal">S</mi>
-     </math>,
-     <math class="tex">
-       <mi mathvariant="normal">S</mi>
-       <mo>≥</mo>
-       <mn>0</mn>
-     </math>,
-     <math class="tex">
-       <mi>card</mi>
-       (
-       <mi mathvariant="normal">X</mi>
-       )
-       <mo>≥</mo>
-       <mi>card</mi>
-       (
-       <mi mathvariant="normal">Y</mi>
-       )
-     </math>
-     …</p>
-  <p class="break">Domaines et co-domaines :
-     <math class="tex">
-       <mi mathvariant="normal">Y</mi>
-       <mo>=</mo>
-       <mover accent="true">
-         <mi mathvariant="normal">H</mi>
-         <mo>^</mo>
-       </mover>
-       (
-       <mi mathvariant="normal">X</mi>
-       )
-     </math>,
-     <math class="tex">
-       <mi mathvariant="normal">X</mi>
-       <mo>=</mo>
-       <munder>
-         <mo>∪</mo>
-         <mrow style="font-size: small">
-          <mn>1</mn>
-          <mo>≤</mo>
-          <mi mathvariant="normal">i</mi>
-          <mo>≤</mo>
-          <mi mathvariant="normal">j</mi>
-         </mrow>
-       </munder>
-       <msub>
-         <mi mathvariant="normal">X</mi>
-         <mi mathvariant="normal">i</mi>
-       </msub>
-     </math>…</p>
-  <p class="break">Paires :
-     <math class="tex">
-       <mi mathvariant="normal">K</mi>
-       <mo>⊆</mo>
-       <mi mathvariant="normal">X</mi>
-     </math>,
-     <math class="tex">
-       <mover accent="true">
-         <mi mathvariant="normal">H</mi>
-         <mo>^</mo>
-       </mover>
-       (
-       <mi mathvariant="normal">K</mi>
-       )
-       <mo>⊆</mo>
-       <mi mathvariant="normal">V</mi>
-     </math>,
-     <math class="tex">
-       <mover accent="true">
-         <mi mathvariant="normal">H</mi>
-         <mo>^</mo>
-       </mover>
-       (
-       <mi mathvariant="normal">K</mi>
-       )
-       <mo>∩</mo>
-       <mi mathvariant="normal">V</mi>
-       <mo>=</mo>
-       <mo>∅</mo>
-     </math>…
-     <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></p>
-  <div style="position: absolute;
-              top: 50%;
-              left: 0;
-              right: 0;
-              text-align: center;
-              font-family: Pre;
-              font-size: 6em;
-              font-weigh: bold;
-              color: red;
-              transform: rotate(-45deg)">
-    censuré
+  <div class="incremental">
+    <div>
+      <p class="break">Les variables
+         <math class="tex">
+           <mi mathvariant="normal">σ</mi>
+           <mo>∈</mo>
+           <mi mathvariant="normal">Σ</mi>
+         </math> sont
+         la taille <math class="tex"><mi mathvariant="normal">S</mi></math>,
+         les ensembles <math class="tex"><mi mathvariant="normal">X</mi></math> et
+         <math class="tex"><mi mathvariant="normal">Y</mi></math>,
+         la fonction totale
+         <math class="tex"><mi mathvariant="normal">H</mi></math>…</p>
+      <p class="break">Cardinalité :
+         <math class="tex">
+           <mi>card</mi>
+           (
+           <mi mathvariant="normal">X</mi>
+           )
+           <mo>=</mo>
+           <mi mathvariant="normal">S</mi>
+         </math>,
+         <math class="tex">
+           <mi mathvariant="normal">S</mi>
+           <mo>≥</mo>
+           <mn>0</mn>
+         </math>,
+         <math class="tex">
+           <mi>card</mi>
+           (
+           <mi mathvariant="normal">X</mi>
+           )
+           <mo>≥</mo>
+           <mi>card</mi>
+           (
+           <mi mathvariant="normal">Y</mi>
+           )
+         </math>
+         …</p>
+      <p class="break">Domaines et co-domaines :
+         <math class="tex">
+           <mi mathvariant="normal">Y</mi>
+           <mo>=</mo>
+           <mover accent="true">
+             <mi mathvariant="normal">H</mi>
+             <mo>^</mo>
+           </mover>
+           (
+           <mi mathvariant="normal">X</mi>
+           )
+         </math>,
+         <math class="tex">
+           <mi mathvariant="normal">X</mi>
+           <mo>=</mo>
+           <munder>
+             <mo>∪</mo>
+             <mrow style="font-size: small">
+              <mn>1</mn>
+              <mo>≤</mo>
+              <mi mathvariant="normal">i</mi>
+              <mo>≤</mo>
+              <mi mathvariant="normal">j</mi>
+             </mrow>
+           </munder>
+           <msub>
+             <mi mathvariant="normal">X</mi>
+             <mi mathvariant="normal">i</mi>
+           </msub>
+         </math>…</p>
+      <p class="break">Paires :
+         <math class="tex">
+           <mi mathvariant="normal">K</mi>
+           <mo>⊆</mo>
+           <mi mathvariant="normal">X</mi>
+         </math>,
+         <math class="tex">
+           <mover accent="true">
+             <mi mathvariant="normal">H</mi>
+             <mo>^</mo>
+           </mover>
+           (
+           <mi mathvariant="normal">K</mi>
+           )
+           <mo>⊆</mo>
+           <mi mathvariant="normal">V</mi>
+         </math>,
+         <math class="tex">
+           <mover accent="true">
+             <mi mathvariant="normal">H</mi>
+             <mo>^</mo>
+           </mover>
+           (
+           <mi mathvariant="normal">K</mi>
+           )
+           <mo>∩</mo>
+           <mi mathvariant="normal">V</mi>
+           <mo>=</mo>
+           <mo>∅</mo>
+         </math>…
+         <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></p>
+      <div style="position: absolute;
+                  top: 50%;
+                  left: 0;
+                  right: 0;
+                  text-align: center;
+                  font-family: Pre;
+                  font-size: 6em;
+                  font-weigh: bold;
+                  color: red;
+                  transform: rotate(-45deg)">
+        censuré
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1375,13 +1383,10 @@ a is unique</code></pre>
 %token  number         \d+</code></pre>
   <p>Règles :</p>
   <pre style="max-height: 180px"><code class="language-pp">value:
-    &lt;true> | &lt;false> | &lt;null> | string() | object() | array() | number()
+    &lt;true> | &lt;false> | &lt;null> | &lt;number> | string() | object() | array()
 
 string:
     ::quote_:: &lt;string> ::_quote::
-
-number:
-    &lt;number>
 
 #object:
     ::brace_:: pair() ( ::comma:: pair() )* ::_brace::
@@ -1474,7 +1479,7 @@ number:
       var sequence = grid.push(paper.rect(0, 0, 140, 80, 3, 'séquence'), 2, 0);
       var word     = grid.push(paper.rect(0, 0, 140, 80, 3, 'mot'), 4, 0);
       grid.push(paper.rect(0, 0, 140, 50, 3, 'PP'), 0, 1);
-      grid.push(paper.rect(0, 0, 360, 50, 3, '[[7 ⟼ …], [+ ⟼ …], [42 ⟼ …]]'), 2, 1);
+      grid.push(paper.rect(0, 0, 410, 50, 3, '[[number ⟼ …], [plus ⟼ …], [number ⟼ …]]'), 2, 1);
       grid.push(paper.rect(0, 0, 140, 50, 3, '7 + 42'), 4, 1);
 
       paper.link.between(grammar, sequence, 'génération');
@@ -1778,8 +1783,8 @@ null
   <p class="👍">Les plus :</p>
   <ul>
     <li>simple, moderne et intuitif</li>
-    <li>un des <em lang="en">frameworks</em> de tests les plus
-    utilisés dans l'industrie</li>
+    <li><em lang="en">framework</em> de tests de plus en plus utilisé dans
+        l'industrie</li>
     <li>gratuit et <em lang="en">open-source</em></li>
     <li>intégré ou inclu dans plusieurs IDE et outils majeurs
         <small>(<a href="https://netbeans.org/">Netbeans</a>,
@@ -1936,25 +1941,47 @@ foreach($this->sampleMany($realdom, 10) as $date)
 </section>
 
 <section>
-  <h1>Outillage</h1>
+  <h1><em lang="lt">Recapitulare</em></h1>
 
-  <p>Implémenté dans <a href="http://hoa-project.net/">Hoa</a> :</p>
-  <ul>
-    <li>un ensemble de bibliothèques PHP modulaires, extensibles et
-        structurées</li>
-    <li>un pont entre le monde de la recherche et de l'industrie</li>
-  </ul>
-  <p>Nous avons vu :</p>
-  <ul>
-    <li><a href="http://central.hoa-project.net/Resource/Library/Realdom"><code>Hoa\Realdom</code></a>
-        pour les domaines réalistes</li>
-    <li><a href="http://central.hoa-project.net/Resource/Library/Praspel"><code>Hoa\Praspel</code></a>
-        pour Praspel</li>
-    <li><a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a>
-        pour le compilateur et le langage PP</li>
-    <li><a href="http://central.hoa-project.net/Resource/Library/Regex"><code>Hoa\Regex</code></a>
-        pour les expressions régulières</li>
-  </ul>
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Implémenté dans <a href="http://hoa-project.net/">Hoa</a> :</p>
+      <ul>
+        <li>un ensemble de bibliothèques PHP modulaires, extensibles et
+            structurées</li>
+        <li>un pont entre le monde de la recherche et de l'industrie</li>
+        <li>gratuit et <em lang="en">open-source</em></li>
+      </ul>
+      <p class="break">Domaines réalistes
+         (<a href="http://central.hoa-project.net/Resource/Library/Realdom"><code>Hoa\Realdom</code></a>) :</p>
+      <ul>
+        <li>des structures permettant de valider et générer des données</li>
+        <li>peuvent être emboîtées et étendus facilement</li>
+      </ul>
+    </div>
+    <div>
+      <p>Praspel
+         (<a href="http://central.hoa-project.net/Resource/Library/Praspel"><code>Hoa\Praspel</code></a>) :</p>
+      <ul>
+        <li>nouveau langage de contrat pour PHP, simple, pradgmatique et
+            extensible</li>
+        <li><em lang="en">Contract-based Testing</em> : génération automatique
+            de données et de suites de tests unitaires</li>
+        <li><em lang="en">Random-</em>,
+            <em lang="en">Solver-</em> et
+            <em lang="en">Grammar-based Testing</em>
+            (<a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a>
+            et
+            <a href="http://central.hoa-project.net/Resource/Library/Regex"><code>Hoa\Regex</code></a>),
+            assemblés dans Praspel, cachés derrières les domaines réalistes</li>
+      </ul>
+      <p class="break">Extension atoum
+         (<a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>atoum/praspel-extension</code></a>) :</p>
+      <ul>
+        <li>pour utiliser les outils de Praspel dans atoum</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -1974,27 +2001,8 @@ foreach($this->sampleMany($realdom, 10) as $date)
         présenté à ICTSS en 2011
         <span class="bibliography"><a href="http://dx.doi.org/10.1007/978-3-642-24580-0_6">📖</a></span></li>
   </ul>
-  <p>Un journal en attente</p>
-  <p>Thèse soutenue très prochainement 😱</p>
-</section>
-
-<section>
-  <h1>Nous avons vu…</h1>
-
-  <ul>
-    <li>les domaines réalistes : des structures permettant de valider et générer
-        des données</li>
-    <li>Praspel, un nouveau langage de contrat pour PHP, simple, pragmatique et
-        extensible</li>
-    <li><em lang="en">Contract-based Testing</em> avec Praspel : générer des
-        suites de test à partir de contrats, grâce aux domaines réalistes et aux
-        critères de couvertures de contrats</li>
-    <li><em lang="en">Random-</em>,
-        <em lang="en">Solver-</em> et
-        <em lang="en">Grammar-based Testing</em></li>
-    <li>extension <code>atoum/praspel-extension</code> pour utiliser les outils
-        de Praspel dans atoum</li>
-  </ul>
+  <p class="break">Un journal en attente</p>
+  <p class="break">Thèse soutenue très prochainement 😱</p>
 </section>
 
 <section class="chapter">
