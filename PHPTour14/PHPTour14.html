@@ -8,7 +8,6 @@
   <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
 
   <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
-
   <style>
     .draw line {
         stroke: #000;
@@ -942,46 +941,55 @@ a4: array([from 0..10 or 20..30 to boolean() or float()], 7)</code></pre>
 
   <p>Génération par défaut</p>
   <p>Totalement pseudo-aléatoire</p>
-  <p><math class="tex">
-       <mi mathvariant="normal">V</mi>
-     </math> l'ensemble des variables (des préconditions et
-  invariants)</p>
-  <p><math class="tex">
-       <mi mathvariant="normal">v</mi>
-       <mo>∈</mo>
-       <mi mathvariant="normal">V</mi>
-     </math> une variable de la forme : <code>v: t_1(…) or … or t_n(…)</code></p>
-  <div id="standard_generation" class="verbatim schema" style="width: 300px"></div>
-  <script>
-  Hoa.Document.onReady(function ( ) {
-
-      var paper      = Hoa.Graph(Hoa.$('#standard_generation'), 300, 300);
-      var grid       = paper.grid(0, 0, 300, 300, 3, 3);
-
-      var pick      = grid.push(paper.circle(0, 0, 20), 1, 0);
-      var sample    = grid.push(paper.circle(0, 0, 20), 0, 1);
-      var predicate = grid.push(paper.circle(0, 0, 20), 1, 2);
-      var pred      = grid.push(paper.circle(0, 0, 20), 2, 1);
-
-//      paper.arc.between(pick, sample);
-//      paper.arc.between(sample, predicate);
-//      paper.arc.between(predicate, pred);
-//      paper.arc.between(pred, pick);
-
-
-//      var invariant1 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
-//      var pre        = grid.push(paper.rect(0, 0, 140, 80, 3, 'préconditions'));
-//      var method     = grid.push(paper.circle(0, 0, 25));
-//      var _method    = paper.text(400, 30, 'méthode');
-//      var post       = grid.push(paper.rect(0, 0, 140, 80, 3, 'postconditions'));
-//      var invariant2 = grid.push(paper.rect(0, 0, 140, 80, 3, 'invariants'));
-//
-//      paper.link.between(invariant1, pre);
-//      paper.link.between(pre, method);
-//      paper.link.between(method, post);
-//      paper.link.between(post, invariant2);
-  });
-  </script>
+  <ol>
+    <li>Pour chaque variable :
+    <ul>
+      <li>sélection d'un domaine réaliste dans la disjonction aléatoirement</li>
+      <li>appel de la méthode <code>sample</code>, puis
+          <code>predicate</code></li>
+    </ul>
+    </li>
+    <li>Évaluation des <code>\pred(<em>p</em>)</code></li>
+  </ol>
+  <div class="incremental incremental-overlay break">
+    <div>
+      <pre><code>@requires i: integer() or void and
+          j: float() or boolean() and
+          \pred('a predicate');</code></pre>
+    </div>
+    <div>
+      <pre><code>@requires <mark>i: integer() or void</mark> and
+          j: float() or boolean() and
+          \pred('a predicate');</code></pre>
+      <p>Sélection de la variable <code>i</code></p>
+    </div>
+    <div>
+      <pre><code>@requires i: <mark>integer()</mark> or void and
+          j: float() or boolean() and
+          \pred('a predicate');</code></pre>
+      <p>Choix du domaine réaliste <code>integer</code> ; <code>i =
+         42</code></p>
+    </div>
+    <div>
+      <pre><code>@requires i: integer() or void and
+          <mark>j: float() or boolean()</mark> and
+          \pred('a predicate');</code></pre>
+      <p>Sélection de la variable <code>j</code></p>
+    </div>
+    <div>
+      <pre><code>@requires i: integer() or void and
+          j: float() or <mark>boolean()</mark> and
+          \pred('a predicate');</code></pre>
+      <p>Choix du domaine réaliste <code>boolean</code> ; <code>j =
+         true</code></p>
+    </div>
+    <div>
+      <pre><code>@requires i: integer() or void and
+          j: float() or boolean() and
+          <mark>\pred('a predicate')</mark>;</code></pre>
+      <p>Évaluation du prédicat</p>
+    </div>
+  </div>
 </section>
 
 <section>
@@ -1260,12 +1268,14 @@ a     : array([to string('a', 'e', 1)], length)
 a[0]  : 'b' or 'c'
 a is unique</code></pre>
   <p>a comme solution possible :</p>
-  <pre><code class="language-php">[
+  <div class="incremental incremental-all">
+    <pre><code class="language-php">[
     0 => 'c',
     1 => 'd',
     2 => 'a',
     3 => 'e'
 ]</code></pre>
+  </div>
 </section>
 
 <section>
@@ -1362,7 +1372,7 @@ a is unique</code></pre>
   <h1>Exemple <small>simplifié</small> avec JSON</h1>
 
   <p>Lexèmes :</p>
-  <pre style="max-height: 180px"><code class="language-pp">%skip   space          \s
+  <pre id="json_tokens" style="max-height: 300px"><code class="language-pp">%skip   space          \s
 // Scalars.
 %token  true           true
 %token  false          false
@@ -1382,7 +1392,7 @@ a is unique</code></pre>
 %token  comma          ,
 %token  number         \d+</code></pre>
   <p>Règles :</p>
-  <pre style="max-height: 180px"><code class="language-pp">value:
+  <pre id="json_rules" style="max-height: 50px"><code class="language-pp">value:
     &lt;true> | &lt;false> | &lt;null> | &lt;number> | string() | object() | array()
 
 string:
@@ -1396,6 +1406,19 @@ string:
 
 #array:
     ::bracket_:: value() ( ::comma:: value() )* ::_bracket::</code></pre>
+  <div class="incremental incremental-overlay">
+    <span onincrement="Hoa.$('#json_tokens').style.maxHeight = '300px';
+                       Hoa.$('#json_rules').style.maxHeight  = '50px';
+                       Hoa.$('#json_rules').hoa.highlightLines()"></span>
+    <span onincrement="Hoa.$('#json_tokens').style.maxHeight = '50px';
+                       Hoa.$('#json_rules').style.maxHeight  = '300px'"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('2')"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('5')"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('8')"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('11')"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('11,2')"></span>
+    <span onincrement="Hoa.$('#json_rules').hoa.highlightLines('14')"></span>
+  </div>
 </section>
 
 <section>
@@ -1963,7 +1986,7 @@ foreach($this->sampleMany($realdom, 10) as $date)
       <p>Praspel
          (<a href="http://central.hoa-project.net/Resource/Library/Praspel"><code>Hoa\Praspel</code></a>) :</p>
       <ul>
-        <li>nouveau langage de contrat pour PHP, simple, pradgmatique et
+        <li>nouveau langage de contrat pour PHP, simple, pragmatique et
             extensible</li>
         <li><em lang="en">Contract-based Testing</em> : génération automatique
             de données et de suites de tests unitaires</li>
@@ -1973,7 +1996,7 @@ foreach($this->sampleMany($realdom, 10) as $date)
             (<a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a>
             et
             <a href="http://central.hoa-project.net/Resource/Library/Regex"><code>Hoa\Regex</code></a>),
-            assemblés dans Praspel, cachés derrières les domaines réalistes</li>
+            assemblés dans Praspel, plongés dans les domaines réalistes</li>
       </ul>
       <p class="break">Extension atoum
          (<a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>atoum/praspel-extension</code></a>) :</p>
@@ -2005,6 +2028,36 @@ foreach($this->sampleMany($realdom, 10) as $date)
   <p class="break">Thèse soutenue très prochainement 😱</p>
 </section>
 
+<section>
+  <h1>Et après ?</h1>
+
+  <div class="incremental">
+    <div>
+      <p>Apprentissage :</p>
+      <ul>
+        <li>thèse <math class="tex"><mo>=</mo></math> documentation : besoin d'une
+            documentation « utilisateur »</li>
+      </ul>
+    </div>
+    <div>
+      <p>Générateurs de données :</p>
+      <ul>
+        <li>toutes les expérimentations valident nos algorithmes</li>
+        <li>matures</li>
+        <li>déjà utilisables, même dans atoum</li>
+      </ul>
+    </div>
+    <div>
+      <p>Générateurs de tests unitaires :</p>
+      <ul>
+        <li>plusieurs expérimentations très encourageantes</li>
+        <li>besoin de maturité</li>
+        <li>besoin d'améliorer/compléter les outils</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="chapter">
   <h1>Merci ! <span>☺︎</span></h1>
 
@@ -2018,17 +2071,19 @@ foreach($this->sampleMany($realdom, 10) as $date)
 <div id="progress-bar"></div>
 
 <script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="Keynote.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Hoa.Graph.js"></script>
+<script src="Hoa.Graph.js"></script>
 <script src="http://static.hoa-project.net/Javascript/Hoa.Graph.style.js"></script>
 <script>
   Hoa.namespace([HTMLElement], {
 
-      guard: function ( ) {
+      guard: function ( element ) {
 
-          return true;
+          return 'PRE' === element.tagName;
       },
       body : function ( element ) {
 
@@ -2036,7 +2091,11 @@ foreach($this->sampleMany($realdom, 10) as $date)
 
               highlightLines: function ( lines ) {
 
-                  element.setAttribute('data-line', lines);
+                  if(undefined === lines)
+                      element.setAttribute('data-line', 1 << 20);
+                  else
+                      element.setAttribute('data-line', lines);
+
                   Prism.hooks.run(
                       'after-highlight',
                       {
