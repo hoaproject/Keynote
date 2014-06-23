@@ -123,6 +123,8 @@
          class="center" />
     <p class="break"><small><time datetime="2014-06-24">24 juin 2014</time></small></p>
   </div>
+
+  <details>Ivan</details>
 </section>
 
 <section>
@@ -213,6 +215,8 @@
     </mrow>
   </math>
   </p>
+
+  <details>Julien</details>
 </section>
 
 <section>
@@ -245,6 +249,8 @@
                                                 inconclusif</p>
     <p class="break"><strong>Suite de tests</strong> : ensemble de cas de tests</p>
   </div>
+
+  <details>Ivan</details>
 </section>
 
 <section>
@@ -473,7 +479,6 @@
 <section>
   <h1>Caractéristiques</h1>
 
-  <p>Conçus pour répondre aux problématiques du test</p>
   <div class="incremental">
     <p>Ils ont les deux caractéristiques suivantes :</p>
     <ul class="incremental">
@@ -780,7 +785,7 @@
 <section>
   <h1>Expressions</h1>
 
-  <p><code>P</code>, <code>Q</code> et <code>T_E</code> représente une
+  <p><code>P</code>, <code>Q</code> et <code>T_E</code> représentent une
   expression :</p>
   <ul>
     <li>une déclaration</li>
@@ -1256,6 +1261,8 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
       </div>
     </div>
   </div>
+
+  <details>Julien + démo</details>
 </section>
 
 <section>
@@ -1297,6 +1304,8 @@ a is unique</code></pre>
        <span class="bibliography"><a href="http://dx.doi.org/10.1109/ICSTW.2013.80">📖</a></span></p>
     <p class="break">👉 Mission suivante ? Les chaînes de caractères !</p>
   </div>
+
+  <details>Ivan</details>
 </section>
 
 <section>
@@ -1627,6 +1636,8 @@ null
     <li>uniformité locale (et non globale)</li>
   </ul>
   <p>Appliqué sur chaque élément d'une séquence</p>
+
+  <details>Julien + démo</details>
 </section>
 
 <section>
@@ -1651,6 +1662,8 @@ null
 
     <p class="break">👉 Mission suivante ? Les objets !</p>
   </div>
+
+  <details>Ivan</details>
 </section>
 
 <section>
@@ -1705,6 +1718,8 @@ null
 
 <section class="chapter">
   <h1>3 <span>Génération automatique de tests unitaires</span></h1>
+
+  <details>Julien</details>
 </section>
 
 <section>
@@ -1724,10 +1739,6 @@ null
           code</strong></li>
       <li>idée n°1 : couvrir les données</li>
       <li>idée n°2 : couvrir la structure du contrat</li>
-      <li>hypothèse :
-          couverture du contrat
-          <math class="tex"><mover accent="false"><mo>≈</mo><mtext>?</mtext></mover></math>
-          couverture du code</li>
     </ul>
   </div>
 </section>
@@ -1806,30 +1817,32 @@ null
   <h1>Suite de tests unitaires</h1>
 
   <ol>
-    <li>choix d'un critère de couverture de contrat</li>
-    <li>génération d'une suite de tests satisfaisants le critère</li>
+    <li>choix, <strong>par l'utilisateur</strong>, d'un critère de couverture de
+        contrat</li>
+    <li>génération, <strong>par l'outil</strong>, d'une suite de tests
+        satisfaisants le critère</li>
   </ol>
-  <p class="break">Comment l'exécuter ?</p>
+  <p>Comment l'exécuter ?</p>
   <ul>
     <li>Praspel sait le faire avec son RAC mais…</li>
     <li>… l'isolation des tests, les rapports, l'intégration aux multiples
         outils etc. nécessitent un temps de développement et de maintenance
         important !</li>
   </ul>
-  <p class="break">Idée : transformer les suites de tests Praspel en suites
+  <p>Idée : transformer les suites de tests Praspel en suites
      écrites avec l'API d'<a href="http://atoum.org/">atoum</a></p>
 </section>
 
 <section>
   <h1>Pourquoi atoum ?</h1>
 
-  <p class="👍">Les plus :</p>
+  <p><span class="👍">Les atouts</span> :</p>
   <ul>
     <li><em lang="en">framework</em> de tests de plus en plus utilisé dans
         l'industrie</li>
     <li>simple, moderne et intuitif</li>
     <li>gratuit et <em lang="en">open-source</em></li>
-    <li>intégré ou inclu dans plusieurs IDE et outils majeurs
+    <li>intégré ou inclus dans plusieurs IDE et outils majeurs
         <small>(<a href="https://netbeans.org/">Netbeans</a>,
         <a href="http://eclipse.org/">Eclipse</a>,
         <a href="http://vim.org/">Vim</a>,
@@ -1839,7 +1852,7 @@ null
     <li>multiples sortes d'exécutions et formats de rapports</li>
     <li><em lang="en">hackable</em></li>
   </ul>
-  <p class="👎">Les moins :</p>
+  <p><span class="👎">Les manques</span> :</p>
   <ul>
     <li>pas de générateur automatique de données</li>
     <li>pas de contrat</li>
@@ -1947,6 +1960,8 @@ $this->string($this->sample($realdom))
 
 foreach($this->sampleMany($realdom, 10) as $date)
     var_dump($date);</code></pre>
+
+  <details>Démo</details>
 </section>
 
 <section>
@@ -1981,6 +1996,8 @@ foreach($this->sampleMany($realdom, 10) as $date)
 
 <section class="chapter">
   <h1>5 <span>Conclusion</span></small></h1>
+
+  <details>Ivan</details>
 </section>
 
 <section>
@@ -1999,7 +2016,7 @@ foreach($this->sampleMany($realdom, 10) as $date)
          (<a href="http://central.hoa-project.net/Resource/Library/Realdom"><code>Hoa\Realdom</code></a>) :</p>
       <ul>
         <li>des structures permettant de valider et générer des données</li>
-        <li>peuvent être emboîtées et étendus facilement</li>
+        <li>peuvent être emboîtés et étendus facilement</li>
       </ul>
     </div>
     <div>
