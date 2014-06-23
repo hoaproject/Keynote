@@ -1,0 +1,8 @@
+{
+    "name": "hoa/phptour14",
+    "require": {
+        "atoum/atoum": "dev-extension",
+        "atoum/praspel-extension": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
