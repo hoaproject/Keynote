@@ -483,7 +483,7 @@
       <li>la <strong>générabilité</strong> permet de générer une valeur décrite
           par le domaine réaliste</li>
     </ul>
-    <p class="break">Très important !</p>
+    <p class="break"><strong>Très important !</strong></p>
   </div>
 </section>
 
@@ -757,16 +757,19 @@
   <div class="incremental incremental-overlay">
     <p onincrement="Hoa.$('#overview').hoa.highlightLines('4')">
        <code>@invariant</code> exprime un invariant</p>
-    <p onincrement="Hoa.$('#overview').hoa.highlightLines('9,12,14,20')">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('14-16')"></p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('14')">
        <code>@requires</code> exprime une précondition</p>
-    <p onincrement="Hoa.$('#overview').hoa.highlightLines('15,25')">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('15')">
        <code>@ensures</code> exprime une postcondition normale</p>
-    <p onincrement="Hoa.$('#overview').hoa.highlightLines('16,26')">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('16')">
        <code>@throwable</code> exprime une postcondition exceptionnelle ;
        de la forme <code>T_C with T_E</code></p>
-    <p onincrement="Hoa.$('#overview').hoa.highlightLines('10,19')">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('13-17')">
        <code>@behavior</code> exprime un comportement</p>
-    <p onincrement="Hoa.$('#overview').hoa.highlightLines('23')">
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('10-18')">
+       Les <code>@behavior</code> peuvent s'imbriquer</p>
+    <p onincrement="Hoa.$('#overview').hoa.highlightLines('23-27')">
        <code>@default</code> exprime un comportement par défaut, avec une clause
        <code>@requires</code> implicite</p>
     <p onincrement="Hoa.$('#overview').hoa.highlightLines('11,24')">
@@ -956,38 +959,38 @@ a4: array([from 0..10 or 20..30 to boolean() or float()], 7)</code></pre>
     <div>
       <pre><code>@requires i: integer() or void and
           j: float() or boolean() and
-          \pred('a predicate');</code></pre>
+          \pred('is_foo() && is_bar()');</code></pre>
     </div>
     <div>
       <pre><code>@requires <mark>i: integer() or void</mark> and
           j: float() or boolean() and
-          \pred('a predicate');</code></pre>
+          \pred('is_foo() && is_bar()');</code></pre>
       <p>Sélection de la variable <code>i</code></p>
     </div>
     <div>
       <pre><code>@requires i: <mark>integer()</mark> or void and
           j: float() or boolean() and
-          \pred('a predicate');</code></pre>
+          \pred('is_foo() && is_bar()');</code></pre>
       <p>Choix du domaine réaliste <code>integer</code> ; <code>i =
          42</code></p>
     </div>
     <div>
       <pre><code>@requires i: integer() or void and
           <mark>j: float() or boolean()</mark> and
-          \pred('a predicate');</code></pre>
+          \pred('is_foo() && is_bar()');</code></pre>
       <p>Sélection de la variable <code>j</code></p>
     </div>
     <div>
       <pre><code>@requires i: integer() or void and
           j: float() or <mark>boolean()</mark> and
-          \pred('a predicate');</code></pre>
+          \pred('is_foo() && is_bar()');</code></pre>
       <p>Choix du domaine réaliste <code>boolean</code> ; <code>j =
          true</code></p>
     </div>
     <div>
       <pre><code>@requires i: integer() or void and
           j: float() or boolean() and
-          <mark>\pred('a predicate')</mark>;</code></pre>
+          <mark>\pred('is_foo() && is_bar()')</mark>;</code></pre>
       <p>Évaluation du prédicat</p>
     </div>
   </div>
@@ -1128,7 +1131,7 @@ count($a) === count(array_unique($a, SORT_REGULAR))</code></pre>
 </section>
 
 <section>
-  <h1>Sémantique ensemblistes</h1>
+  <h1>Sémantique ensembliste</h1>
 
   <p class="break">Un <em lang="en">Constraint Satisfaction Problem</em> et
      un triplet
@@ -1302,7 +1305,7 @@ a is unique</code></pre>
   <p>Avec les tableaux, le type le plus utilisé</p>
   <p>Représente des données vastes et <strong>complexes</strong> :</p>
   <ul>
-    <li>base de données (requêtes SQL…)</li>
+    <li>bases de données (requêtes SQL…)</li>
     <li>protocoles de communication (HTTP, WebSocket…)</li>
     <li>descriptions d'objets ou de documents (XML, JSON…)</li>
     <li>etc.</li>
@@ -1443,9 +1446,20 @@ string:
   });
   </script>
   <div class="incremental incremental-overlay">
-    <div>
-      <p>Analyseur lexical (<em lang="en">lexer</em>) :</p>
-      <pre style="height: 280px"><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --token-sequence
+    <div onincrement="Hoa.$$('#parsers > svg > g')[0].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[1].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[2].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[3].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[4].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[5].classList.remove('downlight')"></div>
+    <div onincrement="Hoa.$$('#parsers > svg > g')[0].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[1].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[2].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[3].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[4].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[5].classList.add('downlight')">
+    <p>Analyseur lexical (<em lang="en">lexer</em>) :</p>
+    <pre style="height: 280px"><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --token-sequence
   #  namespace     token name            token value           offset
 ----------------------------------------------------------------------
   0  default       bracket_              [                          0
@@ -1467,7 +1481,12 @@ string:
  16  default       _bracket              ]                         21
  17  default       EOF                                             23</code></pre>
     </div>
-    <div>
+    <div onincrement="Hoa.$$('#parsers > svg > g')[0].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[1].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[2].classList.remove('downlight');
+                      Hoa.$$('#parsers > svg > g')[3].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[4].classList.add('downlight');
+                      Hoa.$$('#parsers > svg > g')[5].classList.remove('downlight')">
       <p>Analyseur syntaxique (<em lang="en">parser</em>) :</p>
       <pre><code class="language-shell">$ echo '[1, [1, [2, 3], 5], 8]' | hoa compiler:pp Json.pp 0 --visitor dump
 >  #array
@@ -1806,9 +1825,9 @@ null
 
   <p class="👍">Les plus :</p>
   <ul>
-    <li>simple, moderne et intuitif</li>
     <li><em lang="en">framework</em> de tests de plus en plus utilisé dans
         l'industrie</li>
+    <li>simple, moderne et intuitif</li>
     <li>gratuit et <em lang="en">open-source</em></li>
     <li>intégré ou inclu dans plusieurs IDE et outils majeurs
         <small>(<a href="https://netbeans.org/">Netbeans</a>,
