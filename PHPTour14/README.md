@@ -26,3 +26,7 @@ d'ores et déjà été publiés.
 ## Quick usage
 
 Just open the `PHPTour14.html` file.
+
+## Recording
+
+The [recording is available](http://youtu.be/PYcQmK_A_rw).
