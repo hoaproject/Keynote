@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hoa Apex'14, what a year!</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="http://static.hoa-project.net/Css/Leaflet.css" rel="stylesheet" />
+</head>
+<body>
+
+<script src="http://static.hoa-project.net/Javascript/Hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Leaflet.js"></script>
+
+<section>
+  <h1>Hoa Apex'14, what a year!</h1>
+
+  <div class="tcenter">
+    <img src="http://static.hoa-project.net/Image/Hoa.png"
+         alt="Logo of Hoa"
+         width="300px"
+         class="center" />
+    <p class="break"><small><time datetime="2014-08-16">16<sup>th</sup> August 2014</time></small></p>
+  </div>
+
+  <details>Ivan</details>
+</section>
+
+<section>
+  <h1>Who am I?</h1>
+
+  <p>Ivan Enderlin:</p>
+  <ul>
+    <li>PhD in Computer Science</li>
+    <li>leader and developer of Hoa</li>
+    <li>contributor of several open-source projects</li>
+    <li><a href="https://twitter.com/hoaproject">@hoaproject</a></li>
+    <li>Hywan on <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+  </ul>
+
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin<sup>•</sup> or hywan<sup> ••</sup>@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net<sup>•,••</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>inria.fr<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>php.net<sup>••</sup></mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
+</section>
+
+<section>
+  <h1>Who are you?</h1>
+
+  <p><em>(oral self-presentations)</em></p>
+  <ul>
+    <li data-item=" ">users</li>
+    <li data-item="+">contributors</li>
+    <li data-item="+">companies</li>
+    <li data-item="+">sponsors</li>
+    <li data-item="+">geeks/nerds</li>
+    <li data-item="+">…</li>
+    <li data-item="=">Hoa's community!</li>
+  </ul>
+
+  <p class="tcenter break"><strong>Welcome!</strong></p>
+</section>
+
+<section>
+  <h1>Where are we?</h1>
+
+  <div id="where_are_we" style="height: 300px; background: transparent"></div>
+  <script>
+    var map = L.map('where_are_we').setView([43.281374566478, 5.356245875504], 3);
+
+    L.tileLayer('http://static.hoa-project.net/Map/Tiles/{z}/{x}/{y}.png', {
+      minZoom: 1,
+      maxZoom: 7
+    }).addTo(map);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      minZoom: 7
+    }).addTo(map);
+
+    var icon = L.icon({
+        iconUrl: 'http://static.hoa-project.net/Map/Marker.svg',
+        iconSize: [28, 45],
+        iconAnchor: [14, 44],
+        popupAnchor: [2, -45]
+    });
+
+    L.marker([43.281374566478, 5.356245875504], {icon: icon})
+     .bindPopup('<a href="http://verylastroom.com/">VeryLastRoom</a>')
+     .addTo(map);
+  </script>
+  <p class="tcenter break">
+    <a href="http://verylastroom.com/">VeryLastRoom</a> home,
+    our main sponsor!
+  </p>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>What happened since Hoa Apex'13?
+      <ul>
+        <li>Community</li>
+        <li>Source code</li>
+        <li>Official contributions</li>
+        <li>Sponsors</li>
+        <li>Sites et documentations</li>
+        <li>Events</li>
+        <li>Foundation</li>
+        <li>Bilan</li>
+      </ul>
+    </li>
+    <li>Let's go for the next jump!</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>What happened since Hoa Apex'13?</h1>
+</section>
+
+<section>
+  <div style="position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              opacity: .09;
+              pointer-events: none;">
+    <iframe id="community"
+            src=""
+            style="width: 800px;
+                   height: 600px"></iframe>
+  </div>
+  <div style="position: absolute">
+    <h1>Community</h1>
+
+    <div class="incremental incremental-overlay">
+      <div>
+        <p>Contributors in 2013:</p>
+        <ul>
+          <li>19 hackers</li>
+          <li>including 10 <em>hoackers</em></li>
+        </ul>
+        <p class="break">Contributors in 2014:</p>
+        <div class="incremental">
+          <ul>
+            <li><strong>38 hackers</strong> (<span class="👍">+19</span>, <span class="👍">×2</span>)!</li>
+            <li>including <strong>14 hoackers</strong> (<span class="👍">+4</span>)!</li>
+          </ul>
+        </div>
+      </div>
+      <div style="-moz-columns: 2">
+        <p>Welcome to:</p>
+        <small>
+          <ul>
+            <li>Julien Bianchi (jubianchi)</li>
+            <li>Benjamin Delespierre (bdelespierre)</li>
+            <li>Endel Dreyer (endel)</li>
+            <li>Cédric Dugat (ph3nol)</li>
+            <li>Guislain Duthieuw (guiled)</li>
+            <li>Julien Espérat (savageman)</li>
+            <li>Aymeric Gerlier (skan)</li>
+            <li>Alexis von Glasow (avonglasow)</li>
+            <li>Kevin Gravier (mrmkg)</li>
+            <li>Nicolas Grekas (nicolas-grekas)</li>
+            <li>Sarah Haïm-Lubczanski (mere-teresa)</li>
+            <li>Matthieu de Laubrie (Metalaka)</li>
+            <li>Baptiste Leduc (Korbeil)</li>
+            <li>Renaud Littolff (marmotz)</li>
+            <li>Matthieu Napoli (mnapoli)</li>
+            <li>Cosmin Nitu (ncosmin2001)</li>
+            <li>Grégoire Pineau (lyrixx)</li>
+            <li>Mathias Strasser (mathiasstrasser)</li>
+            <li>flip101</li>
+          </ul>
+        </small>
+      </div>
+
+      <div>
+        <p>On Github:</p>
+        <ul>
+          <li><strong>463 watchers/stargazers</strong></li>
+          <li>238 forks</li>
+          <li>Most famous ones (in term of watchers):
+            <ul>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Console"><code>Hoa\Console</code></a>:
+                  106 watchers, 13 forks</li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Ruler"><code>Hoa\Ruler</code></a>:
+                  90 watchers, 7 forks</li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Websocket"><code>Hoa\Websocket</code></a>:
+                  42 watchers, 9 forks</li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Eventsource"><code>Hoa\Eventsource</code></a>:
+                  35 watchers, 7 forks</li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a>:
+                  21 watchers, 10 forks</li>
+            </ul>
+          </li>
+        </ul>
+        <p class="break">On Twitter: <strong>≈ 542 followers</strong> (<span class="👍">+160</span>)</p>
+      </div>
+
+      <div>
+        <p>On Composer/Packagist:</p>
+        <ul class="incremental">
+          <li>9 500 downloads in March 2013</li>
+          <li><strong>more than 140 000 downloads!</strong></li>
+          <li>most famous ones:
+            <ul class="-moz-columns: 2">
+              <li><a href="http://central.hoa-project.net/Resource/Library/Core"><code>Hoa\Core</code></a></li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Stream"><code>Hoa\Stream</code></a></li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/File"><code>Hoa\File</code></a></li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Iterator"><code>Hoa\Iterator</code></a></li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Compiler"><code>Hoa\Compiler</code></a></li>
+              <li><a href="http://central.hoa-project.net/Resource/Library/Math"><code>Hoa\Math</code></a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p>On IRC:</p>
+        <ul>
+          <li>record was 24 connections</li>
+          <li><strong>21 connections</strong> on average (<span class="👍">×2</span>)</li>
+        </ul>
+
+        <p class="break">“Community at large” (Github + Twitter):
+        <strong>more than 860 persons</strong></p>
+
+        <p class="break">New “big users”:</p>
+        <ul>
+          <li><a href="http://gouvernement.wallonie.be/">Service Public de Wallonie</a>:
+              governmental service of Belgium</li>
+          <li><a href="http://atipik.fr/">Atipik</a>:
+          web agency</li>
+          <li><a href="http://www.phpmetrics.org/">PhpMetrics</a>:
+              static analysis tool for PHP</li>
+          <li><a href="https://github.com/FriendsOfPHP/pickle/">pickle</a>:
+              the PHP extension installer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Source code</h1>
+
+  <p>Number of (from <code>Central</code>):</p>
+  <ul>
+    <li>libraries: 49 (<span class="👍">+0</span>)</li>
+    <li>files: 736 (<span class="👍">+42</span>)</li>
+    <li>line of codes: more than 132 660 (<span class="👍">+29 560</span>)</li>
+    <li>commits: more than 8 320 (<span class="👍">+6 270</span>)</li>
+  </ul>
+
+  <p>Extended repository of repositories:</p>
+  <ul>
+    <li><code>Hoathis/<em>*</em></code>: official
+        <code>Hoathis\<em>*</em></code></li>
+    <li><code>Contributions/<em>Vendor</em>/<em>*</em></code>: official
+        contributions</li>
+  </ul>
+  <p>How do we ensure the quality? (See the next keynote)</p>
+  <p><small>Tips: <a href="http://central.hoa-project.net/Resource/Library/Core"
+                          >http://central.hoa-project.net/Resource/Library/Core</a></small></p>
+</section>
+
+<section>
+  <h1>Official contributions</h1>
+
+  <p><a href="http://atoum.org/">atoum</a></p>
+  <ul>
+    <li><a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>Atoum\PraspelExtension</code></a>:
+        include Praspel inside atoum</li>
+  </ul>
+  <p class="break"><a href="http://symfony.com/">Symfony</a>:</p>
+  <ul>
+    <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBridge"><code>Hoathis\SymfonyConsoleBridge</code></a>:
+        <code>Hoa\Console</code> to Symfony bundle bridge</li>
+    <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBundle"><code>Hoathis\SymfonyConsoleBundle</code></a>:
+        Symfony bundle including <code>Hoa\Console</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Sponsors</h1>
+  <style scoped>
+    img {
+        margin-bottom: 2em;
+    }
+  </style>
+
+  <div class="incremental incremental-overlay tcenter">
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/Verylastroom.png" /><br />
+      Offers new servers (migration done in December)<br />
+      Offers a vast support (mainly financial)
+    </p>
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/Pikacode.png" /><br />
+      Offers new mirrors for all repositories
+    </p>
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/PHPStorm.png" /><br />
+      Offers a free license of PHPStorm to each contributor
+    </p>
+  </div>
+</section>
+
+<section>
+  <h1>Sites et documentations</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Documentations:</p>
+      <ul>
+        <li>learn manual: 9 chapters (<span class="👍">+0</span>)</li>
+        <li>hack book: 15 chapters (<span class="👍">+5</span>)</li>
+        <li>awecodes: 3 (<span class="👍">+3</span>, too few…)
+          <ul>
+            <li>20 views per day on average</li>
+            <li><strong>more than 2350 views</strong></li>
+          </ul>
+        </li>
+      </ul>
+      <p class="break">Everything has been <strong>translated into
+      English</strong> <small>(partly)</small>, including awecodes (with
+      subtitles)</p>
+    </div>
+    <div>
+      <p class="tcenter">
+        <img src="Image/Visits_before.png" /><br />
+        Before translation
+      </p>
+    </div>
+    <div>
+      <p class="tcenter">
+        <img src="Image/Visits_after.png" /><br />
+        After translation
+      </p>
+    </div>
+    <div>
+      <ul>
+        <li><strong>more than 8 500 visits</strong> since January 2014</li>
+        <li>USA 37%, France 32%, others 31% (<span class="👍">60% from outside
+        France</span>)</li>
+        <li>more than 96 countries</li>
+        <li>promotions of every “events” on the
+            <a href="http://blog.hoa-project.net/">blog</a>,
+            <a href="http://reddit.com/r/php">Reddit</a>,
+            <a href="http://news.humancoders.com/t/php">HumanCoders</a> and
+            <a href="https://news.ycombinator.com/">Hacker News</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Events</h1>
+
+  <ul>
+    <li>Hoa Apex'14, second edition</li>
+    <li><cite lang="fr">Praspel, un langage de spécification par
+        contrats</cite>, presented at the
+        <a href="http://afup.org/pages/phptourlyon2014/">PHPTour 2014</a> (Lyon,
+        France),
+        <a href="http://keynote.hoa-project.net/PHPTour14/PHPTour14.html">presentation</a>
+        and
+        <a href="http://hoa-project.net/Event/Phptour14.html">details</a></li>
+    <li><cite lang="fr">Hoa, un ensemble de bibliothèques PHP</cite>,
+        presented at the <a href="http://lyon.afup.org/">AFUP Lyon 2013</a>
+        (Lyon, France),
+        <a href="http://keynote.hoa-project.net/AFUPLyon13/AFUPLyon13.html">presentation</a>
+        and
+        <a href="http://hoa-project.net/Event/Afuplyon13.html">details</a></li>
+
+    <li>A course on atoum and Praspel has been given at the <em lang="fr">JDév'
+        Journées nationales du Développement Logiciel</em> (Paris, France),
+        <a href="http://hoa-project.net/Event/Jdev13.html">details</a></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Foundation</h1>
+
+  <p><strong>Hoa Project is a non-profit foundation</strong> (french loi 1901).
+  It aims to support the Hoa project by <strong>developing</strong>,
+  <strong>deploying</strong> and <strong>promoting</strong> the free softwares
+  from Hoa Project, its derivatives and associated projects.</p>
+  <p class="break"><a href="http://hoa-project.net/Fr/Foundation/Statutes.html">The
+  statutes</a></p>
+  <p class="break"><small>(it took time but…)</small> Subscriptions will open in
+  few weeks!</p>
+</section>
+
+<section>
+  <h1>Bilan</h1>
+
+  <ol>
+    <li>translated into English</li>
+    <li>world-wide visibility and promotion</li>
+    <li>bigger community: more contributors, more users…</li>
+    <li>better documentation</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>Let's go for the next jump!</h1>
+</section>
+
+<section>
+  <h1>Opened issues</h1>
+
+  <p>Documentation :</p>
+  <ul>
+    <li>redaction</li>
+    <li><strong>translation</strong></li>
+  </ul>
+  <p class="break">Code:</p>
+  <ul>
+    <li>migrate tests</li>
+    <li>more tests</li>
+    <li><strong>drop PHP5.3</strong></li>
+    <li>remove <code>from</code>/<code>import</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Communication</h1>
+
+  <p>(Matthieu takes the microphone)</p>
+  <ul>
+    <li>what is Hoa for you?</li>
+    <li>what it was at the beginning?</li>
+    <li>what it will be?</li>
+  </ul>
+  <p>(results is coming)</p>
+</section>
+
+<section class="chapter">
+  <h1>Thanks! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
+</section>
+
+<div id="progress-bar"></div>
+
+<script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+
+<script>
+  Hoa.Document.onReady(function ( ) {
+
+      Hoa.$('#community').src = 'Community_at_large.html';
+  });
+</script>
+
+</body>
+</html>

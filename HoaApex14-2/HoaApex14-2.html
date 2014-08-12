@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hoa Apex'14, how do we ensure code quality?</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="http://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="http://static.hoa-project.net/Css/Leaflet.css" rel="stylesheet" />
+
+  <style>
+    .avatar {
+        border-radius: 12px;
+    }
+
+    .draw line {
+        stroke: #000;
+        stroke-width: 2;
+    }
+
+    .draw circle {
+        fill: #000;
+        stroke-width: 0;
+
+    }
+
+    .draw rect,
+    .draw path {
+        fill: none;
+        stroke: #000;
+        stroke-width: 1;
+        stroke-linejoin: round;
+    }
+
+    .draw .arrow {
+        fill: #000;
+    }
+
+    .draw rect {
+        stroke-linecap: round;
+    }
+
+    text,
+    .middle📌 {
+        text-anchor: middle;
+        dominant-baseline: middle;
+    }
+
+      text.strong {
+          fill: #de8300;
+      }
+
+    .north📌 {
+        text-anchor: middle;
+        dominant-baseline: central;
+        transform: translate(0, 1em);
+    }
+
+    .north-east📌 {
+        text-anchor: end;
+        dominant-baseline: central;
+        transform: translate(-.5em, 1em);
+    }
+
+    .east📌 {
+        text-anchor: end;
+        dominant-baseline: central;
+        transform: translate(-.5em, 0);
+    }
+
+    .south-east📌 {
+        text-anchor: end;
+        dominant-baseline: auto;
+        transform: translate(-.5em, -.5em);
+    }
+
+    .south📌 {
+        text-anchor: middle;
+        dominant-baseline: auto;
+        transform: translate(0, -.5em);
+    }
+
+    .south-west📌 {
+        text-anchor: start;
+        dominant-baseline: auto;
+        transform: translate(.5em, -.5em);
+    }
+
+    .west📌 {
+        text-anchor: start;
+        dominant-baseline: central;
+        transform: translate(.5em, 0);
+    }
+
+    .north-west📌 {
+        text-anchor: start;
+        dominant-baseline: central;
+        transform: translate(.5em, 1em);
+    }
+
+    .draw .code-like {
+        font-family: Pre;
+        font-size: 12pt;
+    }
+  </style>
+</head>
+<body>
+
+<script src="http://static.hoa-project.net/Javascript/Hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Leaflet.js"></script>
+
+<svg width="0" height="0">
+  <defs>
+      <marker id="arrowHead"
+              viewBox="0 0 10 10" 
+              refX="1" refY="5"
+              markerWidth="6" 
+              markerHeight="6"
+              orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" class="arrow" />
+      </marker>
+  </defs>
+</svg>
+
+<section>
+  <h1>Hoa Apex'14, how do we ensure code quality?</h1>
+
+  <div class="tcenter">
+    <img src="http://static.hoa-project.net/Image/Hoa.png"
+         alt="Logo of Hoa"
+         width="300px"
+         class="center" />
+    <p class="break"><small><time datetime="2014-08-16">16<sup>th</sup> August 2014</time></small></p>
+  </div>
+
+  <details>Ivan</details>
+</section>
+
+<section>
+  <h1>Who am I?</h1>
+
+  <p>Ivan Enderlin:</p>
+  <ul>
+    <li>PhD in Computer Science \o/</li>
+    <li>leader and developer of Hoa</li>
+    <li>contributor of several open-source projects</li>
+    <li><a href="https://twitter.com/hoaproject">@hoaproject</a></li>
+    <li>Hywan on <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+  </ul>
+
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin<sup>•</sup> or hywan<sup> ••</sup>@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net<sup>•,••</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>inria.fr<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>php.net<sup>••</sup></mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
+</section>
+
+<section>
+  <h1>Code matters</h1>
+
+  <p>Anything we do inside Hoa is <strong>coding</strong></p>
+  <p class="break">We <strong>have to ensure</strong> code quality because:</p>
+  <ul>
+    <li>we care about our users</li>
+    <li>to continue to promote excellence <small>(e.g. standards)</small></li>
+    <li>it helps to get a stunning future</li>
+    <li>it is more comfortable for us</li>
+  </ul>
+  <p class="break">How to ensure <strong>Quality Automation</strong> (QA)?</p>
+</section>
+
+<section>
+  <h1><em>The (In)glourious Basterds</em></h1>
+
+  <div class="tcenter" style="margin-top: 100px">
+    <style scoped>
+      img { width: 80px }
+      img + img, img + div { margin-left: 1.5em; }
+    </style>
+    <img src="http://static.hoa-project.net/Image/Logo/Git.png" />
+    <img src="https://avatars0.githubusercontent.com/u/4126670?v=2&s=400"
+         class="avatar" />
+    <img src="https://camo.githubusercontent.com/d764a5c6c75684b705a5e4101d97cee9d10a6cae/687474703a2f2f687977616e2e6769746875622e696f2f4d6172766972632f5374617469632f4c6f676f2e706e67" />
+    <img src="http://downloads.atoum.org/images/logo.png" />
+    <div style="display: inline-block; opacity: 1; border: 5px #999 dashed; border-radius: 12px">
+      <img src="https://avatars1.githubusercontent.com/u/8411298?v=2&s=400"
+           style="opacity: 0" />
+    </div>
+  </div>
+  <ol class="break incremental">
+    <li>Git and Bhoat maintain the <strong>source code</strong></li>
+    <li>Marvirc helps us to <strong>be notified</strong></li>
+    <li>atoum and Praspel for the <strong>tests</strong></li>
+    <li><em>the mystery guest</em> for the obvious next step</li>
+  </ol>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>Repositories</li>
+    <li>Bhoat</li>
+    <li>Marvirc</li>
+    <li>Praspel and atoum</li>
+    <li><em>mystery guest</em></li>
+    <li>Rolling-Release</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>Repositories</h1>
+
+  <div class="tcenter">
+    <img src="http://static.hoa-project.net/Image/Logo/Git.png" />
+  </div>
+</section>
+
+<section>
+  <h1>Version control</h1>
+
+  <p><a href="http://git-scm.com/">Git</a> is a Distributed Version Control
+     System</p>
+  <p class="break">List of repositories at
+     <a href="http://git.hoa-project.net/">git.hoa-project.net</a>, based on
+     <a href="http://git.zx2c4.com/cgit/">cgit</a>:</p>
+  <ul>
+    <li><code>Library/<em>*</em></code>, Hoa's libraries</li>
+    <li><code>Hoathis/<em>*</em></code>, official Hoathis</li>
+    <li><code>Contributions/<em>Vendor</em>/<em>*</em></code>, official
+        contributions</li>
+    <li>more than 60 repositories</li>
+  </ul>
+  <p class="break">So far, we mainly care about
+     <code>Library/<em>*</em></code></p>
+</section>
+
+<section>
+  <h1>Permissions</h1>
+
+  <p>General rules:</p>
+  <ul>
+    <li>everyone can <strong>read</strong> through <strong>HTTP</strong></li>
+    <pre><code class="language-shell">$ git clone http://git.hoa-project.net/Library/Core.git</code></pre>
+    <li>commiters can <strong>read and write</strong> through
+        <strong>SSH</strong></li>
+    <pre><code class="language-shell">$ git remote --verbose
+origin git@git.hoa-project.net:Library/Core (fetch)
+origin git@git.hoa-project.net:Library/Core (push)
+$ git push …</code></pre>
+  </ul>
+  <p class="break"><strong>Election</strong> of commiters is based on their
+     importance in a project</p>
+</section>
+
+<section class="chapter">
+  <h1>Bhoat</h1>
+
+  <div class="tcenter">
+    <img src="https://avatars0.githubusercontent.com/u/4126670?v=2&s=400"
+         width="150px" class="avatar" />
+  </div>
+</section>
+
+<section>
+  <h1>Synchronizations</h1>
+
+  <p><strong>Bhoat</strong> is the bot that <strong>maintains all the
+     repositories</strong>:</p>
+  <ul>
+    <li>synchronizes <code>Central</code> with
+        <code>Library/<em>*</em></code></li>
+    <li>synchronizes all read-only mirrors
+        (<a href="https://github.com/hoaproject/">Github</a> and
+         <a href="https://pikacode.com/hoaproject/">Pikacode</a>)</li>
+    <li>produces up-to-date archives</li>
+    <li>produces data (e.g. statistics)</li>
+    <li>fires notifications</li>
+  </ul>
+  <p class="break">All in realtime!</p>
+</section>
+
+<section>
+  <h1>Inside Bhoat</h1>
+
+  <p>Bhoat is a <strong>set of commands</strong> integrated in
+     <a href="http://gitolite.com/">Gitolite</a>:</p>
+  <ul>
+    <li>not open-sourced for <strong>security</strong> reasons</li>
+    <li>written in Shell and PHP</li>
+    <li>configures every repository with a <strong>high precision</strong></li>
+    <li>can be run <strong>manually</strong> (commands) or
+        <strong>automatically</strong> (hooks)</li>
+  </ul>
+  <pre><code class="language-shell">$ cat Gitolite/local/hooks/repo-specific/post-receive-library
+…
+gitolite bhoat/library-into-central "$libraryName"
+gitolite bhoat/mirror "$GL_REPO"
+gitolite bhoat/archive "$GL_REPO" "$GL_REPO/$libraryName" "/Hoa/$libraryName/"
+gitolite bhoat/irc "Library Hoa\\$libraryName has been updated"'!'</code></pre>
+</section>
+
+<section>
+  <h1>No more hands</h1>
+
+  <p>Repositories are no longer managed by-hands, <strong>everything</strong> is
+     done by Bhoat</p>
+  <div class="tcenter">
+    <img src="Image/Bhoat_in_action.png" width="650px" />
+  </div>
+</section>
+
+<section class="chapter">
+  <h1>Marvirc</h1>
+
+  <div class="tcenter">
+    <img src="https://camo.githubusercontent.com/d764a5c6c75684b705a5e4101d97cee9d10a6cae/687474703a2f2f687977616e2e6769746875622e696f2f4d6172766972632f5374617469632f4c6f676f2e706e67" />
+  </div>
+</section>
+
+<section>
+  <h1><em>The depressive bot</em></h1>
+
+  <p><a href="https://github.com/hoaproject/Marvirc">Marvirc</a>
+     is a dead <strong>simple</strong>, extremely <strong>modular</strong> and
+     blazing <strong>fast</strong> IRC bot (yup, that's it)</p>
+  <ul>
+    <li>prints notifications on IRC (mainly from Bhoat)</li>
+    <li>helps to locate source codes</li>
+    <li>helps to locate documentations</li>
+    <li>helps to monitor the server</li>
+    <li>is very polite</li>
+  </ul>
+  <pre><code class="language-shell">$ marvirc join --socket    chat.freenode.org:6667 \
+               --username  FakeMarvirc            \
+               --channel   '#hoaproject'          \
+               --websocket 127.0.0.1:8889 &amp;
+$ echo 'You are awesome :-).' | hoa websocket:client --server 127.0.0.1:8889</code></pre>
+</section>
+
+<section>
+  <h1>100% Hoa</h1>
+
+  <ul>
+    <li data-item=" "><a href="http://central.hoa-project.net/Resource/Library/Console"><code>Hoa\Console</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Dispatcher"><code>Hoa\Dispatcher</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/File"><code>Hoa\File</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Http"><code>Hoa\Http</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Irc"><code>Hoa\Irc</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Router"><code>Hoa\Router</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Socket"><code>Hoa\Socket</code></a></li>
+    <li data-item="+"><a href="http://central.hoa-project.net/Resource/Library/Websocket"><code>Hoa\Websocket</code></a></li>
+    <li data-item="+">dependencies</li>
+    <li data-item="=">Marvirc \o/</li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <h1>Praspel and atoum</h1>
+
+  <div class="tcenter">
+    <img src="http://downloads.atoum.org/images/logo.png"
+         width="150px" />
+  </div>
+</section>
+
+<section>
+  <h1>Cartography of test</h1>
+
+  <div class="schema">
+    <svg width="700" height="400" viewBox="60 0 780 480" class="draw">
+
+      <g>
+        <line x1="375" y1="250" x2="375" y2="50"
+              marker-end="url(#arrowHead)" />
+
+        <text x="375" y="50" class="south-east📌">Size of the system</text>
+
+        <circle cx="375" cy="210" r="3" />
+        <circle cx="375" cy="170" r="3" />
+        <circle cx="375" cy="130" r="3" />
+        <circle cx="375" cy="90"  r="3" />
+
+        <text x="375" y="210" class="east📌 strong">unit</text>
+        <text x="375" y="170" class="east📌 strong">component</text>
+        <text x="375" y="130" class="east📌 strong">integration</text>
+        <text x="375" y="90"  class="east📌">system</text>
+      </g>
+
+      <g>
+        <line x1="375" y1="250" x2="650" y2="250"
+              marker-end="url(#arrowHead)" />
+
+        <text x="650" y="250" class="north-west📌">Conception</text>
+        <text x="650" y="265" class="north-west📌">support</text>
+
+        <circle cx="465" cy="250" r="3" />
+        <circle cx="565" cy="250" r="3" />
+
+        <text x="465" y="235" class="south📌 strong">black</text>
+        <text x="465" y="250" class="south📌 strong">box</text>
+        <text x="565" y="235" class="south📌 strong">white</text>
+        <text x="565" y="250" class="south📌 strong">box</text>
+      </g>
+
+      <g transform="rotate(45 375 250)">
+        <line x1="375" y1="250" x2="375" y2="450"
+              marker-end="url(#arrowHead)" />
+
+        <text x="375" y="450" class="north-west📌">Type of test</text>
+
+        <circle cx="375" cy="290" r="3" />
+        <circle cx="375" cy="330" r="3" />
+        <circle cx="375" cy="370" r="3" />
+        <circle cx="375" cy="410" r="3" />
+
+        <text x="375" y="290" class="west📌 strong">functional</text>
+        <text x="375" y="330" class="west📌 strong">robustness</text>
+        <text x="375" y="370" class="west📌 strong">performance</text>
+        <text x="375" y="410" class="west📌">usability</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <h1>Where are they?</h1>
+
+  <p>In a library:</p>
+  <ul>
+    <li><code>Test/</code>
+      <ul>
+        <li><code>Unit/</code>, manual unit tests</li>
+        <li><code>Integration/</code>, manual integration tests</li>
+        <li><code>Praspel/</code>
+          <ul>
+            <li><code>Unit/</code>, automatically generated unit tests</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><code>README.md</code></li>
+    <li>etc.</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Praspel + atoum = ♥︎</h1>
+
+  <p><a href="http://atoum.org/">atoum</a> is a <strong>simple</strong>,
+     <strong>modern</strong> and <strong>intuitive</strong> unit testing
+     framework for PHP!</p>
+  <p><a href="https://en.wikipedia.org/wiki/Praspel">Praspel</a> is a
+     <strong>specification</strong> language based on
+     <strong>contracts</strong></p>
+  <p class="break">The
+     <a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>atoum/praspel-extension</code></a>
+     introduces Praspel inside atoum:</p>
+  <ul>
+    <li>all the data generators (for booleans, integers, floats, arrays, strings
+        and objects)</li>
+    <li>all the realistic domains (see
+        <a href="http://central.hoa-project.net/Resource/Library/Realdom"><code>Hoa\Realdom</code></a>)</li>
+    <li>tools to automatically generate unit test suites based on contracts
+        written in Praspel</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Like a phoenix</h1>
+
+  <p class="break"><a href="http://central.hoa-project.net/Resource/Library/Test"><code>Hoa\Test</code></a>:</p>
+  <ul>
+    <li>dead in 2<sup>nd</sup> July 2013, re-borned the
+        20<sup>th</sup> May 2014</li>
+    <li>provides <strong>execution</strong> and <strong>management</strong>
+       (generation and removal) of test suites for libraries, namespaces,
+       directories or files</li>
+    <li>is based on <code>atoum/praspel-extension</code> API (which is based on
+        Hoa)</li>
+    <li>background execution is provided by atoum</li>
+  </ul>
+  <pre><code class="language-shell">$ hoa test:generate --classes Hoa.Math.Util
+$ hoa test:run --namespaces Hoa.Math</code></pre>
+</section>
+
+<section>
+  <h1>State of test migration</h1>
+
+  <p>Concretely started few weeks ago</p>
+  <p class="break">We must focus on the <strong>most popular libraries</strong>
+     at first</p>
+  <p class="break">Existing tests are mostly <strong>integration</strong> ones,
+     <strong>easy to migrate</strong></p>
+  <p>Writing contracts are more difficult and automatic generation needs
+     maturation, so it implies patching <code>Hoa\Praspel</code> often (which is
+     <span class="👍">good</span>)</p>
+  <p class="break">Before going further in the migration, we need another
+     tool…</p>
+</section>
+
+<section class="chapter">
+  <h1>Le Comte Intatto</h1>
+
+  <div class="tcenter">
+    <img src="https://avatars1.githubusercontent.com/u/8411298?v=2&s=400"
+         width="150px" />
+  </div>
+</section>
+
+<section>
+  <h1>Hello Gentlemen</h1>
+
+  <p>C.I. stands for Continuous Integration and Comte Intatto:</p>
+  <ul>
+    <li><em lang="fr">Comte</em> is a french word for Count</li>
+    <li><em lang="it">Intatto</em> is an italian word, from the latin word
+        <em lang="it">Intactus</em>: <em>In</em> for <em>No</em> and
+        <em>Tactus</em> for <em>Touch</em></li>
+  </ul>
+  <p class="break">Le Comte Intatto ensures the <strong>integrity</strong> of
+     the source code:</p>
+  <ul>
+    <li><strong>no regression</strong>, i.e. new patches do not introduce a
+        bug</li>
+    <li><strong>find bugs</strong> by executing tests very often on <strong>all
+        platforms</strong>, whatever where they are (<strong>local</strong> or
+        <strong>remote</strong>)</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Under the hood</h1>
+
+  <p><strong>100% Hoa</strong>, highly based on
+     <a href="http://php.net/fpm">FPM</a> (Fast Process Manager, a FastCGI
+     frontend of PHP)</p>
+  <p class="break">Le Comte Intatto is composed of 2 parts:</p>
+  <ol>
+    <li><strong>a primary</strong>, the front-end, responsible to receive jobs
+        and dispatch them</li>
+    <li><strong>standbys</strong>, responsible to execute jobs
+        appropriately</li>
+  </ol>
+  <p class="break">The primary is located on
+     <a href="http://ci.hoa-project.net/">ci.hoa-project.net</a></p>
+  <p>The standbys are located <strong>anywhere</strong>, for example inside
+     <strong>virtual machines</strong></p>
+</section>
+
+<section>
+  <h1>Testing environments</h1>
+
+  <p>Here is the <strong>matrix OS × PHP</strong> virtual machines
+     (interpreters):</p>
+  <ul>
+    <li data-item=" ">Debian, Ubuntu, ArchLinux, Windows, Mac OS X, FreeBSD…</li>
+    <li data-item="×">PHP, HHVM, HippyVM, JPHP…</li>
+  </ul>
+  <p>Add <strong>all version numbers</strong> (possibly exhaustively, e.g.
+     PHP5.5.4, PHP5.5.5, PHP5.5.6, PHP5.5.7 etc.) to <strong>specific
+     configurations</strong> and it becomes <strong>crazy</strong>!</p>
+  <p class="break">How to automate the building of all these environments?</p>
+  <ul>
+    <li>a virtual machine is a testing environment</li>
+    <li>ok, let's build virtual machines!</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Building virtual machines</h1>
+
+  <p>Le Comte Intatto provides scripts to automatically…</p>
+  <p class="break">… <strong>build</strong> virtual machines, based on
+     <a href="http://packer.io/">Packer</a>:</p>
+  <ul>
+    <li><strong>identical</strong> machine images for <strong>multiple</strong>
+        platforms (e.g. VirtualBox, QEMU, VMWare, OpenStack, Docker etc.)</li>
+    <li>a <strong>single</strong> source configuration</li>
+  </ul>
+  <p class="break">… <strong>provision</strong> virtual machines; basically:</p>
+  <ul>
+    <li>install the standby</li>
+    <li>install Hoa and testing tools</li>
+    <li>compile all PHP virtual machines</li>
+  </ul>
+</section>
+
+<section>
+  <h1>The big schema</h1>
+
+  <pre>                          primary-side . standbys-side
+        payload                        .
+           +                           .
+           |                           .   +-----------------+    +-----------+
+           v                           .+->|  standby (VM1)  |+-->|  workers  |
+     +-----------+      +------------+ .|  +-----------------+    +-----------+
+     |   hook    |+-+-->|  worker 1  |+-+
+     +-----------+  |   +------------+ .|  +-----------------+    +-----------+
+read |           |  |                  .+->|  standby (VM2)  |+-->|  workers  |
++--->|  primary  |  |   +------------+ .|  +-----------------+    +-----------+
+     |           |  +-->|  worker 2  +--+
+     +-----------+      +------------+ .|  +-----------------+    +-----------+
+                                       .+->|  standby (VM3)  |+-->|  workers  |
+                                       .   +-----------------+    +-----------+
+                                       .</pre>
+  <div class="incremental incremental-overlay break">
+    <p>A payload is <strong>posted</strong> on the hook API</p>
+    <p>The hook <strong>registers</strong> a new job and a primary worker is
+       <strong>created</strong></p>
+    <p>The fresh primary worker <strong>dispatches</strong> the job to
+       <strong>all</strong> standbys</p>
+    <p>A standby <strong>prepares</strong> a workspace to execute the job</p>
+    <p>The job is finally <strong>executed</strong> inside
+       <strong>dedicated</strong> workers per PHP virtual machines</p>
+  </div>
+</section>
+
+<section>
+  <h1>Some details</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p class="break">All details on the
+         <a href="http://wiki.hoa-project.net/projects:ci:start">wiki</a></p>
+      <p class="break">Workers are created by
+         <a href="http://central.hoa-project.net/Resource/Library/Fastcgi"><code>Hoa\Fastcgi</code></a>
+         and
+         <a href="http://central.hoa-project.net/Resource/Library/Zombie"><code>Hoa\Zombie</code></a>
+         to turn them into daemons</p>
+      <p class="break">Communication between all workers and the primary is ensured by
+         <a href="http://central.hoa-project.net/Resource/Library/Websocket"><code>Hoa\Websocket</code></a>
+         (realtime outputs on the primary)</p>
+    </div>
+    <div>
+      <p>Support payloads from and report statuses to Github (excellent for Pull
+         Request):</p>
+      <p style="background: #fff">
+        <img src="Image/Github_PR_ok.png" width="703px" />
+      </p>
+      <p>or</p>
+      <p>
+        <img src="Image/Github_PR_nok.png" />
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter">
+  <h1>Rolling-Release</h1>
+</section>
+
+<section>
+  <h1>Life cycle of a library</h1>
+
+  <div id="library_states" class="schema"></div>
+  <script>
+    Hoa.Document.onReady(function ( ) {
+
+        var paper = Hoa.Graph(Hoa.$('#library_states'), 550, 150);
+        var grid  = paper.grid(0, 0, 550, 150, 3, 1);
+        var step1 = grid.push(paper.rect(0, 0, 120, 90, 3, 'beta'));
+        var step2 = grid.push(paper.rect(0, 0, 120, 90, 3, 'RC'));
+        var step3 = grid.push(paper.rect(0, 0, 120, 90, 3, 'finalized'));
+
+        paper.link.between(step1, step2);
+        paper.link.between(step2, step3);
+    });
+  </script>
+
+  <div class="incremental incremental-overlay">
+    <ol class="incremental">
+      <li>first of all, it is in the <strong>beta</strong> state</li>
+      <li>after some works, it is growing into the <strong>RC</strong> (stands
+          for release candidate)</li>
+      <li>after some intensive <strong>feedbacks</strong>, intensive
+          <strong>tests</strong> and many <strong>incubation</strong> months, it
+          is growing into the <strong>finalized</strong> state</li>
+    </ol>
+    <p class="break">Once it has reached the finalized state, its
+       <strong>release cycle</strong> starts</p>
+  </div>
+</section>
+
+<section>
+  <h1>Why rolling release?</h1>
+
+  <p class="👎">Cons:</p>
+  <ul>
+    <li>we have more than 60 “products” (= libraries)</li>
+    <li>60 × 3 = 180 branches to maintain</li>
+    <li>what to do with old versions?</li>
+    <li>not enough resources (humans and bots)</li>
+  </ul>
+  <p class="👍">Pros:</p>
+  <ul>
+    <li>ensures a higher quality</li>
+    <li>easier to deploy</li>
+    <li>better flexibility</li>
+  </ul>
+  <p>Discussions?</p>
+</section>
+
+<section>
+  <h1>Branches</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Each library has 4 branches:</p>
+      <ol>
+        <li><code>development</code>, receives all the new patches</li>
+        <li><code>incoming</code>, when all tests passed and every reviewers
+            agreed, <code>development</code> is merged into this branch</li>
+        <li><code>staging</code>, manual merge from <code>incoming</code>, will
+            be tested and reviewed by external users (complementary to our test
+            suites)</li>
+        <li><code>master</code>, when <code>staging</code> is considered as safe
+            and valid, it is merged into this branch</li>
+      </ol>
+      <p><code>Central</code> only receives patches from
+         <code>master</code>s</p>
+    </div>
+    <div>
+      <p>To sum up:</p>
+      <ul>
+        <li><code>development</code> is like the “trunk”, private branch</li>
+        <li><code>incoming</code> is like the “alpha channel”, private
+            branch</li>
+        <li><code>staging</code> is like the “beta and RC channels”, protected
+            branch</li>
+        <li><code>master</code> is the <strong>public</strong> branch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1><em>Full-</em> &amp; <em>true-</em>rolling release</h1>
+
+  <p><a href="https://en.wikipedia.org/wiki/Rolling_release">Wikipedia</a>:</p>
+  <ul>
+    <li>“Full-rolling do not divide the [project] into a rolling and non-rolling
+    part. They apply the rolling release software development model to the
+    entirety of the software stack”</li>
+    <li>“True-rolling [project] are developed solely using a rolling release
+    software development model”</li>
+  </ul>
+  <p class="break">However, some softwares (like Composer) need a version; what
+     solution?</p>
+</section>
+
+<section>
+  <h1>Scheduled-based release</h1>
+
+  <p><strong>Mixing</strong> full- and true-rolling release with
+     <strong>scheduled-based release</strong></p>
+  <p class="break"><strong>Semi-automatically</strong> versionned release:</p>
+  <ul>
+    <li>each 6 weeks, if at least one new patch has been merged into the
+        <code>master</code>, a new release is created</li>
+    <li>before 6 weeks, if several critical or significant patches, a new
+        release is created</li>
+  </ul>
+  <p class="break">Version format
+     <code><em>Y</em><sup>{2,4}</sup>.<em>mm</em>.<em>dd</em></code>
+     (starting from 2000, “RR Epoch”): </p>
+  <ul>
+    <li>for the 16<sup>th</sup> August 2014, <code>14.08.16</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Backward compatibility</h1>
+
+  <p>We are not <span class="👎">infallible</span></p>
+  <p>Sometimes, we can break backward compatibility (never happened but we have
+     to face it)</p>
+  <p class="break"><code>master</code> must have a <strong>compatibility
+     number</strong> <code><em>x</em></code>, starting from 1 with step of 1</p>
+  <p class="break">New version format
+     <code><em>x</em>.<em>Y</em><sup>{2,4}</sup>.<em>mm</em>.<em>dd</em></code>:</p>
+  <ul>
+    <li>for the 16<sup>th</sup> August 2014, <code>1.14.08.16</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Conclusion</h1>
+
+  <div class="tcenter" style="margin-top: 100px">
+    <style scoped>
+      img { width: 80px }
+      img + img, img + div { margin-left: 1.5em; }
+    </style>
+    <img src="http://static.hoa-project.net/Image/Logo/Git.png" />
+    <img src="https://avatars0.githubusercontent.com/u/4126670?v=2&s=400"
+         class="avatar" />
+    <img src="https://camo.githubusercontent.com/d764a5c6c75684b705a5e4101d97cee9d10a6cae/687474703a2f2f687977616e2e6769746875622e696f2f4d6172766972632f5374617469632f4c6f676f2e706e67" />
+    <img src="http://downloads.atoum.org/images/logo.png" />
+    <img src="https://avatars1.githubusercontent.com/u/8411298?v=2&s=400" />
+  </div>
+  <p class="break tcenter">Are you ready?</p>
+</section>
+
+<section class="chapter">
+  <h1>Thanks! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
+</section>
+
+<div id="progress-bar"></div>
+
+<script src="http://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Hoa.Graph.js"></script>
+<script src="http://static.hoa-project.net/Javascript/Hoa.Graph.style.js"></script>
+
+</body>
+</html>
