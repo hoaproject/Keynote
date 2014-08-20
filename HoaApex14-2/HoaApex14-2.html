@@ -706,8 +706,8 @@ read |           |  |                  .+->|  standby (VM2)  |+-->|  workers  |
 
   <p class="👎">Cons:</p>
   <ul>
-    <li>we have more than 60 “products” (= libraries)</li>
-    <li>60 × 3 = 180 branches to maintain</li>
+    <li>we have nearly 50 “products” (= libraries)</li>
+    <li>50 × 3 = 150 branches to maintain</li>
     <li>what to do with old versions?</li>
     <li>not enough resources (humans and bots)</li>
   </ul>
@@ -717,7 +717,6 @@ read |           |  |                  .+->|  standby (VM2)  |+-->|  workers  |
     <li>easier to deploy</li>
     <li>better flexibility</li>
   </ul>
-  <p>Discussions?</p>
 </section>
 
 <section>
@@ -754,24 +753,29 @@ read |           |  |                  .+->|  standby (VM2)  |+-->|  workers  |
 </section>
 
 <section>
-  <h1><em>Full-</em> &amp; <em>true-</em>rolling release</h1>
+  <h1><em>Part-</em> &amp; <em>true-</em>rolling release</h1>
 
   <p><a href="https://en.wikipedia.org/wiki/Rolling_release">Wikipedia</a>:</p>
   <ul>
-    <li>“Full-rolling do not divide the [project] into a rolling and non-rolling
-    part. They apply the rolling release software development model to the
-    entirety of the software stack”</li>
+    <li>“Part-rolling [project] has a subset of software packages that are not
+    rolling.”</li>
     <li>“True-rolling [project] are developed solely using a rolling release
     software development model”</li>
   </ul>
-  <p class="break">However, some softwares (like Composer) need a version; what
-     solution?</p>
+  <p>Simplified:</p>
+  <ul>
+    <li>Hoa is full-RR but it depends on PHP (the language) which
+        <strong>are not</strong>, so
+        we are making part-rolling release</li>
+    <li>true-RR because master is the public branch</li>
+  </ul>
+  <p>However, some softwares (like Composer) need a version; what solution?</p>
 </section>
 
 <section>
   <h1>Scheduled-based release</h1>
 
-  <p><strong>Mixing</strong> full- and true-rolling release with
+  <p><strong>Mixing</strong> part- and true-rolling release with
      <strong>scheduled-based release</strong></p>
   <p class="break"><strong>Semi-automatically</strong> versionned release:</p>
   <ul>
