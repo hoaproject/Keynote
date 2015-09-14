@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Hoa Apex 3rd edition, Overture</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="Static/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="Static/Css/Leaflet.css" rel="stylesheet" />
+  <link type="text/css" href="Static/Css/Map.css" rel="stylesheet" />
+  <link type="text/css" href="Static/Css/Graph.css" rel="stylesheet" />
+
+  <style>
+    .small-avatar {
+        width: 1.8rem !important;
+        height: 1.8rem !important;
+        box-shadow: 0px 0px 3px rgb(0, 0, 0) !important;
+    }
+
+    .small-avatar::before {
+        box-shadow: none !important;
+    }
+
+    .small-avatar > img {
+        vertical-align: top;
+    }
+  </style>
+</head>
+<body>
+
+<script src="Static/Javascript/Hoa.js"></script>
+<script src="Static/Javascript/Leaflet.js"></script>
+
+<section>
+  <h1>Hoa Apex 3<sup>rd</sup> edition, Overture</h1>
+
+  <div class="tcenter">
+    <img src="Static/Image/Hoa.png"
+         alt="Logo of Hoa"
+         width="300px"
+         class="center" />
+    <p class="break"><small><time datetime="2015-09-26">26<sup>th</sup> of September 2015</time></small></p>
+  </div>
+
+  <details>Ivan</details>
+</section>
+
+<section>
+  <h1>Who am I?</h1>
+
+  <p>Ivan Enderlin:</p>
+  <ul>
+    <li>PhD in Computer Science</li>
+    <li>leader and developer of Hoa</li>
+    <li>contributor of several open-source projects</li>
+    <li><a href="https://twitter.com/mnt_io">@mnt_io</a></li>
+    <li>Hywan on <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+    <li>
+      ex-<a href="http://inria.fr/">INRIA</a>,
+      ex-<a href="https://fruux.com/">fruux</a>,
+      current <a href="https://liip.ch/">Liip</a>
+    </li>
+  </ul>
+
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin<sup>•</sup> or hywan<sup> ••</sup>@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net<sup>•,••</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>php.net<sup>••</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>liip.ch<sup>•</sup></mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
+</section>
+
+<section>
+  <h1>Who are you?</h1>
+
+  <p><strong>Biggest</strong> Apex in terms of people <small>(aka
+  Paris-effect)</small></p>
+  <p><em>(oral self-presentations)</em></p>
+  <ul>
+    <li data-item=" ">users</li>
+    <li data-item="+">contributors</li>
+    <li data-item="+">companies</li>
+    <li data-item="+">sponsors</li>
+    <li data-item="+">geeks/nerds</li>
+    <li data-item="+">…</li>
+    <li data-item="=">Hoa's community!</li>
+  </ul>
+
+  <p class="tcenter break"><strong>Welcome!</strong></p>
+</section>
+
+<section>
+  <h1>Where are we?</h1>
+
+  <div id="where_are_we" style="height: 300px; background: transparent"></div>
+  <script>
+    var map = L.map('where_are_we').setView([48.871442404899, 2.348051905897], 3);
+
+    L.tileLayer('http://static.hoa-project.net/Map/Tiles/{z}/{x}/{y}.png', {
+      minZoom: 1,
+      maxZoom: 7
+    }).addTo(map);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      minZoom: 7
+    }).addTo(map);
+
+    var icon = L.icon({
+        iconUrl: 'http://static.hoa-project.net/Map/Marker.svg',
+        iconSize: [28, 45],
+        iconAnchor: [14, 44],
+        popupAnchor: [2, -45]
+    });
+
+    L.marker([48.871442404899, 2.348051905897], {icon: icon})
+     .bindPopup('<a href="http://verylastroom.com/">VeryLastRoom</a>')
+     .addTo(map);
+  </script>
+  <p class="tcenter break"><a href="http://inovia.fr/">inovia</a>'s home, one of
+  our big user. <strong>Thank you</strong>!</p>
+</section>
+
+<section>
+  <h1>Welcome!</h1>
+
+  <p>This is a <strong>special</strong> event:</p>
+  <ul>
+    <li><strong>Itinerant</strong> event,</li>
+    <li>Come meet you and your family,</li>
+    <li>Discover people and a place <small>(and sometimes talk about Hoa)</small></li>
+    <li>Share precious moments,</li>
+  </ul>
+  <p>This is unique in the land of Computer Science.</p>
+  <p>3<sup>rd</sup> edition: Still a success!</p>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>Community</li>
+    <li>Source code</li>
+    <li>Official contributions</li>
+    <li>Site and documentations</li>
+    <li>Around the project</li>
+    <li>What's next?</li>
+  </ol>
+
+  <!--
+  Community
+    Some stats
+    Contributors listing
+
+  Source code
+    Some stats
+    New library
+    Best features
+    Quality
+
+  Official contributions
+
+  Site and documentations
+
+  Around the project
+    Sponsors
+    New server
+    Foundation
+      Bank
+      Subscription
+      Goodies
+  -->
+</section>
+
+<section class="chapter">
+  <h1>Community</h1>
+</section>
+
+<section>
+  <h1>Contributors &amp; hoackers</h1>
+
+  <ul>
+    <li><strong>56 hackers</strong> (<span class="👍">+19</span>)!</li>
+    <li>including <strong>19 hoackers</strong> (<span class="👍">+5</span>)!</li>
+  </ul>
+
+  <div>graph (2x2 bars)</div>
+</section>
+
+<section>
+  <h1>New contributors</h1>
+
+  <p>Welcome to:</p>
+  <small>
+    <ul class="columns" data-columns="2">
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/245494?s=60" /></div>
+        Timothée Barray
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/4128197?s=60" /></div>
+        Catalin Criste
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/953262?s=60" /></div>
+        Guillaume Dievart
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/1869022?s=60" /></div>
+        Ben Getsug
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/66958?s=60" /></div>
+        Kévin Gomez
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/288535?s=60" /></div>
+        Martin Hasoň
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/482993?s=60" /></div>
+        Stéphane Hulard
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/313117?s=60" /></div>
+        Samuel Laulhau
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/1810304?s=60" /></div>
+        Marc Lemay
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/474329?s=60" /></div>
+        Linus Metzler
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/2761980?s=60" /></div>
+        Rémi Parpaillon
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/443391?s=60" /></div>
+        Rogerio Prado de Jesus
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/528790?s=60" /></div>
+        Steven Rémot
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/245021?s=60" /></div>
+        Kim Sia Sim
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/907613?s=60" /></div>
+        Mike Simonson
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/51127?s=60" /></div>
+        David Thalmann
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/5133487?s=60" /></div>
+        Pierre Tomasina
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/347573?s=60" /></div>
+        Alex Walker
+      </li>
+      <li>
+        <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/1924166?s=60" /></div>
+        bureX
+      </li>
+    </ul>
+  </small>
+</section>
+
+<section>
+  <h1>Most active contributors…</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>… by <strong>commits</strong> on <code>Central</code>:</p>
+      <ol class="columns" data-columns="2">
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/946104?s=60" /></div>
+          I. Enderlin <small>(75%)</small>
+        </li>
+        <li style="opacity: .1">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="" /></div>
+          <em>Bhoat</em> <small>(21%)</small>
+        </li>
+        <li style="counter-reset: ol 1">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/232744?s=60" /></div>
+          S. Py <small>(0.7%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/482993?s=60" /></div>
+          S. Hulard <small>(0.5%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/5406767?s=60" /></div>
+          M. de Laubrie <small>(0.3%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" /></div>
+          J. Bianchi <small>(0.3%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/1275202?s=60" /></div>
+          A. von Glasow <small>(0.2%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/125797?s=60" /></div>
+          R. Emourgeon <small>(0.2%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/1519729?s=60" /></div>
+          J. Clauzel <small>(0.1%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/5133487?s=60" /></div>
+          P. Tomasina <small>(0.1%)</small>
+        </li>
+      </ol>
+    </div>
+    <div>
+      <p>… by <strong>lines</strong> on <code>Central</code>:</p>
+      <ol class="columns" data-columns="2">
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/946104?s=60" /></div>
+          I. Enderlin <small>(80.3%)</small>
+        </li>
+        <li style="opacity: .1">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="" /></div>
+          <em>Bhoat</em> <small>(13.6%)</small>
+        </li>
+        <li style="counter-reset: ol 1">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/474329?s=60" /></div>
+          L. Metzler <small>(0.9%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/5406767?s=60" /></div>
+          M. de Laubrie <small>(0.6%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars2.githubusercontent.com/u/232744?s=60" /></div>
+          S. Py <small>(0.4%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/1275202?s=60" /></div>
+          A. von Glasow <small>(0.2%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/125797?s=60" /></div>
+          R. Emourgeon <small>(0.2%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" /></div>
+          J. Bianchi <small>(0.2%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/482993?s=60" /></div>
+          S. Hulard <small>(0.1%)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/668738?s=60" /></div>
+          M. Codron <small>(0.1%)</small>
+        </li>
+      </ol>
+    </div>
+    <div>
+      <p>Perhaps, it is <strong>changing</strong> a lot!</p>
+      <p>… by <strong>commits</strong> on <code>Central</code> since 3 months:</p>
+      <ol class="columns" data-columns="2">
+        <li style="opacity: .1">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="" /></div>
+          <em>Bhoat</em> <small>(43.3%)</small>
+        </li>
+        <li style="counter-reset: ol 0">
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/946104?s=60" /></div>
+          I. Enderlin <small>(36.9%, <span class="👎">-38.1%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/482993?s=60" /></div>
+          S. Hulard <small>(11.9%, <span class="👍">+11.4%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/5406767?s=60" /></div>
+          M. de Laubrie <small>(4.3%, <span class="👍">+4%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/125797?s=60" /></div>
+          R. Emourgeon <small>(1%, <span class="👍">+0.8%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" /></div>
+          J. Bianchi <small>(0.7%, <span class="👍">+0.4%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars0.githubusercontent.com/u/66958?s=60" /></div>
+          K. Gomez <small>(0.5%, <span class="👍">+0.5%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/2235157?s=60" /></div>
+          A. Gerlier <small>(0.4%, <span class="👍">+0.4%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars1.githubusercontent.com/u/51127?s=60" /></div>
+          D. Thalmann <small>(0.2%, <span class="👍">+0.2%</span>)</small>
+        </li>
+        <li>
+          <div class="avatar small-avatar fleft" style="margin-right: .5em;"><img src="https://avatars3.githubusercontent.com/u/1869022?s=60" /></div>
+          B. Getsug <small>(0.2%, <span class="👍">+0.2%</span>)</small>
+        </li>
+      </ol>
+    </div>
+    <div>
+      <p>What is the tendency?</p>
+      <ul>
+        <li>Contributors are more and more <strong>autonomous</strong></li>
+        <li>I. Enderlin (author of the project) is less and less a “requirement”,</li>
+        <li>Community is more organized,</li>
+        <li>More discussion and collaboration,</li>
+        <li>More reviewers per libraries,</li>
+        <li>Community is more qualified,</li>
+        <li data-item="=">The community is getting <strong>mature</strong>!</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Github <img src="Static/Image/Icon/Github.svg" height="45px" alt="Github" /></h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p><strong>1167 stargazers</strong> (<span class="👍">+704</span>)</p>
+      <p>497 forks (<span class="👍">+259</span>)</p>
+      <div id="github_graph"></div>
+      <script>
+        Hoa.Document.onReady(function () {
+            var margin = {top: 20, right: 20, bottom: 30, left: 30};
+            var width  = 750 - margin.left - margin.right;
+            var height = 350 - margin.top - margin.bottom;
+
+            var x = d3.time.scale().
+                range([0, width]);
+
+            var y = d3.scale.linear().
+                range([height, 50]);
+
+            var xAxis = d3.svg.axis().
+                scale(x).
+                orient('bottom').
+                ticks(10).
+                tickFormat(d3.time.format('%m-%Y'));
+
+            var yAxis = d3.svg.axis().
+                scale(y).
+                orient('left').
+                ticks(10);
+
+            var area = d3.svg.area().
+                x(function ( d ) { return x(d.date); }).
+                y0(height).
+                y1(function ( d ) { return y(d.stargazers); });
+
+            var svg = d3.select('#github_graph').insert('svg').
+                attr(
+                    'viewBox',
+                    '0 0 ' +
+                    (width + margin.left + margin.right) + ' ' +
+                    (height + margin.top + margin.bottom)
+                ).
+                append('g').
+                    attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            var parseDate = d3.time.format('%Y-%m-%d').parse;
+
+            d3.tsv(
+                'Data/Github.tsv',
+                function(error, data) {
+                    data.forEach(function(d) {
+                        d.date = parseDate(d.date);
+                    });
+
+                    x.domain(d3.extent(data, function(d) { return d.date; }));
+                    y.domain([0, d3.max(data, function(d) { return d.stargazers; })]);
+
+                    svg.
+                        append('path').
+                        datum(data).
+                        attr('class', 'area').
+                        attr('d', area);
+
+                    svg.
+                        append('g').
+                        attr('class', 'x axis').
+                        attr('transform', 'translate(0, ' + height + ')').
+                        call(xAxis);
+
+                    svg.
+                        append('g').
+                        attr('class', 'y axis').
+                        call(yAxis);
+                }
+            );
+        });
+      </script>
+    </div>
+    <div>
+      <p>Most famous ones (in term of watchers):</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Library/Ruler"><code>Hoa\Ruler</code></a>:
+            222 watchers,</li>
+        <li><a href="http://central.hoa-project.net/Resource/Library/Console"><code>Hoa\Console</code></a>:
+            176 watchers,</li>
+        <li><a href="http://central.hoa-project.net/Resource/Library/Websocket"><code>Hoa\Websocket</code></a>:
+            138 watchers,</li>
+        <li><a href="http://central.hoa-project.net/Resource/Library/Ustring"><code>Hoa\Ustring</code></a>:
+            84 watchers,</li>
+        <li><a href="http://central.hoa-project.net/Resource/Library/Eventsource"><code>Hoa\Eventsource</code></a>:
+            52 watchers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Twitter</h1>
+
+  <p><strong>762 followers</strong> (<span class="👍">+220</span>)</p>
+  <p>Better communication:</p>
+  <ul>
+    <li data-item="📦">Announce snapshots, by promoting the features
+    <strong>and</strong> the people,</li>
+    <li data-item="👷">Encourage to contribute on easy ones,</li>
+    <li data-item="❣">Ask help (get more and learn from experts),</li>
+    <li data-item="📗">Announce news,</li>
+    <li data-item="❤">Spread love about related projects.</li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <h1>Source code</h1>
+</section>
+
+<section>
+  <h1>New library</h1>
+
+  <ul>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Cli"><code>Hoa\Cli</code></a>:
+    To use the <code>hoa</code> command; extracted from
+    <code>Hoa\Core</code>,</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Devtools"><code>Hoa\Devtools</code></a>:
+    Development tools for contributors, maintainers, releasers etc.; partly
+    extracted from <code>Hoa\Core</code>,</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Promise"><code>Hoa\Promise</code></a>:
+    Promise in PHP,</li>
+    <li><a href="http://central.hoa-project.net/Resource/Library/Test"><code>Hoa\Test</code></a>:
+    Framework to test Hoa's libraries, extends
+    <a href="http://atoum.org/">atoum</a>.</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Evolution of the code</h1>
+
+  <p>Files: 939 (<span class="👍">+736</span>)</p>
+  <p>Line of codes: 119 202 (<span class="👍">-13 458</span>)</p>
+  <p>Commits: 10 423 (<span class="👍">+2103</span>)</p>
+  <p>Activity on the code:</p>
+  <div id="code_central_commits"></div>
+
+  <script>
+    Hoa.Document.onReady(function () {
+        var margin = {top: 20, right: 20, bottom: 30, left: 30},
+            width  = 750 - margin.left - margin.right,
+            height = 150 - margin.top - margin.bottom;
+
+        var parseDate = d3.time.format('%Y-%m').parse;
+
+        var x = d3.time.scale()
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient('bottom')
+            .ticks(10)
+            .tickFormat(d3.time.format('%m-%Y'));
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient('left')
+            .ticks(5);
+
+        var area = d3.svg.area()
+            .x (function ( d ) { return x(d.date); })
+            .y0(height)
+            .y1(function ( d ) { return y(d.number); });
+
+        var svg = d3.select('#code_central_commits').insert('svg', ':first-child')
+            .attr(
+              'viewBox',
+              '0 0 ' +
+              (width + margin.left + margin.right) + ' ' +
+              (height + margin.top + margin.bottom)
+            )
+          .append('g')
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        d3.tsv(
+            'Data/Central_commits.tsv',
+            function(error, data) {
+                data.forEach(function(d) {
+                  d.date = parseDate(d.date);
+                  d.number = +d.number;
+                });
+
+                x.domain(d3.extent(data, function(d) { return d.date; }));
+                y.domain([0, d3.max(data, function(d) { return d.number; })]);
+
+                svg.append('path')
+                    .datum(data)
+                    .attr('class', 'area')
+                    .attr('d', area);
+
+                svg.append('g')
+                    .attr('class', 'x axis')
+                    .attr('transform', 'translate(0,' + height + ')')
+                    .call(xAxis);
+
+                svg.append('g')
+                    .attr('class', 'y axis')
+                    .call(yAxis);
+            }
+        );
+  
+    });
+  </script>
+</section>
+
+<section>
+  <h1>Installations <img src="Static/Image/Logo/Composer.png" height="60px" alt="Composer" /></h1>
+
+  <p><strong>855 466 downloads</strong> (<span class="👍">+715 000</span>)</p>
+  <div id="packagist_graph"></div>
+  <script>
+    Hoa.Document.onReady(function () {
+        var margin = {top: 20, right: 20, bottom: 30, left: 50};
+        var width  = 750 - margin.left - margin.right;
+        var height = 350 - margin.top - margin.bottom;
+
+        var x = d3.time.scale().
+            range([0, width]);
+
+        var y = d3.scale.linear().
+            range([height, 50]);
+
+        var xAxis = d3.svg.axis().
+            scale(x).
+            orient('bottom').
+            ticks(10).
+            tickFormat(d3.time.format('%m-%Y'));
+
+        var yAxis = d3.svg.axis().
+            scale(y).
+            orient('left').
+            ticks(10);
+
+        var area = d3.svg.area().
+            x(function ( d ) { return x(d.date); }).
+            y0(height).
+            y1(function ( d ) { return y(d.installations); });
+
+        var svg = d3.select('#packagist_graph').insert('svg').
+            attr(
+                'viewBox',
+                '0 0 ' +
+                (width + margin.left + margin.right) + ' ' +
+                (height + margin.top + margin.bottom)
+            ).
+            append('g').
+                attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+        var parseDate = d3.time.format('%Y-%m-%d').parse;
+
+        d3.tsv(
+            'Data/Packagist.tsv',
+            function(error, data) {
+                data.forEach(function(d) {
+                    d.date = parseDate(d.date);
+                });
+
+                x.domain(d3.extent(data, function(d) { return d.date; }));
+                y.domain([0, d3.max(data, function(d) { return d.installations; })]);
+
+                svg.
+                    append('path').
+                    datum(data).
+                    attr('class', 'area').
+                    attr('d', area);
+
+                svg.
+                    append('g').
+                    attr('class', 'x axis').
+                    attr('transform', 'translate(0, ' + height + ')').
+                    call(xAxis);
+
+                svg.
+                    append('g').
+                    attr('class', 'y axis').
+                    call(yAxis);
+            }
+        );
+    });
+  </script>
+
+
+  <p><small><a href="https://www.flickr.com/photos/hywan/19659100251/">Where are
+  we in the Packagist galaxy</a>?</small></p>
+</section>
+
+<section class="chapter">
+  <h1>Official contribution</h1>
+</section>
+
+<section class="chapter">
+  <h1>Site and documentations</h1>
+</section>
+
+<section class="chapter">
+  <h1>Around the project</h1>
+</section>
+
+<section>
+  <div
+    style="
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: .09;
+      pointer-events: none;">
+    <iframe
+      id="community"
+      src=""
+      style="width: 800px; height: 600px"></iframe>
+  </div>
+  <div>
+    <h1>Community</h1>
+
+    <div>
+
+      <div>
+      </div>
+
+      <div>
+        <p>On IRC:</p>
+        <ul>
+          <li>Record was 26 connections</li>
+          <li><strong>21 connections</strong> on average</li>
+          <li><a href="https://github.com/hoaproject/Marvirc">Marvirc</a> is
+          still here, with some new commands</li>
+        </ul>
+
+        <p class="break">Community at large: <strong>more than 1070
+        persons</strong></p>
+
+        <p>New “big users”:</p>
+        <ul>
+          <li>
+            <a href="https://fruux.com/" class="plain">
+              <img
+                src="Static/Image/Logo/Fruux.png"
+                alt="fruux"
+                style="width: 80px" />
+            </a>
+          </li>
+          <li>
+            <a href="https://owncloud.com/" class="plain">
+              <img
+                src="Static/Image/Logo/OwnCloud.png"
+                alt="ownCloud"
+                style="width: 80px" />
+            </a>
+          </li>
+          <li>
+            <a href="https://jolicode.com/" class="plain">
+              <img
+                src="Static/Image/Logo/Jolicode.svg"
+                alt="JoliCode"
+                style="width: 80px" />
+            </a>
+          </li>
+          <li>
+            <a href="http://inovia.fr/" class="plain">
+              <img
+                src="Static/Image/Logo/Inovia.png"
+                alt="Inovia"
+                style="width: 80px" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Code quality</h1>
+
+  <p>Tests:</p>
+  <ul>
+    <li>61 test suites,</li>
+    <li>303 test cases,</li>
+    <li><strong>144 107 assertions</strong>!</li>
+  </ul>
+
+  <p>Snapshots: <strong>397</strong>!</p>
+
+  <p>Standards:</p>
+  <ul>
+    <li>About 30 RFCs,</li>
+    <li>PSR-1, PSR-2 and PSR-4 (PSR-7 under way).</li>
+  </ul>
+
+  <p>PHP VM support:</p>
+  <ul>
+    <li>PHP 5.3 dropped,</li>
+    <li>PHP 5.4 is going to be dropped,</li>
+    <li>HHVM under testing.</li>
+  </ul>
+
+  <p>Thanks <code>Hoa\Test</code> and <code>Hoa\Devtools</code>!</p>
+</section>
+
+<section>
+  <h1>Official contributions</h1>
+
+  <div class="incremental incrementa-overlay">
+    <div>
+      <p><a href="http://atoum.org/">atoum</a>:</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>Atoum\PraspelExtension</code></a></li>
+      </ul>
+      <p><a href="">emacs</a>:</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Emacs/Pp"><code>Pp</code></a></li>
+      </ul>
+      <p><a href="http://central.hoa-project.net/Resource/Contributions/Provisioning">Provisioning</a></p>
+    </div>
+    <div>
+      <p><a href="http://symfony.com/">Symfony</a>:</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/BenchBundle"><code>Hoathis\SymfonyBenchBundle</code></a></li>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBridge"><code>Hoathis\SymfonyConsoleBridge</code></a></li>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBundle"><code>Hoathis\SymfonyConsoleBundle</code></a></li>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/RulerBundle"><code>Hoathis\SymfonyRulerBundle</code></a></li>
+      </ul>
+      <p><a href="">Vim</a>:</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Vim/Pp"><code>Pp</code></a></li>
+      </ul>
+      <p><a href="">Zsh</a>:</p>
+      <ul>
+        <li><a href="http://central.hoa-project.net/Resource/Contributions/Zsh/Hoa"><code>Hoa</code></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Sponsors</h1>
+  <style scoped>
+    img {
+        margin-bottom: 2em;
+    }
+  </style>
+
+  <div class="incremental incremental-overlay tcenter">
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/Verylastroom.png" /><br />
+      Offers new servers (migration done in December)<br />
+      Offers a vast support (mainly financial)
+    </p>
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/Pikacode.png" /><br />
+      Offers new mirrors for all repositories
+    </p>
+    <p>
+      <img src="http://static.hoa-project.net/Image/Logo/PHPStorm.png" /><br />
+      Offers a free license of PHPStorm to each contributor
+    </p>
+    <p>
+      <img src="" /><br />
+      Build stickers and awesome stuff
+    </p>
+  </div>
+</section>
+
+<section>
+  <h1>Sites et documentations</h1>
+
+  <div class="incremental incremental-overlay">
+    <div>
+      <p>Documentations:</p>
+      <ul>
+        <li>Learn manual: Bye bye!</li>
+        <li>Hack book: 17 chapters (<span class="👍">+2</span>)</li>
+        <li>Awecodes: 3 (<span class="👎">+0</span>)</li>
+      </ul>
+      <p>Contributor guide (see next keynotes!)</p>
+      <p><strong>Incredible</strong> work to translate all the
+      documentation…</p>
+    </div>
+    <div>
+      <p>New design:</p>
+      <img src="https://flickr.com/" />
+    </div>
+    <div>
+      <p>Search engine:</p>
+      <img src="https://flickr.com/" />
+    </div>
+    <div>
+      <p>Enhanced documentation:</p>
+      <img src="https://flickr.com/" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Bilan</h1>
+
+  <ol>
+    <li>…</li>
+    <li>…</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>Let's go for the next jump!</h1>
+</section>
+
+<section>
+  <h1>Hot opened issues</h1>
+
+  <p>Documentation:</p>
+  <ul>
+    <li>Redaction of hack book chapters</li>
+    <li>Records of more awecodes</li>
+  </ul>
+  <p class="break">Code:</p>
+  <ul>
+    <li>Migrate tests</li>
+    <li>Drop PHP5.4</li>
+  </ul>
+</section>
+
+<section class="chapter">
+  <h1>Thanks! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
+</section>
+
+<section>
+  <h1>Communication</h1>
+
+  <p>More blog posts, with un “chef rédacteur”</p>
+</section>
+
+<div id="progress-bar"></div>
+
+<script src="Static/Javascript/Keynote.js"></script>
+<script src="Static/Javascript/Prism.js"></script>
+<script src="Static/Javascript/Prism.hoa.js"></script>
+<script src="Static/Javascript/Prism.plugin.line.js"></script>
+<script src="Static/Javascript/D3.js"></script>
+
+<script>
+  /*
+  Hoa.Document.onReady(function ( ) {
+      Hoa.$('#community').src = 'Community.html';
+  });
+  */
+</script>
+
+</body>
+</html>
