@@ -26,6 +26,11 @@
     .small-avatar > img {
         vertical-align: top;
     }
+
+    h1 > .avatar {
+        display: inline-block;
+        vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -850,7 +855,8 @@
   <span class="👍">success</span></p>
   <p class="break"><strong>392 snapshots</strong> published!</p>
   <ul>
-    <li>Rush Release seems to be a success.</li>
+    <li>Rush Release seems to be a success,</li>
+    <li><code>CHANGELOG.md</code> (<span class="👍">new</span>).</li>
   </ul>
   <p class="break">CI still <span class="👎">not</span> here… but
   <small>(suspense)</small></p>
@@ -957,14 +963,19 @@
 </section>
 
 <section class="chapter">
-  <h1>Official contribution</h1>
+  <h1>Official contributions</h1>
 </section>
 
 <section>
-  <h1>atoum</h1>
+  <h1>
+    To atoum, by
+    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/946104?s=60" alt="Ivan Enderlin" /></div>
+    and
+    <div class="avatar"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" alt="Julien Bianchi" /></div>
+  </h1>
 
   <p><a href="http://central.hoa-project.net/Resource/Contributions/Atoum/PraspelExtension"><code>atoum/praspel-extension</code></a>:
-  Use <code>Hoa\Praspel</code> inside atoum</p>
+  <code>Hoa\Praspel</code> inside atoum</p>
   <div class="break incremental incremental-overlay">
     <div>
       <pre><code class="language-php">$data = $this->sample(
@@ -991,16 +1002,42 @@ foreach ($this->sampleMany($data, 10) as $date) {
 </section>
 
 <section>
-  <h1>emacs</h1>
+  <h1>
+    To Emacs, by
+    <div class="avatar"><img src="https://avatars2.githubusercontent.com/u/528790?s=60" alt="Steven Rémot" /></div>
+  </h1>
 
   <p><a href="http://central.hoa-project.net/Resource/Contributions/Emacs/Pp"><code>Contributions/Emacs/Pp</code></a>:
-  PP support (from <code>Hoa\Compiler</code>) in emacs</p>
+  PP support (from <code>Hoa\Compiler</code>) in Emacs</p>
+  <div class="incremental incremental-overlay break">
+    <div>
+      <p>Install with MELPA:</p>
+      <pre><code>M-x package-install hoa-pp-mode</code></pre>
+      <p>Enjoy!</p>
+    </div>
+    <div>
+      <p>Install with Cask:</p>
+      <pre><code>…</code></pre>
+      <p>Enjoy!</p>
+    </div>
+    <div class="tcenter">
+      <img
+        src="http://central.hoa-project.net/Resource/Contributions/Emacs/Pp/screenshots/sample.png?format=raw"
+        style="max-height: 340px" />
+    </div>
+  </div>
 </section>
 
 <section>
-  <h1>Provisioning</h1>
+  <h1>
+    Provisioning, by
+    <div class="avatar"><img src="https://avatars1.githubusercontent.com/u/5133487?s=60" alt="Pierre Tomasina" /></div>
+    and
+    <div class="avatar"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" alt="Julien Bianchi" /></div>
+  </h1>
 
-  <p><a href="http://central.hoa-project.net/Resource/Contributions/Provisioning"><code>Contributions/Provisioning</code></a></p>
+  <p><a href="http://central.hoa-project.net/Resource/Contributions/Provisioning"><code>Contributions/Provisioning</code></a>:
+  Install Hoa everywhere, easily</p>
   <div class="break">
     <pre><code>.
 ├── Base
@@ -1019,7 +1056,13 @@ foreach ($this->sampleMany($data, 10) as $date) {
 </section>
 
 <section>
-  <h1>Symfony</h1>
+  <h1>
+    To Symfony, by
+    <div class="avatar"><img src="https://avatars3.githubusercontent.com/u/327237?s=60" alt="Julien Bianchi" /></div>,
+    <div class="avatar"><img src="https://avatars2.githubusercontent.com/u/232744?s=60" alt="Stéphane Py" /></div>
+    and
+    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/66958?s=60" alt="Kévin Gomez" /></div>
+  </h1>
 
   <div class="incremental incremental-overlay">
     <div>
@@ -1057,36 +1100,164 @@ foreach ($this->sampleMany($data, 10) as $date) {
     {% benchstop 'messagesCount' %}
     {% benchstop 'usersLoop' %}
 &lt;ul></code></pre>
-          <p><small>or directly inside a Twig template!</small></p>
+          <p><small>… or directly inside a Twig template!</small></p>
         </div>
       </div>
     </div>
     <div>
-      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBridge"><code>Hoathis\SymfonyConsoleBridge</code></a></p>
+      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBridge"><code>Hoathis\SymfonyConsoleBridge</code></a>:
+      <code>Hoa\Console</code> inside Symfony</p>
+      <div class="break incremental incremental-overlay">
+        <div>
+          <pre class="language-php"><code>$formatter = $output->getFormatter();
+$formatter->setStyle('info', new OutputFormatterStyle('#e4cbf4'));</code></pre>
+          <p><small>Use advanced colors from
+          <code>Hoa\Console\Cursor::colorize</code></small></p>
+        </div>
+        <div>
+          <pre class="language-php"><code>|          | Verbosity    | Decoration |
+| -------- | ------------ | ---------- |
+| Pipe     | normal       | disabled   |
+| Redirect | very verbose | disabled   |
+| Terminal | verbose      | enabled    |</code></pre>
+          <p><small>Automatically set the verbosity level based on the output
+          type (direct, pipe, redirection…)</small></p>
+        </div>
+        <div>
+          <pre class="language-php"><code>$app->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+    $window = $app->getHelperSet()->get('window');
+
+    $output->writeln('<info>I\'m going to bring your window to the foreground and back to the foreground after one second</info>');
+    $window->lower($output);
+    $window->raise($output);
+
+    $output->writeln('<info>I\'m going to minimize your window and restore it after one second</info>');
+    $window->minimize($output);
+    $window->restore($output);
+});</code></pre>
+          <p><small>Use <code>Hoa\Console\Window</code> as a helper.</small></p>
+        </div>
+        <div>
+          <pre class="language-php"><code>$app->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+    $cursor = $app->getHelperSet()->get('cursor');
+    $cursor->save()->hide($output)->move($output, 'up', 1);
+
+    foreach (['red', 'yellow', '#003DF5', '#6633FF', …] as $index => $color) {
+        $cursor->move($output, 'left', 20 - ($index * 4));
+        $output->write(sprintf('<bg=%1$s>%2$s</bg=%1$s>', $color, str_repeat(' ', 20)));
+
+        // …
+    }
+
+    $cursor->move($output, 'left', 100)->restore()->show($output);
+});</code></pre>
+          <p><small>Use <code>Hoa\Console\Cursor</code> as a helper.</small></p>
+        </div>
+        <div>
+          <p>And more!</p>
+          <ul>
+            <li>Readline (based on <code>Hoa\Console\Readline</code>),</li>
+            <li>Pager (based on <code>Hoa\Console\Chrome\Pager</code>),</li>
+            <li>Tput (based on <code>Hoa\Console\Tput</code>),</li>
+            <li>etc.</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div>
-      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBundle"><code>Hoathis\SymfonyConsoleBundle</code></a></p>
+      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/ConsoleBundle"><code>Hoathis\SymfonyConsoleBundle</code></a>:
+      Use the Symfony console bridge as a bundle</p>
+      <p><small>Under finalization.</small></p>
     </div>
     <div>
-      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/RulerBundle"><code>Hoathis\SymfonyRulerBundle</code></a></p>
+      <p><a href="http://central.hoa-project.net/Resource/Contributions/Symfony/RulerBundle"><code>Hoathis\SymfonyRulerBundle</code></a>:
+      Use <code>Hoa\Ruler</code> inside Symfony</p>
+      <p><small>Under construction.</small></p>
     </div>
   </div>
 </section>
 
 <section>
-  <h1>Vim</h1>
+  <h1>
+    Vim and Neovim by
+    <div class="avatar"><img src="https://avatars0.githubusercontent.com/u/946104?s=60" alt="Ivan Enderlin" /></div>
+  </h1>
 
-  <p><a href="http://central.hoa-project.net/Resource/Contributions/Vim/Pp"><code>Pp</code></a></p>
+  <p><a href="http://central.hoa-project.net/Resource/Contributions/Vim/Pp"><code>Contributions/Vim/Pp</code></a>:
+  PP support (from <code>Hoa\Compiler</code>) in Vim and Neovim</p>
+  <div class="incremental incremental-overlay break">
+    <div>
+      <p>Install with Vundle:</p>
+      <pre><code>Plugin 'hoaproject/Contributions-Vim-Pp'
+
+:source %
+:PluginInstall</code></pre>
+      <p>Enjoy!</p>
+    </div>
+    <div class="tcenter">
+      <img
+        src="http://central.hoa-project.net/Resource/Contributions/Vim/Pp/doc/image/screenshot.png?format=raw"
+        style="max-height: 340px" />
+    </div>
+  </div>
 </section>
 
 <section>
   <h1>Zsh</h1>
 
-  <p><a href="http://central.hoa-project.net/Resource/Contributions/Zsh/Hoa"><code>Hoa</code></a></p>
+  <p><a href="http://central.hoa-project.net/Resource/Contributions/Zsh/Hoa"><code>Contributions/Zsh/Hoa</code></a>:
+  <code>Hoa\Cli</code> support in Zsh</p>
+  <div class="incremental incremental-overlay break">
+    <div>
+      <p>Install with Antigen:</p>
+      <pre><code>antigen bundle hoaproject/Contributions-Zsh-Hoa
+
+antigen apply</code></pre>
+      <p>Enjoy!</p>
+    </div>
+    <div class="tcenter">
+      <img
+        src="http://central.hoa-project.net/Resource/Contributions/Zsh/Hoa/Documentation/Image/Autocompletion.gif?format=raw"
+        style="max-width: 582px" />
+    </div>
+  </div>
 </section>
 
 <section class="chapter">
-  <h1>Site and documentations</h1>
+  <h1>Site &amp; documentations</h1>
+</section>
+
+<section>
+  <h1>New design</h1>
+
+  <div class="incremental incremental-overlay" style="height: 400px; overflow-y: scroll">
+    <div class="tcenter">
+      <p>Homepage</p>
+      <img src="https://farm9.staticflickr.com/8679/16524950630_f4da2b9868_h.jpg" />
+    </div>
+    <div class="tcenter">
+      <p>Menu opened</p>
+      <img src="https://farm9.staticflickr.com/8587/16524947230_1375a36839_z.jpg" />
+    </div>
+    <div class="tcenter">
+      <p>Community page</p>
+      <img src="https://farm9.staticflickr.com/8567/16524954680_967269888e_o.png" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Search engine</h1>
+</section>
+
+<section>
+  <h1>Documentation</h1>
+
+  <p>Learn manual: <span class="👎">Bye bye</span>!</li>
+  <p>17 hack book chapters (<span class="👍">+2</span>)</li>
+  <p>3 awecodes (<span class="👎">+0</span>)</li>
+  <p>Contributor guide (<span class="👍">new</span>, see next keynotes!)</p>
+  <p><strong>Incredible</strong> work to translate all the documentation…</p>
 </section>
 
 <section class="chapter">
@@ -1124,36 +1295,6 @@ foreach ($this->sampleMany($data, 10) as $date) {
       <img src="" /><br />
       Build stickers and awesome stuff
     </p>
-  </div>
-</section>
-
-<section>
-  <h1>Sites et documentations</h1>
-
-  <div class="incremental incremental-overlay">
-    <div>
-      <p>Documentations:</p>
-      <ul>
-        <li>Learn manual: Bye bye!</li>
-        <li>Hack book: 17 chapters (<span class="👍">+2</span>)</li>
-        <li>Awecodes: 3 (<span class="👎">+0</span>)</li>
-      </ul>
-      <p>Contributor guide (see next keynotes!)</p>
-      <p><strong>Incredible</strong> work to translate all the
-      documentation…</p>
-    </div>
-    <div>
-      <p>New design:</p>
-      <img src="https://flickr.com/" />
-    </div>
-    <div>
-      <p>Search engine:</p>
-      <img src="https://flickr.com/" />
-    </div>
-    <div>
-      <p>Enhanced documentation:</p>
-      <img src="https://flickr.com/" />
-    </div>
   </div>
 </section>
 
