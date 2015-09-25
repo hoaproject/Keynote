@@ -168,38 +168,8 @@
     <li>Official contributions</li>
     <li>Site and documentations</li>
     <li>Around the project</li>
-    <li>What's next?</li>
+    <li>Bilan</li>
   </ol>
-
-  <!--
-  Community
-    Some stats
-    Contributors listing
-
-  Source code
-    Some stats
-    New library
-    Best features
-    Quality
-
-  Official contributions
-
-  Site and documentations
-
-  Around the project
-    Sponsors
-    New server
-    Foundation
-      Bank
-      Subscription
-      Goodies
-  -->
-
-  <!--
-
-  <p>Community involved inside <strong>PHP internal group</strong></p>
-
-  -->
 </section>
 
 <section class="chapter">
@@ -878,7 +848,7 @@
     <li>PHP 5.3 <span class="👎">dropped</span>,</li>
     <li>PHP 5.4 is <span class="👎">going to be dropped</span>,</li>
     <li>PHP 7 <span class="👍">compatible</span>,</li>
-    <li>HHVM 3.9 under <span class="👍">testing</span>.</li>
+    <li>HHVM 3.10 under <span class="👍">testing</span>.</li>
   </ul>
 </section>
 
@@ -1013,11 +983,6 @@ foreach ($this->sampleMany($data, 10) as $date) {
     <div>
       <p>Install with MELPA:</p>
       <pre><code>M-x package-install hoa-pp-mode</code></pre>
-      <p>Enjoy!</p>
-    </div>
-    <div>
-      <p>Install with Cask:</p>
-      <pre><code>…</code></pre>
       <p>Enjoy!</p>
     </div>
     <div class="tcenter">
@@ -1248,16 +1213,42 @@ antigen apply</code></pre>
 
 <section>
   <h1>Search engine</h1>
+
+  <div class="incremental incremental-overlay" style="height: 400px; overflow-y: scroll">
+    <div class="tcenter">
+      <p>Invite user to ask something</p>
+      <img src="https://c1.staticflickr.com/9/8597/16505069357_f33d249c55_o.png" />
+    </div>
+    <div class="tcenter">
+      <p>Provide some results</p>
+      <img src="https://c1.staticflickr.com/9/8574/16524945370_6af86c4e7c_o.png" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Comments</h1>
+
+  <p>On the documentation, the blog and error pages</p>
+  <p>Based on <a href="http://posativ.org/isso/">isso</a> (privacy matters)</p>
+  <div class="tcenter" style="height: 350px; overflow-y: scroll">
+    <img src="http://i.imgur.com/O84IhTv.png" />
+  </div>
 </section>
 
 <section>
   <h1>Documentation</h1>
 
-  <p>Learn manual: <span class="👎">Bye bye</span>!</li>
-  <p>17 hack book chapters (<span class="👍">+2</span>)</li>
+  <p><span class="👎">Bye bye</span> learn manual!</li>
+  <p>17 hack book chapters (<span class="👍">+2</span>),
+  approximatively <strong>365 pages</strong>  <small>(A4)</small> per language,
+  <strong>730 pages</strong> in total!</li>
   <p>3 awecodes (<span class="👎">+0</span>)</li>
   <p>Contributor guide (<span class="👍">new</span>, see next keynotes!)</p>
   <p><strong>Incredible</strong> work to translate all the documentation…</p>
+  <p class="break"><span class="👍">Ease the contribution</span> by merging
+  <code>Hoathis\Documentation</code> into <code>Hoa\Devtools</code>:</p>
+  <pre><code class="language-shell">$ hoa devtools:documentation --language en</code></pre>
 </section>
 
 <section class="chapter">
@@ -1265,8 +1256,25 @@ antigen apply</code></pre>
 </section>
 
 <section>
-  <h1>Official contributions</h1>
+  <h1>Infrastructure</h1>
 
+  <p>Move from a datacenter in Marseille (France) to ScaleWay:</p>
+  <ul>
+    <li>Faster machines, more spaces, more power, but…</li>
+    <li><span class="👎">Bye bye</span> <code>hoa</code> (all services),</li>
+    <li><span class="👍">Hello</span> <code>hoa1</code> (Web services),</li>
+    <li><span class="👍">Hello</span> <code>hoa2</code> (mail services),</li>
+    <li><span class="👎">Bye bye</span> <code>hoa2</code> (crashed and deleted).</li>
+  </ul>
+  <p>Move partially from ScaleWay to AWS:</p>
+  <ul>
+    <li><span class="👍">Hello</span> <code>hoa2</code> (under
+    configuring),</li>
+    <li><span class="👍">Hello</span> <code>hoa3</code> (for CI, under
+  discussion).</li>
+  </ul>
+  <p class="break">A big mess. Much cleaner now. <strong>Scripting
+  everything</strong>.</p>
 </section>
 
 <section>
@@ -1292,38 +1300,148 @@ antigen apply</code></pre>
       Offers a free license of PHPStorm to each contributor
     </p>
     <p>
-      <img src="" /><br />
+      <img src="http://www.unixstickers.com/image/data/custom_assets/xlogo_light_blue.png.pagespeed.ic.i8JQdi7SKL.png" /><br />
       Build stickers and awesome stuff
     </p>
   </div>
 </section>
 
 <section>
-  <h1>Bilan</h1>
+  <h1>New popular projects using Hoa</h1>
 
-  <ol>
-    <li>…</li>
-    <li>…</li>
-  </ol>
+  <div class="incremental incremental-overlay">
+    <div>
+      <p><a href="https://github.com/K-Phoen/rulerz">RulerZ</a>, a powerful
+      implementation of the Specification pattern</p>
+      <p class="break"><a href="https://github.com/webmozart/console"><code>webmozart/console</code></a>,
+      a usable, beautiful and easily testable console toolkit (under
+      implementing!)</p>
+      <p><small><a href="http://puli.io">Puli</a>, intelligent packages for PHP
+      (if previous point works, based on
+      <code>webmozart/console</code>!)</small></p>
+    </div>
+    <div>
+      <p><a href="https://github.com/fruux/ec2dns">ec2dns</a>, a set of command
+      line tools that makes it easy to display public hostnames of EC2 instances
+      and SSH into them via their tag name</p>
+      <p class="break"><a href="https://github.com/fruux/sabre-katana/">sabre/katana</a>,
+      a contact, calendar, task list and file server, synced, everywhere, all the
+      time</p>
+      <p class="break"><a hreef="http://www.phpmetrics.org/">PHP Metrics</a>, a
+      static analysis tool for PHP</p>
+    </div>
+    <div class="tcenter">
+      <p>LOGOOOs</p>
+      <p><strong>Various</strong> projects, with a different
+      <strong>public</strong> and<br />very different
+      <strong>usages</strong>!</p>
+    </div>
+  </div>
 </section>
 
 <section class="chapter">
-  <h1>Let's go for the next jump!</h1>
+  <h1>Bilan</h1>
 </section>
 
 <section>
-  <h1>Hot opened issues</h1>
+  <h1>Community</h1>
 
-  <p>Documentation:</p>
-  <ul>
-    <li>Redaction of hack book chapters</li>
-    <li>Records of more awecodes</li>
-  </ul>
-  <p class="break">Code:</p>
-  <ul>
-    <li>Migrate tests</li>
-    <li>Drop PHP5.4</li>
-  </ul>
+  <div class="incremental">
+    <p><strong>Growing</strong> at a good rate</p>
+    <p><strong>Maturing</strong>, based on contribution amount</p>
+    <p>More <strong>involved</strong>:</p>
+    <ul>
+      <li>Even in other projects, like <a href="http://atoum.org/">atoum</a>
+      or <a href="http://php.net/">PHP internal group</a></li>
+    </ul>
+    <p>Stars attrack stars, see popularity on Github:</p>
+    <ul>
+      <li>Several times on the <strong>trending</strong> pages</li>
+    </ul>
+    <p>Still <strong>welcoming</strong> and this is the <strong>most important
+    point</strong>!</p>
+  </div>
+</section>
+
+<section>
+  <h1>Source code</h1>
+
+  <div class="incremental">
+    <p><strong>Maturing</strong> because more users and usages</p>
+    <p>Better <strong>tooling:</strong></p>
+    <ul>
+      <li>Test framework,</li>
+      <li>Devtools,</li>
+      <li>Rush Release,</li>
+      <li>Documentation.</li>
+    </ul>
+    <p>More <strong>friendly</strong> (Rush release again, PSR-1, PSR-2…)</p>
+    <p>Downloads are <strong>exponential</strong>:</p>
+    <ul>
+      <li>Only shows we have more users!</li>
+      <li>We don't really care about this number, it is a <strong>probe</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h1>Official contributions</h1>
+
+  <div class="incremental">
+    <p>More <strong>contributions</strong></p>
+    <p><strong>Include</strong> Hoa inside several tools:</p>
+    <ul>
+      <li>It was one of the goal of the previous Hoa Apex edition,</li>
+      <li>Partially achieved but in good <strong>progress</strong>.</li>
+    </ul>
+    <p>We must <strnog>attrack</strnog> more “external” users</p>
+    <p>The main <strong>entry</strong> into industrial tool
+    <strong>stacks</strong> for Hoa</p>
+    <blockquote style="margin-top: 1.5em">We do the low-level job; you just need
+    to plug everything for more awesomeness</blockquote>
+  </div>
+</section>
+
+<section>
+  <h1>Site and documentations</h1>
+
+  <div class="incremental">
+    <p>Good <strong>evolution</strong></p>
+    <p>Lot of positive <strong>feedbacks</strong></p>
+    <p>Need to write more <strong>hack book</strong> chapters:</p>
+    <ul>
+      <li>Must focus on finalized libraries with tests,</li>
+      <li>Several “small” libraries, easy work.</li>
+    </ul>
+    <p>Need to record new <strong>awecodes</strong>:</p>
+    <ul>
+      <li>We have an absolutely awesome tool…</li>
+      <li>… but we don't use it!</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h1>Around the project</h1>
+
+  <div class="incremental">
+    <p>Several changes in the <strong>infrastructure</strong>:</p>
+    <ul>
+      <li>Consummed a lot of <strong>time</strong> and <strong>man
+      days</strong>,</li>
+      <li><strong>Scripting</strong> everything is the only way to save time and
+      resources.</li>
+    </ul>
+    <p>1 new sponsor: <strong>UnixStickers</strong>!</p>
+    <p>Awesome new projects using Hoa:</p>
+    <ul>
+      <li>Another <strong>probe</strong> showing that Hoa is more
+      <strong>popular</strong>,</li>
+      <li>Provide more <strong>arguments</strong> to use Hoa in other
+      projects,</li>
+      <li><strong>Illustrate</strong> what we can do with Hoa.</li>
+    </ul>
+  </div>
 </section>
 
 <section class="chapter">
@@ -1336,12 +1454,6 @@ antigen apply</code></pre>
   </p>
 </section>
 
-<section>
-  <h1>Communication</h1>
-
-  <p>More blog posts, with un “chef rédacteur”</p>
-</section>
-
 <div id="progress-bar"></div>
 
 <script src="Static/Javascript/Keynote.js"></script>
@@ -1349,14 +1461,6 @@ antigen apply</code></pre>
 <script src="Static/Javascript/Prism.hoa.js"></script>
 <script src="Static/Javascript/Prism.plugin.line.js"></script>
 <script src="Static/Javascript/D3.js"></script>
-
-<script>
-  /*
-  Hoa.Document.onReady(function ( ) {
-      Hoa.$('#community').src = 'Community.html';
-  });
-  */
-</script>
 
 </body>
 </html>
