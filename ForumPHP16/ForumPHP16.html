@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ForumPHP'16, WebSocket workshop</title>
+  <meta http-equiv="content-type" content="text/html;       charset=utf-8" />
+  <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
+  <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
+
+  <link type="text/css" href="https://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+  <style>
+    section.fullslide {
+        background: none;
+    }
+
+    section.real-time-editing {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    section.real-time-editing iframe {
+        height: 100%;
+    }
+
+    section.real-time-editing > div:nth-of-type(1) {
+        flex: 1;
+        order: 2;
+    }
+
+    section.real-time-editing > div:nth-of-type(2) {
+        order: 1;
+        width: 40%;
+        overflow: hidden;
+        resize: horizontal;
+    }
+
+    iframe.shell {
+        pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<section>
+  <h1>ForumPHP'16, WebSocket</h1>
+
+  <div class="tcenter">
+    <img src="https://static.hoa-project.net/Image/Hoa.png"
+         alt="Logo of Hoa"
+         width="300px"
+         class="center" />
+    <p class="break"><small><time datetime="2016-10-28">28<sup>th</sup> October 2016</time></small></p>
+  </div>
+</section>
+
+<section>
+  <h1>Who are you?</h1>
+
+  <p><em>(oral self-presentations)</em></p>
+  <ul>
+    <li data-item=" ">users</li>
+    <li data-item="+">contributors</li>
+    <li data-item="+">companies</li>
+    <li data-item="+">sponsors</li>
+    <li data-item="+">geeks/nerds</li>
+    <li data-item="+">…</li>
+  </ul>
+
+  <p class="tcenter break"><strong>Welcome!</strong></p>
+</section>
+
+<section>
+  <h1>Who am I?</h1>
+
+  <p>Ivan Enderlin:</p>
+  <ul>
+    <li>PhD in Computer Science</li>
+    <li>leader and developer of Hoa</li>
+    <li>contributor of several open-source projects</li>
+    <li><a href="https://twitter.com/hoaproject">@hoaproject</a></li>
+    <li>Hywan on <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+  </ul>
+
+  <p class="tcenter break">
+    <math>
+      <mrow>
+        <mtext>ivan.enderlin<sup>•</sup> or hywan<sup> ••</sup>@</mtext>
+        <mo>{</mo>
+        <mtable>
+          <mtr>
+            <mtd><mtext>hoa-project.net<sup>•,••</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>tagua.io<sup>•</sup></mtext></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mtext>php.net<sup>••</sup></mtext></mtd>
+          </mtr>
+        </mtable>
+      </mrow>
+    </math>
+  </p>
+</section>
+
+<section>
+  <h1>Agenda</h1>
+
+  <ol>
+    <li>Introduction</li>
+    <li>Exercise 1: Chat</li>
+    <li>Exercise 2: Bubble Game</li>
+    <li>Conclusion</li>
+  </ol>
+</section>
+
+<section class="chapter">
+  <h1>Introduction</h1>
+</section>
+
+<section>
+  <h1>Classical HTTP model</h1>
+
+  <details>
+    <ul>
+      <li>Client sends a request,</li>
+      <li>Server sends a response.</li>
+      <li>A connection can be re-used if <code>Connection: keep-alive</code>,</li>
+      <li>One request or response at a time per connection,</li>
+      <li>Server cannot send a message spontaneously.</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h1>WebSocket properties</h1>
+
+  <dl>
+    <dt>Bidirectional</dt>
+    <dd>…</dd>
+
+    <dt>Full-duplex</dt>
+    <dd>…</dd>
+  </dl>
+
+  <details>
+    <ul>
+      <li>…</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h1>Implementations</h1>
+
+  <p>Based on RFC6455.</p>
+  <p>All browsers support it.</p>
+  <p>All major languages have an implementation of it.</p>
+  <p>Some HTTP servers support it.</p>
+</section>
+
+<section>
+  <h1>History</h1>
+
+  •---•----•----•
+</section>
+
+<section>
+  <h1>Handshake and challenge</h1>
+
+  <!-- schema -->
+
+  <details>
+    <ul>
+      <li>First, an HTTP request with a challenge,</li>
+      <li>Then, <code>Connection: Upgrade</code>,</li>
+      <li>Enter WebSocket.</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h1>Frame</h1>
+
+  <!-- RFC schema -->
+</section>
+
+<section>
+  <h1>Opcodes</h1>
+
+  <ul>
+    <li><code>TEXT_FRAME</code></li>
+    <li><code>BINARY_FRAME</code></li>
+    <li><code>CONTINUATION_FRAME</code></li>
+    <li><code>CONNECTION_CLOSE</code></li>
+    <li><code>PING</code></li>
+    <li><code>PONG</code></li>
+  </ul>
+
+  <details>
+    <p><code>TEXT_FRAME</code> always in UTF-8</p>
+  </details>
+</section>
+
+<section>
+  <h1>Close reasons</h1>
+
+  <ul>
+    <li><code>NORMAL</code></li>
+    <li><code>GOING_AWAY</code></li>
+    <li><code>PROTOCOL_ERROR</code></li>
+    <li><code>DATA_ERROR</code></li>
+    <li><code>STATUS_ERROR</code></li>
+    <li><code>ABNORMAL</code></li>
+    <li><code>MESSAGE_ERROR</code></li>
+    <li><code>POLICY_ERROR</code></li>
+    <li><code>MESSAGE_TOO_BIG</code></li>
+    <li><code>EXENSION_MISSING</code></li>
+    <li><code>SERVER_ERROR</code></li>
+    <li><code>TLS</code></li>
+  </ul>
+</section>
+
+<section>
+  <h1>Classical developer API</h1>
+
+  <pre><code class="language-php">$server = new Server($socket);
+$server->on('message', …);
+$server->on('close', …);
+$server->on('error', …);
+$server->run();</code></pre>
+</section>
+
+<section>
+  <h1><code>Hoa\Websocket</code></h1>
+</section>
+
+<section class="chapter">
+  <h1>Exercise 1: Chat</h1>
+</section>
+
+<section class="fullslide real-time-editing">
+  <div>
+    <iframe src="http://127.0.0.1:8067/" class="shell"></iframe>
+  </div>
+  <div>
+    <iframe src="http://127.0.0.1:8080/"></iframe>
+  </div>
+</section>
+
+<section class="chapter">
+  <h1>Exercise 2: Bubble Game</h1>
+</section>
+
+<section class="chapter">
+  <h1>Thanks! <span>☺︎</span></h1>
+
+  <p class="tcenter">
+    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <br />
+    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+  </p>
+</section>
+
+<section>
+  <h1>Go further</h1>
+
+  <ul>
+    <li>TLS support with <code>wss://</code></li>
+    <li>Extensions</li>
+  </ul>
+</section>
+
+<div id="progress-bar"></div>
+
+<script src="https://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+
+</body>
+</html>
