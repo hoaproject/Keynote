@@ -30,6 +30,7 @@
 
     section.real-time-editing iframe {
         height: 100%;
+        width: 100%;
     }
 
     section.real-time-editing > div:nth-of-type(1) {
@@ -79,6 +80,10 @@
     svg text {
         text-anchor: middle;
         dominant-baseline: middle;
+    }
+
+    svg text.small {
+        font-size: x-small;
     }
   </style>
 </head>
@@ -394,12 +399,44 @@
 <section>
   <h1>Handshake and challenge</h1>
 
-  <!-- schema -->
+  <svg viewbox="0 0 500 350" class="incremental">
+    <g>
+      <rect x="10" y="10" width="150" height="330" />
+      <text x="85" y="165">client</text>
+    </g>
+    
+    <g>
+      <rect x="340" y="10" width="150" height="330" />
+      <text x="415" y="165">server</text>
+    </g>
+
+    <g class="incremental" style="transform: translateY(0px)">
+      <g>
+        <text x="250" y="45">HTTP request</text>
+        <text x="250" y="65" class="small">Sec-WebSocket-Key: Y2FzZV9kb1…</text>
+        <line x1="180" y1="85" x2="320" y2="85" class="arrow" />
+      </g>
+
+      <g>
+        <text x="250" y="135">HTTP response</text>
+        <text x="250" y="155" class="small">101 Switching Protocols</text>
+        <text x="250" y="175" class="small">Upgrade: websocket</text>
+        <text x="250" y="195" class="small">Sec-WebSocket-Accept: BnK2jqfE7…</text>
+        <line x2="180" y2="215" x1="320" y1="215" class="arrow" />
+      </g>
+
+      <g>
+        <text x="250" y="265">WebSocket frames</text>
+        <line x1="180" y1="285" x2="320" y2="285" class="arrow" />
+        <line x2="180" y2="285" x1="320" y1="285" class="arrow" />
+      </g>
+    </g>
+  </svg>
 
   <details>
     <ul>
-      <li>First, an HTTP request with a challenge,</li>
-      <li>Then, <code>Connection: Upgrade</code>,</li>
+      <li>First, an HTTP request with a challenge (go through port 80 and proxies),</li>
+      <li>Then, <code>Switching Protocol</code>,</li>
       <li>Enter WebSocket.</li>
     </ul>
   </details>
@@ -409,18 +446,37 @@
   <h1>Frame</h1>
 
   <!-- RFC schema -->
+  <pre>           0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-------+-+-------------+-------------------------------+
+      |F|R|R|R| opcode|M| Payload len |    Extended payload length    |
+      |I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
+      |N|V|V|V|       |S|             |   (if payload len==126/127)   |
+      | |1|2|3|       |K|             |                               |
+      +-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
+      |     Extended payload length continued, if payload len == 127  |
+      + - - - - - - - - - - - - - - - +-------------------------------+
+      |                               |Masking-key, if MASK set to 1  |
+      +-------------------------------+-------------------------------+
+      | Masking-key (continued)       |          Payload Data         |
+      +-------------------------------- - - - - - - - - - - - - - - - +
+      :                     Payload Data continued ...                :
+      + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+      |                     Payload Data continued ...                |
+      +---------------------------------------------------------------+</pre>
+  <p><small><a href="https://tools.ietf.org/html/rfc6455#section-5.2"><cite>5.2. Base Framing Protocol</cite></a></small></p>
 </section>
 
 <section>
   <h1>Opcodes</h1>
 
   <ul>
-    <li><code>TEXT_FRAME</code></li>
-    <li><code>BINARY_FRAME</code></li>
-    <li><code>CONTINUATION_FRAME</code></li>
-    <li><code>CONNECTION_CLOSE</code></li>
-    <li><code>PING</code></li>
-    <li><code>PONG</code></li>
+    <li><code>TEXT_FRAME</code>, always UTF-8 valid textual payload,</li>
+    <li><code>BINARY_FRAME</code>, binary payload,</li>
+    <li><code>CONTINUATION_FRAME</code>, one slice of the payload that has been split into several frames,</li>
+    <li><code>PING</code>, check if the connection is still established,</li>
+    <li><code>PONG</code>, ensure the connection is established,</li>
+    <li><code>CONNECTION_CLOSE</code>, attempt to properly close the connection.</li>
   </ul>
 
   <details>
@@ -431,32 +487,42 @@
 <section>
   <h1>Close reasons</h1>
 
-  <ul>
-    <li><code>NORMAL</code></li>
-    <li><code>GOING_AWAY</code></li>
-    <li><code>PROTOCOL_ERROR</code></li>
-    <li><code>DATA_ERROR</code></li>
-    <li><code>STATUS_ERROR</code></li>
-    <li><code>ABNORMAL</code></li>
-    <li><code>MESSAGE_ERROR</code></li>
-    <li><code>POLICY_ERROR</code></li>
-    <li><code>MESSAGE_TOO_BIG</code></li>
-    <li><code>EXENSION_MISSING</code></li>
-    <li><code>SERVER_ERROR</code></li>
-    <li><code>TLS</code></li>
+  <ul style="columns: 2; -moz-columns: 2; -webkit-columns: 2">
+    <li><code>NORMAL</code>,</li>
+    <li><code>GOING_AWAY</code>,</li>
+    <li><code>PROTOCOL_ERROR</code>,</li>
+    <li><code>DATA_ERROR</code>,</li>
+    <li><code>STATUS_ERROR</code>,</li>
+    <li><code>ABNORMAL</code>,</li>
+    <li><code>MESSAGE_ERROR</code>,</li>
+    <li><code>POLICY_ERROR</code>,</li>
+    <li><code>MESSAGE_TOO_BIG</code>,</li>
+    <li><code>EXTENSION_MISSING</code>,</li>
+    <li><code>SERVER_ERROR</code>,</li>
+    <li><code>TLS</code>.</li>
   </ul>
 </section>
 
 <section>
   <h1>Expected developer API</h1>
 
-  <pre><code class="language-php">$server = new Server($socket);
+  <pre><code class="language-php">// Allocate a server.
+$server = new Server($socket);
+
+// Set listeners.
 $server->on('message', …);
 $server->on('close', …);
 $server->on('error', …);
+
+// Send messages.
 $server->send(…);
 $server->broadcast(…);
+$server->broadcastIf(…);
+
+// Close a connection.
 $server->close(…);
+
+// Start the server.
 $server->run();</code></pre>
 </section>
 
@@ -468,6 +534,7 @@ $server->run();</code></pre>
   <h1>Presentation</h1>
 
   <ul>
+    <li><a href="https://github.com/hoaproject/Websocket">github.com/hoaproject/Websocket</a>,</li>
     <li>Server and client implementation in PHP,</li>
     <li>RFC6455 and Hybi00 protocols are supported,</li>
     <li>Robust implementation <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
@@ -508,8 +575,12 @@ $server->run();</code></pre>
 
 <section class="fullslide real-time-editing">
   <div>
-    <iframe src="http://127.0.0.1:8080/" class="shell"></iframe>
+    <iframe data-src="http://127.0.0.1:8067/" class="shell"></iframe>
   </div>
+
+  <details>
+    <p>Demo: <code>SmallestServer.php</code> + <code>hoa websocket:client</code></p>
+  </details>
 </section>
 
 <section class="chapter">
@@ -530,10 +601,10 @@ $server->run();</code></pre>
 
 <section class="fullslide real-time-editing">
   <div>
-    <iframe src="http://127.0.0.1:8067/" class="shell"></iframe>
+    <iframe data-src="http://127.0.0.1:8067/" class="shell"></iframe>
   </div>
   <div>
-    <iframe src="http://127.0.0.1:8080/"></iframe>
+    <iframe data-src="http://127.0.0.1:8080/"></iframe>
   </div>
 </section>
 
