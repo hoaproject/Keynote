@@ -190,19 +190,19 @@
           }
 
           50% {
-              transform: translateX(152px);
+              transform: translateX(142px);
               opacity: 1;
           }
 
           100% {
-              transform: translateX(152px);
+              transform: translateX(142px);
               opacity: 0;
           }
       }
 
       @keyframes right-to-left {
           0% {
-              transform: translateX(152px);
+              transform: translateX(142px);
           }
 
           50%, 100% {
@@ -243,7 +243,7 @@
       <g>
         <text x="250" y="45">request</text>
         <line x1="170" y1="60" x2="320" y2="60" class="arrow" />
-        <circle cx="170" cy="60" r="4" class="animation1" />
+        <circle cx="180" cy="60" r="4" class="animation1" />
 
         <text x="250" y="85">response</text>
         <line x2="180" y2="100" x1="330" y1="100" class="arrow" />
@@ -253,10 +253,10 @@
       <g>
         <text x="250" y="165">request</text>
         <line x1="170" y1="180" x2="320" y2="180" class="arrow" />
-        <circle cx="170" cy="180" r="4" class="animation1" />
-        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-1s" />
-        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-2s" />
-        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-3s" />
+        <circle cx="180" cy="180" r="4" class="animation1" />
+        <circle cx="180" cy="180" r="4" class="animation1 animation-delay-1s" />
+        <circle cx="180" cy="180" r="4" class="animation1 animation-delay-2s" />
+        <circle cx="180" cy="180" r="4" class="animation1 animation-delay-3s" />
       </g>
       <use xlink:href="#cross" x="220" y="-5" width="60" />
   
@@ -283,17 +283,42 @@
 <section>
   <h1>WebSocket properties</h1>
 
-  <dl>
-    <dt>Bidirectional</dt>
-    <dd>…</dd>
+  <svg viewbox="0 0 500 350" class="incremental">
+    <g>
+      <rect x="10" y="10" width="150" height="330" />
+      <text x="85" y="165">client</text>
+    </g>
+    
+    <g>
+      <rect x="340" y="10" width="150" height="330" />
+      <text x="415" y="165">server</text>
+    </g>
 
-    <dt>Full-duplex</dt>
-    <dd>…</dd>
-  </dl>
+    <g class="incremental" style="transform: translateY(49px)">
+      <g>
+        <text x="250" y="45">bidirectional</text>
+        <line x1="180" y1="60" x2="320" y2="60" class="arrow" />
+        <line x2="180" y2="60" x1="320" y1="60" class="arrow" />
+        <circle cx="180" cy="60" r="4" class="animation1" />
+        <circle cx="180" cy="60" r="4" class="animation2" />
+      </g>
+
+      <g>
+        <text x="250" y="165">full-duplex</text>
+        <line x1="180" y1="180" x2="320" y2="180" class="arrow" />
+        <line x2="180" y2="180" x1="320" y1="180" class="arrow" />
+        <circle cx="180" cy="180" r="4" class="animation1 animation-delay-3s" />
+        <circle cx="180" cy="180" r="4" class="animation1 animation-delay-2s" />
+        <circle cx="180" cy="180" r="4" class="animation2" />
+        <circle cx="180" cy="180" r="4" class="animation2 animation-delay-1s" />
+      </g>
+    </g>
+  </svg>
 
   <details>
     <ul>
-      <li>…</li>
+      <li>Bidirectional: From client to server and vice-versa,</li>
+      <li>Full-duplex: Simultaneously in both directions.</li>
     </ul>
   </details>
 </section>
@@ -301,16 +326,69 @@
 <section>
   <h1>Implementations</h1>
 
-  <p>Based on RFC6455.</p>
-  <p>All browsers support it.</p>
-  <p>All major languages have an implementation of it.</p>
-  <p>Some HTTP servers support it.</p>
+  <p>Based on <a href="http://tools.ietf.org/html/rfc6455">RFC6455</a>.</p>
+  <p>All <strong>browsers</strong> support it (IE 11+, Firefox 11+, Chrome 16+, Safari 7+…).</p>
+  <p>All major <strong>languages</strong> have an implementation of it.</p>
+  <p>Some <strong>HTTP servers</strong> support it (as proxy, <a href="http://nginx.org/en/docs/http/websocket.html">nginx</a>, <a href="https://cxf.apache.org/docs/websocket.html">Apache CXF</a>…).</p>
 </section>
 
 <section>
   <h1>History</h1>
 
-  •---•----•----•
+  <style scoped>
+    ul {
+        position: relative;
+    }
+
+    ul::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: .815em;
+        border: rgb(254, 172, 38) solid;
+        border-width: 0 0 0 2px;
+    }
+
+    li::before {
+        color: rgb(254, 172, 38);
+    }
+
+    time {
+        display: inline-block;
+        width: 250px;
+    }
+  </style>
+  <ul>
+    <li>
+      <time datetime="2010">before</time>
+      Flash TCP sockets
+    </li>
+    <li>
+      <time datetime="2010-02-04">4th February, 2010</time>
+      <a href="https://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-75">hixie-75</a>
+    </li>
+    <li>
+      <time datetime="2010-05-06">6th May, 2010</time>
+      <a href="https://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76">hixie-76</a>
+    </li>
+    <li>
+      <time datetime="2010-05-23">23th May, 2010</time>
+      <a href="https://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-00">hixie-00</a>
+    </li>
+    <li>
+      <time datetime="2011-04-22">22th April, 2011</time>
+      <a href="https://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-07">hixie-07</a>
+    </li>
+    <li>
+      <time datetime="2011-06-11">11th July, 2011</time>
+      <a href="https://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-10">hixie-10</a>
+    </li>
+    <li>
+      <time datetime="2011-12">December, 2011</time>
+      <a href="https://tools.ietf.org/html/rfc6455">RFC6455</a>
+    </li>
+  </ul>
 </section>
 
 <section>
