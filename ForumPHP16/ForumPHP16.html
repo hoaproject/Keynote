@@ -7,8 +7,17 @@
   <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
   <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
 
-  <link type="text/css" href="https://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="Static/Css/Keynote.css" rel="stylesheet" />
   <style>
+    section:first-of-type {
+        background: none;
+    }
+
+        section:first-of-type > h1 {
+            text-align: center;
+            margin-right: 0;
+        }
+    
     section.fullslide {
         background: none;
     }
@@ -35,18 +44,64 @@
         resize: horizontal;
     }
 
+    .incremental[data-active] > .incremental[aria-selected],
+    .incremental[data-active] > *[aria-selected] ~ *,
+    .incremental[data-active] > *[aria-selected] .incremental,
+    .incremental[data-active] > *[data-active] ~ * {
+        opacity: 0;
+        transition-duration: 0s;
+    }
+
     iframe.shell {
         pointer-events: none;
+    }
+
+    svg rect,
+    svg line {
+        fill: none;
+        stroke: rgb(254, 172, 38);
+        stroke-width: 2;
+    }
+
+    #cross line {
+        stroke: red;
+    }
+
+    svg circle {
+        fill: rgb(254, 172, 38);
+        stroke: none;
+    }
+
+    svg line.arrow {
+        marker-end: url(#arrow);
+    }
+
+    svg text {
+        text-anchor: middle;
+        dominant-baseline: middle;
     }
   </style>
 </head>
 <body>
 
-<section>
+<svg style="height: 0">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgb(254, 172, 38)" />
+    </marker>
+
+    <symbol id="cross" viewBox="0 0 10 10">
+      <line x1="2" y1="2" x2="8" y2="8" stroke="currentColor" />
+      <line x1="8" y1="2" x2="2" y2="8" stroke="currentColor" />
+    </symbol>
+  </defs>
+</svg>
+
+<section class="slide--no-logo">
   <h1>ForumPHP'16, WebSocket</h1>
 
-  <div class="tcenter">
-    <img src="https://static.hoa-project.net/Image/Hoa.png"
+  <div class="tcenter" style="margin-top: 5em">
+    <img src="Static/Image/Hoa.png"
          alt="Logo of Hoa"
          width="300px"
          class="center" />
@@ -76,10 +131,13 @@
   <p>Ivan Enderlin:</p>
   <ul>
     <li>PhD in Computer Science</li>
-    <li>leader and developer of Hoa</li>
+    <li>
+      leader and developer of
+      <a href="https://hoa-project.net">Hoa</a> and <a href="http://tagua.io/">Tagua VM</a>
+    </li>
     <li>contributor of several open-source projects</li>
-    <li><a href="https://twitter.com/hoaproject">@hoaproject</a></li>
-    <li>Hywan on <a href="irc://irc.freenode.net#hoaproject">#hoaproject</a></li>
+    <li><a href="https://twitter.com/mnt_io">@mnt_io</a></li>
+    <li>Hywan on IRC</li>
   </ul>
 
   <p class="tcenter break">
@@ -92,10 +150,10 @@
             <mtd><mtext>hoa-project.net<sup>•,••</sup></mtext></mtd>
           </mtr>
           <mtr>
-            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
+            <mtd><mtext>tagua.io<sup>•</sup></mtext></mtd>
           </mtr>
           <mtr>
-            <mtd><mtext>tagua.io<sup>•</sup></mtext></mtd>
+            <mtd><mtext>atoum.org<sup>•</sup></mtext></mtd>
           </mtr>
           <mtr>
             <mtd><mtext>php.net<sup>••</sup></mtext></mtd>
@@ -123,6 +181,93 @@
 
 <section>
   <h1>Classical HTTP model</h1>
+
+  <svg viewbox="0 0 500 350" class="incremental">
+    <style>
+      @keyframes left-to-right {
+          0% {
+              transform: translateX(0);
+          }
+
+          50% {
+              transform: translateX(152px);
+              opacity: 1;
+          }
+
+          100% {
+              transform: translateX(152px);
+              opacity: 0;
+          }
+      }
+
+      @keyframes right-to-left {
+          0% {
+              transform: translateX(152px);
+          }
+
+          50%, 100% {
+              transform: translateX(0);
+              opacity: 1;
+          }
+
+          100% {
+              transform: translateX(0);
+              opacity: 0;
+          }
+      }
+
+      .animation1 {
+          animation: 4s ease-in-out 0s infinite left-to-right;
+      }
+
+      .animation2 {
+          animation: 4s ease-in-out 2s infinite right-to-left;
+      }
+
+      .animation-delay-1s { animation-delay: 1s; }
+      .animation-delay-2s { animation-delay: 2s; }
+      .animation-delay-3s { animation-delay: 3s; }
+    </style>
+    
+    <g>
+      <rect x="10" y="10" width="150" height="330" />
+      <text x="85" y="165">client</text>
+    </g>
+    
+    <g>
+      <rect x="340" y="10" width="150" height="330" />
+      <text x="415" y="165">server</text>
+    </g>
+
+    <g class="incremental" style="transform: translateY(23px)">
+      <g>
+        <text x="250" y="45">request</text>
+        <line x1="170" y1="60" x2="320" y2="60" class="arrow" />
+        <circle cx="170" cy="60" r="4" class="animation1" />
+
+        <text x="250" y="85">response</text>
+        <line x2="180" y2="100" x1="330" y1="100" class="arrow" />
+        <circle cx="180" cy="100" r="4" class="animation2" />
+      </g>
+
+      <g>
+        <text x="250" y="165">request</text>
+        <line x1="170" y1="180" x2="320" y2="180" class="arrow" />
+        <circle cx="170" cy="180" r="4" class="animation1" />
+        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-1s" />
+        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-2s" />
+        <circle cx="170" cy="180" r="4" class="animation1 animation-delay-3s" />
+      </g>
+      <use xlink:href="#cross" x="220" y="-5" width="60" />
+  
+      <g>
+        <text x="250" y="245">response</text>
+        <line x2="180" y2="260" x1="330" y1="260" class="arrow" />
+        <circle cx="180" cy="260" r="4" class="animation2" />
+      </g>
+      <use xlink:href="#cross" x="220" y="75" width="60" />
+    </g>
+  </svg>
 
   <details>
     <ul>
@@ -225,21 +370,84 @@
 </section>
 
 <section>
-  <h1>Classical developer API</h1>
+  <h1>Expected developer API</h1>
 
   <pre><code class="language-php">$server = new Server($socket);
 $server->on('message', …);
 $server->on('close', …);
 $server->on('error', …);
+$server->send(…);
+$server->broadcast(…);
+$server->close(…);
 $server->run();</code></pre>
 </section>
 
-<section>
+<section class="chapter">
   <h1><code>Hoa\Websocket</code></h1>
+</section>
+
+<section>
+  <h1>Presentation</h1>
+
+  <ul>
+    <li>Server and client implementation in PHP,</li>
+    <li>RFC6455 and Hybi00 protocols are supported,</li>
+    <li>Robust implementation <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
+    <li>Can work with <code>Hoa\Socket</code> <small>(10 test suites, 157 test cases)</small>,</li>
+    <li>More than 12k installations on Packagist.</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Architecture</h1>
+
+  <details>
+    <ul>
+      <li>Connection -> Server and Client</li>
+      <li>A node represents an active connection</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h1>Smallest server</h1>
+
+  <pre><code class="language-php">use Hoa\Event;
+use Hoa\Socket;
+use Hoa\Websocket;
+
+$server = new Websocket\Server(
+    new Socket\Server('ws://127.0.0.1:8080')
+);
+$server->on(
+    'message',
+    function (Event\Bucket $bucket) {
+        echo '> ', $bucket->getData()['message'], "\n";
+    }
+);
+$server->run();</code></pre>
+</section>
+
+<section class="fullslide real-time-editing">
+  <div>
+    <iframe src="http://127.0.0.1:8080/" class="shell"></iframe>
+  </div>
 </section>
 
 <section class="chapter">
   <h1>Exercise 1: Chat</h1>
+</section>
+
+<section>
+  <h1>Goals</h1>
+
+  <p>A chat application to see the basis:</p>
+  <ol>
+    <li>Send messages to every person on the channel,</li>
+    <li>Notify when someone joins or leaves the channel,</li>
+    <li>Identify person with a pseudo.</li>
+  </ol>
+  <p>Then we will get fun with a game.</p>
 </section>
 
 <section class="fullslide real-time-editing">
@@ -276,10 +484,10 @@ $server->run();</code></pre>
 
 <div id="progress-bar"></div>
 
-<script src="https://static.hoa-project.net/Javascript/Keynote.js"></script>
-<script src="https://static.hoa-project.net/Javascript/Prism.js"></script>
-<script src="https://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
-<script src="https://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
+<script src="Static/Javascript/Keynote.js"></script>
+<script src="Static/Javascript/Prism.js"></script>
+<script src="Static/Javascript/Prism.hoa.js"></script>
+<script src="Static/Javascript/Prism.plugin.line.js"></script>
 
 </body>
 </html>
