@@ -445,7 +445,6 @@
 <section>
   <h1>Frame</h1>
 
-  <!-- RFC schema -->
   <pre>           0                   1                   2                   3
        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
       +-+-+-+-+-------+-+-------------+-------------------------------+
@@ -538,7 +537,7 @@ $server->run();</code></pre>
     <li>Server and client implementation in PHP,</li>
     <li>RFC6455 and Hybi00 protocols are supported,</li>
     <li>Robust implementation <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
-    <li>Can work with <code>Hoa\Socket</code> <small>(10 test suites, 157 test cases)</small>,</li>
+    <li>Can work with <code>Hoa\Socket</code> <small>(with 10 test suites and 157 test cases)</small>,</li>
     <li>More than 12k installations on Packagist.</li>
   </ul>
 </section>
@@ -596,7 +595,35 @@ $server->run();</code></pre>
     <li>Notify when someone joins or leaves the channel,</li>
     <li>Identify person with a pseudo.</li>
   </ol>
-  <p>Then we will get fun with a game.</p>
+  <p>We are interested only by the server-side as a first-step.</p>
+  <p class="break">Then we will get fun with a game.</p>
+</section>
+
+<section>
+  <h1>Workspace setup</h1>
+
+  <p>Download the application:</p>
+  <pre><code class="language-shell">$ git clone github.com:Hywan/ForumPHP2016.git
+$ cd ForumPHP2016/Chat</code></pre>
+  <p>Install dependencies:</p>
+  <pre><code class="language-shell">$ composer install</code></pre>
+  <p>Test it:</p>
+  <pre><code class="language-shell">$ php ChatServer.php&
+$ open index.html</code></pre>
+  <p>Let's put the work tree into the “lesson mode”:</p>
+  <pre><code class="language-shell">$ git checkout chat-lesson-1</code></pre>
+</section>
+
+<section>
+  <h1>Developing the server</h1>
+
+  <ol>
+    <li>Log what comes from the client,</li>
+    <li>Close the client connection with an appropriated reason,</li>
+    <li>Decide what to do with the data,</li>
+    <li>If useful, compute it and “unclose” the client connection,</li>
+    <li>Restart the process.</li>
+  </ol>
 </section>
 
 <section class="fullslide real-time-editing">
@@ -610,6 +637,43 @@ $server->run();</code></pre>
 
 <section class="chapter">
   <h1>Exercise 2: Bubble Game</h1>
+</section>
+
+<section>
+  <h1>Goals</h1>
+
+  <p>A bubble game to see get hands durty:</p>
+  <ol>
+    <li>Automatic team joining,</li>
+    <li>Bubble type detection,</li>
+    <li>Scores,</li>
+    <li>Restore the state on connect,</li>
+    <li>and maybe new features if we have time!</li>
+  </ol>
+</section>
+
+<section>
+  <h1>Workspace setup</h1>
+
+  <p>Download the application (if not previously done):</p>
+  <pre><code class="language-shell">$ git clone github.com:Hywan/ForumPHP2016.git
+$ cd ForumPHP2016/Bubble</code></pre>
+  <p>Install dependencies:</p>
+  <pre><code class="language-shell">$ composer install</code></pre>
+  <p>Test it:</p>
+  <pre><code class="language-shell">$ php GameServer.php&
+$ open index.html</code></pre>
+  <p>Let's put the work tree into the “lesson mode”:</p>
+  <pre><code class="language-shell">$ git checkout bubble-lesson-1</code></pre>
+</section>
+
+<section class="fullslide real-time-editing">
+  <div>
+    <iframe data-src="http://127.0.0.1:8067/" class="shell"></iframe>
+  </div>
+  <div>
+    <iframe data-src="http://127.0.0.1:8080/"></iframe>
+  </div>
 </section>
 
 <section class="chapter">

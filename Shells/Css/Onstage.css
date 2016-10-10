@@ -1,10 +1,7 @@
 @font-face {
     font-family: Text;
-    src: url("../Media/Font/Colaborate.eot");
-    src: url("../Media/Font/Colaborate.eot?#iefix") format("embedded-opentype"),
-         url("../Media/Font/Colaborate.woff")       format("woff"),
-         url("../Media/Font/Colaborate.ttf")        format("truetype"),
-         url("../Media/Font/Colaborate.svg#font")   format("svg");
+    src: url("http://static.hoa.io/Font/FiraSans-Light.eot")  format("eot"),
+         url("http://static.hoa.io/Font/FiraSans-Light.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -41,10 +38,12 @@ iframe {
     position: absolute;
     bottom: 9%;
     right: 10%;
+    width: 4em;
 
     font-size: 125%;
     color: #cdf2fe;
     text-shadow: 0 0 5px #c8e9f8;
+    text-align: center;
     padding: .5em;
     border: 1px #314d6f solid;
     border-radius: 6px;
