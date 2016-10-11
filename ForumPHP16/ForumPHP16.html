@@ -500,6 +500,7 @@
     <li><code>SERVER_ERROR</code>,</li>
     <li><code>TLS</code>.</li>
   </ul>
+  <p>And a message explaning the reason.</p>
 </section>
 
 <section>
@@ -534,9 +535,9 @@ $server->run();</code></pre>
 
   <ul>
     <li><a href="https://github.com/hoaproject/Websocket">github.com/hoaproject/Websocket</a>,</li>
-    <li>Server and client implementation in PHP,</li>
-    <li>RFC6455 and Hybi00 protocols are supported,</li>
-    <li>Robust implementation <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
+    <li>Strict server and client implementation in PHP,</li>
+    <li>RFC6455 and Hybi00 protocols,</li>
+    <li>Robust <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
     <li>Can work with <code>Hoa\Socket</code> <small>(with 10 test suites and 157 test cases)</small>,</li>
     <li>More than 12k installations on Packagist.</li>
   </ul>
@@ -609,7 +610,7 @@ $ cd ForumPHP2016/Chat</code></pre>
   <pre><code class="language-shell">$ composer install</code></pre>
   <p>Test it:</p>
   <pre><code class="language-shell">$ php ChatServer.php&
-$ open index.html</code></pre>
+$ open index.html // twice</code></pre>
   <p>Let's put the work tree into the “lesson mode”:</p>
   <pre><code class="language-shell">$ git checkout chat-lesson-1</code></pre>
 </section>
@@ -642,13 +643,13 @@ $ open index.html</code></pre>
 <section>
   <h1>Goals</h1>
 
-  <p>A bubble game to see get hands durty:</p>
+  <p>A bubble game to get hands durty:</p>
   <ol>
     <li>Automatic team joining,</li>
     <li>Bubble type detection,</li>
     <li>Scores,</li>
     <li>Restore the state on connect,</li>
-    <li>and maybe new features if we have time!</li>
+    <li>and maybe new features if we have time (on client and server)!</li>
   </ol>
 </section>
 
@@ -676,6 +677,15 @@ $ open index.html</code></pre>
   </div>
 </section>
 
+<section>
+  <h1>Go further</h1>
+
+  <ul>
+    <li>TLS support with <code>wss://</code></li>
+    <li>Extensions</li>
+  </ul>
+</section>
+
 <section class="chapter">
   <h1>Thanks! <span>☺︎</span></h1>
 
@@ -684,15 +694,6 @@ $ open index.html</code></pre>
     <br />
     <a href="https://twitter.com/hoaproject">@hoaproject</a>
   </p>
-</section>
-
-<section>
-  <h1>Go further</h1>
-
-  <ul>
-    <li>TLS support with <code>wss://</code></li>
-    <li>Extensions</li>
-  </ul>
 </section>
 
 <div id="progress-bar"></div>
