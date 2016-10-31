@@ -1,7 +1,7 @@
 @font-face {
     font-family: Text;
-    src: url("http://static.hoa.io/Font/FiraSans-Light.eot")  format("eot"),
-         url("http://static.hoa.io/Font/FiraSans-Light.woff") format("woff");
+    src: url("https://static.hoa-project.net/Font/FiraSans-Light.eot")  format("eot"),
+         url("https://static.hoa-project.net/Font/FiraSans-Light.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
