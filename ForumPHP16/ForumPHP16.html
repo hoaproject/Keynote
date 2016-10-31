@@ -7,7 +7,7 @@
   <meta http-equiv="content-type" content="text/javascript; charset=utf-8" />
   <meta http-equiv="content-type" content="text/css;        charset=utf-8" />
 
-  <link type="text/css" href="Static/Css/Keynote.css" rel="stylesheet" />
+  <link type="text/css" href="https://static.hoa-project.net/Css/Keynote.css" rel="stylesheet" />
   <style>
     section:first-of-type {
         background: none;
@@ -114,12 +114,12 @@
   <h1>ForumPHP'16, WebSocket</h1>
 
   <div class="tcenter" style="margin-top: 5em">
-    <img src="Static/Image/Hoa.png"
+    <img src="https://static.hoa-project.net/Image/Hoa.png"
          alt="Logo of Hoa"
          width="200px"
          class="center" />
     <br />
-    <img src="Static/Image/Logo/Liip.png"
+    <img src="https://static.hoa-project.net/Image/Logo/Liip.png"
          alt="Logo of Liip"
          width="200px"
          class="center" />
@@ -554,11 +554,11 @@ $server->run();</code></pre>
 
   <ul>
     <li><a href="https://github.com/hoaproject/Websocket">github.com/hoaproject/Websocket</a>,</li>
-    <li>Strict server and client implementation in PHP,</li>
-    <li>RFC6455 and Hybi00 protocols,</li>
-    <li>Robust <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
+    <li><strong>Strict</strong> server and client implementation in PHP,</li>
+    <li>RFC6455 <strong>and</strong> Hybi00 protocols,</li>
+    <li><strong>Robust</strong> <small>(with 13 test suites, 182 test cases and 3677 assertions)</small>,</li>
     <li>Can work with <code>Hoa\Socket</code> <small>(with 10 test suites and 157 test cases)</small>,</li>
-    <li>More than 20k installations on Packagist.</li>
+    <li>More than 21k installations on Packagist.</li>
   </ul>
 </section>
 
@@ -682,6 +682,7 @@ $server->on(
         echo '> ', $bucket->getData()['message'], "\n";
     }
 );
+
 $server->run();</code></pre>
 </section>
 
@@ -716,12 +717,12 @@ $server->run();</code></pre>
   <h1>Workspace setup</h1>
 
   <p>Download the application:</p>
-  <pre><code class="language-shell">$ git clone github.com:Hywan/ForumPHP2016.git
+  <pre><code class="language-shell">$ git clone git@github.com:Hywan/ForumPHP2016.git
 $ cd ForumPHP2016/Chat</code></pre>
   <p>Install dependencies:</p>
   <pre><code class="language-shell">$ composer install</code></pre>
   <p>Test it:</p>
-  <pre><code class="language-shell">$ php ChatServer.php&
+  <pre><code class="language-shell">$ php ChatServer.php
 $ open index.html // twice</code></pre>
   <p>Let's put the work tree into the “lesson mode”:</p>
   <pre><code class="language-shell">$ git checkout lesson-1</code></pre>
@@ -744,7 +745,7 @@ $ open index.html // twice</code></pre>
     <iframe data-src="http://127.0.0.1:8067/" class="shell"></iframe>
   </div>
   <div>
-    <iframe data-src="http://127.0.0.1:8080/"></iframe>
+    <iframe data-src="http://127.0.0.1:8081/"></iframe>
   </div>
 </section>
 
@@ -755,7 +756,7 @@ $ open index.html // twice</code></pre>
 <section>
   <h1>Goals</h1>
 
-  <p>A bubble game to get hands durty:</p>
+  <p>A bubble game to get hands dirty:</p>
   <ol>
     <li>Automatic team joining,</li>
     <li>Bubble type detection,</li>
@@ -774,10 +775,10 @@ $ cd ForumPHP2016/Bubble</code></pre>
   <p>Install dependencies:</p>
   <pre><code class="language-shell">$ composer install</code></pre>
   <p>Test it:</p>
-  <pre><code class="language-shell">$ php GameServer.php&
+  <pre><code class="language-shell">$ php GameServer.php
 $ open index.html</code></pre>
   <p>Let's put the work tree into the “lesson mode”:</p>
-  <pre><code class="language-shell">$ git checkout bubble-lesson-1</code></pre>
+  <pre><code class="language-shell">$ git checkout lesson-2</code></pre>
 </section>
 
 <section class="fullslide real-time-editing">
@@ -785,35 +786,29 @@ $ open index.html</code></pre>
     <iframe data-src="http://127.0.0.1:8067/" class="shell"></iframe>
   </div>
   <div>
-    <iframe data-src="http://127.0.0.1:8080/"></iframe>
+    <iframe data-src="http://127.0.0.1:8082/"></iframe>
   </div>
 </section>
 
-<section>
-  <h1>Go further</h1>
-
-  <ul>
-    <li>TLS support with <code>wss://</code></li>
-    <li>Extensions</li>
-  </ul>
-</section>
-
 <section class="chapter">
-  <h1>Thanks! <span>☺︎</span></h1>
+  <h1>Thanks! <span>😄︎</span></h1>
 
   <p class="tcenter">
-    <a href="http://hoa-project.net/">hoa-project.net</a>
+    <a href="https://hoa-project.net/">hoa-project.net</a> &amp;
+    <a href="https://www.liip.ch/">liip.ch</a>
     <br />
-    <a href="https://twitter.com/hoaproject">@hoaproject</a>
+    <a href="https://twitter.com/hoaproject">@hoaproject</a> &amp;
+    <a href="https://twitter.com/mnt_io">@mnt</a> &amp;
+    <a href="https://twitter.com/liip">@liip</a>
   </p>
 </section>
 
 <div id="progress-bar"></div>
 
-<script src="Static/Javascript/Keynote.js"></script>
-<script src="Static/Javascript/Prism.js"></script>
-<script src="Static/Javascript/Prism.hoa.js"></script>
-<script src="Static/Javascript/Prism.plugin.line.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Keynote.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.hoa.js"></script>
+<script src="https://static.hoa-project.net/Javascript/Prism.plugin.line.js"></script>
 
 </body>
 </html>
